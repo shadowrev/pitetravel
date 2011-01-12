@@ -1,0 +1,182 @@
+@charset "utf-8";
+/* Aplica a todo */
+html {
+    background-color: #FFF;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    width: 800px;
+	margin: 0;
+	padding: 0;
+}
+
+/* Aplica al contenido*/
+#contenido {
+	clear: both;
+	padding-left: 10px;
+}
+
+/* Aplica al submenu */
+#submenu {
+	margin-right: 10px;
+	float: left;
+}
+
+#submenu ul {
+	list-style: none inside;
+	margin-top: 20px;
+	padding-left: 0;
+}
+
+#submenu li {
+	background-color: #E7F1F8;
+	padding: 3px;
+	margin-bottom: 3px;
+	border-bottom: 1px solid #999;
+	border-right: 1px solid #999;
+	border-top: none;
+	border-left: none;
+}
+
+#submenu li.current {
+	background-color: #FFF;
+	border-bottom: none;
+	border-right: none;
+	border-top: 1px solid #999;
+	border-left: 1px solid #999;
+}
+
+#submenu a {
+    text-decoration:none;
+}
+
+#submenu a span {
+    color:#666;
+}
+
+#submenu a:hover span {
+    color:#FF9834;
+}
+
+/* Aplica al area de formularios */
+#contenido-formulario {
+	float: left;
+}
+
+/* Aplica al formulario de login */
+#login {
+    width: 300px;
+    margin: 20px auto;
+    min-height: 150px;
+    border: 1px solid #DF0C73;
+}
+
+#login h2, .formulario h2 { /* También aplica a h2 de .formulario*/
+    margin-top: 0;
+    background-color: #DF0C73;
+    text-align: center;
+    color: #FFF;
+}
+
+.form table {
+    width: 100%;
+}
+
+.form textarea {
+	width: 95%;
+	height: 6em;
+}
+
+/* Aplica al resto de formularios */ 
+.formulario {
+    width: 600px;
+    margin: 20px auto;
+    min-height: 150px;
+    border: 1px solid #DF0C73;
+}
+
+/* Aplica a las listas */
+.lista table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lista thead {
+    font-weight: bold;
+    background-color: #E7F1F8;
+}
+
+.lista tbody .par {
+    background-color: #E7F1F8;
+}
+.lista tbody .impar {
+}
+
+.lista tbody tr:hover {
+    background-color: #DF6BA3;
+}
+
+/* Aplica al menu */
+#menu {
+    float:left;
+    width:100%;
+    background: #FFF;
+    font-size:93%;
+    line-height:normal;
+	margin-bottom: 10px;
+}
+#menu ul {
+    margin:0;
+    padding:10px 10px 0 10px;
+    list-style:none;
+}
+#menu li {
+    display:inline;
+    margin:0;
+    padding:0;
+}
+#menu a {
+    float:left;
+    background:url("../images/tableft.gif") no-repeat left top;
+    margin:0;
+    padding:0 0 0 4px;
+    text-decoration:none;
+}
+#menu a span {
+    float:left;
+    display:block;
+    background:url("../images/tabright.gif") no-repeat right top;
+    padding:5px 15px 4px 6px;
+    color:#666;
+}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#menu a span {float:none;}
+/* End IE5-Mac hack */
+#menu a:hover span {
+    color:#FF9834;
+}
+#menu a:hover {
+    background-position:0% -42px;
+}
+#menu a:hover span {
+    background-position:100% -42px;
+}
+
+#menu .current a {
+    background-position:0% -42px;
+}
+#menu .current a span {
+    background-position:100% -42px;
+}
+
+/* Botonera de control de formularios */
+.submit {
+    text-align: center;
+}
+
+/* Aplica al pie de pagina */
+#pie {
+    clear: both;
+}

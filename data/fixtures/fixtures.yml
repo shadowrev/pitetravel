@@ -1,0 +1,275 @@
+# # Populate this file with data to be loaded by your ORM's *:data-load task.
+# # You can create multiple files in this directory (i.e. 010_users.yml,
+# # 020_articles.yml, etc) which will be loaded in alphabetical order.
+# # 
+# # See documentation for your ORM's *:data-load task for more information.
+# 
+# User:
+#   fabien:
+#     username: fabien
+#     password: changeme
+#     name:     Fabien Potencier
+#     email:    fabien.potencier@symfony-project.com
+#   kris:
+#     username: Kris.Wallsmith
+#     password: changeme
+#     name:     Kris Wallsmith
+#     email:    kris.wallsmith@symfony-project.com
+
+Paciente:
+  raulerne:
+    pac_nombre:           Raul Ernesto Villamarin
+    pac_identificacion:   14621099
+    pac_fecha_nacimiento: 1983-06-11
+    pac_telefono1:        4463197
+    pac_telefono2:        3006600740
+    pac_email:            raulernevl@hotmail.com
+    pac_direccion:        Calle 44A 7N-36
+    pac_ciudad:           Cali
+    pac_estado:           Valle
+    pac_pais:             Colombia
+    pac_cod_postal:       0
+
+  victorh:
+    pac_nombre:           Victor Hugo Villamarin
+    pac_identificacion:   6104222
+    pac_fecha_nacimiento: 1979-03-22
+    pac_telefono1:        4463197
+    pac_telefono2:        3015242563
+    pac_email:            victor.villamarin@gmail.com
+    pac_direccion:        Calle 44A 7N-36
+    pac_ciudad:           Cali
+    pac_estado:           Valle
+    pac_pais:             Colombia
+    pac_cod_postal:       0
+
+  anavictoria:
+    pac_nombre:           Ana Victoria Agudelo
+    pac_identificacion:   45253625
+    pac_fecha_nacimiento: 1989-04-30
+    pac_telefono1:        5253213
+    pac_telefono2:        3156698542
+    pac_email:            anagudelo@gmail.com
+    pac_direccion:        Av 6AN 23-41
+    pac_ciudad:           Cali
+    pac_estado:           Valle
+    pac_pais:             Colombia
+    pac_cod_postal:       0
+
+Contacto:
+  francisco:
+    Paciente:      raulerne
+    con_nombre:    Francisco Urrea
+    con_telefono1: 7525245
+    con_telefono2: 3015253632
+    con_email:     pacho.urrea@contact.com
+    con_direccion: Calle 36 8N-33
+
+  hernando:
+    Paciente:      raulerne
+    con_nombre:    Hernando Osorio
+    con_telefono1: 8563232
+    con_telefono2: 3129963525
+    con_email:     heos@contact.com
+    con_direccion: Cra 8 33-501
+
+  vigo:
+    Paciente:      victorh
+    con_nombre:    Vicente Oga
+    con_telefono1: 6546565
+    con_telefono2: 3158858888
+    con_email:     vigo@contact.com
+    con_direccion: Cra 100 88-33
+
+Hotel:
+  danncartlon:
+    hot_nombre:      Dann Cartlon Cali
+    hot_direccion:   Carrera 2 Nº 1-60 Barrio El Peñón
+    hot_telefono:    8933000
+    hot_web:         http://www.hotelesdann.com/
+    hot_email:       contactenos@hotelesdann.com
+    hot_valor_noche: 0
+
+  intercontinental:
+    hot_nombre:      Intercontinental
+    hot_direccion:   Carrera 2
+    hot_telefono:    8933000
+    hot_web:         http://www.hotelesestelar.com/es/
+    hot_email:       dummy@mail.com
+    hot_valor_noche: 0
+
+  dummy_hotel:
+    hot_nombre:      Dummy Hotel
+    hot_direccion:   Empty
+    hot_telefono:    0000000
+    hot_web:         http://dummy-hotel/
+    hot_email:       dummy@mail.com
+    hot_valor_noche: 0
+
+Descripciontratamiento:
+  lipo:
+    Tipotratamiento: corporal
+    dtr_descripcion: Lipoescultura
+  mamoplastia_1:
+    Tipotratamiento: corporal
+    dtr_descripcion: Mamoplastia (reducción)
+  mamoplastia_2:
+    Tipotratamiento: corporal
+    dtr_descripcion: Mamoplastia (aumento)
+  mamoplastia_3:
+    Tipotratamiento: corporal
+    dtr_descripcion: Mamoplastia (levantamiento)
+  lip_abdominal:
+    Tipotratamiento: corporal
+    dtr_descripcion: Lipectomia Abdominal
+  lip_crural:
+    Tipotratamiento: corporal
+    dtr_descripcion: Lipectomia Crural (cara interna muslos)
+  gluteo_1:
+    Tipotratamiento: corporal
+    dtr_descripcion: Aumento Glúteo (protesis)
+  gluteo_2:
+    Tipotratamiento: corporal
+    dtr_descripcion: Aumento Glúteo (grasa)
+  ginecomastia:
+    Tipotratamiento: corporal
+    dtr_descripcion: Ginecomastia
+  braquioplastia:
+    Tipotratamiento: corporal
+    dtr_descripcion: Braquioplastia (brazos)
+  braquioplastia:
+    Tipotratamiento: corporal
+    dtr_descripcion: Braquioplastia (brazos)
+  otro_1:
+    Tipotratamiento: corporal
+    dtr_descripcion: Otro? Cual?
+  cabello:
+    Tipotratamiento: facial
+    dtr_descripcion: Implante de Cabello
+  cejas:
+    Tipotratamiento: facial
+    dtr_descripcion: Pexia de Cejas (levantamiento)
+  parpados:
+    Tipotratamiento: facial
+    dtr_descripcion: Blefaroplastia (párpados)
+  nariz:
+    Tipotratamiento: facial
+    dtr_descripcion: Rinoplastia (nariz)
+  orejas:
+    Tipotratamiento: facial
+    dtr_descripcion: Otoplastia (orejas)
+  cumbamba:
+    Tipotratamiento: facial
+    dtr_descripcion: Mentoplastia (mentón)
+  cara:
+    Tipotratamiento: facial
+    dtr_descripcion: Ritidoplastia (rostro)
+  cachetes:
+    Tipotratamiento: facial
+    dtr_descripcion: Bichectomia (mejillas)
+  lipoiny_facial:
+    Tipotratamiento: facial
+    dtr_descripcion: Lipoinyección facial (grasa)
+  otro_2:
+    Tipotratamiento: facial
+    dtr_descripcion: Otro? Cual?
+  odo_general:
+    Tipotratamiento: odontologia
+    dtr_descripcion: Odontologia general
+  periodoncia:
+    Tipotratamiento: odontologia
+    dtr_descripcion: Periodoncia
+  ortodoncia:
+    Tipotratamiento: odontologia
+    dtr_descripcion: Ortodoncia
+  orto_maxilar:
+    Tipotratamiento: odontologia
+    dtr_descripcion: Ortopedia maxilar
+  endodoncia:
+    Tipotratamiento: odontologia
+    dtr_descripcion: Endodoncia
+  implantes:
+    Tipotratamiento: odontologia
+    dtr_descripcion: Implantes
+  sonrisa:
+    Tipotratamiento: odontologia
+    dtr_descripcion: Diseño de sonrisa
+  rest_dental:
+    Tipotratamiento: odontologia
+    dtr_descripcion: Restauración dental
+  otro_3:
+    Tipotratamiento: odontologia
+    dtr_descripcion: Otro? Cual?
+  catarata:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Cirugía de Catarata
+  refractiva:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Cirugía Refractiva
+  vitreo_retina:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Cirugía de Vítreo y Retina
+  trans_cornea:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Transplante de Cornea
+  glaucoma:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Cirugía de Glaucoma
+  implantes:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Implantes Valvulares de Drenaje
+  pterigio:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Cirugía de Pterígio
+  vias_lacrimales:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Cirugía de Vías Lacrimales
+  orbita:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Cirugía de Orbita
+  protesis_ocular:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Implantes de Prótesis Ocular
+  otro_4:
+    Tipotratamiento: oftalmologia
+    dtr_descripcion: Otro? Cual?
+
+Tipotratamiento:
+  corporal:
+    tit_nombre: Corporal
+
+  facial:
+    tit_nombre: Facial
+
+  odontologia:
+    tit_nombre: Odontología
+
+  oftalmologia:
+    tit_nombre: Oftalmología
+
+Clinica:
+  farallones:
+    cli_direccion: Cll 8 No 16AN-8
+    cli_nombre: Clínica Farallones
+    cli_telefono: 5545452
+  valle_lili:
+    cli_direccion: Av. Simón Bolívar. Cra 98 No. 18 - 49
+    cli_nombre: Clínica Valle del Lili
+    cli_telefono: 3319090
+  comfenalco:
+    cli_direccion: Cll 4N No 54-25
+    cli_nombre: IPS Comfenalco Norte
+    cli_telefono: 4431512
+
+Materialquirurgico:
+  faja:
+    maq_nombre: Faja Post-Quirurgica
+    maq_valor: <?php echo rand(10000, 900000); ?>
+
+  brasier:
+    maq_nombre: Brasier Post-Quirurgico
+    maq_valor: <?php echo rand(10000, 900000); ?>
+
+  otros:
+    maq_nombre: Otros
+    maq_valor: <?php echo rand(10000, 900000); ?>

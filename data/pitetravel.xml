@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Db flnm="pitetravel" nm="pitetravel" ver="1.3.4">
+  <VerLbl/>
+  <VerNotes/>
+  <DefTblOpts/>
+  <DocFolder>C:\Users\raulerne\Documents\freelance\pitetravel\data</DocFolder>
+  <Sch Cm="" nm="public">
+    <Tbl UsSo="1" nm="altapostoperatoria">
+      <TblOpts/>
+      <Pk ClNs="apo_codigo" nm="pkaltapostoperatoria"/>
+      <Cl au="1" df="" nm="apo_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="apo_tra_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="apo_med_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="apo_cli_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="apo_exploracion" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="apo_info_especialista" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="apo_tratamiento" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="apo_observaciones" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_postoperatorio_clinica" prLkCl="cli_codigo" upAc="3">
+        <PrTb mn="0" nm="clinica" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="altapostoperatoria" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="apo_cli_codigo" prCl="cli_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_postoperatorio_medico" prLkCl="med_codigo" upAc="3">
+        <PrTb mn="0" nm="medico" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="altapostoperatoria" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="apo_med_codigo" prCl="med_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_postoperatorio_tratamiento" prLkCl="tra_codigo" upAc="3">
+        <PrTb mn="0" nm="tratamiento" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="altapostoperatoria" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="apo_tra_codigo" prCl="tra_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="clinica">
+      <Cm>Clinicas asociadas</Cm>
+      <TblOpts/>
+      <Pk ClNs="cli_codigo" nm="pkclinica"/>
+      <Cl au="1" df="" nm="cli_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="cli_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="cli_direccion" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="cli_telefono" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="contacto">
+      <Cm>Contacto de un paciente</Cm>
+      <TblOpts/>
+      <Pk ClNs="con_codigo" nm="pkcontacto"/>
+      <Cl au="1" df="" nm="con_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="con_pac_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="con_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="con_telefono1" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="con_telefono2" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="con_email" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="con_direccion" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_contacto_paciente" prLkCl="pac_codigo" upAc="3">
+        <PrTb mn="0" nm="paciente" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="contacto" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="con_pac_codigo" prCl="pac_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="contactologistica">
+      <TblOpts/>
+      <Pk ClNs="clo_codigo" nm="pkcontactologistica"/>
+      <Cl au="1" df="" nm="clo_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="clo_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="clo_identificacion" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="clo_telefono" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="clo_email" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="clo_direccion" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="clo_caracteristica" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+        <Cm>Define si es responsable de la logistica o es un guía turístico</Cm>
+      </Cl>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="dietapaciente">
+      <TblOpts/>
+      <Pk ClNs="dtp_codigo" nm="pkdietapaciente"/>
+      <Cl au="1" df="" nm="dtp_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="dtp_tra_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="dtp_recomendaciones" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="dtp_med_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Receta la dieta</Cm>
+      </Cl>
+      <Cl au="0" df="PREOPERATORIA" nm="dtp_tipo_dieta" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_dietapaciente_medico" prLkCl="med_codigo" upAc="3">
+        <PrTb mn="0" nm="medico" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="dietapaciente" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="dtp_med_codigo" prCl="med_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_dietapaciente_tratamiento" prLkCl="tra_codigo" upAc="3">
+        <PrTb mn="0" nm="tratamiento" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="dietapaciente" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="dtp_tra_codigo" prCl="tra_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="elementosxintervencion">
+      <Cm>Relaciona el material quirurgico necesitado con la valoracion preoperatoria</Cm>
+      <TblOpts/>
+      <Cl au="0" df="" nm="exi_preo_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="exi_maq_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_elementosxintervencion_materialquirurgico" prLkCl="maq_codigo" upAc="3">
+        <PrTb mn="0" nm="materialquirurgico" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="elementosxintervencion" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="exi_maq_codigo" prCl="maq_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_elementosxintervencion_preoperatorio" prLkCl="preo_codigo" upAc="3">
+        <PrTb mn="0" nm="preoperatorio" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="elementosxintervencion" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="exi_preo_codigo" prCl="preo_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="enfermera">
+      <Cm>guarda la informacion de una enfermera</Cm>
+      <TblOpts/>
+      <Pk ClNs="enf_codigo" nm="pkenfermera"/>
+      <Cl au="1" df="" nm="enf_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="enf_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="enf_valor_servicio" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="foto">
+      <TblOpts/>
+      <Pk ClNs="fot_codigo" nm="pkfoto"/>
+      <Cl au="1" df="" nm="fot_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="fot_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="fot_uri_imagen" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="1" nm="fot_preoperatoria" nu="0">
+        <DT ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Determina si es una foto antes de la operacion</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="fot_preo_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_foto_postoperatorio" prLkCl="pos_codigo" upAc="3">
+        <PrTb mn="0" nm="postoperatorio" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="foto" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="pos_codigo" prCl="pos_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_foto_preoperatorio" prLkCl="preo_codigo" upAc="3">
+        <PrTb mn="0" nm="preoperatorio" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="foto" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="fot_preo_codigo" prCl="preo_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="hotel">
+      <Cm>Almacena los hoteles con los que se tiene convenio</Cm>
+      <TblOpts/>
+      <Pk ClNs="hot_codigo" nm="pkhotel"/>
+      <Cl au="1" df="" nm="hot_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="hot_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="hot_direccion" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="hot_telefono" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="hot_web" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="hot_email" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="hot_valor_noche" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="logistica">
+      <Cm>Logistica manejada para atender a un paciente</Cm>
+      <TblOpts/>
+      <Pk ClNs="log_codigo" nm="pklogistica"/>
+      <Cl au="1" df="" nm="log_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="log_tra_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="log_reh_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="log_vue_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="log_trans_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="log_clo_codigo_responsable" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="log_clo_codigo_guia" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="log_observaciones" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_logistica_contactologistica" prLkCl="clo_codigo" upAc="3">
+        <PrTb mn="0" nm="contactologistica" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="logistica" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="log_clo_codigo_responsable" prCl="clo_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_logistica_contactologistica_guia" prLkCl="clo_codigo" upAc="3">
+        <PrTb mn="0" nm="contactologistica" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="logistica" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="log_clo_codigo_guia" prCl="clo_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_logistica_reservahotel" prLkCl="reh_codigo" upAc="3">
+        <PrTb mn="0" nm="reservahotel" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="logistica" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="log_reh_codigo" prCl="reh_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_logistica_reservavuelo" prLkCl="vue_codigo" upAc="3">
+        <PrTb mn="0" nm="reservavuelo" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="logistica" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="log_vue_codigo" prCl="vue_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_logistica_transporte" prLkCl="trans_codigo" upAc="3">
+        <PrTb mn="0" nm="transporte" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="logistica" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="log_trans_codigo" prCl="trans_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_logistica_tratamiento" prLkCl="tra_codigo" upAc="3">
+        <PrTb mn="0" nm="tratamiento" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="logistica" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="log_tra_codigo" prCl="tra_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="materialquirurgico">
+      <TblOpts/>
+      <Pk ClNs="maq_codigo" nm="pkmaterialquirurgico"/>
+      <Cl au="1" df="" nm="maq_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="maq_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="maq_valor" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="medico">
+      <Cm>Medicos asociados</Cm>
+      <TblOpts/>
+      <Pk ClNs="med_codigo" nm="pkmedico"/>
+      <Cl au="1" df="" nm="med_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="med_sfg_id" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+        <Cm>Identificador del usuario en sfGuard</Cm>
+      </Cl>
+      <Cl au="0" df="" nm="med_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="med_direccion" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="med_telefono1" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="med_telefono2" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="med_email" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="med_especialidad" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="menu">
+      <TblOpts/>
+      <Pk ClNs="men_codigo" nm="pkmenu"/>
+      <Cl au="1" df="" nm="men_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="men_desayuno" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="men_almuerzo" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="men_comida" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="men_dtp_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_menu_dietapaciente" prLkCl="dtp_codigo" upAc="3">
+        <PrTb mn="0" nm="dietapaciente" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="menu" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="men_dtp_codigo" prCl="dtp_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="paciente">
+      <Cm>Almacena los pacientes/clientes</Cm>
+      <TblOpts/>
+      <Pk ClNs="pac_codigo" nm="pkpaciente"/>
+      <Cl au="1" df="" nm="pac_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="1"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_identificacion" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="30" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_fecha_nacimiento" nu="0">
+        <DT ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_telefono1" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_telefono2" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_email" nu="1">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_direccion" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_ciudad" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_estado" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pac_pais" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="0" nm="pac_cod_postal" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="postoperatorio">
+      <Cm>Valoracion post-operatoria</Cm>
+      <TblOpts/>
+      <Pk ClNs="pos_codigo" nm="pkpostoperatorio"/>
+      <Cl au="1" df="" nm="pos_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_tra_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_med_codigo_responsable" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_hora_cita_col" nu="0">
+        <DT ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_valoracion" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_recomendaciones" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_tipo_anestesia" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="20" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_hora_cirugia" nu="0">
+        <DT ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_enf_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_info_especialista" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pos_observaciones" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_postoperatorio_enfermera" prLkCl="enf_codigo" upAc="3">
+        <PrTb mn="0" nm="enfermera" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="postoperatorio" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="pos_enf_codigo" prCl="enf_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_postoperatorio_medico" prLkCl="med_codigo" upAc="3">
+        <PrTb mn="0" nm="medico" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="postoperatorio" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="pos_med_codigo_responsable" prCl="med_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_postoperatorio_tratamiento" prLkCl="tra_codigo" upAc="3">
+        <PrTb mn="0" nm="tratamiento" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="postoperatorio" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="pos_tra_codigo" prCl="tra_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="preoperatorio">
+      <Cm>Valoraciones preoperatorias</Cm>
+      <TblOpts/>
+      <Pk ClNs="preo_codigo" nm="pkpreoperatorio"/>
+      <Cl au="1" df="" nm="preo_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="preo_tra_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_glicemia" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_tiempo_coagulacion" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_tpt" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_ptt" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_creatinina" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_nitrogeno_ureico" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_parcial_orina" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_electro" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_rx_torax" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_pa_lateral" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_prueba_esfuerzo" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_hg_glicosilada" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_tsh" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_t3" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="no aplica" nm="preo_t4" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="preo_vih" nu="0">
+        <DT ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="preo_hora_cirugia" nu="0">
+        <DT ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="preo_cli_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="preo_enf_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="preo_observaciones" nu="0">
+        <DT ds="Text" en="" id="703" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="preo_med_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_preoperatorio_clinica" prLkCl="cli_codigo" upAc="3">
+        <PrTb mn="0" nm="clinica" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="preoperatorio" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="preo_cli_codigo" prCl="cli_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_preoperatorio_enfermera" prLkCl="enf_codigo" upAc="3">
+        <PrTb mn="0" nm="enfermera" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="preoperatorio" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="preo_enf_codigo" prCl="enf_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_preoperatorio_medico" prLkCl="med_codigo" upAc="3">
+        <PrTb mn="0" nm="medico" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="preoperatorio" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="preo_med_codigo" prCl="med_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_preoperatorio_tratamiento" prLkCl="tra_codigo" upAc="3">
+        <PrTb mn="0" nm="tratamiento" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="preoperatorio" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="preo_tra_codigo" prCl="tra_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="procedimiento">
+      <Cm>Que se le va a realizar al cliente</Cm>
+      <TblOpts/>
+      <Pk ClNs="pro_codigo" nm="pkprocedimiento"/>
+      <Cl au="1" df="" nm="pro_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pro_tra_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pro_tit_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="pro_descripcion" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_procedimiento__tipotratamiento" prLkCl="tit_codigo" upAc="3">
+        <PrTb mn="0" nm="tipotratamiento" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="procedimiento" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="pro_tit_codigo" prCl="tit_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_procedimiento__tratamiento" prLkCl="tra_codigo" upAc="3">
+        <PrTb mn="0" nm="tratamiento" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="procedimiento" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="pro_tra_codigo" prCl="tra_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="reservahotel">
+      <Cm>Almacena las reservas hoteleras</Cm>
+      <TblOpts/>
+      <Pk ClNs="reh_codigo" nm="pkreservahotel"/>
+      <Cl au="1" df="" nm="reh_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="reh_hot_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="reh_tra_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="reh_fecha_entrada" nu="0">
+        <DT ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="reh_fecha_salida" nu="0">
+        <DT ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="reh_hora_llegada" nu="0">
+        <DT ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="reh_hora_salida" nu="1">
+        <DT ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="reh_localizador" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="80" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="reh_dias_estadia" nu="0">
+        <DT ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="reh_noches_estadia" nu="0">
+        <DT ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_reservahotel_hotel" prLkCl="hot_codigo" upAc="3">
+        <PrTb mn="0" nm="hotel" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="reservahotel" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="reh_hot_codigo" prCl="hot_codigo"/>
+      </Fk>
+      <Fk deAc="3" nm="fk_reservahotel_tratamiento" prLkCl="tra_codigo" upAc="3">
+        <PrTb mn="0" nm="tratamiento" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="reservahotel" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="reh_tra_codigo" prCl="tra_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="reservavuelo">
+      <Cm>Vuelos asociados</Cm>
+      <TblOpts/>
+      <Pk ClNs="vue_codigo" nm="pkreservavuelo"/>
+      <Cl au="1" df="" nm="vue_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_tra_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_origen" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_destino" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_fecha_ida" nu="0">
+        <DT ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_fecha_regreso" nu="0">
+        <DT ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_nro_vuelo_ida" nu="0">
+        <DT ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_nro_vuelo_regreso" nu="0">
+        <DT ds="Integer" en="" id="4" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_hora_salida_ida" nu="0">
+        <DT ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_hora_llegada_ida" nu="0">
+        <DT ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_hora_salida_vuelta" nu="0">
+        <DT ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_hora_llegada_vuelta" nu="0">
+        <DT ds="Time" en="" id="92" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="vue_valor" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="1" nm="fk_reservavuelo_tratamiento" prLkCl="tra_codigo" upAc="0">
+        <PrTb mn="0" nm="tratamiento" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="reservavuelo" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="vue_tra_codigo" prCl="tra_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="tipotratamiento">
+      <Cm>Tipo de tratamiento disponible</Cm>
+      <TblOpts/>
+      <Pk ClNs="tit_codigo" nm="pktipotratamiento"/>
+      <Cl au="1" df="" nm="tit_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="Otro" nm="tit_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="100" sc="null" sg="1" un="0"/>
+      </Cl>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="transporte">
+      <TblOpts/>
+      <Pk ClNs="trans_codigo" nm="pktransporte"/>
+      <Cl au="1" df="" nm="trans_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_nombre" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_identificacion" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_telefono1" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_telefono2" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_direccion" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_placa_vehiculo" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_tipo_vehiculo" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="150" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_nombre_companhia" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="50" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_numero_companhia" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="trans_telefono_companhia" nu="0">
+        <DT ds="VarChar" en="" id="12" ln="15" sc="null" sg="1" un="0"/>
+      </Cl>
+      <SchTrHis/>
+    </Tbl>
+    <Tbl UsSo="1" nm="tratamiento">
+      <Cm>Tratamiento que va a realizar un paciente</Cm>
+      <TblOpts/>
+      <Pk ClNs="tra_codigo" nm="pktratamiento"/>
+      <Cl au="1" df="" nm="tra_codigo" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="tra_pac_codigo" nu="1">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="tra_fecha_partida" nu="0">
+        <DT ds="Date" en="" id="91" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="tra_tiempo_estadia" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="1" nm="tra_apto_operacion" nu="0">
+        <DT ds="Boolean" en="" id="16" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Cl au="0" df="" nm="tra_costo_basico" nu="0">
+        <DT ds="BigInt" en="" id="-5" ln="null" sc="null" sg="1" un="0"/>
+      </Cl>
+      <Fk deAc="3" nm="fk_tratamiento_paciente" prLkCl="pac_codigo" upAc="3">
+        <PrTb mn="0" nm="paciente" oe="1" sch="public" zr="0"/>
+        <CdTb mn="1" nm="tratamiento" oe="1" sch="public" zr="1"/>
+        <ClPr cdCl="tra_pac_codigo" prCl="pac_codigo"/>
+      </Fk>
+      <SchTrHis/>
+    </Tbl>
+    <CustomTypes/>
+  </Sch>
+  <Dgm nm="diagramA">
+    <RnCf FtSz="9" lkStgy="OffsetDirect" zm="0.75">
+      <VbCfg>
+        <Fg ky="Auto Number" vl="0"/>
+        <Fg ky="Check" vl="0"/>
+        <Fg ky="Comment" vl="0"/>
+        <Fg ky="Data Type" vl="1"/>
+        <Fg ky="Default" vl="0"/>
+        <Fg ky="ENUM Values" vl="0"/>
+        <Fg ky="Length" vl="1"/>
+        <Fg ky="Name" vl="1"/>
+        <Fg ky="Nullable" vl="0"/>
+        <Fg ky="Schema Name" vl="0"/>
+        <Fg ky="Signed" vl="0"/>
+      </VbCfg>
+    </RnCf>
+    <DiaProps>
+      <Show AllCols="1" FkCols="1" PkCols="1"/>
+    </DiaProps>
+    <TbGl bkCl="ffccccff" sch="public" tbl="paciente" x="762" y="617"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="contacto" x="1033" y="626"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="tratamiento" x="596" y="447"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="tipotratamiento" x="1106" y="489"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="reservavuelo" x="973" y="189"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="reservahotel" x="475" y="11"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="hotel" x="155" y="24"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="preoperatorio" x="18" y="456"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="clinica" x="314" y="618"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="enfermera" x="5" y="147"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="medico" x="364" y="379"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="menu" x="1164" y="390"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="dietapaciente" x="872" y="389"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="altapostoperatoria" x="521" y="586"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="postoperatorio" x="361" y="172"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="materialquirurgico" x="308" y="766"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="contactologistica" x="705" y="19"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="logistica" x="657" y="210"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="transporte" x="933" y="8"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="procedimiento" x="878" y="482"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="foto" x="126" y="294"/>
+    <TbGl bkCl="ffccccff" sch="public" tbl="elementosxintervencion" x="44" y="765"/>
+    <FkGl bkCl="ff000000" nm="public.altapostoperatoria.fk_postoperatorio_clinica"/>
+    <FkGl bkCl="ff000000" nm="public.altapostoperatoria.fk_postoperatorio_medico"/>
+    <FkGl bkCl="ff000000" nm="public.altapostoperatoria.fk_postoperatorio_tratamiento"/>
+    <FkGl bkCl="ff000000" nm="public.contacto.fk_contacto_paciente"/>
+    <FkGl bkCl="ff000000" nm="public.dietapaciente.fk_dietapaciente_medico"/>
+    <FkGl bkCl="ff000000" nm="public.dietapaciente.fk_dietapaciente_tratamiento"/>
+    <FkGl bkCl="ff000000" nm="public.elementosxintervencion.fk_elementosxintervencion_materialquirurgico"/>
+    <FkGl bkCl="ff000000" nm="public.elementosxintervencion.fk_elementosxintervencion_preoperatorio"/>
+    <FkGl bkCl="ff000000" nm="public.foto.fk_foto_postoperatorio"/>
+    <FkGl bkCl="ff000000" nm="public.foto.fk_foto_preoperatorio"/>
+    <FkGl bkCl="ff000000" nm="public.logistica.fk_logistica_contactologistica"/>
+    <FkGl bkCl="ff000000" nm="public.logistica.fk_logistica_contactologistica_guia"/>
+    <FkGl bkCl="ff000000" nm="public.logistica.fk_logistica_reservahotel"/>
+    <FkGl bkCl="ff000000" nm="public.logistica.fk_logistica_reservavuelo"/>
+    <FkGl bkCl="ff000000" nm="public.logistica.fk_logistica_transporte"/>
+    <FkGl bkCl="ff000000" nm="public.logistica.fk_logistica_tratamiento"/>
+    <FkGl bkCl="ff000000" nm="public.menu.fk_menu_dietapaciente"/>
+    <FkGl bkCl="ff000000" nm="public.postoperatorio.fk_postoperatorio_enfermera"/>
+    <FkGl bkCl="ff000000" nm="public.postoperatorio.fk_postoperatorio_medico"/>
+    <FkGl bkCl="ff000000" nm="public.postoperatorio.fk_postoperatorio_tratamiento"/>
+    <FkGl bkCl="ff000000" nm="public.preoperatorio.fk_preoperatorio_clinica"/>
+    <FkGl bkCl="ff000000" nm="public.preoperatorio.fk_preoperatorio_enfermera"/>
+    <FkGl bkCl="ff000000" nm="public.preoperatorio.fk_preoperatorio_medico"/>
+    <FkGl bkCl="ff000000" nm="public.preoperatorio.fk_preoperatorio_tratamiento"/>
+    <FkGl bkCl="ff000000" nm="public.procedimiento.fk_procedimiento__tipotratamiento"/>
+    <FkGl bkCl="ff000000" nm="public.procedimiento.fk_procedimiento__tratamiento"/>
+    <FkGl bkCl="ff000000" nm="public.reservahotel.fk_reservahotel_hotel"/>
+    <FkGl bkCl="ff000000" nm="public.reservahotel.fk_reservahotel_tratamiento"/>
+    <FkGl bkCl="ff000000" nm="public.reservavuelo.fk_reservavuelo_tratamiento"/>
+    <FkGl bkCl="ff000000" nm="public.tratamiento.fk_tratamiento_paciente"/>
+    <Notes/>
+    <Zones/>
+  </Dgm>
+  <RnmMgr NxRnmId="57">
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="contacto" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="1" nNm="con_pac_codigo" oNm="pac_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="contacto" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="2" nNm="con_pac_codigo" oNm="pac_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="tratamiento" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="3" nNm="tra_tit_codigo" oNm="tit_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="tratamiento" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="4" nNm="tra_pac_codigo" oNm="pac_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="reservavuelo" SupCls="Schema" SupNme="schemaA">
+      <Rnm id="5" nNm="vue_pac_codigo" oNm="pac_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Schema" ParCls="Database" ParNme="pitetravel" SupCls="" SupNme="">
+      <Rnm id="6" nNm="public" oNm="schemaA"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="reservavuelo" SupCls="Schema" SupNme="public">
+      <Rnm id="7" nNm="vue_fecha_ida" oNm="vue_tipo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="public" SupCls="" SupNme="">
+      <Rnm id="8" nNm="reservavuelo" oNm="vuelo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="reservavuelo" SupCls="Schema" SupNme="public">
+      <Rnm id="9" nNm="vue_tra_codigo" oNm="vue_pac_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="reservahotel" SupCls="Schema" SupNme="public">
+      <Rnm id="10" nNm="reh_hot_codigo" oNm="hot_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="reservahotel" SupCls="Schema" SupNme="public">
+      <Rnm id="11" nNm="reh_codigo" oNm="res_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="reservahotel" SupCls="Schema" SupNme="public">
+      <Rnm id="12" nNm="reh_tra_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="preoperatorio" SupCls="Schema" SupNme="public">
+      <Rnm id="13" nNm="preo_tra_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="preoperatorio" SupCls="Schema" SupNme="public">
+      <Rnm id="14" nNm="preo_cli_codigo" oNm="cli_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="preoperatorio" SupCls="Schema" SupNme="public">
+      <Rnm id="15" nNm="preo_enf_codigo" oNm="enf_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="preoperatorio" SupCls="Schema" SupNme="public">
+      <Rnm id="16" nNm="preo_med_codigo" oNm="med_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="dietapaciente" SupCls="Schema" SupNme="public">
+      <Rnm id="17" nNm="dtp_tra_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="dietapaciente" SupCls="Schema" SupNme="public">
+      <Rnm id="18" nNm="dtp_tra_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="menu" SupCls="Schema" SupNme="public">
+      <Rnm id="19" nNm="men_dtp_codigo" oNm="dtp_tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="dietapaciente" SupCls="Schema" SupNme="public">
+      <Rnm id="20" nNm="dtp_med_codigo" oNm="med_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="altapostoperatoria" SupCls="Schema" SupNme="public">
+      <Rnm id="27" nNm="apo_tra_codigo" oNm="poso_tra_codigo"/>
+      <Rnm id="21" nNm="poso_tra_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="altapostoperatoria" SupCls="Schema" SupNme="public">
+      <Rnm id="28" nNm="apo_med_codigo" oNm="poso_med_codigo"/>
+      <Rnm id="22" nNm="poso_med_codigo" oNm="med_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="altapostoperatoria" SupCls="Schema" SupNme="public">
+      <Rnm id="29" nNm="apo_cli_codigo" oNm="poso_cli_codigo"/>
+      <Rnm id="23" nNm="poso_cli_codigo" oNm="cli_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="public" SupCls="" SupNme="">
+      <Rnm id="25" nNm="altapostoperatoria" oNm="salida"/>
+      <Rnm id="24" nNm="salida" oNm="postoperatorio"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="altapostoperatoria" SupCls="Schema" SupNme="public">
+      <Rnm id="26" nNm="apo_codigo" oNm="poso_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="altapostoperatoria" SupCls="Schema" SupNme="public">
+      <Rnm id="30" nNm="apo_exploracion" oNm="poso_exploracion"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="altapostoperatoria" SupCls="Schema" SupNme="public">
+      <Rnm id="31" nNm="apo_info_especialista" oNm="poso_info_especialista"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="altapostoperatoria" SupCls="Schema" SupNme="public">
+      <Rnm id="32" nNm="apo_tratamiento" oNm="poso_tratamiento"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="altapostoperatoria" SupCls="Schema" SupNme="public">
+      <Rnm id="33" nNm="apo_observaciones" oNm="poso_observaciones"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="postoperatorio" SupCls="Schema" SupNme="public">
+      <Rnm id="34" nNm="pos_tra_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="postoperatorio" SupCls="Schema" SupNme="public">
+      <Rnm id="35" nNm="pos_med_codigo_responsable" oNm="med_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="postoperatorio" SupCls="Schema" SupNme="public">
+      <Rnm id="36" nNm="pos_enf_codigo" oNm="enf_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="postoperatorio" SupCls="Schema" SupNme="public">
+      <Rnm id="37" nNm="pos_maq_codigo" oNm="maq_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="logistica" SupCls="Schema" SupNme="public">
+      <Rnm id="38" nNm="log_tra_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="logistica" SupCls="Schema" SupNme="public">
+      <Rnm id="39" nNm="log_reh_codigo" oNm="reh_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="logistica" SupCls="Schema" SupNme="public">
+      <Rnm id="40" nNm="log_vue_codigo" oNm="vue_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="transporte" SupCls="Schema" SupNme="public">
+      <Rnm id="41" nNm="trans_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="transporte" SupCls="Schema" SupNme="public">
+      <Rnm id="42" nNm="trans_nombre" oNm="tra_nombre"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="logistica" SupCls="Schema" SupNme="public">
+      <Rnm id="43" nNm="log_trans_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="transporte" SupCls="Schema" SupNme="public">
+      <Rnm id="44" nNm="trans_nombre_companhia" oNm="trans_numero_companhia"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="logistica" SupCls="Schema" SupNme="public">
+      <Rnm id="45" nNm="log_clo_codigo_responsable" oNm="clo_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="tratamiento" SupCls="Schema" SupNme="public">
+      <Rnm id="46" nNm="tra_costo_basico" oNm="tra_costo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="public" SupCls="" SupNme="">
+      <Rnm id="48" nNm="tratamiento" oNm="procedimiento"/>
+      <Rnm id="47" nNm="procedimiento" oNm="tratamiento"/>
+    </RnmCh>
+    <RnmCh ObjCls="Table" ParCls="Schema" ParNme="public" SupCls="" SupNme="">
+      <Rnm id="49" nNm="procedimiento" oNm="procedimiento_"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="procedimiento" SupCls="Schema" SupNme="public">
+      <Rnm id="50" nNm="pro_tra_codigo" oNm="tra_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="procedimiento" SupCls="Schema" SupNme="public">
+      <Rnm id="51" nNm="pro_tit_codigo" oNm="tit_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="procedimiento" SupCls="Schema" SupNme="public">
+      <Rnm id="52" nNm="pro_codigo" oNm="pro_id"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="foto" SupCls="Schema" SupNme="public">
+      <Rnm id="54" nNm="fot_preo_codigo" oNm="fotpreo_codigo"/>
+      <Rnm id="53" nNm="fotpreo_codigo" oNm="preo_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="elementosxintervencion" SupCls="Schema" SupNme="public">
+      <Rnm id="55" nNm="exi_preo_codigo" oNm="preo_codigo"/>
+    </RnmCh>
+    <RnmCh ObjCls="Column" ParCls="Table" ParNme="elementosxintervencion" SupCls="Schema" SupNme="public">
+      <Rnm id="56" nNm="exi_maq_codigo" oNm="maq_codigo"/>
+    </RnmCh>
+  </RnmMgr>
+  <DbDocOptionMgr>
+    <BasicOptionMgr>
+      <Name>db.doc.option.mgr</Name>
+      <BoolOpt lbl="Diagrams" nm="doc.diagrams" on="1" spl="0"/>
+      <BoolOpt lbl="Foreign Keys" nm="doc.fks" on="1" spl="0"/>
+      <BoolOpt lbl="Indexes" nm="doc.indexes" on="1" spl="0"/>
+      <BoolOpt lbl="Overwrite CSS File" nm="doc.overwrite.css" on="1" spl="0"/>
+      <BoolOpt lbl="Procedures" nm="doc.procs" on="1" spl="0"/>
+      <BoolOpt lbl="Schemas" nm="doc.schemas" on="1" spl="0"/>
+      <BoolOpt lbl="Sequences" nm="doc.sequences" on="1" spl="0"/>
+      <BoolOpt lbl="Tables" nm="doc.tables" on="1" spl="0"/>
+      <BoolOpt lbl="Triggers" nm="doc.triggers" on="1" spl="0"/>
+      <BoolOpt lbl="Views" nm="doc.views" on="1" spl="0"/>
+    </BasicOptionMgr>
+  </DbDocOptionMgr>
+  <OpenEditors>
+    <OpenEditor ClsNm="Diagram" fqn="null.diagramA" selected="1"/>
+  </OpenEditors>
+  <TreePaths>
+    <TreePath/>
+    <TreePath>/Schemas (1)</TreePath>
+    <TreePath>/Schemas (1)/public</TreePath>
+    <TreePath>/Schemas (1)/public/Views (0)</TreePath>
+    <TreePath>/Schemas (1)/public/Procedures (0)</TreePath>
+    <TreePath>/Diagrams (1)</TreePath>
+  </TreePaths>
+</Db>

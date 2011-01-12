@@ -1,0 +1,1572 @@
+Altapostoperatoria:
+  connection: doctrine
+  tableName: altapostoperatoria
+  columns:
+    apo_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    apo_tra_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    apo_med_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    apo_cli_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    apo_exploracion:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    apo_info_especialista:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    apo_tratamiento:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    apo_observaciones:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Clinica:
+      local: apo_cli_codigo
+      foreign: cli_codigo
+      type: one
+Clinica:
+  connection: doctrine
+  tableName: clinica
+  columns:
+    cli_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    cli_nombre:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    cli_direccion:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    cli_telefono:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Altapostoperatoria:
+      local: cli_codigo
+      foreign: apo_cli_codigo
+      type: many
+    Preoperatorio:
+      local: cli_codigo
+      foreign: preo_cli_codigo
+      type: many
+Contacto:
+  connection: doctrine
+  tableName: contacto
+  columns:
+    con_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    con_pac_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    con_nombre:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    con_telefono1:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    con_telefono2:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    con_email:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    con_direccion:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Paciente:
+      local: con_pac_codigo
+      foreign: pac_codigo
+      type: one
+Contactologistica:
+  connection: doctrine
+  tableName: contactologistica
+  columns:
+    clo_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    clo_nombre:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    clo_identificacion:
+      type: string(30)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    clo_telefono:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    clo_email:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    clo_direccion:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    clo_caracteristica:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Logistica:
+      local: clo_codigo
+      foreign: log_clo_codigo_responsable
+      type: many
+    Logistica_3:
+      class: Logistica
+      local: clo_codigo
+      foreign: log_clo_codigo_guia
+      type: many
+Dietapaciente:
+  connection: doctrine
+  tableName: dietapaciente
+  columns:
+    dtp_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    dtp_tra_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    dtp_recomendaciones:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    dtp_med_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    dtp_tipo_dieta:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: PREOPERATORIA
+      notnull: true
+      autoincrement: false
+  relations:
+    Tratamiento:
+      local: dtp_tra_codigo
+      foreign: tra_codigo
+      type: one
+    Medico:
+      local: dtp_med_codigo
+      foreign: med_codigo
+      type: one
+    Menu:
+      local: dtp_codigo
+      foreign: men_dtp_codigo
+      type: many
+Elementosxintervencion:
+  connection: doctrine
+  tableName: elementosxintervencion
+  columns:
+    exi_preo_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      notnull: false
+      autoincrement: false
+    exi_maq_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      notnull: false
+      autoincrement: false
+    exi_cantidad:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Preoperatorio:
+      local: exi_preo_codigo
+      foreign: preo_codigo
+      type: one
+    Materialquirurgico:
+      local: exi_maq_codigo
+      foreign: maq_codigo
+      type: one
+Enfermera:
+  connection: doctrine
+  tableName: enfermera
+  columns:
+    enf_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    enf_nombre:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    enf_valor_servicio:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Postoperatorio:
+      local: enf_codigo
+      foreign: pos_enf_codigo
+      type: many
+    Preoperatorio:
+      local: enf_codigo
+      foreign: preo_enf_codigo
+      type: many
+Foto:
+  connection: doctrine
+  tableName: foto
+  columns:
+    fot_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    fot_nombre:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    fot_uri_imagen:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    fot_preoperatoria:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '1'
+      notnull: true
+      autoincrement: false
+    fot_preo_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    pos_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Preoperatorio:
+      local: fot_preo_codigo
+      foreign: preo_codigo
+      type: one
+    Postoperatorio:
+      local: pos_codigo
+      foreign: pos_codigo
+      type: one
+Hotel:
+  connection: doctrine
+  tableName: hotel
+  columns:
+    hot_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    hot_nombre:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    hot_direccion:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    hot_telefono:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    hot_web:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    hot_email:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    hot_valor_noche:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Reservahotel:
+      local: hot_codigo
+      foreign: reh_hot_codigo
+      type: many
+Logistica:
+  connection: doctrine
+  tableName: logistica
+  columns:
+    log_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    log_tra_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    log_reh_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    log_vue_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    log_trans_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    log_clo_codigo_responsable:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    log_clo_codigo_guia:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    log_observaciones:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Tratamiento:
+      local: log_tra_codigo
+      foreign: tra_codigo
+      type: one
+    Contactologistica:
+      local: log_clo_codigo_responsable
+      foreign: clo_codigo
+      type: one
+    Contactologistica_3:
+      class: Contactologistica
+      local: log_clo_codigo_guia
+      foreign: clo_codigo
+      type: one
+    Reservahotel:
+      local: log_reh_codigo
+      foreign: reh_codigo
+      type: one
+    Reservavuelo:
+      local: log_vue_codigo
+      foreign: vue_codigo
+      type: one
+    Transporte:
+      local: log_trans_codigo
+      foreign: trans_codigo
+      type: one
+Materialquirurgico:
+  connection: doctrine
+  tableName: materialquirurgico
+  columns:
+    maq_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    maq_nombre:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    maq_valor:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Elementosxintervencion:
+      local: maq_codigo
+      foreign: exi_maq_codigo
+      type: many
+Medico:
+  connection: doctrine
+  tableName: medico
+  columns:
+    med_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    med_sfg_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    med_nombre:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    med_direccion:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    med_telefono1:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    med_telefono2:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    med_email:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    med_especialidad:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Dietapaciente:
+      local: med_codigo
+      foreign: dtp_med_codigo
+      type: many
+    Postoperatorio:
+      local: med_codigo
+      foreign: pos_med_codigo_responsable
+      type: many
+    Preoperatorio:
+      local: med_codigo
+      foreign: preo_med_codigo
+      type: many
+Menu:
+  connection: doctrine
+  tableName: menu
+  columns:
+    men_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    men_desayuno:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    men_almuerzo:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    men_comida:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    men_dtp_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Dietapaciente:
+      local: men_dtp_codigo
+      foreign: dtp_codigo
+      type: one
+Paciente:
+  connection: doctrine
+  tableName: paciente
+  columns:
+    pac_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    pac_nombre:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pac_identificacion:
+      type: string(30)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pac_fecha_nacimiento:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pac_telefono1:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    pac_telefono2:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    pac_email:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    pac_direccion:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pac_ciudad:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pac_estado:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pac_pais:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pac_cod_postal:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '0'
+      notnull: true
+      autoincrement: false
+  relations:
+    Contacto:
+      local: pac_codigo
+      foreign: con_pac_codigo
+      type: many
+    Tratamiento:
+      local: pac_codigo
+      foreign: tra_pac_codigo
+      type: many
+Postoperatorio:
+  connection: doctrine
+  tableName: postoperatorio
+  columns:
+    pos_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    pos_tra_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pos_med_codigo_responsable:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pos_hora_cita_col:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pos_valoracion:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pos_recomendaciones:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pos_tipo_anestesia:
+      type: string(20)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pos_hora_cirugia:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pos_enf_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pos_info_especialista:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pos_observaciones:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Tratamiento:
+      local: pos_tra_codigo
+      foreign: tra_codigo
+      type: one
+    Enfermera:
+      local: pos_enf_codigo
+      foreign: enf_codigo
+      type: one
+    Medico:
+      local: pos_med_codigo_responsable
+      foreign: med_codigo
+      type: one
+    Foto:
+      local: pos_codigo
+      foreign: pos_codigo
+      type: many
+Preoperatorio:
+  connection: doctrine
+  tableName: preoperatorio
+  columns:
+    preo_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    preo_tra_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    preo_glicemia:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_tiempo_coagulacion:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_tpt:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_ptt:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_creatinina:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_nitrogeno_ureico:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_parcial_orina:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_electro:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_rx_torax:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_pa_lateral:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_prueba_esfuerzo:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_hg_glicosilada:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_tsh:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_t3:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_t4:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: 'no aplica'
+      notnull: true
+      autoincrement: false
+    preo_vih:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    preo_fecha_cita_ext:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    preo_hora_cita_ext:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    preo_fecha_cirugia:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    preo_hora_cirugia:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    preo_cli_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    preo_enf_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    preo_informe_especialista:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    preo_observaciones:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    preo_med_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Tratamiento:
+      local: preo_tra_codigo
+      foreign: tra_codigo
+      type: one
+    Clinica:
+      local: preo_cli_codigo
+      foreign: cli_codigo
+      type: one
+    Enfermera:
+      local: preo_enf_codigo
+      foreign: enf_codigo
+      type: one
+    Medico:
+      local: preo_med_codigo
+      foreign: med_codigo
+      type: one
+    Elementosxintervencion:
+      local: preo_codigo
+      foreign: exi_preo_codigo
+      type: many
+    Foto:
+      local: preo_codigo
+      foreign: fot_preo_codigo
+      type: many
+Procedimiento:
+  connection: doctrine
+  tableName: procedimiento
+  columns:
+    pro_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    pro_tra_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pro_tit_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pro_dtr_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    pro_otro:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Tratamiento:
+      local: pro_tra_codigo
+      foreign: tra_codigo
+      type: one
+    Tipotratamiento:
+      local: pro_tit_codigo
+      foreign: tit_codigo
+      type: one
+    Descripciontratamiento:
+      local: pro_dtr_codigo
+      foreign: dtr_codigo
+      type: one
+Reservahotel:
+  connection: doctrine
+  tableName: reservahotel
+  columns:
+    reh_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    reh_hot_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    reh_tra_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    reh_fecha_entrada:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    reh_fecha_salida:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    reh_hora_llegada:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    reh_hora_salida:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    reh_localizador:
+      type: string(80)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    reh_dias_estadia:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    reh_noches_estadia:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Tratamiento:
+      local: reh_tra_codigo
+      foreign: tra_codigo
+      type: one
+    Hotel:
+      local: reh_hot_codigo
+      foreign: hot_codigo
+      type: one
+    Logistica:
+      local: reh_codigo
+      foreign: log_reh_codigo
+      type: many
+Reservavuelo:
+  connection: doctrine
+  tableName: reservavuelo
+  columns:
+    vue_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    vue_tra_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_origen:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_destino:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_fecha_ida:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_fecha_regreso:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_nro_vuelo_ida:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_nro_vuelo_regreso:
+      type: integer(4)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_hora_salida_ida:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_hora_llegada_ida:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_hora_salida_vuelta:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_hora_llegada_vuelta:
+      type: time(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    vue_valor:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Tratamiento:
+      local: vue_tra_codigo
+      foreign: tra_codigo
+      type: one
+    Logistica:
+      local: vue_codigo
+      foreign: log_vue_codigo
+      type: many
+Tipotratamiento:
+  connection: doctrine
+  tableName: tipotratamiento
+  columns:
+    tit_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    tit_nombre:
+      type: string(100)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: Otro
+      notnull: true
+      autoincrement: false
+  relations:
+    Procedimiento:
+      local: tit_codigo
+      foreign: pro_tit_codigo
+      type: many
+    Descripciontratamiento:
+      local: tit_codigo
+      foreign: dtr_tit_codigo
+      type: many
+Transporte:
+  connection: doctrine
+  tableName: transporte
+  columns:
+    trans_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    trans_nombre:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    trans_identificacion:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    trans_telefono1:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    trans_telefono2:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    trans_direccion:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    trans_placa_vehiculo:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    trans_tipo_vehiculo:
+      type: string(150)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    trans_nombre_companhia:
+      type: string(50)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    trans_numero_companhia:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    trans_telefono_companhia:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+  relations:
+    Logistica:
+      local: trans_codigo
+      foreign: log_trans_codigo
+      type: many
+Tratamiento:
+  connection: doctrine
+  tableName: tratamiento
+  columns:
+    tra_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    tra_pac_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    tra_fecha_partida:
+      type: date(25)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tra_tiempo_estadia:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    tra_apto_operacion:
+      type: integer(1)
+      fixed: false
+      unsigned: false
+      primary: false
+      default: '1'
+      notnull: false
+      autoincrement: false
+    tra_costo_basico:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Paciente:
+      local: tra_pac_codigo
+      foreign: pac_codigo
+      type: one
+    Dietapaciente:
+      local: tra_codigo
+      foreign: dtp_tra_codigo
+      type: many
+    Logistica:
+      local: tra_codigo
+      foreign: log_tra_codigo
+      type: many
+    Postoperatorio:
+      local: tra_codigo
+      foreign: pos_tra_codigo
+      type: many
+    Preoperatorio:
+      local: tra_codigo
+      foreign: preo_tra_codigo
+      type: many
+    Procedimiento:
+      local: tra_codigo
+      foreign: pro_tra_codigo
+      type: many
+    Reservahotel:
+      local: tra_codigo
+      foreign: reh_tra_codigo
+      type: many
+    Reservavuelo:
+      local: tra_codigo
+      foreign: vue_tra_codigo
+      type: many
+Descripciontratamiento:
+  connection: doctrine
+  tableName: descripciontratamiento
+  columns:
+    dtr_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    dtr_tit_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      autoincrement: false
+    dtr_descripcion:
+      type: string(200)
+      fixed: false
+      unsigned: false
+      notnull: true
+      primary: false
+      autoincrement: false
+  relations:
+    Procedimiento:
+      local: dtr_codigo
+      foreign: pro_dtr_codigo
+      type: many
+    Tipotratamiento:
+      local: dtr_tit_codigo
+      foreign: tit_codigo
+      type: one
