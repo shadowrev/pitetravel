@@ -1,0 +1,35 @@
+sfGuardUser:
+  User_admin:
+    first_name:     Administrator
+    last_name:      D
+    email_address:  dummy-email@localhost.com
+    username:       admin
+    password:       admin
+    is_super_admin: true
+    Groups:         [Group_admin]
+
+  raulerne:
+    first_name:     Raul Ernesto Villamarin
+    last_name:      ---
+    email_address:  raul.villamarin@correounivalle.edu.co
+    username:       raulerne
+    password:       raulerne
+    is_super_admin: false
+    Groups:         [Group_admin, grupo_tour_operador]
+
+
+sfGuardGroup:
+  Group_admin:
+    name:           admin
+    description:    Administrator group
+    Permissions:    [Permission_admin]
+
+  grupo_tour_operador:
+    name:           Tour Operador
+    description:    Grupo Tour Operador
+    Permissions:    []
+
+sfGuardPermission:
+  Permission_admin:
+    name:           admin
+    description:    Administrator permission
