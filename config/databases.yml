@@ -1,7 +1,0 @@
-all:
-  doctrine:
-    class: sfDoctrineDatabase
-    param:
-      dsn: 'sqlite:/var/www/apps/pitetravel/data/database.sq3'
-      username: root
-      password: null
