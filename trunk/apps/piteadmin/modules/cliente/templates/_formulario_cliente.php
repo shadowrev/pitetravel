@@ -1,6 +1,7 @@
 <form id="form1" name="form1" method="post" action="<?php echo url_for('cliente/guardarPaciente') ?>">
     <div class="formulario">
         <h2>Datos del Paciente</h2>
+        <?php echo $form->renderHiddenFields() ?>
         <div class="form">
             <table>
                 <tr>
@@ -110,8 +111,10 @@
                 </tbody>
             </table>
             <?php endif; ?>
+            <div style="display: none" id="hidden_contacto_forms"></div>
         </div>
         <div class="form">
+            <?php echo $contact_form->renderHiddenFields() ?>
             <table>
                 <tr>
                     <td><?php echo $contact_form['con_nombre']->renderError() ?>
@@ -134,7 +137,12 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td colspan="3"><div style="text-align: right"><button type="button">Agregar Contacto</button></div></td>
+                    <td colspan="3">
+                        <div style="text-align: right">
+                            <button type="button" onclick="limpiarFormulario('<?php echo $contact_form->getName() ?>')">Nuevo Contacto</button>
+                            <button type="button" onclick="">Agregar Contacto</button>
+                        </div>
+                    </td>
                 </tr>
             </table>
         </div>
