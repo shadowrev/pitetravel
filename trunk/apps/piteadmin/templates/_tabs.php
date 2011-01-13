@@ -24,7 +24,7 @@
     <?php //endif; ?>
     <?php //if(in_array('logistica', $show)) : ?>
     <li<?php echo (strcmp($current, 'logistica') == 0) ? ' class="current"' : '' ?>>
-        <a href="<?php echo url_for('logistica/default') ?>"><span>Log&iacute;stica</span></a>
+        <a href="<?php echo url_for('logistica/logistica') ?>"><span>Log&iacute;stica</span></a>
     </li>
     <?php //endif; ?>
     <?php //if(in_array('usuarios', $show)) : ?>
