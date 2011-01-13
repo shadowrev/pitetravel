@@ -115,3 +115,17 @@ function activarCampoProcedimientoOtro(nombre_campo, valor_campo) {
         document.getElementById('procedimiento_pro_otro').disabled = true;
     }
 }
+
+function limpiarFormulario(nombre_grupo_formulario) {
+    $("[name*='" + nombre_grupo_formulario + "[']").val("");
+}
+
+function cargarHTML(id_elemento, url_accion, data) {
+    $.ajax({
+        url: url_accion,
+        data: data,
+        success: function(respuesta) {
+
+        }
+    });
+}
