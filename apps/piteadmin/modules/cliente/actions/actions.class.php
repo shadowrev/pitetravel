@@ -62,6 +62,25 @@ class clienteActions extends sfActions
       }
   }
 
+  /**
+   * Guarda temporalmente el contacto almacenado en un form invisible
+   * @param sfWebRequest $request
+   */
+  public function executeAlmacenarContacto(sfWebRequest $request)
+  {
+      if($request->isXmlHttpRequest())
+      {
+          $this->form_contacto = new ContactoForm();
+          $this->form_contacto->setWidget('con_nombre', new sfWidgetFormInputHidden());
+          $this->form_contacto->setWidget('con_telefono1', new sfWidgetFormInputHidden());
+          $this->form_contacto->setWidget('con_telefono2', new sfWidgetFormInputHidden());
+          $this->form_contacto->setWidget('con_email', new sfWidgetFormInputHidden());
+          $this->form_contacto->setWidget('con_direccion', new sfWidgetFormInputHidden());
+          $this->form_contacto->setNameFormat($this->form_contacto->getName() . '_' . $request->getParameter('contacto_id') . '[%s]');
+          $this->form_contacto->bind($request->getParameter($this->form_contacto->getName()));
+      }
+  }
+
   public function executeEliminarPaciente(sfWebRequest $request) {
       // TODO cargar la informacion del paciente para su edicion
       $this->setLayout(false);
@@ -70,6 +89,31 @@ class clienteActions extends sfActions
   public function executeGuardarPaciente(sfWebRequest $request)
   {
       // TODO Guardar el paciente en la base de datos
+      if(strcmp($request->getParameter('pac_codigo'), '') != 0)
+      {
+          $paciente = Doctrine_Core::getTable('Paciente')->find(array($request->getParameter('pac_codigo')));
+          $this->form = new PacienteForm($paciente);
+          $this->form->bind($request->getParameter($this->form->getName()));
+
+          $this->contactos_form = array();
+
+          foreach($paciente->Contactos as $obj_contacto)
+          {
+              $this->contactos_form[] = new ContactoForm($obj_contacto);
+          }
+      }
+      else
+      {
+
+      }
+      /*if($this->form->isValid())
+      {
+          if($this->form->isNew())
+          {
+              $paciente = $this->form->save();
+              $contactos =
+          }
+      }*/
   }
 
   public function executeListarPacientes(sfWebRequest $request)
