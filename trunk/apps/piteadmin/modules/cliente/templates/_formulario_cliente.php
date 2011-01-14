@@ -1,7 +1,7 @@
 <form id="form1" name="form1" method="post" action="<?php echo url_for('cliente/guardarPaciente') ?>">
     <div class="formulario">
         <h2>Datos del Paciente</h2>
-        <?php echo $form->renderHiddenFields() ?>
+        <?php echo $form->renderHiddenFields(false) ?>
         <div class="form">
             <table>
                 <tr>
@@ -79,37 +79,12 @@
     </div>
     <div class="formulario">
         <h2>Contactos del Paciente</h2>
-        <div class="lista">
+        <div class="lista" id="lst_contactos_paciente">
             <?php if(!isset($ids_contactos)) $ids_contactos = array() ?>
             <?php if(sizeof($ids_contactos) > 0): ?>
-            <table>
-                <thead>
-                    <tr>
-                        <td>Nombre del Contacto</td>
-                        <td>Tel&eacute;fono Fijo</td>
-                        <td>Correo Electr&oacute;nico</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td colspan="4">&nbsp;</td>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <?php $par = false ?>
-                    <?php foreach($paciente->Contacto as $contacto_paciente): ?>
-                    <tr class="<?php echo ($par == true) ? 'par' : 'impar' ?>" id="contacto_<?php echo $contacto_paciente->con_codigo ?>">
-                        <td><?php echo $contacto_paciente->con_nombre ?></td>
-                        <td><?php echo $contacto_paciente->con_telefono1 ?></td>
-                        <td><?php echo $contacto_paciente->con_email ?></td>
-                        <td><?php echo '[modificar]' ?></td>
-                        <td><?php echo '[eliminar]' ?></td><?php $par = !$par ?>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+            <?php include_partial('lista_contactos', array(
+                'paciente' => $paciente
+            )) ?>
             <?php endif; ?>
             <div style="display: none" id="hidden_contacto_forms"></div>
         </div>
@@ -117,8 +92,14 @@
             <script type="text/javascript">
                 var actualizarFormaContacto = function() {
                     var contador_contactos = document.getElementById('form1').cuenta_contactos.value;
-                    agregarHiddensDinamicos('hidden_contacto_forms', '<?php echo url_for('cliente/almacenarContacto') ?>', 'contacto', contador_contactos);
-                    
+                    var parametros_enviados = agregarHiddensDinamicos('hidden_contacto_forms', '<?php echo url_for('cliente/almacenarContacto') ?>', 'contacto', contador_contactos);
+                    $.ajax({
+                        url: "<?php echo url_for('cliente/generarListaContactos') ?>",
+                        data: parametros_enviados,
+                        success: function(respuesta) {
+                            document.getElementById('lst_contactos_paciente').innerHTML = respuesta;
+                        }
+                    });
                     document.getElementById('form1').cuenta_contactos.value ++;
                 }
             </script>
@@ -149,7 +130,7 @@
                     <td colspan="3">
                         <div style="text-align: right">
                             <button type="button" onclick="limpiarFormulario('<?php echo $contact_form->getName() ?>')">Nuevo Contacto</button>
-                            <button type="button" onclick="agregarHiddensDinamicos('hidden_contacto_forms', '<?php echo url_for('cliente/almacenarContacto') ?>', 'contacto', document.form1.cuenta_contactos.value); document.form1.cuenta_contactos.value ++">Agregar Contacto</button>
+                            <!--<button type="button" onclick="agregarHiddensDinamicos('hidden_contacto_forms', '<?php echo url_for('cliente/almacenarContacto') ?>', 'contacto', document.form1.cuenta_contactos.value); document.form1.cuenta_contactos.value ++">Agregar Contacto</button>-->
                             <button type="button" onclick="actualizarFormaContacto()">Agregar Contacto</button>
                         </div>
                     </td>

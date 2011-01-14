@@ -17,19 +17,25 @@ class clienteActions extends sfActions
 
   public function executeInformacionPaciente(sfWebRequest $request)
   {
-      // TODO Desplegar formulario del paciente
-      //if(strcmp($request->getParameter('nuevo_paciente'), 'si') != 0)
       if(strcmp($this->getUser()->getAttribute('pac_codigo'), '') != 0)
       {
-          $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
+          if(strcmp($request->getParameter('nuevo_paciente'), 'si') == 0)
+          {
+              $this->form = new PacienteForm();
+              $this->contact_form = new ContactoForm();
+              $this->getUser()->setAttribute('pac_codigo', '');
+              $this->getUser()->setAttribute('pac_nombre', '');
+          }
+          else
+          {
+              $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
+          }
       }
       else
       {
-          $this->getUser()->getAttribute('pac_codigo');
-          $this->getUser()->getAttribute('pac_nombre');
+          $this->form = new PacienteForm();
+          $this->contact_form = new ContactoForm();
       }
-      $this->form = new PacienteForm();
-      $this->contact_form = new ContactoForm();
   }
 
   public function executeMostrarInformacionPaciente(sfWebRequest $request)
@@ -62,6 +68,23 @@ class clienteActions extends sfActions
       }
   }
 
+  public function executeGenerarListaContactos(sfWebRequest $request)
+  {
+      if($request->isXmlHttpRequest())
+      {
+          $codigo_paciente = $this->getUser()->getAttribute('pac_codigo');
+          if(empty($codigo_paciente))
+          {
+              $this->paciente = new Paciente();
+          }
+          else
+          {
+              $this->paciente = Doctrine_Core::getTable('Paciente')->find(array($codigo_paciente));
+          }
+          
+      }
+  }
+
   /**
    * Guarda temporalmente el contacto almacenado en un form invisible
    * @param sfWebRequest $request
@@ -89,22 +112,40 @@ class clienteActions extends sfActions
   public function executeGuardarPaciente(sfWebRequest $request)
   {
       // TODO Guardar el paciente en la base de datos
-      if(strcmp($request->getParameter('pac_codigo'), '') != 0)
+      $this->form = new PacienteForm();
+      $datos_paciente = $request->getParameter($this->form->getName());
+      if(strcmp($datos_paciente['pac_codigo'], '') != 0)
       {
-          $paciente = Doctrine_Core::getTable('Paciente')->find(array($request->getParameter('pac_codigo')));
+          $paciente = Doctrine_Core::getTable('Paciente')->find(array($datos_paciente['pac_codigo']));
           $this->form = new PacienteForm($paciente);
-          $this->form->bind($request->getParameter($this->form->getName()));
+          $this->form->bind($datos_paciente);
 
-          $this->contactos_form = array();
+          /*$this->contactos_form = array();
 
           foreach($paciente->Contactos as $obj_contacto)
           {
               $this->contactos_form[] = new ContactoForm($obj_contacto);
+          }*/
+          if($this->form->isValid())
+          {
+              //echo 'Formulario valido';
+              $this->paciente = $this->form->save();
+              $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
           }
+          else
+          {
+              echo 'Algo no esta bien';
+          }
+//          return sfView::NONE;
       }
       else
       {
-
+          $this->form->bind($request->getParameter($this->form->getName()));
+          // TODO Guardar contactos
+          $this->paciente = $this->form->save();
+          $this->getUser()->setAttribute('pac_codigo', $this->paciente->pac_codigo);
+          $this->getUser()->setAttribute('pac_nombre', $this->paciente->pac_nombre);
+          $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
       }
       /*if($this->form->isValid())
       {
