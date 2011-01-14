@@ -73,6 +73,8 @@ class clienteActions extends sfActions
       if($request->isXmlHttpRequest())
       {
           $codigo_paciente = $this->getUser()->getAttribute('pac_codigo');
+          var_dump($request->getContent());
+          var_dump($request->getParameter('parametro_array[codigo]'));
           if(empty($codigo_paciente))
           {
               $this->paciente = new Paciente();

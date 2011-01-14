@@ -1,4 +1,4 @@
-<form id="form1" name="form1" method="post" action="<?php echo url_for('cliente/guardarPaciente') ?>">
+<form id="form1" name="form1" method="get" action="<?php echo url_for('cliente/guardarPaciente') ?>">
     <div class="formulario">
         <h2>Datos del Paciente</h2>
         <?php echo $form->renderHiddenFields(false) ?>
@@ -86,16 +86,20 @@
                 'paciente' => $paciente
             )) ?>
             <?php endif; ?>
-            <div style="display: none" id="hidden_contacto_forms"></div>
         </div>
+        <div style="display: none" id="hidden_contacto_forms"></div>
         <div class="form">
             <script type="text/javascript">
                 var actualizarFormaContacto = function() {
                     var contador_contactos = document.getElementById('form1').cuenta_contactos.value;
                     var parametros_enviados = agregarHiddensDinamicos('hidden_contacto_forms', '<?php echo url_for('cliente/almacenarContacto') ?>', 'contacto', contador_contactos);
+                    /*for(var i = 0; i < document.getElementById("form1").elements.length; i ++) {
+                        alert(document.getElementById("form1").elements[i]);
+                    }*/
                     $.ajax({
                         url: "<?php echo url_for('cliente/generarListaContactos') ?>",
-                        data: parametros_enviados,
+                        data: "parametro_array[codigo]=1&parametro_array[nombre]=cartlos",
+                        type: "POST",
                         success: function(respuesta) {
                             document.getElementById('lst_contactos_paciente').innerHTML = respuesta;
                         }
