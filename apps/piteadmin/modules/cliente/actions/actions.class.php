@@ -70,14 +70,14 @@ class clienteActions extends sfActions
   {
       if($request->isXmlHttpRequest())
       {
-          $this->form_contacto = new ContactoForm();
-          $this->form_contacto->setWidget('con_nombre', new sfWidgetFormInputHidden());
-          $this->form_contacto->setWidget('con_telefono1', new sfWidgetFormInputHidden());
-          $this->form_contacto->setWidget('con_telefono2', new sfWidgetFormInputHidden());
-          $this->form_contacto->setWidget('con_email', new sfWidgetFormInputHidden());
-          $this->form_contacto->setWidget('con_direccion', new sfWidgetFormInputHidden());
-          $this->form_contacto->setNameFormat($this->form_contacto->getName() . '_' . $request->getParameter('contacto_id') . '[%s]');
-          $this->form_contacto->bind($request->getParameter($this->form_contacto->getName()));
+          $contacto = new Contacto();
+          $contacto->set('con_nombre', $request->getParameter('con_nombre'));
+          $contacto->set('con_telefono1', $request->getParameter('con_telefono1'));
+          $contacto->set('con_telefono2', $request->getParameter('con_telefono2'));
+          $contacto->set('con_email', $request->getParameter('con_email'));
+          $contacto->set('con_direccion', $request->getParameter('con_direccion'));
+          $this->form_contacto = new ContactoForm($contacto);
+          $this->form_contacto->setHiddenForm($request->getParameter('contacto_id'));
       }
   }
 

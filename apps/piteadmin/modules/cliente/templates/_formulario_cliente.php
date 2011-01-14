@@ -100,7 +100,7 @@
                 <tbody>
                     <?php $par = false ?>
                     <?php foreach($paciente->Contacto as $contacto_paciente): ?>
-                    <tr class="<?php echo ($par == true) ? 'par' : 'impar' ?>">
+                    <tr class="<?php echo ($par == true) ? 'par' : 'impar' ?>" id="contacto_<?php echo $contacto_paciente->con_codigo ?>">
                         <td><?php echo $contacto_paciente->con_nombre ?></td>
                         <td><?php echo $contacto_paciente->con_telefono1 ?></td>
                         <td><?php echo $contacto_paciente->con_email ?></td>
@@ -114,7 +114,16 @@
             <div style="display: none" id="hidden_contacto_forms"></div>
         </div>
         <div class="form">
+            <script type="text/javascript">
+                var actualizarFormaContacto = function() {
+                    var contador_contactos = document.getElementById('form1').cuenta_contactos.value;
+                    agregarHiddensDinamicos('hidden_contacto_forms', '<?php echo url_for('cliente/almacenarContacto') ?>', 'contacto', contador_contactos);
+                    
+                    document.getElementById('form1').cuenta_contactos.value ++;
+                }
+            </script>
             <?php echo $contact_form->renderHiddenFields() ?>
+            <input type="hidden" name="cuenta_contactos" value="0" />
             <table>
                 <tr>
                     <td><?php echo $contact_form['con_nombre']->renderError() ?>
@@ -140,7 +149,8 @@
                     <td colspan="3">
                         <div style="text-align: right">
                             <button type="button" onclick="limpiarFormulario('<?php echo $contact_form->getName() ?>')">Nuevo Contacto</button>
-                            <button type="button" onclick="">Agregar Contacto</button>
+                            <button type="button" onclick="agregarHiddensDinamicos('hidden_contacto_forms', '<?php echo url_for('cliente/almacenarContacto') ?>', 'contacto', document.form1.cuenta_contactos.value); document.form1.cuenta_contactos.value ++">Agregar Contacto</button>
+                            <button type="button" onclick="actualizarFormaContacto()">Agregar Contacto</button>
                         </div>
                     </td>
                 </tr>

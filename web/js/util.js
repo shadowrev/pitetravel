@@ -120,12 +120,28 @@ function limpiarFormulario(nombre_grupo_formulario) {
     $("[name*='" + nombre_grupo_formulario + "[']").val("");
 }
 
-function cargarHTML(id_elemento, url_accion, data) {
+function agregarHTML(id_elemento, url_accion, parametros) {
     $.ajax({
         url: url_accion,
-        data: data,
+        data: parametros,
         success: function(respuesta) {
-
+            var html_anterior = document.getElementById(id_elemento).innerHTML;
+            //$(id_elemento).html(respuesta);
+            document.getElementById(id_elemento).innerHTML = html_anterior + respuesta;
         }
     });
+}
+
+function agregarHiddensDinamicos(id_elemento, url_accion, selector, valor_contador) {
+    var campos = $("[name*='" + selector + "[']");
+    var cadena_parametros = "";
+    for(var i = 0; i < campos.length; i ++) {
+        var string_id = selector + "_";
+        var parametro_id = campos[i].getAttribute('id')
+        var parametro =  parametro_id.substr(string_id.length, parametro_id.length);
+        cadena_parametros += parametro + "=" + campos[i].value + '&';
+    }
+    if(valor_contador != undefined)
+        cadena_parametros += selector + '_id=' + valor_contador
+    agregarHTML(id_elemento, url_accion, cadena_parametros);
 }

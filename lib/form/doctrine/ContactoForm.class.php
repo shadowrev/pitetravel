@@ -20,4 +20,14 @@ class ContactoForm extends BaseContactoForm
           'con_direccion' => 'Direcci&oacute;n:'
       ));
     }
+
+    public function setHiddenForm($id_contacto)
+    {
+        $this->setWidget('con_nombre', new sfWidgetFormInputHidden());
+        $this->setWidget('con_telefono1', new sfWidgetFormInputHidden());
+        $this->setWidget('con_telefono2', new sfWidgetFormInputHidden());
+        $this->setWidget('con_email', new sfWidgetFormInputHidden());
+        $this->setWidget('con_direccion', new sfWidgetFormInputHidden());
+        $this->widgetSchema->setNameFormat($this->getName() . '_' . trim($id_contacto) . '[%s]');
+    }
 }
