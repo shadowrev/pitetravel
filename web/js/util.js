@@ -144,4 +144,5 @@ function agregarHiddensDinamicos(id_elemento, url_accion, selector, valor_contad
     if(valor_contador != undefined)
         cadena_parametros += selector + '_id=' + valor_contador
     agregarHTML(id_elemento, url_accion, cadena_parametros);
+    return cadena_parametros;
 }
