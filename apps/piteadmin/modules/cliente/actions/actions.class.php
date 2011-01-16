@@ -100,7 +100,7 @@ class clienteActions extends sfActions
       $formas_contactos_nuevos = array();
       $this->contactos = array();
 
-      for($i = 0; $i <= $request->getParameter('cuenta_contactos'); $i ++)
+      for($i = 0; $i < $request->getParameter('cuenta_contactos'); $i ++)
       {
           $formas_contactos_nuevos[] = 'contacto_' . $i;
       }
@@ -132,9 +132,10 @@ class clienteActions extends sfActions
           // TODO Guardar contactos
           $this->paciente = $this->form->save();
 
-          foreach($formas_contactos_nuevos as $contenido_contacto)
+          foreach($formas_contactos_nuevos as $nombre_forma)
           {
               $contacto_form = new ContactoForm();
+              $contenido_contacto = $request->getParameter($nombre_forma);
               $contenido_contacto['con_pac_codigo'] = $this->paciente->pac_codigo;
               $contacto_form->bind($contenido_contacto);
               $this->contactos[] = $contacto_form->save();
