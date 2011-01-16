@@ -146,7 +146,3 @@ function agregarHiddensDinamicos(id_elemento, url_accion, selector, valor_contad
     agregarHTML(id_elemento, url_accion, cadena_parametros);
     return cadena_parametros;
 }
-
-function armarCadenaParametros(selector) {
-    var items_enviar = $("[name*=" + selector + "']");
-}
