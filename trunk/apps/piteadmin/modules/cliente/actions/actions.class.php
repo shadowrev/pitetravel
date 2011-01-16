@@ -112,18 +112,27 @@ class clienteActions extends sfActions
           $this->form->bind($datos_paciente);
 
           $this->contactos_form = array();
-
-          foreach($paciente->Contactos as $obj_contacto)
+          
+          if(isset($paciente->Contactos))
           {
-              $this->contactos_form[] = new ContactoForm($obj_contacto);
+              foreach($paciente->Contactos as $obj_contacto)
+              {
+                  // TODO Procedimiento para editar contactos
+                  $this->contactos_form[] = new ContactoForm($obj_contacto);
+              }
+          }
+         
+          $this->paciente = $this->form->save();
+          foreach($formas_contactos_nuevos as $nombre_forma)
+          {
+              $contacto_form = new ContactoForm();
+              $contenido_contacto = $request->getParameter($nombre_forma);
+              $contenido_contacto['con_pac_codigo'] = $this->paciente->pac_codigo;
+              $contacto_form->bind($contenido_contacto);
+              $this->contactos[] = $contacto_form->save();
           }
 
-          if($this->form->isValid())
-          {
-              //echo 'Formulario valido';
-              $this->paciente = $this->form->save();
-              $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
-          }
+          $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
 //          return sfView::NONE;
       }
       else
@@ -179,6 +188,10 @@ class clienteActions extends sfActions
 
   public function executeReserva(sfWebRequest $request)
   {
+      if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
+      {
+          $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');
+      }
       $this->form = new ReservahotelForm();
   }
   
@@ -199,6 +212,10 @@ class clienteActions extends sfActions
 
   public function executeVuelo(sfWebRequest $request)
   {
+      if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
+      {
+          $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');
+      }
       $this->form = new ReservavueloForm();
   }
 
