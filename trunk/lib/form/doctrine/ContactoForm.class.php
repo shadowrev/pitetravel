@@ -28,6 +28,6 @@ class ContactoForm extends BaseContactoForm
         $this->setWidget('con_telefono2', new sfWidgetFormInputHidden());
         $this->setWidget('con_email', new sfWidgetFormInputHidden());
         $this->setWidget('con_direccion', new sfWidgetFormInputHidden());
-        $this->widgetSchema->setNameFormat($this->getName() . '_' . trim($id_contacto) . '[%s]');
+        $this->widgetSchema->setNameFormat($this->getName() . '_' . (empty($id_contacto) ? '0' : $id_contacto) . '[%s]');
     }
 }
