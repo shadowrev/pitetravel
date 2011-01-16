@@ -68,25 +68,6 @@ class clienteActions extends sfActions
       }
   }
 
-  public function executeGenerarListaContactos(sfWebRequest $request)
-  {
-      if($request->isXmlHttpRequest())
-      {
-          $codigo_paciente = $this->getUser()->getAttribute('pac_codigo');
-          var_dump($request->getContent());
-          var_dump($request->getParameter('parametro_array[codigo]'));
-          if(empty($codigo_paciente))
-          {
-              $this->paciente = new Paciente();
-          }
-          else
-          {
-              $this->paciente = Doctrine_Core::getTable('Paciente')->find(array($codigo_paciente));
-          }
-          
-      }
-  }
-
   /**
    * Guarda temporalmente el contacto almacenado en un form invisible
    * @param sfWebRequest $request
@@ -116,47 +97,53 @@ class clienteActions extends sfActions
       // TODO Guardar el paciente en la base de datos
       $this->form = new PacienteForm();
       $datos_paciente = $request->getParameter($this->form->getName());
+      $formas_contactos_nuevos = array();
+      $this->contactos = array();
+
+      for($i = 0; $i <= $request->getParameter('cuenta_contactos'); $i ++)
+      {
+          $formas_contactos_nuevos[] = 'contacto_' . $i;
+      }
+      
       if(strcmp($datos_paciente['pac_codigo'], '') != 0)
       {
           $paciente = Doctrine_Core::getTable('Paciente')->find(array($datos_paciente['pac_codigo']));
           $this->form = new PacienteForm($paciente);
           $this->form->bind($datos_paciente);
 
-          /*$this->contactos_form = array();
+          $this->contactos_form = array();
 
           foreach($paciente->Contactos as $obj_contacto)
           {
               $this->contactos_form[] = new ContactoForm($obj_contacto);
-          }*/
+          }
+
           if($this->form->isValid())
           {
               //echo 'Formulario valido';
               $this->paciente = $this->form->save();
               $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
           }
-          else
-          {
-              echo 'Algo no esta bien';
-          }
 //          return sfView::NONE;
       }
       else
       {
-          $this->form->bind($request->getParameter($this->form->getName()));
+          $this->form->bind($datos_paciente);
           // TODO Guardar contactos
           $this->paciente = $this->form->save();
+
+          foreach($formas_contactos_nuevos as $contenido_contacto)
+          {
+              $contacto_form = new ContactoForm();
+              $contenido_contacto['con_pac_codigo'] = $this->paciente->pac_codigo;
+              $contacto_form->bind($contenido_contacto);
+              $this->contactos[] = $contacto_form->save();
+          }
+          
           $this->getUser()->setAttribute('pac_codigo', $this->paciente->pac_codigo);
           $this->getUser()->setAttribute('pac_nombre', $this->paciente->pac_nombre);
           $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
       }
-      /*if($this->form->isValid())
-      {
-          if($this->form->isNew())
-          {
-              $paciente = $this->form->save();
-              $contactos =
-          }
-      }*/
   }
 
   public function executeListarPacientes(sfWebRequest $request)
