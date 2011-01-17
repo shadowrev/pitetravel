@@ -1045,7 +1045,7 @@ Preoperatorio:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     preo_cli_codigo:
       type: integer(8)
@@ -1336,7 +1336,7 @@ Reservavuelo:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
   relations:
     Tratamiento:

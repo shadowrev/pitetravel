@@ -16,4 +16,10 @@ class PreoperatorioTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Preoperatorio');
     }
+
+    public function obtenerTratamientos($codigo_tratamiento)
+    {
+        $query = $this->createQuery('p')->where('preo_tra_codigo=' . $codigo_tratamiento);
+        return $query->execute();
+    }
 }

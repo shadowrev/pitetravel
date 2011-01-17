@@ -12,4 +12,10 @@
  */
 class Paciente extends BasePaciente
 {
+    public function getTratamiento()
+    {
+        $tabla_tratamientos = Doctrine_Core::getTable('Tratamiento');
+        $query = $tabla_tratamientos->createQuery('t')->where('tra_pac_codigo=' . $this->pac_codigo)->addOrderBy('tra_codigo');
+        return $query->execute();
+    }
 }

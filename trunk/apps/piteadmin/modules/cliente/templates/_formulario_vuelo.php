@@ -1,7 +1,8 @@
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="<?php echo url_for('cliente/guardarVuelo') ?>">
     <div class="formulario">
         <h2>Reserva del Vuelo</h2>
         <div class="form">
+            <?php echo $form->renderHiddenFields() ?>
             <table>
                 <tr>
                     
@@ -54,7 +55,8 @@
         </div>
     </div>
     <div class="submit">
+        <button type="button">Nueva Reserva</button>
         <button type="submit">Guardar</button>
-        <button type="button">Cancelar</button>
+        <button type="button">Generar Imprimible</button>
     </div> 
 </form>

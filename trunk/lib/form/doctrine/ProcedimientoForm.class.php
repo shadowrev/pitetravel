@@ -20,4 +20,12 @@ class ProcedimientoForm extends BaseProcedimientoForm
             'pro_otro' => 'Cual (Otro):'
         ));
     }
+
+    public function setHiddenForm($id_procedimiento)
+    {
+        $this->setWidget('pro_tit_codigo', new sfWidgetFormInputHidden());
+        $this->setWidget('pro_dtr_codigo', new sfWidgetFormInputHidden());
+        $this->setWidget('pro_otro', new sfWidgetFormInputHidden());
+        $this->widgetSchema->setNameFormat($this->getName() . '_' . (empty($id_procedimiento) ? '0' : $id_procedimiento) . '[%s]');
+    }
 }

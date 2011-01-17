@@ -204,6 +204,32 @@ class clienteActions extends sfActions
   {
       // TODO Cargar la reserva
   }
+
+  public function executeGuardarReserva(sfWebRequest $request)
+  {
+      $datos_reserva = $request->getParameter('reservahotel');
+      $datos_reserva['reh_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
+      if(!empty($datos_reserva['reh_tra_codigo']))
+      {
+          if(0 != strcmp($datos_reserva['reh_codigo'], ''))
+          {
+              $reserva_hotel = Doctrine_Core::getTable('Reservahotel')->find(array($datos_reserva['reh_codigo']));
+              $form_reserva = new ReservahotelForm($reserva_hotel);
+              $form_reserva->bind($datos_reserva);
+              if($form_reserva->isValid())
+                      $nueva_reserva = $form_reserva->save();
+          }
+          else
+          {
+              $form_reserva = new ReservahotelForm();
+              $form_reserva->bind($datos_reserva);
+              if($form_reserva->isValid())
+                      $nueva_reserva = $form_reserva->save();
+          }
+          // TODO redireccionar a la reserva de hotel almacenada
+          $this->redirect('cliente/reserva');
+      }
+  }
   
   public function executeEliminarReserva(sfWebRequest $request)
   {
@@ -214,7 +240,7 @@ class clienteActions extends sfActions
   {
       if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
       {
-          $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');
+          $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');                  $this->getUser()->getFlash('mensaje_advertencia');
       }
       $this->form = new ReservavueloForm();
   }
@@ -226,7 +252,32 @@ class clienteActions extends sfActions
 
   public function executeGuardarVuelo(sfWebRequest $request)
   {
-      // TODO Guardar la reserva del vuelo
+      $datos_vuelo = $request->getParameter('reservavuelo');
+      $datos_vuelo['vue_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
+      if(!empty($datos_vuelo['vue_tra_codigo']))
+      {
+          if(0 != strcmp($datos_vuelo['vue_codigo'], ''))
+          {
+              $reserva_vuelo = Doctrine_Core::getTable('Reservavuelo')->find(array($datos_vuelo['vue_codigo']));
+              $form_reserva = new ReservavueloForm($reserva_vuelo);
+              $form_reserva->bind($datos_vuelo);
+              if($form_reserva->isValid())
+                      $nueva_reserva = $form_reserva->save();
+          }
+          else
+          {
+              $form_reserva = new ReservavueloForm();
+              $form_reserva->bind($datos_vuelo);
+              if($form_reserva->isValid())
+                      $nueva_reserva = $form_reserva->save();
+          }
+          // TODO Redireccionar a la reserva de vuelo guardada
+          $this->redirect('cliente/vuelo');
+      }
+      /*else
+      {
+          $this->forward('cliente', 'vuelo');
+      }*/
   }
 
   public function executeEliminarVuelo(sfWebRequest $request)
