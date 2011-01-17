@@ -379,7 +379,7 @@ Foto:
       primary: false
       notnull: false
       autoincrement: false
-    pos_codigo:
+    fot_pos_codigo:
       type: integer(8)
       fixed: false
       unsigned: false
