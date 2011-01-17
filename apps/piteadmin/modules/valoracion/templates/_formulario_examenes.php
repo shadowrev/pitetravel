@@ -1,7 +1,8 @@
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="<?php echo url_for('valoracion/guardarPreoperatorio') ?>">
     <div class="formulario">
         <h2>Ex&aacute;menes Pre-Operatorios</h2>
         <div class="form">
+            <?php echo $form->renderHiddenFields() ?>
             <table>
                 <tr>
                     <td><?php echo $form['preo_glicemia']->renderError() ?>
@@ -74,9 +75,7 @@
     </div>
         <div class="formulario">
             <h2>Tratamiento</h2>
-            <div class="lista">
-                <?php if(!isset($ids_procedimientos)) $ids_procedimientos = array() ?>
-                <?php if(sizeof($ids_procedimientos) > 0): ?>
+            <div class="lista" id="lst_procedimientos">
                 <table>
                     <thead>
                         <tr>
@@ -92,6 +91,8 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                    <?php if(!isset($ids_procedimientos)) $ids_procedimientos = array() ?>
+                    <?php if(sizeof($ids_procedimientos) > 0): ?>
                         <?php $par = false ?>
                         <?php //foreach($paciente->Contacto as $procedimiento): ?>
                         <tr class="<?php echo (true == $par) ? 'par' : 'impar' ?>">
@@ -102,11 +103,49 @@
                             <td><?php //echo '[eliminar]' ?></td><?php $par = !$par ?>
                         </tr>
                         <?php //endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
-                <?php endif; ?>
+                <div id="procedimientos_hidden" style="display: none"></div>
             </div>
+            <script type="text/javascript">
+                var actualizarFormaTratamientos = function() {
+                    var contador_contactos = document.getElementById('form1').cuenta_procedimientos.value;
+                    agregarHiddensDinamicos('procedimientos_hidden', '<?php echo url_for('valoracion/almacenarProcedimiento') ?>', 'procedimiento', contador_contactos);
+                    var ultima_fila = $("#lst_procedimientos table tbody tr:last-child");
+
+                    var fila_nueva = document.createElement("tr");
+                    var celda_0 = document.createElement("td");
+                    var celda_1 = document.createElement("td");
+                    var celda_2 = document.createElement("td");
+                    var celda_3 = document.createElement("td");
+
+                    if("par" == ultima_fila.attr("class") || (0 == ultima_fila.size()))
+                        fila_nueva.className = "impar";
+                    else
+                        fila_nueva.className = "par";
+
+                    celda_0.textContent = $("#procedimiento_pro_tit_codigo option:selected").text();
+                    celda_1.textContent = $("#procedimiento_pro_dtr_codigo option:selected").text();
+                    celda_2.textContent = "[modificar]";
+                    celda_3.textContent = "[eliminar]";
+
+                    fila_nueva.appendChild(celda_0);
+                    fila_nueva.appendChild(celda_1);
+                    fila_nueva.appendChild(celda_2);
+                    fila_nueva.appendChild(celda_3);
+
+                    if(0 == ultima_fila.size()) {
+                        $("#lst_procedimientos table tbody").append(fila_nueva);
+                    }
+                    else
+                        ultima_fila.after(fila_nueva);
+
+                    document.getElementById('form1').cuenta_procedimientos.value ++;
+                }
+            </script>
             <div class="form">
+                <input type="hidden" name="cuenta_procedimientos" value="0" />
                 <table>
                     <tr>
                         <td><?php echo $procedimiento_form['pro_tit_codigo']->renderError() ?>
@@ -126,25 +165,18 @@
                         )) ?></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><div style="text-align: right"><button type="button">Agregar Tratamiento</button></div></td>
-                    </tr>
-                    <!--<tr>
-                        <td><label for="label2">*Fecha de Partida:</label><br />
-                        <input type="text" name="nombre" id="label" /></td>
-                        <td><label for="label2">*Fecha de Regreso:</label><br />
-                        <input type="text" name="nombre" id="label" /></td>
-                        <td><label for="label2">Tiempo de Estad&iacute;a:</label><br />
-                        <input type="text" name="nombre" id="label" /></td>
-                    </tr>
-                    <tr>
                         <td colspan="3">
                             <div style="text-align: right">
-                                <button type="button">Guardar Tratamiento</button>
-                                <button type="button">Buscar Tratamiento</button>
+                                <button type="button" onclick="">Nuevo Tratamiento</button>
+                                <button type="button" onclick="actualizarFormaTratamientos()">Agregar Tratamiento</button>
                             </div>
                         </td>
-                    </tr>-->
+                    </tr>
                 </table>
+                <script type="text/javascript">
+                    var select_tratamiento = document.getElementById("procedimiento_pro_tit_codigo");
+                    filtrarTratamientos("<?php echo url_for('valoracion/cargarTipoTratamiento') ?>", select_tratamiento.value);
+                </script>
                 <div>
                     <em>&Uacute;ltima valoraci&oacute;n realizada por: <strong>Nombre del m&eacute;dico</strong></em>
                 </div>

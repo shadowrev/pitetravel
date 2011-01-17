@@ -66,7 +66,7 @@ abstract class BasePreoperatorioForm extends BaseFormDoctrine
       'preo_fecha_cita_ext'       => new sfValidatorDate(array('required' => false)),
       'preo_hora_cita_ext'        => new sfValidatorTime(array('required' => false)),
       'preo_fecha_cirugia'        => new sfValidatorDate(array('required' => false)),
-      'preo_hora_cirugia'         => new sfValidatorTime(),
+      'preo_hora_cirugia'         => new sfValidatorTime(array('required' => false)),
       'preo_cli_codigo'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Clinica'), 'required' => false)),
       'preo_enf_codigo'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Enfermera'), 'required' => false)),
       'preo_informe_especialista' => new sfValidatorString(array('required' => false)),

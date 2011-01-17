@@ -43,7 +43,7 @@ abstract class BaseReservavueloForm extends BaseFormDoctrine
       'vue_hora_llegada_ida'    => new sfValidatorTime(),
       'vue_hora_salida_vuelta'  => new sfValidatorTime(),
       'vue_hora_llegada_vuelta' => new sfValidatorTime(),
-      'vue_valor'               => new sfValidatorInteger(),
+      'vue_valor'               => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('reservavuelo[%s]');
