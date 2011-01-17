@@ -29,6 +29,8 @@ class valoracionActions extends sfActions
     {
         $this->form = new PreoperatorioForm();
         $this->procedimiento_form = new ProcedimientoForm();
+        $this->foto_form = new FotoForm();
+        $this->foto_form->cambiarGrupo('foto_0');
         
         if(0 != strcmp($this->getUser()->getAttribute('pac_codigo'), ''))
         {
@@ -38,18 +40,53 @@ class valoracionActions extends sfActions
                 if(sizeof($this->paciente->Tratamiento) > 0)
                 {
                     $tratamiento = $this->paciente->Tratamiento->getLast();
-                    $preoperatorios = Doctrine_Core::getTable('Preoperatorio')->obtenerTratamientos($tratamiento->tra_codigo);
-                    $this->form = new PreoperatorioForm($preoperatorios->getLast());
+                    $preoperatorio = Doctrine_Core::getTable('Preoperatorio')->obtenerTratamientos($tratamiento->tra_codigo)->getLast();
+                    //$this->form = new PreoperatorioForm($preoperatorios->getLast());
+                    $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
                 }
-            }
-            
+            }            
         }        
     }
 
     public function executeCargarExamenPreoperatorio(sfWebRequest $request)
     {
-        // TODO Cargar el formulario con la informacion del examen preoperatorio
-        //$this->getUser()->setAttribute('preo_codigo', $this->preoperatorio->preo_codigo);
+        if((0 != strcmp($request->getParameter('preo_codigo'), '')) && (0 != strcmp($this->getUser()->getAttribute('tra_codigo'), '')))
+        {
+            $this->preoperatorio = Doctrine_Core::getTable('Preoperatorio')->find(array($request->getParameter('preo_codigo')));
+            $this->form = new PreoperatorioForm($this->preoperatorio);
+            // TODO cargar los procedimientos que se van a realizar en el tratamiento
+            $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find(array($this->getUser()->getAttribute('tra_codigo')));
+            $this->ids_procedimientos = array();
+            foreach($this->tratamiento->Procedimiento as $procedimiento)
+            {
+                $this->ids_procedimientos[] = $procedimiento->pro_codigo;
+            }
+
+            $this->procedimiento_form = new ProcedimientoForm();
+            $this->forms_fotos = array();
+            $this->links_forms_fotos = array();
+            
+            if(sizeof($this->preoperatorio->Foto) > 0)
+            {
+                $count = 0;
+                foreach($this->preoperatorio->Foto as $foto)
+                {
+                    $this->forms_fotos[$count] = new FotoForm($foto);
+                    $this->links_forms_fotos[$count] = $foto->fot_uri_imagen;
+                }
+            }
+            else
+            {
+                $this->forms_fotos[0] = new FotoForm();
+                $this->forms_fotos[0]->cambiarGrupo('foto_0');
+            }
+            
+            $this->setTemplate('examenesPreoperatorios');
+        }
+        else
+        {
+            $this->forward('valoracion', 'examenesPreoperatorios');
+        }
     }
 
     public function executeGuardarPreoperatorio(sfWebRequest $request)
@@ -62,6 +99,24 @@ class valoracionActions extends sfActions
             $this->getUser()->setAttribute('tra_codigo', $this->tratamiento->tra_codigo);
         }
 
+        $forms_procedimientos = array();
+        for($i = 0; $i < $request->getParameter('cuenta_procedimientos'); $i ++)
+        {
+            //$forms_procedimientos[] = 'procedimiento_' . $i;
+            $datos_nuevo_procedimiento = $request->getParameter('procedimiento_' . $i);
+            
+            if(empty($datos_nuevo_procedimiento['pro_codigo']))
+            {
+                $nuevo_procedimiento = new Procedimiento();
+                $nuevo_procedimiento->set('pro_tra_codigo', $this->getUser()->getAttribute('tra_codigo'));
+                $nuevo_procedimiento->set('pro_tit_codigo', $datos_nuevo_procedimiento['pro_tit_codigo']);
+                $nuevo_procedimiento->set('pro_dtr_codigo', $datos_nuevo_procedimiento['pro_dtr_codigo']);
+                $nuevo_procedimiento->set('pro_otro', $datos_nuevo_procedimiento['pro_otro']);
+                $nuevo_procedimiento->save();
+            }
+        }
+
+
         $contenido_preoperatorio = $request->getParameter('preoperatorio');
         $contenido_preoperatorio['preo_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
 
@@ -70,21 +125,21 @@ class valoracionActions extends sfActions
             $preoperatorio = Doctrine_Core::getTable('Preoperatorio')->find(array($contenido_preoperatorio['preo_codigo']));
             $this->form_preoperatorio = new PreoperatorioForm($preoperatorio);
             $this->form_preoperatorio->bind($contenido_preoperatorio);
-            //if($this->form_preoperatorio->isValid())
-            //{
+            if($this->form_preoperatorio->isValid())
+            {
                 $preoperatorio_actual = $this->form_preoperatorio->save();
-            //}
+            }
         }
         else
         {
             $this->form_preoperatorio = new PreoperatorioForm();
             $this->form_preoperatorio->bind($contenido_preoperatorio);
-            //if($this->form_preoperatorio->isValid())
-            //{
-                $preoperatorio = $this->form_preoperatorio->save();
-            //}
+            if($this->form_preoperatorio->isValid())
+            {
+                $preoperatorio_actual = $this->form_preoperatorio->save();
+            }
         }
-        $this->redirect('valoracion/examenesPreoperatorios');
+        $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
     }
 
     /**
@@ -98,7 +153,6 @@ class valoracionActions extends sfActions
         {
             $query_desc_tipo_tratamiento = Doctrine_Core::getTable('Descripciontratamiento')->getQueryListaDescripciones($request->getParameter('dtr_tit_codigo'));
             $this->procedimiento_form->getWidget('pro_dtr_codigo')->setOption('query', $query_desc_tipo_tratamiento);
-
         }
     }
 
@@ -129,6 +183,15 @@ class valoracionActions extends sfActions
             $procedimiento->set('pro_otro', $request->getParameter('pro_otro'));
             $this->form_procedimiento = new ProcedimientoForm($procedimiento);
             $this->form_procedimiento->setHiddenForm($request->getParameter('procedimiento_id'));
+        }
+    }
+
+    public function executeAgregarFoto(sfWebRequest $request)
+    {
+        if($request->isXmlHttpRequest())
+        {
+            $this->form_foto = new FotoForm();
+            $this->form_foto->cambiarGrupo('foto_' . $request->getParameter('cuenta_fotos'));
         }
     }
 

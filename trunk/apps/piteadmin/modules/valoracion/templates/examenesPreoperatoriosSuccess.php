@@ -3,5 +3,15 @@
 <?php endif; ?>
 <?php include_partial('submenu', array('current' => 'examenes')) ?>
 <div id="contenido-formulario">
-<?php include_partial('formulario_examenes', array('form' => $form, 'procedimiento_form' => $procedimiento_form)) ?>
+    <?php
+        $variables_incluir = array('form' => $form, 'procedimiento_form' => $procedimiento_form, 'foto_form' => $foto_form);
+        if(isset($ids_procedimientos))
+            $variables_incluir['ids_procedimientos'] = $ids_procedimientos;
+        else
+            $variables_incluir['ids_procedimientos'] = array();
+        if(isset($tratamiento))
+            $variables_incluir['tratamiento'] = $tratamiento;
+
+    ?>
+    <?php include_partial('formulario_examenes', $variables_incluir) ?>
 </div>

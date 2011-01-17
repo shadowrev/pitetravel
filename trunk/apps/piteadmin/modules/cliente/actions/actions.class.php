@@ -25,6 +25,7 @@ class clienteActions extends sfActions
               $this->contact_form = new ContactoForm();
               $this->getUser()->setAttribute('pac_codigo', '');
               $this->getUser()->setAttribute('pac_nombre', '');
+              $this->getUser()->setAttribute('tra_codigo', '');
           }
           else
           {
@@ -46,6 +47,10 @@ class clienteActions extends sfActions
       
       $this->getUser()->setAttribute('pac_codigo', $this->paciente->pac_codigo);
       $this->getUser()->setAttribute('pac_nombre', $this->paciente->pac_nombre);
+      if(sizeof($this->paciente->Tratamiento) > 0)
+      {
+          $this->getUser()->setAttribute('tra_codigo', $this->paciente->Tratamiento->getLast()->getTraCodigo());
+      }
 
       $this->form = new PacienteForm($this->paciente);
       $this->ids_contactos = array();
