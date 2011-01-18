@@ -21,14 +21,26 @@ class FotoForm extends BaseFotoForm
       ));
 
       $this->widgetSchema->setLabels(array(
-          'fot_nombre' => 'Nombre:',
+          'fot_nombre' => 'Nombre de la Foto:',
           'fot_uri_imagen' => 'Subir Foto',
           'fot_preoperatoria' => 'Preoperatoria?:'
+      ));
+
+      $this->validatorSchema['fot_uri_imagen'] = new sfValidatorFile(array(
+          'required' => true,
+          'path' => sfConfig::get('sf_upload_dir') . '/fotos_pacientes',
+          'mime_types' => 'web_images'
       ));
     }
 
     public function cambiarGrupo($nombre_grupo)
     {
         $this->widgetSchema->setNameFormat($nombre_grupo . '[%s]');
+    }
+
+    public function quitarCampoFoto()
+    {
+        unset($this->widgetSchema['fot_uri_imagen']);
+        //unset($this->validatorSchema['fot_uri_imagen']);
     }
 }

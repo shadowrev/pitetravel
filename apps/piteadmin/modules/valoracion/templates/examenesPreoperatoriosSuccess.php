@@ -4,7 +4,12 @@
 <?php include_partial('submenu', array('current' => 'examenes')) ?>
 <div id="contenido-formulario">
     <?php
-        $variables_incluir = array('form' => $form, 'procedimiento_form' => $procedimiento_form, 'foto_form' => $foto_form);
+        $variables_incluir = array(
+            'form' => $form,
+            'procedimiento_form' => $procedimiento_form,
+            'forms_fotos' => $forms_fotos,
+            'links_forms_fotos' => $links_forms_fotos
+        );
         if(isset($ids_procedimientos))
             $variables_incluir['ids_procedimientos'] = $ids_procedimientos;
         else

@@ -29,8 +29,8 @@ class valoracionActions extends sfActions
     {
         $this->form = new PreoperatorioForm();
         $this->procedimiento_form = new ProcedimientoForm();
-        $this->foto_form = new FotoForm();
-        $this->foto_form->cambiarGrupo('foto_0');
+        $this->forms_fotos = array(new FotoForm());
+        $this->forms_fotos[0]->cambiarGrupo('foto_0');
         
         if(0 != strcmp($this->getUser()->getAttribute('pac_codigo'), ''))
         {
@@ -72,7 +72,9 @@ class valoracionActions extends sfActions
                 foreach($this->preoperatorio->Foto as $foto)
                 {
                     $this->forms_fotos[$count] = new FotoForm($foto);
+                    $this->forms_fotos[$count]->cambiarGrupo('foto_' . $count);
                     $this->links_forms_fotos[$count] = $foto->fot_uri_imagen;
+                    $count ++;
                 }
             }
             else
@@ -99,7 +101,6 @@ class valoracionActions extends sfActions
             $this->getUser()->setAttribute('tra_codigo', $this->tratamiento->tra_codigo);
         }
 
-        $forms_procedimientos = array();
         for($i = 0; $i < $request->getParameter('cuenta_procedimientos'); $i ++)
         {
             //$forms_procedimientos[] = 'procedimiento_' . $i;
@@ -116,7 +117,6 @@ class valoracionActions extends sfActions
             }
         }
 
-
         $contenido_preoperatorio = $request->getParameter('preoperatorio');
         $contenido_preoperatorio['preo_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
 
@@ -127,7 +127,7 @@ class valoracionActions extends sfActions
             $this->form_preoperatorio->bind($contenido_preoperatorio);
             if($this->form_preoperatorio->isValid())
             {
-                $preoperatorio_actual = $this->form_preoperatorio->save();
+                $this->preoperatorio_actual = $this->form_preoperatorio->save();
             }
         }
         else
@@ -136,9 +136,39 @@ class valoracionActions extends sfActions
             $this->form_preoperatorio->bind($contenido_preoperatorio);
             if($this->form_preoperatorio->isValid())
             {
-                $preoperatorio_actual = $this->form_preoperatorio->save();
+                $this->preoperatorio_actual = $this->form_preoperatorio->save();
             }
         }
+
+        $forms_fotos = array();
+        for($i = 0; $i <= $request->getParameter('cuenta_fotos'); $i ++)
+        {
+            $datos_foto = $request->getParameter('foto_' . $i);
+            $datos_foto['fot_preoperatoria'] = 1;
+            $datos_foto['fot_preo_codigo'] = $this->preoperatorio_actual->preo_codigo;
+            $forma_foto = new FotoForm();
+            if(!empty($datos_foto['fot_codigo']))
+            {
+                $foto = Doctrine_Core::getTable('Foto')->find(array($datos_foto['fot_codigo']));
+                $forma_foto = new FotoForm($foto);
+                if(empty($datos_foto['fot_uri_imagen']))
+                {
+                    $foto->setFotNombre($datos_foto['fot_nombre']);
+                    $foto->save();
+                }
+                else
+                {
+                    $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
+                    $foto_nueva = $forma_foto->save();
+                }
+            }
+            else
+            {
+                $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
+                $foto_nueva = $forma_foto->save();
+            }
+        }
+
         $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
     }
 

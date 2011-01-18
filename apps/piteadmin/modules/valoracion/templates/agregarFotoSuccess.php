@@ -1,3 +1,4 @@
+<?php echo $form_foto->renderHiddenFields() ?>
 <table>
     <tr>
         <td>
