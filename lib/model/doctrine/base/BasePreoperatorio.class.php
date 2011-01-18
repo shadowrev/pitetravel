@@ -34,6 +34,8 @@ Doctrine_Manager::getInstance()->bindComponent('Preoperatorio', 'doctrine');
  * @property string $preo_informe_especialista
  * @property string $preo_observaciones
  * @property integer $preo_med_codigo
+ * @property string $preo_nombre_especialista
+ * @property string $preo_correo_especialista
  * @property Tratamiento $Tratamiento
  * @property Clinica $Clinica
  * @property Enfermera $Enfermera
@@ -68,6 +70,8 @@ Doctrine_Manager::getInstance()->bindComponent('Preoperatorio', 'doctrine');
  * @method string              getPreoInformeEspecialista()   Returns the current record's "preo_informe_especialista" value
  * @method string              getPreoObservaciones()         Returns the current record's "preo_observaciones" value
  * @method integer             getPreoMedCodigo()             Returns the current record's "preo_med_codigo" value
+ * @method string              getPreoNombreEspecialista()    Returns the current record's "preo_nombre_especialista" value
+ * @method string              getPreoCorreoEspecialista()    Returns the current record's "preo_correo_especialista" value
  * @method Tratamiento         getTratamiento()               Returns the current record's "Tratamiento" value
  * @method Clinica             getClinica()                   Returns the current record's "Clinica" value
  * @method Enfermera           getEnfermera()                 Returns the current record's "Enfermera" value
@@ -101,6 +105,8 @@ Doctrine_Manager::getInstance()->bindComponent('Preoperatorio', 'doctrine');
  * @method Preoperatorio       setPreoInformeEspecialista()   Sets the current record's "preo_informe_especialista" value
  * @method Preoperatorio       setPreoObservaciones()         Sets the current record's "preo_observaciones" value
  * @method Preoperatorio       setPreoMedCodigo()             Sets the current record's "preo_med_codigo" value
+ * @method Preoperatorio       setPreoNombreEspecialista()    Sets the current record's "preo_nombre_especialista" value
+ * @method Preoperatorio       setPreoCorreoEspecialista()    Sets the current record's "preo_correo_especialista" value
  * @method Preoperatorio       setTratamiento()               Sets the current record's "Tratamiento" value
  * @method Preoperatorio       setClinica()                   Sets the current record's "Clinica" value
  * @method Preoperatorio       setEnfermera()                 Sets the current record's "Enfermera" value
@@ -374,6 +380,24 @@ abstract class BasePreoperatorio extends sfDoctrineRecord
              'notnull' => false,
              'autoincrement' => false,
              'length' => 8,
+             ));
+        $this->hasColumn('preo_nombre_especialista', 'string', 64, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 64,
+             ));
+        $this->hasColumn('preo_correo_especialista', 'string', 64, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => 64,
              ));
     }
 

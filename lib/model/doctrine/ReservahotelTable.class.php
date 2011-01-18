@@ -16,4 +16,11 @@ class ReservahotelTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Reservahotel');
     }
+
+    public function buscarPorTratamiento($codigo_tratamiento)
+    {
+        $consulta = $this->createQuery('rh')->where('reh_tra_codigo=' . $codigo_tratamiento);
+        //return $consulta->execute();
+        return $consulta->fetchOne();
+    }
 }

@@ -17,7 +17,7 @@ abstract class BaseFotoFormFilter extends BaseFormFilterDoctrine
       'fot_uri_imagen'    => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'fot_preoperatoria' => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'fot_preo_codigo'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Preoperatorio'), 'add_empty' => true)),
-      'pos_codigo'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Postoperatorio'), 'add_empty' => true)),
+      'fot_pos_codigo'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Postoperatorio'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -25,7 +25,7 @@ abstract class BaseFotoFormFilter extends BaseFormFilterDoctrine
       'fot_uri_imagen'    => new sfValidatorPass(array('required' => false)),
       'fot_preoperatoria' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'fot_preo_codigo'   => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Preoperatorio'), 'column' => 'preo_codigo')),
-      'pos_codigo'        => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Postoperatorio'), 'column' => 'pos_codigo')),
+      'fot_pos_codigo'    => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Postoperatorio'), 'column' => 'pos_codigo')),
     ));
 
     $this->widgetSchema->setNameFormat('foto_filters[%s]');
@@ -50,7 +50,7 @@ abstract class BaseFotoFormFilter extends BaseFormFilterDoctrine
       'fot_uri_imagen'    => 'Text',
       'fot_preoperatoria' => 'Number',
       'fot_preo_codigo'   => 'ForeignKey',
-      'pos_codigo'        => 'ForeignKey',
+      'fot_pos_codigo'    => 'ForeignKey',
     );
   }
 }

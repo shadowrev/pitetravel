@@ -17,7 +17,7 @@ class clienteActions extends sfActions
 
   public function executeInformacionPaciente(sfWebRequest $request)
   {
-      if(strcmp($this->getUser()->getAttribute('pac_codigo'), '') != 0)
+      if((strcmp($this->getUser()->getAttribute('pac_codigo'), '') != 0) && ($this->getUser()->getAttribute('pac_codigo') != null))
       {
           if(strcmp($request->getParameter('nuevo_paciente'), 'si') == 0)
           {
@@ -34,6 +34,9 @@ class clienteActions extends sfActions
       }
       else
       {
+          $this->getUser()->setAttribute('pac_codigo', null);
+          $this->getUser()->setAttribute('pac_nombre', null);
+          $this->getUser()->setAttribute('tra_codigo', null);
           $this->form = new PacienteForm();
           $this->contact_form = new ContactoForm();
       }
@@ -196,8 +199,16 @@ class clienteActions extends sfActions
       if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
       {
           $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');
+          $this->form = new ReservahotelForm();
       }
-      $this->form = new ReservahotelForm();
+      else
+      {
+          $reserva_hotel = Doctrine_Core::getTable('Reservahotel')->buscarPorTratamiento($this->getUser()->getAttribute('tra_codigo'))/*->getFirst()*/;
+          if($reserva_hotel)
+              $this->form = new ReservahotelForm($reserva_hotel);
+          else
+              $this->form = new ReservahotelForm();
+      }
   }
   
   public function executeListarReserva(sfWebRequest $request)
@@ -245,9 +256,17 @@ class clienteActions extends sfActions
   {
       if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
       {
-          $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');                  $this->getUser()->getFlash('mensaje_advertencia');
+          $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');
+          $this->form = new ReservavueloForm();
       }
-      $this->form = new ReservavueloForm();
+      else
+      {
+          $vuelo = Doctrine_Core::getTable('Reservavuelo')->buscarPorTratamiento($this->getUser()->getAttribute('tra_codigo'))/*->getFirst()*/;
+          if($vuelo)
+              $this->form = new ReservavueloForm($vuelo);
+          else
+              $this->form = new ReservavueloForm();
+      }
   }
 
   public function executeMostrarVuelo(sfWebRequest $request)
@@ -261,28 +280,24 @@ class clienteActions extends sfActions
       $datos_vuelo['vue_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
       if(!empty($datos_vuelo['vue_tra_codigo']))
       {
-          if(0 != strcmp($datos_vuelo['vue_codigo'], ''))
+          if(!empty($datos_vuelo['vue_codigo']))
           {
               $reserva_vuelo = Doctrine_Core::getTable('Reservavuelo')->find(array($datos_vuelo['vue_codigo']));
               $form_reserva = new ReservavueloForm($reserva_vuelo);
               $form_reserva->bind($datos_vuelo);
-              if($form_reserva->isValid())
+              //if($form_reserva->isValid())
                       $nueva_reserva = $form_reserva->save();
           }
           else
           {
               $form_reserva = new ReservavueloForm();
               $form_reserva->bind($datos_vuelo);
-              if($form_reserva->isValid())
+              //if($form_reserva->isValid())
                       $nueva_reserva = $form_reserva->save();
           }
           // TODO Redireccionar a la reserva de vuelo guardada
-          $this->redirect('cliente/vuelo');
       }
-      /*else
-      {
-          $this->forward('cliente', 'vuelo');
-      }*/
+      $this->redirect('cliente/vuelo');
   }
 
   public function executeEliminarVuelo(sfWebRequest $request)

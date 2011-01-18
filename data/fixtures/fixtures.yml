@@ -16,70 +16,70 @@
 #     name:     Kris Wallsmith
 #     email:    kris.wallsmith@symfony-project.com
 
-Paciente:
-  raulerne:
-    pac_nombre:           Raul Ernesto Villamarin
-    pac_identificacion:   14621099
-    pac_fecha_nacimiento: 1983-06-11
-    pac_telefono1:        4463197
-    pac_telefono2:        3006600740
-    pac_email:            raulernevl@hotmail.com
-    pac_direccion:        Calle 44A 7N-36
-    pac_ciudad:           Cali
-    pac_estado:           Valle
-    pac_pais:             Colombia
-    pac_cod_postal:       0
-
-  victorh:
-    pac_nombre:           Victor Hugo Villamarin
-    pac_identificacion:   6104222
-    pac_fecha_nacimiento: 1979-03-22
-    pac_telefono1:        4463197
-    pac_telefono2:        3015242563
-    pac_email:            victor.villamarin@gmail.com
-    pac_direccion:        Calle 44A 7N-36
-    pac_ciudad:           Cali
-    pac_estado:           Valle
-    pac_pais:             Colombia
-    pac_cod_postal:       0
-
-  anavictoria:
-    pac_nombre:           Ana Victoria Agudelo
-    pac_identificacion:   45253625
-    pac_fecha_nacimiento: 1989-04-30
-    pac_telefono1:        5253213
-    pac_telefono2:        3156698542
-    pac_email:            anagudelo@gmail.com
-    pac_direccion:        Av 6AN 23-41
-    pac_ciudad:           Cali
-    pac_estado:           Valle
-    pac_pais:             Colombia
-    pac_cod_postal:       0
-
-Contacto:
-  francisco:
-    Paciente:      raulerne
-    con_nombre:    Francisco Urrea
-    con_telefono1: 7525245
-    con_telefono2: 3015253632
-    con_email:     pacho.urrea@contact.com
-    con_direccion: Calle 36 8N-33
-
-  hernando:
-    Paciente:      raulerne
-    con_nombre:    Hernando Osorio
-    con_telefono1: 8563232
-    con_telefono2: 3129963525
-    con_email:     heos@contact.com
-    con_direccion: Cra 8 33-501
-
-  vigo:
-    Paciente:      victorh
-    con_nombre:    Vicente Oga
-    con_telefono1: 6546565
-    con_telefono2: 3158858888
-    con_email:     vigo@contact.com
-    con_direccion: Cra 100 88-33
+#Paciente:
+#  raulerne:
+#    pac_nombre:           Raul Ernesto Villamarin
+#    pac_identificacion:   14621099
+#    pac_fecha_nacimiento: 1983-06-11
+#    pac_telefono1:        4463197
+#    pac_telefono2:        3006600740
+#    pac_email:            raulernevl@hotmail.com
+#    pac_direccion:        Calle 44A 7N-36
+#    pac_ciudad:           Cali
+#    pac_estado:           Valle
+#    pac_pais:             Colombia
+#    pac_cod_postal:       0
+#
+#  victorh:
+#    pac_nombre:           Victor Hugo Villamarin
+#    pac_identificacion:   6104222
+#    pac_fecha_nacimiento: 1979-03-22
+#    pac_telefono1:        4463197
+#    pac_telefono2:        3015242563
+#    pac_email:            victor.villamarin@gmail.com
+#    pac_direccion:        Calle 44A 7N-36
+#    pac_ciudad:           Cali
+#    pac_estado:           Valle
+#    pac_pais:             Colombia
+#    pac_cod_postal:       0
+#
+#  anavictoria:
+#    pac_nombre:           Ana Victoria Agudelo
+#    pac_identificacion:   45253625
+#    pac_fecha_nacimiento: 1989-04-30
+#    pac_telefono1:        5253213
+#    pac_telefono2:        3156698542
+#    pac_email:            anagudelo@gmail.com
+#    pac_direccion:        Av 6AN 23-41
+#    pac_ciudad:           Cali
+#    pac_estado:           Valle
+#    pac_pais:             Colombia
+#    pac_cod_postal:       0
+#
+#Contacto:
+#  francisco:
+#    Paciente:      raulerne
+#    con_nombre:    Francisco Urrea
+#    con_telefono1: 7525245
+#    con_telefono2: 3015253632
+#    con_email:     pacho.urrea@contact.com
+#    con_direccion: Calle 36 8N-33
+#
+#  hernando:
+#    Paciente:      raulerne
+#    con_nombre:    Hernando Osorio
+#    con_telefono1: 8563232
+#    con_telefono2: 3129963525
+#    con_email:     heos@contact.com
+#    con_direccion: Cra 8 33-501
+#
+#  vigo:
+#    Paciente:      victorh
+#    con_nombre:    Vicente Oga
+#    con_telefono1: 6546565
+#    con_telefono2: 3158858888
+#    con_email:     vigo@contact.com
+#    con_direccion: Cra 100 88-33
 
 Hotel:
   danncartlon:

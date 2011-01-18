@@ -29,6 +29,7 @@ class valoracionActions extends sfActions
     {
         $this->form = new PreoperatorioForm();
         $this->procedimiento_form = new ProcedimientoForm();
+        $this->links_forms_fotos = array();
         $this->forms_fotos = array(new FotoForm());
         $this->forms_fotos[0]->cambiarGrupo('foto_0');
         
@@ -165,7 +166,8 @@ class valoracionActions extends sfActions
             else
             {
                 $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
-                $foto_nueva = $forma_foto->save();
+                if($forma_foto->isValid())
+                    $foto_nueva = $forma_foto->save();
             }
         }
 
@@ -188,9 +190,33 @@ class valoracionActions extends sfActions
 
     public function executeValoracionPreoperatoria(sfWebRequest $request)
     {
-        // TODO Carga el tratamiento actual y la valoracion que le corresponde
-//        $this->preoperatorio = Doctrine_Core::getTable('Preoperatorio')->find(array($this->getUser()->getAttribute('preo_codigo')));
         $this->preoperatorio_form = new PreoperatorioForm();
+        if(0 != strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
+        {
+            $this->preoperatorio = Doctrine_Core::getTable('Preoperatorio')->obtenerTratamientos($this->getUser()->getAttribute('tra_codigo'))->getLast();
+            $this->preoperatorio_form = new PreoperatorioForm($this->preoperatorio);
+        }
+    }
+
+    public function executeGuardarValoracionPreoperatoria(sfWebRequest $request)
+    {
+        $datos_preoperatorio = $request->getParameter('preoperatorio');
+        if(!empty($datos_preoperatorio['preo_codigo']))
+        {
+            $this->preoperatorio = Doctrine_Core::getTable('Preoperatorio')->find(array($datos_preoperatorio['preo_codigo']));
+            $fecha_cita_ext = $datos_preoperatorio['preo_fecha_cita_ext']['year'] . '-' . $datos_preoperatorio['preo_fecha_cita_ext']['month'] . '-' . $datos_preoperatorio['preo_fecha_cita_ext']['day'];
+            $hora_cita_ext = $datos_preoperatorio['preo_hora_cita_ext']['hour'] . ':' . $datos_preoperatorio['preo_hora_cita_ext']['minute'];
+            $this->preoperatorio->set('preo_fecha_cita_ext', $fecha_cita_ext);
+            $this->preoperatorio->set('preo_hora_cita_ext', $hora_cita_ext);
+            $this->preoperatorio->set('preo_cli_codigo', $datos_preoperatorio['preo_cli_codigo']);
+            $this->preoperatorio->set('preo_informe_especialista', $datos_preoperatorio['preo_informe_especialista']);
+            $this->preoperatorio->save();
+        }
+        else
+        {
+            // TODO mensaje indicando que no se ha hecho una evaluacion previa
+        }
+        $this->forward('valoracion', 'valoracionPreoperatoria');
     }
 
     public function executeComplementos(sfWebRequest $request)

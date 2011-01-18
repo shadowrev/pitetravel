@@ -33,12 +33,14 @@ abstract class BasePreoperatorioFormFilter extends BaseFormFilterDoctrine
       'preo_fecha_cita_ext'       => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
       'preo_hora_cita_ext'        => new sfWidgetFormFilterInput(),
       'preo_fecha_cirugia'        => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate())),
-      'preo_hora_cirugia'         => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'preo_hora_cirugia'         => new sfWidgetFormFilterInput(),
       'preo_cli_codigo'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Clinica'), 'add_empty' => true)),
       'preo_enf_codigo'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Enfermera'), 'add_empty' => true)),
       'preo_informe_especialista' => new sfWidgetFormFilterInput(),
       'preo_observaciones'        => new sfWidgetFormFilterInput(),
       'preo_med_codigo'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'), 'add_empty' => true)),
+      'preo_nombre_especialista'  => new sfWidgetFormFilterInput(),
+      'preo_correo_especialista'  => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -68,6 +70,8 @@ abstract class BasePreoperatorioFormFilter extends BaseFormFilterDoctrine
       'preo_informe_especialista' => new sfValidatorPass(array('required' => false)),
       'preo_observaciones'        => new sfValidatorPass(array('required' => false)),
       'preo_med_codigo'           => new sfValidatorDoctrineChoice(array('required' => false, 'model' => $this->getRelatedModelName('Medico'), 'column' => 'med_codigo')),
+      'preo_nombre_especialista'  => new sfValidatorPass(array('required' => false)),
+      'preo_correo_especialista'  => new sfValidatorPass(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('preoperatorio_filters[%s]');
@@ -114,6 +118,8 @@ abstract class BasePreoperatorioFormFilter extends BaseFormFilterDoctrine
       'preo_informe_especialista' => 'Text',
       'preo_observaciones'        => 'Text',
       'preo_med_codigo'           => 'ForeignKey',
+      'preo_nombre_especialista'  => 'Text',
+      'preo_correo_especialista'  => 'Text',
     );
   }
 }

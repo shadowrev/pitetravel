@@ -20,7 +20,7 @@ abstract class BaseFotoForm extends BaseFormDoctrine
       'fot_uri_imagen'    => new sfWidgetFormInputText(),
       'fot_preoperatoria' => new sfWidgetFormInputText(),
       'fot_preo_codigo'   => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Preoperatorio'), 'add_empty' => true)),
-      'pos_codigo'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Postoperatorio'), 'add_empty' => true)),
+      'fot_pos_codigo'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Postoperatorio'), 'add_empty' => true)),
     ));
 
     $this->setValidators(array(
@@ -29,7 +29,7 @@ abstract class BaseFotoForm extends BaseFormDoctrine
       'fot_uri_imagen'    => new sfValidatorString(array('max_length' => 150)),
       'fot_preoperatoria' => new sfValidatorInteger(array('required' => false)),
       'fot_preo_codigo'   => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Preoperatorio'), 'required' => false)),
-      'pos_codigo'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Postoperatorio'), 'required' => false)),
+      'fot_pos_codigo'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Postoperatorio'), 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('foto[%s]');
