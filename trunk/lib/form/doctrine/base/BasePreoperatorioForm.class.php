@@ -42,6 +42,8 @@ abstract class BasePreoperatorioForm extends BaseFormDoctrine
       'preo_informe_especialista' => new sfWidgetFormTextarea(),
       'preo_observaciones'        => new sfWidgetFormTextarea(),
       'preo_med_codigo'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'), 'add_empty' => true)),
+      'preo_nombre_especialista'  => new sfWidgetFormInputText(),
+      'preo_correo_especialista'  => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -72,6 +74,8 @@ abstract class BasePreoperatorioForm extends BaseFormDoctrine
       'preo_informe_especialista' => new sfValidatorString(array('required' => false)),
       'preo_observaciones'        => new sfValidatorString(array('required' => false)),
       'preo_med_codigo'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'), 'required' => false)),
+      'preo_nombre_especialista'  => new sfValidatorString(array('max_length' => 64, 'required' => false)),
+      'preo_correo_especialista'  => new sfValidatorString(array('max_length' => 64, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('preoperatorio[%s]');

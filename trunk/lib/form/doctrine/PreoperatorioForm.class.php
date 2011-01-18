@@ -65,7 +65,9 @@ class PreoperatorioForm extends BasePreoperatorioForm
             'preo_cli_codigo' => 'Cl&iacute;nica:',
             'preo_enf_codigo' => 'Enfermera:',
             'preo_informe_especialista' => 'Informe del Especialista:',
-            'preo_observaciones' => 'Observaciones:'
+            'preo_observaciones' => 'Observaciones:',
+            'preo_nombre_especialista' => 'Especialista:',
+            'preo_correo_especialista' => 'Correo Electr&oacute;nico del Especialista:',
         ));
         
     }

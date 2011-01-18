@@ -183,6 +183,6 @@
     </div>
     <div class="submit">
         <button type="submit">Guardar</button>
-        <button type="button" onclick="location.href='<?php echo url_for('cliente/informacionPaciente?nuevo_paciente=si') ?>'">Cancelar</button>
+        <button type="button" onclick="location.href='<?php echo url_for('cliente/informacionPaciente?nuevo_paciente=si') ?>'">Nuevo Paciente</button>
     </div>
 </form>

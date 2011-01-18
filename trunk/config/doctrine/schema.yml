@@ -392,7 +392,7 @@ Foto:
       foreign: preo_codigo
       type: one
     Postoperatorio:
-      local: pos_codigo
+      local: fot_pos_codigo
       foreign: pos_codigo
       type: one
 Hotel:
@@ -1077,6 +1077,21 @@ Preoperatorio:
       autoincrement: false
     preo_med_codigo:
       type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+# Campos temporales
+    preo_nombre_especialista:
+      type: string(64)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    preo_correo_especialista:
+      type: string(64)
       fixed: false
       unsigned: false
       primary: false

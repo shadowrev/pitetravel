@@ -1,7 +1,8 @@
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="<?php echo url_for('valoracion/guardarValoracionPreoperatoria') ?>">
 <div class="formulario">
     <h2>Programaci&oacute;n de la Cita y Valoraci&oacute;n</h2>
     <div class="form">
+        <?php echo $preoperatorio_form->renderHiddenFields() ?>
         <table>
             <tr>
                 <td><?php echo $preoperatorio_form['preo_fecha_cita_ext']->renderError() ?>

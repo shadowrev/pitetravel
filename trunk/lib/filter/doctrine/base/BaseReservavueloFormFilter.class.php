@@ -24,7 +24,7 @@ abstract class BaseReservavueloFormFilter extends BaseFormFilterDoctrine
       'vue_hora_llegada_ida'    => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'vue_hora_salida_vuelta'  => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'vue_hora_llegada_vuelta' => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'vue_valor'               => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'vue_valor'               => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(

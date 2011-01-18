@@ -66,6 +66,15 @@
                     <?php echo $form['preo_electro']->render() ?></td>
                 </tr>
                 <tr>
+                    <td><?php echo $form['preo_nombre_especialista']->renderError() ?>
+                    <?php echo $form['preo_nombre_especialista']->renderLabel() ?><br />
+                    <?php echo $form['preo_nombre_especialista']->render() ?></td>
+                    <td><?php echo $form['preo_correo_especialista']->renderError() ?>
+                    <?php echo $form['preo_correo_especialista']->renderLabel() ?><br />
+                    <?php echo $form['preo_correo_especialista']->render() ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
                     <td colspan="3">
                         <div style="text-align: right"><button type="button">Buscar</button></div>
                     </td>
@@ -214,7 +223,9 @@
                             <?php echo $forms_fotos[$i]['fot_uri_imagen']->renderError() ?>
                             <?php echo $forms_fotos[$i]['fot_uri_imagen']->renderLabel() ?><br />
                             <?php echo $forms_fotos[$i]['fot_uri_imagen']->render() ?><br />
+                            <?php if(sizeof($links_forms_fotos) > 0): ?>
                             <a href="<?php echo public_path('') . 'uploads/fotos_pacientes/' . $links_forms_fotos[$i] ?>" target="_blank">Imagen Actual</a>
+                            <?php endif; ?>
                         </td>
                         <td>
                             <button type="button" onclick="">X</button>

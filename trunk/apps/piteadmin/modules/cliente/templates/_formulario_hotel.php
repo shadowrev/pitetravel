@@ -67,6 +67,9 @@
                     </td>
                 </tr>
             </table>
+            <script type="text/javascript">
+                actualizarInfoHotel("<?php echo url_for('cliente/cargarHotel') ?>", document.getElementById("reservahotel_reh_hot_codigo").value);
+            </script>
         </div>
     </div>
     <div class="submit">

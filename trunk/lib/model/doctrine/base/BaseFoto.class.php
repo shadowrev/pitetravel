@@ -12,7 +12,7 @@ Doctrine_Manager::getInstance()->bindComponent('Foto', 'doctrine');
  * @property string $fot_uri_imagen
  * @property integer $fot_preoperatoria
  * @property integer $fot_preo_codigo
- * @property integer $pos_codigo
+ * @property integer $fot_pos_codigo
  * @property Preoperatorio $Preoperatorio
  * @property Postoperatorio $Postoperatorio
  * 
@@ -21,7 +21,7 @@ Doctrine_Manager::getInstance()->bindComponent('Foto', 'doctrine');
  * @method string         getFotUriImagen()      Returns the current record's "fot_uri_imagen" value
  * @method integer        getFotPreoperatoria()  Returns the current record's "fot_preoperatoria" value
  * @method integer        getFotPreoCodigo()     Returns the current record's "fot_preo_codigo" value
- * @method integer        getPosCodigo()         Returns the current record's "pos_codigo" value
+ * @method integer        getFotPosCodigo()      Returns the current record's "fot_pos_codigo" value
  * @method Preoperatorio  getPreoperatorio()     Returns the current record's "Preoperatorio" value
  * @method Postoperatorio getPostoperatorio()    Returns the current record's "Postoperatorio" value
  * @method Foto           setFotCodigo()         Sets the current record's "fot_codigo" value
@@ -29,7 +29,7 @@ Doctrine_Manager::getInstance()->bindComponent('Foto', 'doctrine');
  * @method Foto           setFotUriImagen()      Sets the current record's "fot_uri_imagen" value
  * @method Foto           setFotPreoperatoria()  Sets the current record's "fot_preoperatoria" value
  * @method Foto           setFotPreoCodigo()     Sets the current record's "fot_preo_codigo" value
- * @method Foto           setPosCodigo()         Sets the current record's "pos_codigo" value
+ * @method Foto           setFotPosCodigo()      Sets the current record's "fot_pos_codigo" value
  * @method Foto           setPreoperatorio()     Sets the current record's "Preoperatorio" value
  * @method Foto           setPostoperatorio()    Sets the current record's "Postoperatorio" value
  * 
@@ -88,7 +88,7 @@ abstract class BaseFoto extends sfDoctrineRecord
              'autoincrement' => false,
              'length' => 8,
              ));
-        $this->hasColumn('pos_codigo', 'integer', 8, array(
+        $this->hasColumn('fot_pos_codigo', 'integer', 8, array(
              'type' => 'integer',
              'fixed' => 0,
              'unsigned' => false,
@@ -107,7 +107,7 @@ abstract class BaseFoto extends sfDoctrineRecord
              'foreign' => 'preo_codigo'));
 
         $this->hasOne('Postoperatorio', array(
-             'local' => 'pos_codigo',
+             'local' => 'fot_pos_codigo',
              'foreign' => 'pos_codigo'));
     }
 }
