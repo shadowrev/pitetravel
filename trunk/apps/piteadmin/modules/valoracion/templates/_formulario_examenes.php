@@ -181,7 +181,6 @@
     <div class="formulario">
         <h2>Fotos Preoperatorias</h2>
         <div class="form" id="form_fotos">
-            <input type="hidden" name="cuenta_fotos" value="0" />
             <script type="text/javascript">
                 var agregarFoto = function() {
                     document.getElementById("form1").cuenta_fotos.value ++;
@@ -200,18 +199,22 @@
                     });
                 }
             </script>
-            <div id="foto_0">
+            <input type="hidden" name="cuenta_fotos" value="<?php echo (sizeof($forms_fotos) - 1) ?>" />
+            <?php for($i = 0; $i < sizeof($forms_fotos); $i ++): ?>
+            <div id="foto_<?php echo $i ?>">
+                <?php echo $forms_fotos[$i]->renderHiddenFields() ?>
                 <table>
                     <tr>
                         <td>
-                            <?php echo $foto_form['fot_nombre']->renderError() ?>
-                            <?php echo $foto_form['fot_nombre']->renderLabel() ?><br />
-                            <?php echo $foto_form['fot_nombre']->render() ?>
+                            <?php echo $forms_fotos[$i]['fot_nombre']->renderError() ?>
+                            <?php echo $forms_fotos[$i]['fot_nombre']->renderLabel() ?><br />
+                            <?php echo $forms_fotos[$i]['fot_nombre']->render() ?>
                         </td>
                         <td>
-                            <?php echo $foto_form['fot_uri_imagen']->renderError() ?>
-                            <?php echo $foto_form['fot_uri_imagen']->renderLabel() ?><br />
-                            <?php echo $foto_form['fot_uri_imagen']->render() ?>
+                            <?php echo $forms_fotos[$i]['fot_uri_imagen']->renderError() ?>
+                            <?php echo $forms_fotos[$i]['fot_uri_imagen']->renderLabel() ?><br />
+                            <?php echo $forms_fotos[$i]['fot_uri_imagen']->render() ?><br />
+                            <a href="<?php echo public_path('') . 'uploads/fotos_pacientes/' . $links_forms_fotos[$i] ?>" target="_blank">Imagen Actual</a>
                         </td>
                         <td>
                             <button type="button" onclick="">X</button>
@@ -219,6 +222,7 @@
                     </tr>
                 </table>
             </div>
+            <?php endfor; ?>
             <div style="text-align: right">
                 <button type="button" onclick="agregarFoto()">Agregar Foto</button>
             </div>
