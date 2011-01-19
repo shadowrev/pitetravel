@@ -2,6 +2,7 @@
 <div class="formulario">
     <h2>Informaci&oacute;n Adicional</h2>
     <div class="form">
+        <?php echo $preoperatorio_form->renderHiddenFields() ?>
         <table>
             <tr>
                 <td><?php echo $preoperatorio_form['preo_cli_codigo']->renderError() ?>
