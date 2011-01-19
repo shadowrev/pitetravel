@@ -170,7 +170,7 @@ class valoracionActions extends sfActions
                     $foto_nueva = $forma_foto->save();
             }
         }
-
+        //return sfView::NONE;
         $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
     }
 
@@ -221,11 +221,22 @@ class valoracionActions extends sfActions
 
     public function executeComplementos(sfWebRequest $request)
     {
-        // TODO Carga el tratamiento actual y la informacion del tratamiento correspondiente
         $this->preoperatorio_form = new PreoperatorioForm();
         $this->elementosxinterv_form = new ElementosxintervencionForm();
         $this->dieta_form = new DietapacienteForm();
         $this->menu_form = new MenuForm();
+        
+        $tratamiento_id = $this->getUser()->getAttribute('tra_codigo');
+        if(!empty($tratamiento_id))
+        {
+            $this->preoperatorio = Doctrine_Core::getTable('Preoperatorio')->obtenerTratamientos($tratamiento_id)->getLast();
+            $this->preoperatorio_form = new PreoperatorioForm($this->preoperatorio);
+        }
+    }
+    
+    public function executeGuardarComplementos(sfWebRequest $request)
+    {
+        // TODO Procedimiento para guardar la informacion de complementos
     }
 
     public function executeAlmacenarProcedimiento(sfWebRequest $request)

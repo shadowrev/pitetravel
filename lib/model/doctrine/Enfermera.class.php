@@ -12,4 +12,7 @@
  */
 class Enfermera extends BaseEnfermera
 {
+    public function  __toString() {
+        return $this->enf_nombre;
+    }
 }
