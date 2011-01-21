@@ -19,4 +19,11 @@ class ElementosxintervencionForm extends BaseElementosxintervencionForm
           'exi_cantidad' => 'Cantidad:'
       ));
   }
+
+  public function setHiddenForm($id_elemento)
+  {
+      $this->setWidget('exi_maq_codigo', new sfWidgetFormInputHidden());
+      $this->setWidget('exi_cantidad', new sfWidgetFormInputHidden());
+      $this->widgetSchema->setNameFormat($this->getName() . '_' . (empty($id_elemento) ? '0' : $id_elemento) . '[%s]');
+  }
 }

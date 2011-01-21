@@ -1,4 +1,4 @@
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="<?php echo url_for('valoracion/guardarComplementos') ?>">
 <div class="formulario">
     <h2>Informaci&oacute;n Adicional</h2>
     <div class="form">
@@ -41,9 +41,7 @@
 </div>
 <div class="formulario">
     <h2>Material Quirurgico Adicional</h2>
-    <?php if(!isset($ids_material_quirurgico)) $ids_material_quirurgico = array() ?>
-    <?php if(sizeof($ids_material_quirurgico) > 0): ?>
-    <div class="lista">
+    <div class="lista" id="material_quirurgico_ad">
         <table>
             <thead>
                 <tr>
@@ -59,19 +57,59 @@
                 </tr>
             </tfoot>
             <tbody>
+                <?php if(0 < sizeof($material_quirurgico)): ?>
                 <?php $par = false ?>
-                <?php //foreach($material_quirurgico as $elemento): ?>
+                <?php foreach($material_quirurgico as $elemento): ?>
                 <tr class="<?php echo (true == $par) ? 'par' : 'impar' ?>">
-                    <td><?php //echo $elemento->Materialquirurgico->maq_nombre ?></td>
-                    <td><?php //echo $elemento->exi_cantidad ?></td>
+                    <td><?php echo $elemento->Materialquirurgico->maq_nombre ?></td>
+                    <td><?php echo $elemento->exi_cantidad ?></td>
                     <td><a href="javascript:void(0)">[modificar]</a></td>
                     <td><a href="javascript:void(0)">[eliminar]</a></td>
                 </tr>
-                <?php //endforeach; ?>
+                <?php $par = !$par; ?>
+                <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
+        <div id="material_hidden" style="display: none"></div>
+        <input type="hidden" name="cuenta_material" value="0" />
+        <script type="text/javascript">
+            var actualizarFormaMaterialQuirurgico = function() {
+                var contador_material = document.getElementById('form1').cuenta_material.value;
+                agregarHiddensDinamicos('material_hidden', '<?php echo url_for('valoracion/almacenarMaterial') ?>', 'elementosxintervencion', contador_material);
+                var ultima_fila = $("#material_quirurgico_ad table tbody tr:last-child");
+
+                var fila_nueva = document.createElement("tr");
+                var celda_0 = document.createElement("td");
+                var celda_1 = document.createElement("td");
+                var celda_2 = document.createElement("td");
+                var celda_3 = document.createElement("td");
+
+                if("par" == ultima_fila.attr("class") || (0 == ultima_fila.size()))
+                    fila_nueva.className = "impar";
+                else
+                    fila_nueva.className = "par";
+
+                celda_0.textContent = $("#elementosxintervencion_exi_maq_codigo option:selected").text();
+                celda_1.textContent = $("#elementosxintervencion_exi_cantidad").val();
+                celda_2.textContent = "[modificar]";
+                celda_3.textContent = "[eliminar]";
+
+                fila_nueva.appendChild(celda_0);
+                fila_nueva.appendChild(celda_1);
+                fila_nueva.appendChild(celda_2);
+                fila_nueva.appendChild(celda_3);
+
+                if(0 == ultima_fila.size()) {
+                    $("#material_quirurgico_ad table tbody").append(fila_nueva);
+                }
+                else
+                    ultima_fila.after(fila_nueva);
+
+                document.getElementById('form1').cuenta_material.value ++;
+            }
+        </script>
     </div>
-    <?php endif; ?>
     <div class="form">
         <table>
             <tr>
@@ -83,7 +121,11 @@
                 <?php echo $elementosxinterv_form['exi_cantidad']->render() ?></td>
             </tr>
             <tr>
-                <td colspan="2"><div style="text-align: right"><button type="button">Agregar Material</button></div></td>
+                <td colspan="2">
+                    <div style="text-align: right">
+                        <button type="button" onclick="actualizarFormaMaterialQuirurgico()">Agregar Material</button>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>

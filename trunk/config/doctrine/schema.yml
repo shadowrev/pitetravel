@@ -250,7 +250,7 @@ Dietapaciente:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     dtp_tipo_dieta:
       type: string(20)
@@ -890,7 +890,7 @@ Preoperatorio:
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     preo_glicemia:
       type: string(15)

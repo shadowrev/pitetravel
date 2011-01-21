@@ -7,6 +7,6 @@
     'preoperatorio_form' => $preoperatorio_form,
     'elementosxinterv_form' => $elementosxinterv_form,
     'menu_form' => $menu_form,
-    'dieta_form' => $dieta_form
-)) ?>
+    'dieta_form' => $dieta_form,
+    'material_quirurgico' => $material_quirurgico)); ?>
 </div>
