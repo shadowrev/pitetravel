@@ -47,7 +47,15 @@ class clienteActions extends sfActions
       // TODO cargar la informacion del paciente para su edicion
       //$this->forward404($paciente = Doctrine_Core::getTable('Paciente')->find(array($request->getParameter('pac_codigo'))), 'El Paciente no existe');
       $this->paciente = Doctrine_Core::getTable('Paciente')->find(array($request->getParameter('pac_codigo')));
-      
+
+      if(false == $this->paciente)
+      {
+          $this->getUser()->setAttribute('pac_codigo', null);
+          $this->getUser()->setAttribute('pac_nombre', null);
+          $this->getUser()->setAttribute('tra_codigo', null);
+          $this->forward('cliente', 'informacionPaciente');
+      }
+
       $this->getUser()->setAttribute('pac_codigo', $this->paciente->pac_codigo);
       $this->getUser()->setAttribute('pac_nombre', $this->paciente->pac_nombre);
       if(sizeof($this->paciente->Tratamiento) > 0)
