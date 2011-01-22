@@ -150,19 +150,21 @@
                 </tr>
             </tfoot>
             <tbody>
+                <?php if($dieta_paciente): ?>
                 <?php if(sizeof($dieta_paciente->Menu) > 0): ?>
                 <?php $par = false; $counter = 1; ?>
                 <?php foreach($dieta_paciente->Menu as $menu): ?>
                 <tr class="<?php echo (true == $par) ? 'par' : 'impar' ?>">
                     <td><?php echo $counter ?></td>
-                    <td><?php //echo $menu->men_desayuno ?></td>
-                    <td><?php //echo $menu->men_almuerzo ?></td>
-                    <td><?php //echo $menu->men_comida ?></td>
+                    <td><?php echo $menu->men_desayuno ?></td>
+                    <td><?php echo $menu->men_almuerzo ?></td>
+                    <td><?php echo $menu->men_comida ?></td>
                     <td><a href="javascript:void(0)">[modificar]</a></td>
                     <td><a href="javascript:void(0)">[eliminar]</a></td>
                 </tr>
                 <?php $counter ++ ?>
                 <?php endforeach; ?>
+                <?php endif; ?>
                 <?php endif; ?>
             </tbody>
         </table>
@@ -212,6 +214,7 @@
         </script>
     </div>
     <div class="form">
+        <?php echo $dieta_form->renderHiddenFields() ?>
         <table>
             <tr>
                 <td><?php echo $menu_form['men_desayuno']->renderError() ?>
@@ -248,8 +251,7 @@
             <tr>
                 <td colspan="3">
                     <div style="text-align: right">
-                        <button type="button">Buscar Dieta</button>
-                        <button type="button">Guardar Dieta</button>
+                        <button type="button" disabled>Buscar Dieta</button>
                     </div>
                 </td>
             </tr>

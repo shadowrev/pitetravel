@@ -287,9 +287,64 @@ class valoracionActions extends sfActions
             if($this->preoperatorio_form->isValid())
             {
                 $this->preoperatorio_actualizado = $this->preoperatorio_form->save();
+
+                // Guarda el material quirurgico
+                $this->exi_guardados = array();
+                for($i = 0; $i < $request->getParameter('cuenta_material'); $i ++)
+                {
+                    $datos_exi = $request->getParameter('elementosxintervencion_' . $i);
+                    $exi_form = new ElementosxintervencionForm();
+                    if(!empty($datos_exi['exi_preo_codigo']) && !empty($datos_exi['exi_maq_codigo']))
+                    {
+                        $elementosxintervencion_obj = Doctrine_Core::getTable('Elementosxintervencion')->find(array($datos_exi['exi_preo_codigo'], $datos_exi['exi_maq_codigo']));
+                        $exi_form = new ElementosxintervencionForm($elementosxintervencion_obj);
+                    }
+
+                    $datos_exi['exi_preo_codigo'] = $this->preoperatorio_actualizado->preo_codigo;
+
+                    $exi_form->bind($datos_exi);
+                    if($exi_form->isValid())
+                    {
+                        $this->exi_guardados[] = $exi_form->save();
+                    }
+                }
+
+                // Guarda el menu
+                $datos_dieta = $request->getParameter('dietapaciente');
+                $form_dieta = new DietapacienteForm();
+                if(!empty($datos_dieta['dtp_codigo']))
+                {
+                    $obj_dieta = Doctrine_Core::getTable('Dietapaciente')->find(array($datos_dieta['dtp_codigo']));
+                    $form_dieta = new DietapacienteForm($obj_dieta);
+                }
+                $datos_dieta['dtp_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
+                $form_dieta->bind($datos_dieta);
+                //if($form_dieta->isValid())
+                    $this->dietapaciente_actualizada = $form_dieta->save();
+
+                $this->menu_dieta = array();
+                for($i = 0; $i < $request->getParameter('cuenta_menu'); $i ++)
+                {
+                    $datos_menu = $request->getParameter('menu_' . $i);
+                    $form_menu = new MenuForm();
+                    if(!empty($datos_menu['men_codigo']))
+                    {
+                        $menu = Doctrine_Core::getTable('Menu')->find(array($datos_menu['men_codigo']));
+                        $form_menu = new MenuForm($menu);
+                    }
+                    $datos_menu['men_dtp_codigo'] = $this->dietapaciente_actualizada->dtp_codigo;
+                    $form_menu->bind($datos_menu);
+                    //if($form_menu->isValid())
+                        $this->menu_dieta[] = $form_menu->save();
+                }
             }
         }
-        return sfView::NONE;
+        else
+        {
+            // TODO Enviar mensaje "Aun no se guarda un examen preoperatorio"
+        }
+        $this->redirect('valoracion/complementos');
+        //return sfView::NONE;
     }
 
     public function executeAlmacenarProcedimiento(sfWebRequest $request)

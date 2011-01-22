@@ -73,7 +73,6 @@
         </div>
     </div>
     <div class="submit">
-        <button type="button">Nueva Reserva</button>
         <button type="submit">Guardar</button>
         <button type="button">Generar Imprimible</button>
     </div> 

@@ -18,7 +18,7 @@ abstract class BaseDietapacienteForm extends BaseFormDoctrine
       'dtp_codigo'          => new sfWidgetFormInputHidden(),
       'dtp_tra_codigo'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Tratamiento'), 'add_empty' => false)),
       'dtp_recomendaciones' => new sfWidgetFormTextarea(),
-      'dtp_med_codigo'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'), 'add_empty' => false)),
+      'dtp_med_codigo'      => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'), 'add_empty' => true)),
       'dtp_tipo_dieta'      => new sfWidgetFormInputText(),
     ));
 
@@ -26,7 +26,7 @@ abstract class BaseDietapacienteForm extends BaseFormDoctrine
       'dtp_codigo'          => new sfValidatorChoice(array('choices' => array($this->getObject()->get('dtp_codigo')), 'empty_value' => $this->getObject()->get('dtp_codigo'), 'required' => false)),
       'dtp_tra_codigo'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Tratamiento'))),
       'dtp_recomendaciones' => new sfValidatorString(),
-      'dtp_med_codigo'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'))),
+      'dtp_med_codigo'      => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'), 'required' => false)),
       'dtp_tipo_dieta'      => new sfValidatorString(array('max_length' => 20, 'required' => false)),
     ));
 

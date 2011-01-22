@@ -16,7 +16,7 @@ abstract class BasePreoperatorioForm extends BaseFormDoctrine
   {
     $this->setWidgets(array(
       'preo_codigo'               => new sfWidgetFormInputHidden(),
-      'preo_tra_codigo'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Tratamiento'), 'add_empty' => true)),
+      'preo_tra_codigo'           => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Tratamiento'), 'add_empty' => false)),
       'preo_glicemia'             => new sfWidgetFormInputText(),
       'preo_tiempo_coagulacion'   => new sfWidgetFormInputText(),
       'preo_tpt'                  => new sfWidgetFormInputText(),
@@ -48,7 +48,7 @@ abstract class BasePreoperatorioForm extends BaseFormDoctrine
 
     $this->setValidators(array(
       'preo_codigo'               => new sfValidatorChoice(array('choices' => array($this->getObject()->get('preo_codigo')), 'empty_value' => $this->getObject()->get('preo_codigo'), 'required' => false)),
-      'preo_tra_codigo'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Tratamiento'), 'required' => false)),
+      'preo_tra_codigo'           => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Tratamiento'))),
       'preo_glicemia'             => new sfValidatorString(array('max_length' => 15, 'required' => false)),
       'preo_tiempo_coagulacion'   => new sfValidatorString(array('max_length' => 15, 'required' => false)),
       'preo_tpt'                  => new sfValidatorString(array('max_length' => 15, 'required' => false)),
