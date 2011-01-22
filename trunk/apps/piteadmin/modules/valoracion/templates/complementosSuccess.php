@@ -8,5 +8,6 @@
     'elementosxinterv_form' => $elementosxinterv_form,
     'menu_form' => $menu_form,
     'dieta_form' => $dieta_form,
+    'dieta_paciente' => $dieta_paciente,
     'material_quirurgico' => $material_quirurgico)); ?>
 </div>
