@@ -18,6 +18,9 @@ class ElementosxintervencionForm extends BaseElementosxintervencionForm
           'exi_maq_codigo' => 'Elemento:',
           'exi_cantidad' => 'Cantidad:'
       ));
+      
+      $this->validatorSchema['exi_maq_codigo'] = new sfValidatorNumber(array('required' => true));
+      $this->validatorSchema['exi_preo_codigo'] = new sfValidatorNumber(array('required' => true));
   }
 
   public function setHiddenForm($id_elemento)

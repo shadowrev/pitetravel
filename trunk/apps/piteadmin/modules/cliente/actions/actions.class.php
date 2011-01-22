@@ -34,9 +34,12 @@ class clienteActions extends sfActions
       }
       else
       {
-          $this->getUser()->setAttribute('pac_codigo', null);
-          $this->getUser()->setAttribute('pac_nombre', null);
-          $this->getUser()->setAttribute('tra_codigo', null);
+//          $this->getUser()->setAttribute('pac_codigo', null);
+          $this->getUser()->getAttributeHolder()->remove('pac_codigo');
+//          $this->getUser()->setAttribute('pac_nombre', null);
+          $this->getUser()->getAttributeHolder()->remove('pac_nombre');
+//          $this->getUser()->setAttribute('tra_codigo', null);
+          $this->getUser()->getAttributeHolder()->remove('tra_codigo');
           $this->form = new PacienteForm();
           $this->contact_form = new ContactoForm();
       }
@@ -50,9 +53,12 @@ class clienteActions extends sfActions
 
       if(false == $this->paciente)
       {
-          $this->getUser()->setAttribute('pac_codigo', null);
-          $this->getUser()->setAttribute('pac_nombre', null);
-          $this->getUser()->setAttribute('tra_codigo', null);
+          //$this->getUser()->setAttribute('pac_codigo', null);
+          $this->getUser()->getAttributeHolder()->remove('pac_codigo');
+          //$this->getUser()->setAttribute('pac_nombre', null);
+          $this->getUser()->getAttributeHolder()->remove('pac_nombre');
+          //$this->getUser()->setAttribute('tra_codigo', null);
+          $this->getUser()->getAttributeHolder()->remove('tra_codigo');
           $this->forward('cliente', 'informacionPaciente');
       }
 
