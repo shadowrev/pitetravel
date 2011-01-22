@@ -18,4 +18,12 @@ class MenuForm extends BaseMenuForm
           'men_comida' => 'Comida:'
       ));
   }
+
+  public function setHiddenForms($id_form)
+  {
+      $this->setWidget('men_desayuno', new sfWidgetFormInputHidden());
+      $this->setWidget('men_almuerzo', new sfWidgetFormInputHidden());
+      $this->setWidget('men_comida', new sfWidgetFormInputHidden());
+      $this->widgetSchema->setNameFormat($this->getName() . '_' . (empty($id_form) ? '0' : $id_form) . '[%s]');
+  }
 }

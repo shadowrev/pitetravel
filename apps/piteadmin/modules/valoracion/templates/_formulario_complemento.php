@@ -132,9 +132,7 @@
 </div>
 <div class="formulario">
     <h2>Dieta</h2>
-    <?php if(!isset($ids_material_quirurgico)) $ids_material_quirurgico = array() ?>
-    <?php if(sizeof($ids_material_quirurgico) > 0): ?>
-    <div class="lista">
+    <div class="lista" id="lst_menu_dieta">
         <table>
             <thead>
                 <tr>
@@ -152,8 +150,9 @@
                 </tr>
             </tfoot>
             <tbody>
+                <?php if(sizeof($dieta_paciente->Menu) > 0): ?>
                 <?php $par = false; $counter = 1; ?>
-                <?php //foreach($menu_dieta as $menu): ?>
+                <?php foreach($dieta_paciente->Menu as $menu): ?>
                 <tr class="<?php echo (true == $par) ? 'par' : 'impar' ?>">
                     <td><?php echo $counter ?></td>
                     <td><?php //echo $menu->men_desayuno ?></td>
@@ -163,11 +162,55 @@
                     <td><a href="javascript:void(0)">[eliminar]</a></td>
                 </tr>
                 <?php $counter ++ ?>
-                <?php //endforeach; ?>
+                <?php endforeach; ?>
+                <?php endif; ?>
             </tbody>
         </table>
+        <div id="menu_dieta_hidden" style="display: none"></div>
+        <input type="hidden" name="cuenta_menu" value="0" />
+        <script type="text/javascript">
+            var actualizarFormaMenu = function() {
+                var contador_menu = document.getElementById('form1').cuenta_menu.value;
+                agregarHiddensDinamicos("menu_dieta_hidden", "<?php echo url_for('valoracion/almacenarMenu') ?>", "menu", contador_menu);
+                var ultima_fila = $("#lst_menu_dieta table tbody tr:last-child");
+
+                var fila_nueva = document.createElement("tr");
+                var celda_0 = document.createElement("td");
+                var celda_1 = document.createElement("td");
+                var celda_2 = document.createElement("td");
+                var celda_3 = document.createElement("td");
+                var celda_4 = document.createElement("td");
+                var celda_5 = document.createElement("td");
+
+                if("par" == ultima_fila.attr("class") || (0 == ultima_fila.size()))
+                    fila_nueva.className = "impar";
+                else
+                    fila_nueva.className = "par";
+
+                celda_0.textContent = parseInt(contador_menu) + 1;
+                celda_1.textContent = $("#menu_men_desayuno").val();
+                celda_2.textContent = $("#menu_men_almuerzo").val();
+                celda_3.textContent = $("#menu_men_comida").val();
+                celda_4.textContent = "[modificar]";
+                celda_5.textContent = "[eliminar]";
+
+                fila_nueva.appendChild(celda_0);
+                fila_nueva.appendChild(celda_1);
+                fila_nueva.appendChild(celda_2);
+                fila_nueva.appendChild(celda_3);
+                fila_nueva.appendChild(celda_4);
+                fila_nueva.appendChild(celda_5);
+
+                if(0 == ultima_fila.size()) {
+                    $("#lst_menu_dieta table tbody").append(fila_nueva);
+                }
+                else
+                    ultima_fila.after(fila_nueva);
+
+                document.getElementById('form1').cuenta_menu.value ++;
+            }
+        </script>
     </div>
-    <?php endif; ?>
     <div class="form">
         <table>
             <tr>
@@ -182,7 +225,11 @@
                 <?php echo $menu_form['men_comida']->render() ?></td>
             </tr>
             <tr>
-                <td colspan="3"><div style="text-align: right"><button type="button">Agregar Menu</button></div></td>
+                <td colspan="3">
+                    <div style="text-align: right">
+                        <button type="button" onclick="actualizarFormaMenu()">Agregar Menu</button>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td><?php echo $dieta_form['dtp_tipo_dieta']->renderError() ?>

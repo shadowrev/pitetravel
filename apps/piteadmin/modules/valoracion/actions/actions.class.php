@@ -219,6 +219,7 @@ class valoracionActions extends sfActions
     {
         $this->preoperatorio_form = new ComplementosPreoperatorioForm();
         $this->elementosxinterv_form = new ElementosxintervencionForm();
+        $this->dieta_paciente = new Dietapaciente();
         $this->dieta_form = new DietapacienteForm();
         $this->menu_form = new MenuForm();
         
@@ -257,6 +258,19 @@ class valoracionActions extends sfActions
             $elementosxintervencion->set('exi_cantidad', $request->getParameter('exi_cantidad'));
             $this->form_material = new ElementosxintervencionForm($elementosxintervencion);
             $this->form_material->setHiddenForm($request->getParameter('elementosxintervencion_id'));
+        }
+    }
+
+    public function executeAlmacenarMenu(sfWebRequest $request)
+    {
+        if($request->isXmlHttpRequest())
+        {
+            $menu = new Menu();
+            $menu->set('men_desayuno', $request->getParameter('men_desayuno'));
+            $menu->set('men_almuerzo', $request->getParameter('men_almuerzo'));
+            $menu->set('men_comida', $request->getParameter('men_comida'));
+            $this->form_menu = new MenuForm($menu);
+            $this->form_menu->setHiddenForms($request->getParameter('menu_id'));
         }
     }
     
