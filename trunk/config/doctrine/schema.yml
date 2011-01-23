@@ -20,7 +20,7 @@ Altapostoperatoria:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     apo_cli_codigo:
       type: integer(8)
@@ -800,7 +800,7 @@ Postoperatorio:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     pos_hora_cita_col:
       type: time(25)
@@ -873,7 +873,7 @@ Postoperatorio:
       type: one
     Foto:
       local: pos_codigo
-      foreign: pos_codigo
+      foreign: fot_pos_codigo
       type: many
 Preoperatorio:
   connection: doctrine

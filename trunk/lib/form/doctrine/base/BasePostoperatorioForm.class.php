@@ -17,7 +17,7 @@ abstract class BasePostoperatorioForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'pos_codigo'                 => new sfWidgetFormInputHidden(),
       'pos_tra_codigo'             => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Tratamiento'), 'add_empty' => false)),
-      'pos_med_codigo_responsable' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'), 'add_empty' => false)),
+      'pos_med_codigo_responsable' => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'), 'add_empty' => true)),
       'pos_hora_cita_col'          => new sfWidgetFormTime(),
       'pos_valoracion'             => new sfWidgetFormTextarea(),
       'pos_recomendaciones'        => new sfWidgetFormTextarea(),
@@ -31,7 +31,7 @@ abstract class BasePostoperatorioForm extends BaseFormDoctrine
     $this->setValidators(array(
       'pos_codigo'                 => new sfValidatorChoice(array('choices' => array($this->getObject()->get('pos_codigo')), 'empty_value' => $this->getObject()->get('pos_codigo'), 'required' => false)),
       'pos_tra_codigo'             => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Tratamiento'))),
-      'pos_med_codigo_responsable' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'))),
+      'pos_med_codigo_responsable' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Medico'), 'required' => false)),
       'pos_hora_cita_col'          => new sfValidatorTime(),
       'pos_valoracion'             => new sfValidatorString(),
       'pos_recomendaciones'        => new sfValidatorString(),

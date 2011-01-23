@@ -16,4 +16,10 @@ class PostoperatorioTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Postoperatorio');
     }
+
+    public function obtenerPorTratamiento($id_tratamiento)
+    {
+        $consulta = $this->createQuery()->where('pos_tra_codigo = ' . $id_tratamiento);
+        return $consulta->execute()->getFirst();
+    }
 }

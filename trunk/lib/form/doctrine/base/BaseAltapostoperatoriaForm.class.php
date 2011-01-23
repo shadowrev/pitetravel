@@ -28,7 +28,7 @@ abstract class BaseAltapostoperatoriaForm extends BaseFormDoctrine
     $this->setValidators(array(
       'apo_codigo'            => new sfValidatorChoice(array('choices' => array($this->getObject()->get('apo_codigo')), 'empty_value' => $this->getObject()->get('apo_codigo'), 'required' => false)),
       'apo_tra_codigo'        => new sfValidatorInteger(),
-      'apo_med_codigo'        => new sfValidatorInteger(),
+      'apo_med_codigo'        => new sfValidatorInteger(array('required' => false)),
       'apo_cli_codigo'        => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('Clinica'))),
       'apo_exploracion'       => new sfValidatorString(),
       'apo_info_especialista' => new sfValidatorString(),
