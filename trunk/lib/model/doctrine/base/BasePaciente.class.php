@@ -21,6 +21,7 @@ Doctrine_Manager::getInstance()->bindComponent('Paciente', 'doctrine');
  * @property integer $pac_cod_postal
  * @property Doctrine_Collection $Contacto
  * @property Doctrine_Collection $Tratamiento
+ * @property Doctrine_Collection $Preferenciaturistica
  * 
  * @method integer             getPacCodigo()            Returns the current record's "pac_codigo" value
  * @method string              getPacNombre()            Returns the current record's "pac_nombre" value
@@ -36,6 +37,7 @@ Doctrine_Manager::getInstance()->bindComponent('Paciente', 'doctrine');
  * @method integer             getPacCodPostal()         Returns the current record's "pac_cod_postal" value
  * @method Doctrine_Collection getContacto()             Returns the current record's "Contacto" collection
  * @method Doctrine_Collection getTratamiento()          Returns the current record's "Tratamiento" collection
+ * @method Doctrine_Collection getPreferenciaturistica() Returns the current record's "Preferenciaturistica" collection
  * @method Paciente            setPacCodigo()            Sets the current record's "pac_codigo" value
  * @method Paciente            setPacNombre()            Sets the current record's "pac_nombre" value
  * @method Paciente            setPacIdentificacion()    Sets the current record's "pac_identificacion" value
@@ -50,6 +52,7 @@ Doctrine_Manager::getInstance()->bindComponent('Paciente', 'doctrine');
  * @method Paciente            setPacCodPostal()         Sets the current record's "pac_cod_postal" value
  * @method Paciente            setContacto()             Sets the current record's "Contacto" collection
  * @method Paciente            setTratamiento()          Sets the current record's "Tratamiento" collection
+ * @method Paciente            setPreferenciaturistica() Sets the current record's "Preferenciaturistica" collection
  * 
  * @package    pitetravel
  * @subpackage model
@@ -181,5 +184,9 @@ abstract class BasePaciente extends sfDoctrineRecord
         $this->hasMany('Tratamiento', array(
              'local' => 'pac_codigo',
              'foreign' => 'tra_pac_codigo'));
+
+        $this->hasMany('Preferenciaturistica', array(
+             'local' => 'pac_codigo',
+             'foreign' => 'prt_pac_codigo'));
     }
 }

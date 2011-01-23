@@ -15,6 +15,7 @@ Doctrine_Manager::getInstance()->bindComponent('Logistica', 'doctrine');
  * @property integer $log_clo_codigo_responsable
  * @property integer $log_clo_codigo_guia
  * @property string $log_observaciones
+ * @property string $log_observaciones_transporte
  * @property Tratamiento $Tratamiento
  * @property Contactologistica $Contactologistica
  * @property Contactologistica $Contactologistica_3
@@ -22,34 +23,36 @@ Doctrine_Manager::getInstance()->bindComponent('Logistica', 'doctrine');
  * @property Reservavuelo $Reservavuelo
  * @property Transporte $Transporte
  * 
- * @method integer           getLogCodigo()                  Returns the current record's "log_codigo" value
- * @method integer           getLogTraCodigo()               Returns the current record's "log_tra_codigo" value
- * @method integer           getLogRehCodigo()               Returns the current record's "log_reh_codigo" value
- * @method integer           getLogVueCodigo()               Returns the current record's "log_vue_codigo" value
- * @method integer           getLogTransCodigo()             Returns the current record's "log_trans_codigo" value
- * @method integer           getLogCloCodigoResponsable()    Returns the current record's "log_clo_codigo_responsable" value
- * @method integer           getLogCloCodigoGuia()           Returns the current record's "log_clo_codigo_guia" value
- * @method string            getLogObservaciones()           Returns the current record's "log_observaciones" value
- * @method Tratamiento       getTratamiento()                Returns the current record's "Tratamiento" value
- * @method Contactologistica getContactologistica()          Returns the current record's "Contactologistica" value
- * @method Contactologistica getContactologistica3()         Returns the current record's "Contactologistica_3" value
- * @method Reservahotel      getReservahotel()               Returns the current record's "Reservahotel" value
- * @method Reservavuelo      getReservavuelo()               Returns the current record's "Reservavuelo" value
- * @method Transporte        getTransporte()                 Returns the current record's "Transporte" value
- * @method Logistica         setLogCodigo()                  Sets the current record's "log_codigo" value
- * @method Logistica         setLogTraCodigo()               Sets the current record's "log_tra_codigo" value
- * @method Logistica         setLogRehCodigo()               Sets the current record's "log_reh_codigo" value
- * @method Logistica         setLogVueCodigo()               Sets the current record's "log_vue_codigo" value
- * @method Logistica         setLogTransCodigo()             Sets the current record's "log_trans_codigo" value
- * @method Logistica         setLogCloCodigoResponsable()    Sets the current record's "log_clo_codigo_responsable" value
- * @method Logistica         setLogCloCodigoGuia()           Sets the current record's "log_clo_codigo_guia" value
- * @method Logistica         setLogObservaciones()           Sets the current record's "log_observaciones" value
- * @method Logistica         setTratamiento()                Sets the current record's "Tratamiento" value
- * @method Logistica         setContactologistica()          Sets the current record's "Contactologistica" value
- * @method Logistica         setContactologistica3()         Sets the current record's "Contactologistica_3" value
- * @method Logistica         setReservahotel()               Sets the current record's "Reservahotel" value
- * @method Logistica         setReservavuelo()               Sets the current record's "Reservavuelo" value
- * @method Logistica         setTransporte()                 Sets the current record's "Transporte" value
+ * @method integer           getLogCodigo()                    Returns the current record's "log_codigo" value
+ * @method integer           getLogTraCodigo()                 Returns the current record's "log_tra_codigo" value
+ * @method integer           getLogRehCodigo()                 Returns the current record's "log_reh_codigo" value
+ * @method integer           getLogVueCodigo()                 Returns the current record's "log_vue_codigo" value
+ * @method integer           getLogTransCodigo()               Returns the current record's "log_trans_codigo" value
+ * @method integer           getLogCloCodigoResponsable()      Returns the current record's "log_clo_codigo_responsable" value
+ * @method integer           getLogCloCodigoGuia()             Returns the current record's "log_clo_codigo_guia" value
+ * @method string            getLogObservaciones()             Returns the current record's "log_observaciones" value
+ * @method string            getLogObservacionesTransporte()   Returns the current record's "log_observaciones_transporte" value
+ * @method Tratamiento       getTratamiento()                  Returns the current record's "Tratamiento" value
+ * @method Contactologistica getContactologistica()            Returns the current record's "Contactologistica" value
+ * @method Contactologistica getContactologistica3()           Returns the current record's "Contactologistica_3" value
+ * @method Reservahotel      getReservahotel()                 Returns the current record's "Reservahotel" value
+ * @method Reservavuelo      getReservavuelo()                 Returns the current record's "Reservavuelo" value
+ * @method Transporte        getTransporte()                   Returns the current record's "Transporte" value
+ * @method Logistica         setLogCodigo()                    Sets the current record's "log_codigo" value
+ * @method Logistica         setLogTraCodigo()                 Sets the current record's "log_tra_codigo" value
+ * @method Logistica         setLogRehCodigo()                 Sets the current record's "log_reh_codigo" value
+ * @method Logistica         setLogVueCodigo()                 Sets the current record's "log_vue_codigo" value
+ * @method Logistica         setLogTransCodigo()               Sets the current record's "log_trans_codigo" value
+ * @method Logistica         setLogCloCodigoResponsable()      Sets the current record's "log_clo_codigo_responsable" value
+ * @method Logistica         setLogCloCodigoGuia()             Sets the current record's "log_clo_codigo_guia" value
+ * @method Logistica         setLogObservaciones()             Sets the current record's "log_observaciones" value
+ * @method Logistica         setLogObservacionesTransporte()   Sets the current record's "log_observaciones_transporte" value
+ * @method Logistica         setTratamiento()                  Sets the current record's "Tratamiento" value
+ * @method Logistica         setContactologistica()            Sets the current record's "Contactologistica" value
+ * @method Logistica         setContactologistica3()           Sets the current record's "Contactologistica_3" value
+ * @method Logistica         setReservahotel()                 Sets the current record's "Reservahotel" value
+ * @method Logistica         setReservavuelo()                 Sets the current record's "Reservavuelo" value
+ * @method Logistica         setTransporte()                   Sets the current record's "Transporte" value
  * 
  * @package    pitetravel
  * @subpackage model
@@ -128,7 +131,16 @@ abstract class BaseLogistica extends sfDoctrineRecord
              'fixed' => 0,
              'unsigned' => false,
              'primary' => false,
-             'notnull' => true,
+             'notnull' => false,
+             'autoincrement' => false,
+             'length' => '',
+             ));
+        $this->hasColumn('log_observaciones_transporte', 'string', null, array(
+             'type' => 'string',
+             'fixed' => 0,
+             'unsigned' => false,
+             'primary' => false,
+             'notnull' => false,
              'autoincrement' => false,
              'length' => '',
              ));

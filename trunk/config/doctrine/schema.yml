@@ -509,7 +509,14 @@ Logistica:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
+      autoincrement: false
+    log_observaciones_transporte:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
       autoincrement: false
   relations:
     Tratamiento:
@@ -777,6 +784,10 @@ Paciente:
     Tratamiento:
       local: pac_codigo
       foreign: tra_pac_codigo
+      type: many
+    Preferenciaturistica:
+      local: pac_codigo
+      foreign: prt_pac_codigo
       type: many
 Postoperatorio:
   connection: doctrine
@@ -1585,3 +1596,50 @@ Descripciontratamiento:
       local: dtr_tit_codigo
       foreign: tit_codigo
       type: one
+Preferenciaturistica:
+  connection: doctrine
+  tableName: preferenciaturistica
+  columns:
+    prt_pac_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    prt_dst_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+  relations:
+    Paciente:
+      local: prt_pac_codigo
+      foreign: pac_codigo
+      type: one
+    Destinoturistico:
+      local: prt_dst_codigo
+      foreign: dst_codigo
+      type: one
+Destinoturistico:
+  connection: doctrine
+  tableName: destinoturistico
+  columns:
+    dst_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    dst_destino:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      autoincrement: false
+  relations:
+    Preferenciaturistica:
+      local: dst_codigo
+      foreign: prt_dst_codigo
+      type: many
+

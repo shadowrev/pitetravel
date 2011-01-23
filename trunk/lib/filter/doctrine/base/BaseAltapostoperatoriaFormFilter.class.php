@@ -14,7 +14,7 @@ abstract class BaseAltapostoperatoriaFormFilter extends BaseFormFilterDoctrine
   {
     $this->setWidgets(array(
       'apo_tra_codigo'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
-      'apo_med_codigo'        => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'apo_med_codigo'        => new sfWidgetFormFilterInput(),
       'apo_cli_codigo'        => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Clinica'), 'add_empty' => true)),
       'apo_exploracion'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'apo_info_especialista' => new sfWidgetFormFilterInput(array('with_empty' => false)),

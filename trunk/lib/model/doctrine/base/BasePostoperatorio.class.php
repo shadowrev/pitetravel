@@ -181,6 +181,6 @@ abstract class BasePostoperatorio extends sfDoctrineRecord
 
         $this->hasMany('Foto', array(
              'local' => 'pos_codigo',
-             'foreign' => 'pos_codigo'));
+             'foreign' => 'fot_pos_codigo'));
     }
 }

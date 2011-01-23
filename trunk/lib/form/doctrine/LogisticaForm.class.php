@@ -10,7 +10,16 @@
  */
 class LogisticaForm extends BaseLogisticaForm
 {
-  public function configure()
-  {
-  }
+    public function configure()
+    {
+        $this->widgetSchema->setLabels(array(
+            'log_reh_codigo' => 'Reserva del Hotel:',
+            'log_vue_codigo' => 'Reserva del Vuelo',
+            'log_trans_codigo' => 'Transporte:',
+            'log_clo_codigo_responsable' => 'Contacto:',
+            'log_clo_codigo_guia' => 'Gu&iacute;a Tur&iacute;stico:',
+            'log_observaciones' => 'Observaciones:',
+            'log_observaciones_transporte' => 'Observaciones:'
+        ));
+    }
 }

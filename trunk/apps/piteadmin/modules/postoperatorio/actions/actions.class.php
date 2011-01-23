@@ -25,6 +25,7 @@ class postoperatorioActions extends sfActions
         $this->form = new PostoperatorioForm();
         $this->links_forms_fotos = array();
         $this->forms_fotos = array();
+        $this->postoperatorio = new Postoperatorio();
         
         if(0 != strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
         {
@@ -96,7 +97,7 @@ class postoperatorioActions extends sfActions
             else
             {
                 $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
-                if($forma_foto->isValid())
+//                if($forma_foto->isValid())
                     $foto_nueva = $forma_foto->save();
             }
         }
