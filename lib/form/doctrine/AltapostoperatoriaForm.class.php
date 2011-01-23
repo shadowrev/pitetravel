@@ -14,10 +14,10 @@ class AltapostoperatoriaForm extends BaseAltapostoperatoriaForm
     {
         $this->widgetSchema->setLabels(array(
             'apo_cli_codigo' => 'Cl&iacute;nica:',
-            'apo_exploracion' => 'Exploraci&oacute;n',
+            'apo_exploracion' => 'Exploraci&oacute;n:',
             'apo_info_especialista' => 'Informe del Especialista:',
-            'apo_tratamiento' => 'Tratamiento',
-            'apo_observaciones' => 'Observaciones'
+            'apo_tratamiento' => 'Tratamiento:',
+            'apo_observaciones' => 'Observaciones:'
         ));
     }
 }

@@ -16,4 +16,10 @@ class AltapostoperatoriaTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Altapostoperatoria');
     }
+
+    public function buscarPorTratamiento($id_tratamiento)
+    {
+        $consulta = $this->createQuery()->where('apo_tra_codigo = ' . $id_tratamiento);
+        return $consulta->execute()->getFirst();
+    }
 }
