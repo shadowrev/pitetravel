@@ -1,4 +1,4 @@
-<form id="form1" name="form1" method="post" action="<?php echo url_for('postoperatorio/guardarInfoPostOperatorio') ?>">
+<form id="form1" name="form1" method="post" action="<?php echo url_for('postoperatorio/guardarInfoPostOperatorio') ?>" enctype="multipart/form-data">
     <div class="formulario">
         <h2>Informe Post-Operatorio</h2>
         <div class="form">

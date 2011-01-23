@@ -10,7 +10,15 @@
  */
 class ContactologisticaForm extends BaseContactologisticaForm
 {
-  public function configure()
-  {
-  }
+    public function configure()
+    {
+        $this->widgetSchema->setLabels(array(
+            'clo_nombre' => 'Nombre del Contacto:',
+            'clo_identificacion' => 'Identificaci&oacute;n:',
+            'clo_telefono' => 'Tel&eacute;fono:',
+            'clo_email' => 'Correo Electr&oacute;nico:',
+            'clo_direccion' => 'Direcci&oacute;n:',
+            'clo_caracteristica' => 'Informaci&oacute;n Adicional:'
+        ));
+    }
 }
