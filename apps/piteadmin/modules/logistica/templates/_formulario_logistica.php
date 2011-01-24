@@ -20,11 +20,9 @@
         <div class="form">
             <table>
                 <tr>
-                    <td><label for="label2">Observaciones y Recomendaciones:</label><br />
-                    <textarea></textarea></td>
-                    <td><?php echo $form_logistica['log_observaciones'] ?>
-                    <td><?php echo $form_logistica['log_observaciones'] ?><br />
-                    <td><?php echo $form_logistica['log_observaciones'] ?></td>
+                    <td><?php echo $form_logistica['log_observaciones']->renderError() ?>
+                    <?php echo $form_logistica['log_observaciones']->renderLabel() ?><br />
+                    <?php echo $form_logistica['log_observaciones']->render() ?></td>
                 </tr>
             </table>
         </div>

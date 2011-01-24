@@ -26,11 +26,11 @@ class logisticaActions extends sfActions
         $this->form_contacto->cambiarNombreFormulario($this->form_contacto->getName() . '_contacto');
         $this->form_responsable = new ContactologisticaForm();
         $this->form_responsable->cambiarNombreFormulario($this->form_responsable->getName() . '_responsable');
-        $this->form_logistica = new LogisticaForm();
+        $this->form_logistica = new ResponsableLogisticaForm();
     }
 
     public function executeTransporte(sfWebRequest $request)
     {
-
+        $this->form_transporte = new TransporteForm();
     }
 }
