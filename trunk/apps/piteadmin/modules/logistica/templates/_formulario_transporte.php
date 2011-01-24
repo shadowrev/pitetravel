@@ -22,9 +22,6 @@
                 <tr>
                     <td><label for="label2">Observaciones y Recomendaciones:</label><br />
                     <textarea></textarea></td>
-                    <td><?php echo $form_logistica['log_observaciones'] ?>
-                    <td><?php echo $form_logistica['log_observaciones'] ?><br />
-                    <td><?php echo $form_logistica['log_observaciones'] ?></td>
                 </tr>
             </table>
         </div>

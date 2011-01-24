@@ -21,4 +21,9 @@ class ContactologisticaForm extends BaseContactologisticaForm
             'clo_caracteristica' => 'Informaci&oacute;n Adicional:'
         ));
     }
+
+    public function cambiarNombreFormulario($nombre_alternativo)
+    {
+        $this->widgetSchema->setNameFormat($nombre_alternativo . '[%s]');
+    }
 }
