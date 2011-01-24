@@ -10,11 +10,11 @@
  */
 class logisticaActions extends sfActions
 {
- /**
-  * Executes index action
-  *
-  * @param sfRequest $request A request object
-  */
+    /**
+    * Executes index action
+    *
+    * @param sfRequest $request A request object
+    */
     public function executeIndex(sfWebRequest $request)
     {
         $this->forward('logistica', 'logistica');
@@ -22,7 +22,8 @@ class logisticaActions extends sfActions
 
     public function executeLogistica(sfWebRequest $request)
     {
-
+        $this->form_contacto = new ContactologisticaForm();
+        $this->form_responsable = new ContactologisticaForm();
     }
 
     public function executeTransporte(sfWebRequest $request)
