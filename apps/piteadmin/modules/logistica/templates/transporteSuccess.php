@@ -3,5 +3,5 @@
 <?php endif; ?>
 <?php include_partial('submenu', array('current' => 'logistica')) ?>
 <div id="contenido-formulario">
-<?php include_partial('formulario_logistica', array()) ?>
+<?php include_partial('formulario_transporte', array()) ?>
 </div>
