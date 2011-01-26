@@ -18,6 +18,7 @@
     <div class="formulario">
         <h2>Observaciones</h2>
         <div class="form">
+            <?php echo $form_logistica->renderHiddenFields() ?>
             <table>
                 <tr>
                     <td><?php echo $form_logistica['log_observaciones']->renderError() ?>

@@ -1,3 +1,4 @@
+<?php echo $form_contacto->renderHiddenFields() ?>
 <table>
     <tr>
         <td><?php echo $form_contacto['clo_nombre']->renderError() ?>
