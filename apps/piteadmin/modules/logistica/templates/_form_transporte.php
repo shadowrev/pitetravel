@@ -1,3 +1,4 @@
+<?php echo $form_transporte->renderHiddenFields() ?>
 <table>
     <tr>
         <td><?php echo $form_transporte['trans_nombre']->renderError() ?>

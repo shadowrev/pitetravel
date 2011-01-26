@@ -1,3 +1,4 @@
+<?php echo $form_responsable->renderHiddenFields() ?>
 <table>
     <tr>
         <td><?php echo $form_responsable['clo_nombre']->renderError() ?>

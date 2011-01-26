@@ -4,6 +4,7 @@
 <?php include_partial('submenu', array('current' => 'transporte')) ?>
 <div id="contenido-formulario">
 <?php include_partial('formulario_transporte', array(
-    'form_transporte' => $form_transporte
+    'form_transporte' => $form_transporte,
+    'form_logistica' => $form_logistica
 )) ?>
 </div>

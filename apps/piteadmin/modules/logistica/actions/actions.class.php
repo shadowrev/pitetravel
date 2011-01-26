@@ -29,8 +29,25 @@ class logisticaActions extends sfActions
         $this->form_logistica = new ResponsableLogisticaForm();
     }
 
+    public function executeCargarContactoLogistica(sfWebRequest $request)
+    {
+        if($request->isXmlHttpRequest())
+        {
+            // TODO cargar el formulario que corresponde al responsable o al guia
+        }
+    }
+
+    public function executeCargarTransporte(sfWebRequest $request)
+    {
+        if($request->isXmlHttpRequest())
+        {
+            // TODO cargar el formulario que corresponde al transportista
+        }
+    }
+
     public function executeTransporte(sfWebRequest $request)
     {
         $this->form_transporte = new TransporteForm();
+        $this->form_logistica = new TransporteLogisticaForm();
     }
 }
