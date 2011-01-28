@@ -1,88 +1,5 @@
 <form id="form1" name="form1" method="post" action="<?php echo url_for('valoracion/guardarPreoperatorio') ?>" enctype="multipart/form-data">
     <div class="formulario">
-        <h2>Ex&aacute;menes Pre-Operatorios</h2>
-        <div class="form">
-            <?php echo $form->renderHiddenFields() ?>
-            <table>
-                <tr>
-                    <td><?php echo $form['preo_glicemia']->renderError() ?>
-                    <?php echo $form['preo_glicemia']->renderLabel() ?><br />
-                    <?php echo $form['preo_glicemia']->render() ?></td>
-                    <td><?php echo $form['preo_tiempo_coagulacion']->renderError() ?>
-                    <?php echo $form['preo_tiempo_coagulacion']->renderLabel() ?><br />
-                    <?php echo $form['preo_tiempo_coagulacion']->render() ?></td>
-                    <td><?php echo $form['preo_hg_glicosilada']->renderError() ?>
-                    <?php echo $form['preo_hg_glicosilada']->renderLabel() ?><br />
-                    <?php echo $form['preo_hg_glicosilada']->render() ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo $form['preo_tpt']->renderError() ?>
-                    <?php echo $form['preo_tpt']->renderLabel() ?><br />
-                    <?php echo $form['preo_tpt']->render() ?></td>
-                    <td><?php echo $form['preo_ptt']->renderError() ?>
-                    <?php echo $form['preo_ptt']->renderLabel() ?><br />
-                    <?php echo $form['preo_ptt']->render() ?></td>
-                    <td><?php echo $form['preo_prueba_esfuerzo']->renderError() ?>
-                    <?php echo $form['preo_prueba_esfuerzo']->renderLabel() ?><br />
-                    <?php echo $form['preo_prueba_esfuerzo']->render() ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo $form['preo_creatinina']->renderError() ?>
-                    <?php echo $form['preo_creatinina']->renderLabel() ?><br />
-                    <?php echo $form['preo_creatinina']->render() ?></td>
-                    <td><?php echo $form['preo_nitrogeno_ureico']->renderError() ?>
-                    <?php echo $form['preo_nitrogeno_ureico']->renderLabel() ?><br />
-                    <?php echo $form['preo_nitrogeno_ureico']->render() ?></td>
-                    <td><?php echo $form['preo_parcial_orina']->renderError() ?>
-                    <?php echo $form['preo_parcial_orina']->renderLabel() ?><br />
-                    <?php echo $form['preo_parcial_orina']->render() ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo $form['preo_tsh']->renderError() ?>
-                    <?php echo $form['preo_tsh']->renderLabel() ?><br />
-                    <?php echo $form['preo_tsh']->render() ?></td>
-                    <td><?php echo $form['preo_t3']->renderError() ?>
-                    <?php echo $form['preo_t3']->renderLabel() ?><br />
-                    <?php echo $form['preo_t3']->render() ?></td>
-                    <td><?php echo $form['preo_t4']->renderError() ?>
-                    <?php echo $form['preo_t4']->renderLabel() ?><br />
-                    <?php echo $form['preo_t4']->render() ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo $form['preo_vih']->renderError() ?>
-                    <?php echo $form['preo_vih']->renderLabel() ?><br />
-                    <?php echo $form['preo_vih']->render() ?></td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="3"><?php echo $form['preo_rx_torax']->renderError() ?>
-                    <?php echo $form['preo_rx_torax']->renderLabel() ?><br />
-                    <?php echo $form['preo_rx_torax']->render() ?></td>
-                </tr>
-                <tr>
-                    <td colspan="3"><?php echo $form['preo_electro']->renderError() ?>
-                    <?php echo $form['preo_electro']->renderLabel() ?><br />
-                    <?php echo $form['preo_electro']->render() ?></td>
-                </tr>
-                <tr>
-                    <td><?php echo $form['preo_nombre_especialista']->renderError() ?>
-                    <?php echo $form['preo_nombre_especialista']->renderLabel() ?><br />
-                    <?php echo $form['preo_nombre_especialista']->render() ?></td>
-                    <td><?php echo $form['preo_correo_especialista']->renderError() ?>
-                    <?php echo $form['preo_correo_especialista']->renderLabel() ?><br />
-                    <?php echo $form['preo_correo_especialista']->render() ?></td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div style="text-align: right"><button type="button">Buscar</button></div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div class="formulario">
         <h2>Tratamiento</h2>
         <div class="lista" id="lst_procedimientos">
             <table>
@@ -185,6 +102,89 @@
                 var select_tratamiento = document.getElementById("procedimiento_pro_tit_codigo");
                 filtrarTratamientos("<?php echo url_for('valoracion/cargarTipoTratamiento') ?>", select_tratamiento.value);
             </script>
+        </div>
+    </div>
+    <div class="formulario">
+        <h2>Ex&aacute;menes Pre-Operatorios</h2>
+        <div class="form">
+            <?php echo $form->renderHiddenFields() ?>
+            <table>
+                <tr>
+                    <td><?php echo $form['preo_glicemia']->renderError() ?>
+                    <?php echo $form['preo_glicemia']->renderLabel() ?><br />
+                    <?php echo $form['preo_glicemia']->render() ?></td>
+                    <td><?php echo $form['preo_tiempo_coagulacion']->renderError() ?>
+                    <?php echo $form['preo_tiempo_coagulacion']->renderLabel() ?><br />
+                    <?php echo $form['preo_tiempo_coagulacion']->render() ?></td>
+                    <td><?php echo $form['preo_hg_glicosilada']->renderError() ?>
+                    <?php echo $form['preo_hg_glicosilada']->renderLabel() ?><br />
+                    <?php echo $form['preo_hg_glicosilada']->render() ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $form['preo_tpt']->renderError() ?>
+                    <?php echo $form['preo_tpt']->renderLabel() ?><br />
+                    <?php echo $form['preo_tpt']->render() ?></td>
+                    <td><?php echo $form['preo_ptt']->renderError() ?>
+                    <?php echo $form['preo_ptt']->renderLabel() ?><br />
+                    <?php echo $form['preo_ptt']->render() ?></td>
+                    <td><?php echo $form['preo_prueba_esfuerzo']->renderError() ?>
+                    <?php echo $form['preo_prueba_esfuerzo']->renderLabel() ?><br />
+                    <?php echo $form['preo_prueba_esfuerzo']->render() ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $form['preo_creatinina']->renderError() ?>
+                    <?php echo $form['preo_creatinina']->renderLabel() ?><br />
+                    <?php echo $form['preo_creatinina']->render() ?></td>
+                    <td><?php echo $form['preo_nitrogeno_ureico']->renderError() ?>
+                    <?php echo $form['preo_nitrogeno_ureico']->renderLabel() ?><br />
+                    <?php echo $form['preo_nitrogeno_ureico']->render() ?></td>
+                    <td><?php echo $form['preo_parcial_orina']->renderError() ?>
+                    <?php echo $form['preo_parcial_orina']->renderLabel() ?><br />
+                    <?php echo $form['preo_parcial_orina']->render() ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $form['preo_tsh']->renderError() ?>
+                    <?php echo $form['preo_tsh']->renderLabel() ?><br />
+                    <?php echo $form['preo_tsh']->render() ?></td>
+                    <td><?php echo $form['preo_t3']->renderError() ?>
+                    <?php echo $form['preo_t3']->renderLabel() ?><br />
+                    <?php echo $form['preo_t3']->render() ?></td>
+                    <td><?php echo $form['preo_t4']->renderError() ?>
+                    <?php echo $form['preo_t4']->renderLabel() ?><br />
+                    <?php echo $form['preo_t4']->render() ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $form['preo_vih']->renderError() ?>
+                    <?php echo $form['preo_vih']->renderLabel() ?><br />
+                    <?php echo $form['preo_vih']->render() ?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><?php echo $form['preo_rx_torax']->renderError() ?>
+                    <?php echo $form['preo_rx_torax']->renderLabel() ?><br />
+                    <?php echo $form['preo_rx_torax']->render() ?></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><?php echo $form['preo_electro']->renderError() ?>
+                    <?php echo $form['preo_electro']->renderLabel() ?><br />
+                    <?php echo $form['preo_electro']->render() ?></td>
+                </tr>
+                <tr>
+                    <td><?php echo $form['preo_nombre_especialista']->renderError() ?>
+                    <?php echo $form['preo_nombre_especialista']->renderLabel() ?><br />
+                    <?php echo $form['preo_nombre_especialista']->render() ?></td>
+                    <td><?php echo $form['preo_correo_especialista']->renderError() ?>
+                    <?php echo $form['preo_correo_especialista']->renderLabel() ?><br />
+                    <?php echo $form['preo_correo_especialista']->render() ?></td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div style="text-align: right"><button type="button">Buscar</button></div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="formulario">
