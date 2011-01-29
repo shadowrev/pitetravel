@@ -1,5 +1,5 @@
-<form id="form1" name="form1" method="post" action="">
-    <div class="formulario">
+<form id="form1" name="form1" method="post" action="<?php echo url_for('logistica/guardarLogistica') ?>">
+    <div class="formulario" id="frm_responsable_logistica">
         <h2>Responsable de la log&iacute;stica</h2>
         <div class="form">
             <?php include_partial('form_responsable', array(
@@ -7,7 +7,7 @@
             )) ?>
         </div>
     </div>
-    <div class="formulario">
+    <div class="formulario" id="frm_guia">
         <h2>Informaci&oacute;n del Gu&iacute;a</h2>
         <div class="form">
             <?php include_partial('form_guia', array(

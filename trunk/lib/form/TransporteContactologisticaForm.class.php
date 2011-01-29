@@ -14,20 +14,22 @@ class TransporteLogisticaForm extends LogisticaForm
     {
         parent::configure();
 
-        unset($this->widgetSchema['log_tra_codigo']);
+//        unset($this->widgetSchema['log_tra_codigo']);
         unset($this->widgetSchema['log_reh_codigo']);
         unset($this->widgetSchema['log_vue_codigo']);
-        unset($this->widgetSchema['log_trans_codigo']);
+//        unset($this->widgetSchema['log_trans_codigo']);
         unset($this->widgetSchema['log_clo_codigo_responsable']);
         unset($this->widgetSchema['log_clo_codigo_guia']);
         unset($this->widgetSchema['log_observaciones']);
 
-        unset($this->validatorSchema['log_tra_codigo']);
+//        unset($this->validatorSchema['log_tra_codigo']);
         unset($this->validatorSchema['log_reh_codigo']);
         unset($this->validatorSchema['log_vue_codigo']);
-        unset($this->validatorSchema['log_trans_codigo']);
+//        unset($this->validatorSchema['log_trans_codigo']);
         unset($this->validatorSchema['log_clo_codigo_responsable']);
         unset($this->validatorSchema['log_clo_codigo_guia']);
         unset($this->validatorSchema['log_observaciones']);
+
+        $this->validatorSchema['log_tra_codigo'] = new sfValidatorNumber();
     }
 }

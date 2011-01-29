@@ -16,4 +16,26 @@ class ContactologisticaTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Contactologistica');
     }
+
+    public function obtenerContactosLogisticaActivos($datos_contacto = null)
+    {
+        $consulta = $this->createQuery();
+
+        if(!empty($datos_contacto))
+        {
+            foreach($datos_contacto as $nombre_parametro => $valor_parametro)
+            {
+                if(is_numeric($valor_parametro))
+                {
+                    $consulta->where($parametro . ' = ' . $valor_parametro);
+                }
+                else
+                {
+                    $consulta->where($parametro . ' LIKE %' . $valor_parametro . '%');
+                }
+            }
+        }
+
+        return $consulta->execute();
+    }
 }

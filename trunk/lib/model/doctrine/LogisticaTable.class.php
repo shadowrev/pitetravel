@@ -16,4 +16,10 @@ class LogisticaTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Logistica');
     }
+
+    public function obtenerLogisticaTratamiento($id_tratamiento)
+    {
+        $consulta = $this->createQuery()->where('log_tra_codigo = ' . $id_tratamiento);
+        return $consulta->execute()->getFirst();
+    }
 }
