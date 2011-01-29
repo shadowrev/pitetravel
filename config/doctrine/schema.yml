@@ -209,7 +209,7 @@ Contactologistica:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
   relations:
     Logistica:
@@ -474,35 +474,35 @@ Logistica:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     log_vue_codigo:
       type: integer(8)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     log_trans_codigo:
       type: integer(8)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     log_clo_codigo_responsable:
       type: integer(8)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     log_clo_codigo_guia:
       type: integer(8)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     log_observaciones:
       type: string()

@@ -1,4 +1,4 @@
-<form id="form1" name="form1" method="post" action="">
+<form id="form1" name="form1" method="post" action="<?php echo url_for('logistica/guardarTransporte') ?>">
     <?php echo $form_logistica->renderHiddenFields() ?>
     <div class="formulario">
         <h2>Transporte</h2>
