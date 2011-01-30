@@ -27,9 +27,12 @@ sfGuardGroup:
   grupo_tour_operador:
     name:           Tour Operador
     description:    Grupo Tour Operador
-    Permissions:    []
+    Permissions:    [tour_operador]
 
 sfGuardPermission:
   Permission_admin:
     name:           admin
     description:    Administrator permission
+  tour_operador:
+    name:           touroperador
+    description:    Permiso para el Tour Operador

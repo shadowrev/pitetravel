@@ -80,13 +80,31 @@ class logisticaActions extends sfActions
     {
         // TODO Lista los contactos
         $this->contactos = Doctrine_Core::getTable('Contactologistica')->obtenerContactosLogisticaActivos();
+        $this->lista_contactos = array();
+        $i = 0;
+        if($this->contactos)
+        {
+            foreach($this->contactos as $contactologistica)
+            {
+                $this->lista_contactos[$i] = array($contactologistica->clo_codigo, $contactologistica->clo_nombre, $contactologistica->clo_identificacion);
+                $i ++;
+            }
+        }
+
+        $this->tipo_contacto = $request->getParameter('tipo_contacto');
+        $this->setLayout('popUp');
     }
 
     public function executeCargarContactoLogistica(sfWebRequest $request)
     {
         if($request->isXmlHttpRequest())
         {
-            // TODO cargar el formulario que corresponde al responsable o al guia
+            $this->cargar_contacto_logistica = $request->getParameter('tipo_formulario');
+            $contacto_logistica = Doctrine_Core::getTable('Contactologistica')->find(array($request->getParameter('clo_codigo')));
+            $this->form_contacto = new ContactologisticaForm($contacto_logistica);
+            $this->form_contacto->cambiarNombreFormulario($this->form_contacto->getName() . '_contacto');
+            $this->form_responsable = new ContactologisticaForm($contacto_logistica);
+            $this->form_responsable->cambiarNombreFormulario($this->form_responsable->getName() . '_responsable');
         }
     }
 
@@ -99,10 +117,10 @@ class logisticaActions extends sfActions
             $contacto_form = new ContactologisticaForm($contacto);
         }
         $contacto_form->bind($datos_contacto);
-//        if($contacto_form->isValid())
-//        {
+        if($contacto_form->isValid())
+        {
             $contacto_actualizado = $contacto_form->save();
-//        }
+        }
         return $contacto_form;
     }
 
@@ -157,13 +175,26 @@ class logisticaActions extends sfActions
     {
         // TODO lista los transportes
         $this->transportadores = Doctrine_Core::getTable('Transporte')->obtenerTransportesActivos();
+        $this->lista_transportes = array();
+        $this->funcion_ajax = $request->getParameter('funcion');
+        $i = 0;
+        if($this->transportadores)
+        {
+            foreach($this->transportadores as $transportador)
+            {
+                $this->lista_transportes[] = array($transportador->trans_codigo, $transportador->trans_nombre, $transportador->trans_identificacion, $transportador->trans_tipo_vehiculo);
+                $i ++;
+            }
+        }
+        $this->setLayout('popUp');
     }
 
     public function executeCargarTransporte(sfWebRequest $request)
     {
         if($request->isXmlHttpRequest())
         {
-            // TODO cargar el formulario que corresponde al transportista
+            $transporte = Doctrine_Core::getTable('Transporte')->find(array($request->getParameter('trans_codigo')));
+            $this->form_transporte = new TransporteForm($transporte);
         }
     }
 
