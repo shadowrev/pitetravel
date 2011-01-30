@@ -17,9 +17,10 @@ class Util
      * @param <type> $opciones Etiquetas y opciones adicionales
      *  - 'labels' array con nombres de la cabecera
      *  - 'options' array con las opciones 'modificar', 'eliminar', 'ver'
+     *  - 'parametros' parametros adicionales. Por ahora solo esta definido 'funcion_ajax'
      * @return string
      */
-    public function generarLista($items, $opciones)
+    public function generarLista($items, $opciones, $lista_ajax = false)
     {
         $lista_tabla = '<table>';
 
@@ -66,11 +67,22 @@ class Util
             }
             if(!empty($opciones['options']))
             {
-                foreach($opciones['options'] as $tags => $operation)
+                if($lista_ajax)
                 {
-                    // TODO ver como poner los enlaces aqui
-                    $enlace = 'javascript:cargarUrlExterno(&quot;' . url_for($operation . '?pac_codigo=' . $item[0]) . '&quot;, window.opener)';
-                    $lista_tabla .= '<td><a href="' . $enlace . '">[' . $tags . ']</a></td>';
+                    foreach($opciones['options'] as $tags => $operation)
+                    {
+                        $enlace = 'javascript:cargarUrlAjax(window.opener.' . $opciones['parametros']['funcion_ajax'] . ', ' . $item[0] . ')';
+                        $lista_tabla .= '<td><a href="' . $enlace . '">[' . $tags . ']</a></td>';
+                    }
+                }
+                else
+                {
+                    foreach($opciones['options'] as $tags => $operation)
+                    {
+                        // TODO ver como poner los enlaces aqui
+                        $enlace = 'javascript:cargarUrlExterno(&quot;' . url_for($operation . '?pac_codigo=' . $item[0]) . '&quot;, window.opener)';
+                        $lista_tabla .= '<td><a href="' . $enlace . '">[' . $tags . ']</a></td>';
+                    }                    
                 }
             }
             $lista_tabla .= '</tr>';

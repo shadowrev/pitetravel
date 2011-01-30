@@ -57,7 +57,7 @@ function desplegarListaWincombo(url, formulario, nombre_formulario) {
     var x_pos = (screen.width / 2) - (width / 2);
     var y_pos = (screen.height / 2) - (height / 2);
 
-    var expr_busqueda = new RegExp(nombre_formulario, 'gi');
+    //var expr_busqueda = new RegExp(nombre_formulario, 'gi');
 
     /*for(var i=0; i < formulario.length; i ++) {
         if(formulario.elements[i].name.test(expr_busqueda)) {
@@ -70,6 +70,11 @@ function desplegarListaWincombo(url, formulario, nombre_formulario) {
 
 function cargarUrlExterno(url, ventana_padre) {
     ventana_padre.location.href = url;
+    window.close();
+}
+
+function cargarUrlAjax(funcion_ajax, parametros) {
+    funcion_ajax(parametros);
     window.close();
 }
 

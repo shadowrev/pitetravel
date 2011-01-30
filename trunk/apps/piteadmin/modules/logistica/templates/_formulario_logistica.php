@@ -1,19 +1,34 @@
 <form id="form1" name="form1" method="post" action="<?php echo url_for('logistica/guardarLogistica') ?>">
+    <script type="text/javascript">
+        var actualizarResponsable = function(id_contacto) {
+            $.ajax({
+                url: "<?php echo url_for('logistica/cargarContactoLogistica') ?>",
+                data: "clo_codigo=" + id_contacto + "&tipo_formulario=responsable",
+                success: function(respuesta) {
+                    document.getElementById("frm_responsable_logistica").innerHTML = respuesta;
+                }
+            });
+        }
+
+        var actualizarGuia = function(id_contacto) {
+            $.ajax({
+                url: "<?php echo url_for('logistica/cargarContactoLogistica') ?>",
+                data: "clo_codigo=" + id_contacto + "&tipo_formulario=guia",
+                success: function(respuesta) {
+                    document.getElementById("frm_guia").innerHTML = respuesta;
+                }
+            });
+        }
+    </script>
     <div class="formulario" id="frm_responsable_logistica">
-        <h2>Responsable de la log&iacute;stica</h2>
-        <div class="form">
-            <?php include_partial('form_responsable', array(
-                'form_responsable' => $form_responsable
-            )) ?>
-        </div>
+        <?php include_partial('form_responsable', array(
+            'form_responsable' => $form_responsable
+        )) ?>
     </div>
     <div class="formulario" id="frm_guia">
-        <h2>Informaci&oacute;n del Gu&iacute;a</h2>
-        <div class="form">
-            <?php include_partial('form_guia', array(
-                'form_contacto' => $form_contacto
-            )) ?>
-        </div>
+        <?php include_partial('form_guia', array(
+            'form_contacto' => $form_contacto
+        )) ?>
     </div>
     <div class="formulario">
         <h2>Observaciones</h2>
