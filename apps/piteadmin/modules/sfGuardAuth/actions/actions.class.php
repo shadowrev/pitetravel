@@ -68,6 +68,4 @@ class sfGuardAuthActions extends sfGuardAuthAct
             $this->getResponse()->setStatusCode(401);
         }
     }
-
-
 }

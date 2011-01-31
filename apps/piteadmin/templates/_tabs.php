@@ -28,9 +28,9 @@
     </li>
     <?php //endif; ?>
     <?php //if(in_array('usuarios', $show)) : ?>
-    <li<?php echo (strcmp($current, 'usuarios') == 0) ? ' class="current"' : '' ?>>
-        <a href="#"><span>Administraci&oacute;n de Usuarios</span></a>
+    <li<?php echo (strcmp($current, 'sfGuardUser') == 0) ? ' class="current"' : '' ?>>
+        <a href="<?php echo url_for('@sf_guard_user') ?>"><span>Administraci&oacute;n de Usuarios</span></a>
     </li>
     <?php //endif; ?>
-    <li class="logout"><a href=""><span>Logout</span></a></li>
+    <li class="logout"><a href="<?php echo url_for('@sf_guard_signout') ?>"><span>Logout</span></a></li>
 </ul>
