@@ -38,6 +38,7 @@ body {
 	border-right: 1px solid #999;
 	border-top: none;
 	border-left: none;
+    width: 130px;
 }
 
 #submenu li.current {
