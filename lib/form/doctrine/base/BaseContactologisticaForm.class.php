@@ -31,7 +31,7 @@ abstract class BaseContactologisticaForm extends BaseFormDoctrine
       'clo_telefono'       => new sfValidatorString(array('max_length' => 15)),
       'clo_email'          => new sfValidatorString(array('max_length' => 150, 'required' => false)),
       'clo_direccion'      => new sfValidatorString(array('max_length' => 50, 'required' => false)),
-      'clo_caracteristica' => new sfValidatorString(array('max_length' => 50)),
+      'clo_caracteristica' => new sfValidatorString(array('max_length' => 50, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('contactologistica[%s]');

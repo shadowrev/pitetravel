@@ -18,7 +18,7 @@ abstract class BaseContactologisticaFormFilter extends BaseFormFilterDoctrine
       'clo_telefono'       => new sfWidgetFormFilterInput(array('with_empty' => false)),
       'clo_email'          => new sfWidgetFormFilterInput(),
       'clo_direccion'      => new sfWidgetFormFilterInput(),
-      'clo_caracteristica' => new sfWidgetFormFilterInput(array('with_empty' => false)),
+      'clo_caracteristica' => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
