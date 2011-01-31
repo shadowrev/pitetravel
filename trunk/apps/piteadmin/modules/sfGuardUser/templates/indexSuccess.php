@@ -1,4 +1,4 @@
-<?php include_partial('submenu', array('current' => 'info')) ?>
+<?php include_partial('submenu', array('current' => 'usuarios')) ?>
 <div id="contenido-formulario">
     <div class="formulario">
         <h2>Lista de Usuarios</h2>
@@ -26,5 +26,8 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div class="submit">
+        <button onclick="location.href = '<?php echo url_for('sfGuardUser/new') ?>'">Nuevo Usuario</button>
     </div>
 </div>
