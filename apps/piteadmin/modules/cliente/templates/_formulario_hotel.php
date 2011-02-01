@@ -1,6 +1,6 @@
 <form id="form1" name="form1" method="post" action="<?php echo url_for('cliente/guardarReserva') ?>">
     <div class="formulario">
-        <h2>Reserva del Hotel</h2>
+        <h2>Reserva del Hospedaje</h2>
         <div class="form">
             <?php echo $form->renderHiddenFields() ?>
             <table>

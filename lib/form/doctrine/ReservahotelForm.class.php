@@ -31,7 +31,7 @@ class ReservahotelForm extends BaseReservahotelForm
       ));
 
       $this->widgetSchema->setLabels(array(
-          'reh_hot_codigo' => 'Hotel:',
+          'reh_hot_codigo' => 'Hotel / Lugar de Hospedaje:',
           'reh_fecha_entrada' => 'Fecha de Entrada:',
           'reh_fecha_salida' => 'Fecha de Salida:',
           'reh_hora_llegada' => 'Hora de Llegada:',

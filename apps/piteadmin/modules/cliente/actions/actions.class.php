@@ -68,6 +68,10 @@ class clienteActions extends sfActions
       {
           $this->getUser()->setAttribute('tra_codigo', $this->paciente->Tratamiento->getLast()->getTraCodigo());
       }
+      else
+      {
+          $this->getUser()->getAttributeHolder()->remove('tra_codigo');
+      }
 
       $this->form = new PacienteForm($this->paciente);
       $this->ids_contactos = array();

@@ -92,7 +92,7 @@
                 <tr>
                     <td colspan="3">
                         <div style="text-align: right">
-                            <button type="button" onclick="">Nuevo Tratamiento</button>
+                            <button type="button" onclick="">Limpiar Campos</button>
                             <button type="button" onclick="actualizarFormaTratamientos()">Agregar Tratamiento</button>
                         </div>
                     </td>
@@ -179,11 +179,11 @@
                     <?php echo $form['preo_correo_especialista']->render() ?></td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td colspan="3">
                         <div style="text-align: right"><button type="button">Buscar</button></div>
                     </td>
-                </tr>
+                </tr>-->
             </table>
         </div>
     </div>
@@ -238,7 +238,7 @@
                 <button type="button" onclick="agregarFoto()">Agregar Foto</button>
             </div>
             <div>
-                <em>&Uacute;ltima valoraci&oacute;n realizada por: <strong>Nombre del m&eacute;dico</strong></em>
+                <em>&Uacute;ltima valoraci&oacute;n realizada por: <strong>Nombre del m&eacute;dico (correo electr&oacute;nico)</strong></em>
             </div>
         </div>
     </div>
