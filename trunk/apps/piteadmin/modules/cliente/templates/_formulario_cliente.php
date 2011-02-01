@@ -172,7 +172,7 @@
                 <tr>
                     <td colspan="3">
                         <div style="text-align: right">
-                            <button type="button" onclick="limpiarFormulario('<?php echo $contact_form->getName() ?>')">Nuevo Contacto</button>
+                            <button type="button" onclick="limpiarFormulario('<?php echo $contact_form->getName() ?>')">Limpiar Campos</button>
                             <!--<button type="button" onclick="agregarHiddensDinamicos('hidden_contacto_forms', '<?php echo url_for('cliente/almacenarContacto') ?>', 'contacto', document.form1.cuenta_contactos.value); document.form1.cuenta_contactos.value ++">Agregar Contacto</button>-->
                             <button type="button" onclick="actualizarFormaContacto()">Agregar Contacto</button>
                         </div>
