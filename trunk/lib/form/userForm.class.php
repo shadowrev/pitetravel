@@ -9,9 +9,19 @@
  *
  * @author raulerne
  */
-class userForm extends PluginsfGuardUserForm {
+class userForm extends sfGuardUserAdminForm {
     
     public function  configure() {
-        $this->widgetSchema['nombre_completo'] = new sfWidgetFormInputText();
+        parent::configure();
+        $this->widgetSchema['groups_list'] = new sfWidgetFormDoctrineChoice(array(
+            'model' => 'sfGuardGroup',
+            'multiple' => true,
+            'expanded' => true
+        ));
+        $this->widgetSchema['permissions_list'] = new sfWidgetFormDoctrineChoice(array(
+            'model' => 'sfGuardPermission',
+            'multiple' => true,
+            'expanded' => true
+        ));
     }
 }
