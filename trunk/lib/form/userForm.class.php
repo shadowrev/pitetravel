@@ -12,8 +12,6 @@
 class userForm extends PluginsfGuardUserForm {
     
     public function  configure() {
-        $this->widgetSchema->setLabels(array(
-            
-        ));
+        $this->widgetSchema['nombre_completo'] = new sfWidgetFormInputText();
     }
 }
