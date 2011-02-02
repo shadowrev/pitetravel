@@ -18,7 +18,7 @@
                     <tr class="<?php echo $par ? 'par' : 'impar' ?>">
                         <td><?php echo $sf_guard_user->username ?></td>
                         <td><?php echo $sf_guard_user->first_name . ' ' . $sf_guard_user->last_name ?></td>
-                        <td>[modificar]</td>
+                        <td><?php echo link_to('[modificar]',  'sfGuardUser/edit?id=' . $sf_guard_user->id) ?></td>
                         <td>[eliminar]</td>
                     </tr>
                 <?php $par = !$par ?>
@@ -28,6 +28,6 @@
         </div>
     </div>
     <div class="submit">
-        <button onclick="location.href = '<?php echo url_for('sfGuardUser/new') ?>'">Nuevo Usuario</button>
+        <button type="button" onclick="location.href = '<?php echo url_for('sfGuardUser/new') ?>'">Nuevo Usuario</button>
     </div>
 </div>

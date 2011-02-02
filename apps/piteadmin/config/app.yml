@@ -4,4 +4,5 @@
 # default values
 all:
   .settings:
-    enabled_modules: [default, sfGuardAuth]
+    enabled_modules: [default, sfGuardAuth]    
+    especialidades: [Cirujano, Odontólogo, Traumatólogo]

@@ -24,5 +24,10 @@
                 <?php echo $form['password_again']->renderLabel('Confirmar Contrase&ntilde;a:') ?><br />
                 <?php echo $form['password_again']->render() ?></td>
         </tr>
+        <tr>
+            <td><?php echo $form['is_super_admin']->renderError() ?>
+                <?php echo $form['is_super_admin']->renderLabel('Administrador:') ?><br />
+                <?php echo $form['is_super_admin']->render() ?></td>
+        </tr>
     </table>
 </div>

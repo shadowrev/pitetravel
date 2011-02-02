@@ -16,4 +16,10 @@ class MedicoTable extends Doctrine_Table
     {
         return Doctrine_Core::getTable('Medico');
     }
+
+    public function obtenerMedicoPorIdUsuario($id_usuario)
+    {
+        $consulta = $this->createQuery()->where('med_sfg_id=' . $id_usuario);
+        return $consulta->execute()->getFirst();
+    }
 }
