@@ -8,7 +8,7 @@ body {
     font-size: 11px;
     font-style: normal;
     width: 800px;
-	margin: 0;
+	margin: 10px auto;
 	padding: 0;
 }
 
@@ -16,6 +16,12 @@ body {
 #contenido {
 	clear: both;
 	padding-left: 10px;
+}
+
+#contenido.borde {
+    border: 1px solid #DF0D74;
+    -moz-border-radius: 0 0 15px 15px;
+    -webkit-border-radius: 0 0 15px 15px;
 }
 
 /* Aplica al submenu */
@@ -31,7 +37,7 @@ body {
 }
 
 #submenu li {
-	background-color: #E7F1F8;
+	background-color: #E5B8D7;
 	padding: 3px;
 	margin-bottom: 3px;
 	border-bottom: 1px solid #999;
@@ -54,7 +60,7 @@ body {
 }
 
 #submenu a span {
-    color:#666;
+    color:#AB768F;
 }
 
 #submenu a:hover span {
@@ -142,7 +148,7 @@ body {
 }
 #menu a {
     float:left;
-    background:url("../images/tableft.gif") no-repeat left top;
+    background:url("../images/tableft_1.gif") no-repeat left top;
     margin:0;
     padding:0 0 0 4px;
     text-decoration:none;
@@ -150,9 +156,9 @@ body {
 #menu a span {
     float:left;
     display:block;
-    background:url("../images/tabright.gif") no-repeat right top;
+    background:url("../images/tabright_1.gif") no-repeat right top;
     padding:5px 15px 4px 6px;
-    color:#666;
+    color:#FFF;
 }
 /* Commented Backslash Hack hides rule from IE5-Mac \*/
 #menu a span {float:none;}
@@ -169,9 +175,11 @@ body {
 
 #menu .current a {
     background-position:0% -42px;
+    color: #666;
 }
 #menu .current a span {
     background-position:100% -42px;
+    color: #666;
 }
 
 /* Botonera de control de formularios */
@@ -182,4 +190,6 @@ body {
 /* Aplica al pie de pagina */
 #pie {
     clear: both;
+    color: #DF0C73;
+    text-align: center;
 }

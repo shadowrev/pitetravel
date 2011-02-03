@@ -10,16 +10,22 @@
     </head>
     <body>
         <div id="encabezado">
-            <img src="<?php echo public_path('') ?>images/pite_logo.jpg" alt="PITE Logo" />
+            <img src="<?php echo public_path('') ?>images/pite_logo_2.jpg" alt="PITE Logo" />
         </div>
+        <?php $clase_contenido = '' ?>
         <?php if(strcasecmp($sf_context->getModuleName(), 'sfGuardAuth') != 0): ?>
+        <?php $clase_contenido = ' class="borde"' ?>
         <div id="menu">
             <?php include_partial('global/tabs', array('current' => $sf_context->getModuleName())) ?>
         </div>
         <?php endif; ?>
-        <div id="contenido">
+        <div id="contenido"<?php echo $clase_contenido ?>>
             <?php echo $sf_content ?>
+            <div style="clear: both"></div>
         </div>
-        <div id="pie">&copy;2010</div>
+        <div id="pie">
+            <p>PITE Travel<br />
+            &copy;2010 - Todos los derechos reservados</p>
+        </div>
     </body>
 </html>
