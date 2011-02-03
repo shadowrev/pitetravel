@@ -47,6 +47,28 @@ class sfGuardUserActions extends autoSfGuardUserActions
         $this->setTemplate('new');
     }
     
+    public function executeUpdate(sfWebRequest $request)
+    {
+        $this->sf_guard_user = $this->getRoute()->getObject();
+        $this->form = new userForm($this->sf_guard_user);
+        $this->medico = Doctrine_Core::getTable('Medico')->obtenerMedicoPorIdUsuario($this->sf_guard_user->id);
+        $this->medico_form = new MedicoForm($this->medico);
+
+        $sf_guard_user_actualizado = $this->guardarForma($this->form, $request->getParameter($this->form->getName()));
+        if($sf_guard_user_actualizado)
+        {
+            $datos_medico = $request->getParameter($this->medico_form->getName());
+            $datos_medico['med_sfg_id'] = $sf_guard_user_actualizado->id;
+            $datos_medico['med_nombre'] = $sf_guard_user_actualizado->first_name . ' ' . $sf_guard_user_actualizado->last_name;
+            $datos_medico['med_email'] = $sf_guard_user_actualizado->email_address;
+
+            $medico_actualizado = $this->guardarForma($this->medico_form, $datos_medico);
+            $this->redirect('@sf_guard_user');
+        }
+
+        $this->setTemplate('new');
+    }
+    
     protected function guardarForma($form, $datos)
     {
         $form->bind($datos);
