@@ -21,7 +21,7 @@
         <?php endif; ?>
         <div id="contenido"<?php echo $clase_contenido ?>>
             <?php echo $sf_content ?>
-            <div style="clear: both"></div>
+            <div style="clear: both; height: 10px"></div>
         </div>
         <div id="pie">
             <p>PITE Travel<br />
