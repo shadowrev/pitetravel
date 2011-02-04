@@ -21,13 +21,28 @@ sfGuardUser:
 sfGuardGroup:
   Group_admin:
     name:           admin
-    description:    Administrator group
+    description:    Super Administrador(es) (Acceso completo a la aplicación)
     Permissions:    [Permission_admin]
 
   grupo_tour_operador:
     name:           Tour Operador
     description:    Grupo Tour Operador
     Permissions:    [tour_operador]
+
+  grupo_logistica:
+    name:           Logistica
+    description:    Grupo de Logistica
+    Permissions:    []
+
+  grupo_medicos_locales:
+    name:           Médicos Evaluadores
+    description:    Grupo de Médicos que reciben los exámenes preoperatorios y remiten al exterior.
+    Permissions:    []
+
+  grupo_medicos_internacionales:
+    name:           Médicos Intervencionista
+    description:    Grupo de Médicos que evaluan los exámenes preoperatorios y determinan la realización de la intervención.
+    Permissions:    []
 
 sfGuardPermission:
   Permission_admin:
