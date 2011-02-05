@@ -51,3 +51,7 @@ sfGuardPermission:
   tour_operador:
     name:           touroperador
     description:    Permiso para el Tour Operador
+
+  medicos:
+    name:           medicos
+    description:    Permiso para los medicos
