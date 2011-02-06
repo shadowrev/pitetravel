@@ -3,7 +3,12 @@
 <?php endif; ?>
 <?php include_partial('submenu', array('current' => 'destino')) ?>
 <div id="contenido-formulario">
-<?php include_partial('formulario_valoracion', array(
-    'preoperatorio_form' => $preoperatorio_form
+<?php include_partial('formulario_valoracion_examenes', array(
+    'preoperatorio_form' => $preoperatorio_form,
+    'elementosxinterv_form' => $elementosxinterv_form,
+    'dieta_form' => $dieta_form,
+    'menu_form' => $menu_form,
+    'material_quirurgico' => $material_quirurgico,
+    'dieta_paciente' => $dieta_paciente
 )) ?>
 </div>
