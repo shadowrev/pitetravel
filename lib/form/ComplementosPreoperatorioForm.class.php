@@ -31,9 +31,6 @@ class ComplementosPreoperatorioForm extends PreoperatorioForm
         unset($this->widgetSchema['preo_t3']);
         unset($this->widgetSchema['preo_t4']);
         unset($this->widgetSchema['preo_vih']);
-        unset($this->widgetSchema['preo_fecha_cita_ext']);
-        unset($this->widgetSchema['preo_hora_cita_ext']);
-        unset($this->widgetSchema['preo_informe_especialista']);
         unset($this->widgetSchema['preo_nombre_especialista']);
         unset($this->widgetSchema['preo_correo_especialista']);
 
@@ -54,9 +51,6 @@ class ComplementosPreoperatorioForm extends PreoperatorioForm
         unset($this->validatorSchema['preo_t3']);
         unset($this->validatorSchema['preo_t4']);
         unset($this->validatorSchema['preo_vih']);
-        unset($this->validatorSchema['preo_fecha_cita_ext']);
-        unset($this->validatorSchema['preo_hora_cita_ext']);
-        unset($this->validatorSchema['preo_informe_especialista']);
         unset($this->validatorSchema['preo_nombre_especialista']);
         unset($this->validatorSchema['preo_correo_especialista']);
 

@@ -43,7 +43,8 @@ class valoracionActions extends sfActions
                     $tratamiento = $this->paciente->Tratamiento->getLast();
                     $preoperatorio = Doctrine_Core::getTable('Preoperatorio')->obtenerTratamientos($tratamiento->tra_codigo)->getLast();
                     //$this->form = new PreoperatorioForm($preoperatorios->getLast());
-                    $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
+                    if($preoperatorio)
+                        $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
                 }
             }            
         }        
@@ -188,67 +189,6 @@ class valoracionActions extends sfActions
         }
     }
 
-    public function executeValoracionPreoperatoria(sfWebRequest $request)
-    {
-        $this->preoperatorio_form = new VDestinoPreoperatorioForm();
-        if(0 != strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
-        {
-            $this->preoperatorio = Doctrine_Core::getTable('Preoperatorio')->obtenerTratamientos($this->getUser()->getAttribute('tra_codigo'))->getLast();
-            $this->preoperatorio_form = new VDestinoPreoperatorioForm($this->preoperatorio);
-        }
-    }
-
-    public function executeGuardarValoracionPreoperatoria(sfWebRequest $request)
-    {
-        $datos_preoperatorio = $request->getParameter('preoperatorio');
-        if(!empty($datos_preoperatorio['preo_codigo']))
-        {
-            $this->preoperatorio = Doctrine_Core::getTable('Preoperatorio')->find(array($datos_preoperatorio['preo_codigo']));
-            $this->preoperatorio_form = new VDestinoPreoperatorioForm($this->preoperatorio);
-            $this->preoperatorio_form->bind($datos_preoperatorio);
-            $this->preoperatorio_actualizado = $this->preoperatorio_form->save();
-        }
-        else
-        {
-            // TODO mensaje indicando que no se ha hecho una evaluacion previa
-        }
-        $this->redirect('valoracion/valoracionPreoperatoria');
-    }
-
-    public function executeComplementos(sfWebRequest $request)
-    {
-        $this->preoperatorio_form = new ComplementosPreoperatorioForm();
-        $this->elementosxinterv_form = new ElementosxintervencionForm();
-        $this->dieta_paciente = new Dietapaciente();
-        $this->dieta_form = new DietapacienteForm();
-        $this->menu_form = new MenuForm();
-        
-        $tratamiento_id = $this->getUser()->getAttribute('tra_codigo');
-        $this->material_quirurgico = null;
-        if(!empty($tratamiento_id))
-        {
-            $this->tratamiento_actual = Doctrine_Core::getTable('Tratamiento')->find(array($tratamiento_id));
-
-            // Obtiene la informacion del preoperatorio
-            $this->preoperatorio = Doctrine_Core::getTable('Preoperatorio')->obtenerTratamientos($tratamiento_id)->getLast();
-            $this->preoperatorio_form = new ComplementosPreoperatorioForm($this->preoperatorio);
-
-            // Obtiene el material quirurgico que se va a emplear
-            $this->material_quirurgico = $this->preoperatorio->Elementosxintervencion;
-
-            // Prepara el formulario elementosxinterv_form
-            $exi = new Elementosxintervencion();
-            $this->elementosxinterv_form = new ElementosxintervencionForm($exi->set('exi_preo_codigo', $this->preoperatorio->preo_codigo));
-
-            // Obtiene la dieta
-            $this->dieta_paciente = $this->tratamiento_actual->Dietapaciente->getFirst();
-            if(false != $this->dieta_paciente)
-            {
-                $this->dieta_form = new DietapacienteForm($this->dieta_paciente);
-            }
-        }
-    }
-
     public function executeAlmacenarMaterial(sfWebRequest $request)
     {
         if($request->isXmlHttpRequest())
@@ -274,7 +214,72 @@ class valoracionActions extends sfActions
         }
     }
     
-    public function executeGuardarComplementos(sfWebRequest $request)
+    public function executeAlmacenarProcedimiento(sfWebRequest $request)
+    {
+        if($request->isXmlHttpRequest())
+        {
+            $procedimiento = new Procedimiento();
+            $procedimiento->set('pro_tra_codigo', $request->getParameter('pro_tra_codigo'));
+            $procedimiento->set('pro_tit_codigo', $request->getParameter('pro_tit_codigo'));
+            $procedimiento->set('pro_dtr_codigo', $request->getParameter('pro_dtr_codigo'));
+            $procedimiento->set('pro_otro', $request->getParameter('pro_otro'));
+            $this->form_procedimiento = new ProcedimientoForm($procedimiento);
+            $this->form_procedimiento->setHiddenForm($request->getParameter('procedimiento_id'));
+        }
+    }
+
+    public function executeAgregarFoto(sfWebRequest $request)
+    {
+        if($request->isXmlHttpRequest())
+        {
+            $this->form_foto = new FotoForm();
+            $this->form_foto->cambiarGrupo('foto_' . $request->getParameter('cuenta_fotos'));
+        }
+    }
+
+    public function executeCleanData()
+    {
+        $this->getUser()->setAttribute('tra_codigo', '');
+        $this->forward('valoracion', 'examenesPreoperatorios');
+    }
+
+    public function executeValoracionExamenes(sfWebRequest $request)
+    {
+        $this->preoperatorio_form = new ComplementosPreoperatorioForm();
+        $this->elementosxinterv_form = new ElementosxintervencionForm();
+        $this->dieta_form = new DietapacienteForm();
+        $this->menu_form = new MenuForm();
+
+        $tratamiento_id = $this->getUser()->getAttribute('tra_codigo');
+        $this->material_quirurgico = null;
+        $this->dieta_paciente = $this->dieta_form->getObject();
+//        $this->dieta_paciente = new Dietapaciente();
+        
+        if(!empty($tratamiento_id))
+        {
+            $this->tratamiento_actual = Doctrine_Core::getTable('Tratamiento')->find(array($tratamiento_id));
+
+            // Obtiene la informacion del preoperatorio
+            $this->preoperatorio = Doctrine_Core::getTable('Preoperatorio')->obtenerTratamientos($tratamiento_id)->getLast();
+            $this->preoperatorio_form = new ComplementosPreoperatorioForm($this->preoperatorio);
+
+            // Obtiene el material quirurgico que se va a emplear
+            $this->material_quirurgico = $this->preoperatorio->Elementosxintervencion;
+
+            // Prepara el formulario elementosxinterv_form
+            $exi = new Elementosxintervencion();
+            $this->elementosxinterv_form = new ElementosxintervencionForm($exi->set('exi_preo_codigo', $this->preoperatorio->preo_codigo));
+
+            // Obtiene la dieta
+            $this->dieta_paciente = $this->tratamiento_actual->Dietapaciente->getFirst();
+            if(false != $this->dieta_paciente)
+            {
+                $this->dieta_form = new DietapacienteForm($this->dieta_paciente);
+            }
+        }
+    }
+
+    public function executeGuardarValoracionExamenes(sfWebRequest $request)
     {
         $datos_preoperatorio = $request->getParameter('preoperatorio');
 
@@ -343,36 +348,6 @@ class valoracionActions extends sfActions
         {
             // TODO Enviar mensaje "Aun no se guarda un examen preoperatorio"
         }
-        $this->redirect('valoracion/complementos');
-        //return sfView::NONE;
-    }
-
-    public function executeAlmacenarProcedimiento(sfWebRequest $request)
-    {
-        if($request->isXmlHttpRequest())
-        {
-            $procedimiento = new Procedimiento();
-            $procedimiento->set('pro_tra_codigo', $request->getParameter('pro_tra_codigo'));
-            $procedimiento->set('pro_tit_codigo', $request->getParameter('pro_tit_codigo'));
-            $procedimiento->set('pro_dtr_codigo', $request->getParameter('pro_dtr_codigo'));
-            $procedimiento->set('pro_otro', $request->getParameter('pro_otro'));
-            $this->form_procedimiento = new ProcedimientoForm($procedimiento);
-            $this->form_procedimiento->setHiddenForm($request->getParameter('procedimiento_id'));
-        }
-    }
-
-    public function executeAgregarFoto(sfWebRequest $request)
-    {
-        if($request->isXmlHttpRequest())
-        {
-            $this->form_foto = new FotoForm();
-            $this->form_foto->cambiarGrupo('foto_' . $request->getParameter('cuenta_fotos'));
-        }
-    }
-
-    public function executeCleanData()
-    {
-        $this->getUser()->setAttribute('tra_codigo', '');
-        $this->forward('valoracion', 'examenesPreoperatorios');
+        $this->redirect('valoracion/valoracionExamenes');
     }
 }

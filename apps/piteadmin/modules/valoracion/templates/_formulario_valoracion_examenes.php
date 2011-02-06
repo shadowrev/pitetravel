@@ -1,4 +1,4 @@
-<form id="form1" name="form1" method="post" action="<?php echo url_for('valoracion/guardarValoracionPreoperatoria') ?>">
+<form id="form1" name="form1" method="post" action="<?php echo url_for('valoracion/guardarValoracionExamenes') ?>">
     <div class="formulario">
         <h2>Programaci&oacute;n de la Cita y Valoraci&oacute;n</h2>
         <div class="form">
@@ -33,15 +33,7 @@
             <?php echo $preoperatorio_form->renderHiddenFields() ?>
             <table>
                 <tr>
-                    <td><?php echo $preoperatorio_form['preo_cli_codigo']->renderError() ?>
-                    <?php echo $preoperatorio_form['preo_cli_codigo']->renderLabel() ?><br />
-                    <?php echo $preoperatorio_form['preo_cli_codigo']->render() ?></td>
                     <!-- Contemplar la posibilidad de poner un boton para agregar en la marcha una enfermera y actualizar el select por AJAX -->
-                    <td id="td_preoperatorio_preo_enf_codigo"><?php echo $preoperatorio_form['preo_enf_codigo']->renderError() ?>
-                    <?php echo $preoperatorio_form['preo_enf_codigo']->renderLabel() ?><br />
-                    <?php echo $preoperatorio_form['preo_enf_codigo']->render() ?></td>
-                </tr>
-                <tr>
                     <td><?php echo $preoperatorio_form['preo_fecha_cirugia']->renderError() ?>
                     <?php echo $preoperatorio_form['preo_fecha_cirugia']->renderLabel() ?><br />
                     <?php echo $preoperatorio_form['preo_fecha_cirugia']->render() ?></td>
@@ -50,8 +42,9 @@
                     <?php echo $preoperatorio_form['preo_hora_cirugia']->render() ?></td>
                 </tr>
                 <tr>
-                    <td><label for="correo_electronico_especialista">Correo Electr&oacute;nico Especialista: </label><br />
-                    <input type="text" name="correo_electronico_especialista" id="correo_electronico_especialista" value="<?php echo 'Aqui viene el mail del especialista' ?>" readonly /></td>
+                    <td id="td_preoperatorio_preo_enf_codigo"><?php echo $preoperatorio_form['preo_enf_codigo']->renderError() ?>
+                    <?php echo $preoperatorio_form['preo_enf_codigo']->renderLabel() ?><br />
+                    <?php echo $preoperatorio_form['preo_enf_codigo']->render() ?></td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
