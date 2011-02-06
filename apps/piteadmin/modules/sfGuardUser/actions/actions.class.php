@@ -24,6 +24,8 @@ class sfGuardUserActions extends autoSfGuardUserActions
         $this->form = new userForm();
         //$this->sf_guard_user = $this->form->getObject();
         $this->sf_guard_user = $this->guardarForma($this->form, $request->getParameter($this->form->getName()));
+        $this->sf_guard_user->set('is_active', 1);
+        $this->sf_guard_user->save();
         if($this->sf_guard_user)
         {
             $this->medico_form = new MedicoForm();
@@ -55,6 +57,9 @@ class sfGuardUserActions extends autoSfGuardUserActions
         $this->medico_form = new MedicoForm($this->medico);
 
         $sf_guard_user_actualizado = $this->guardarForma($this->form, $request->getParameter($this->form->getName()));
+        $sf_guard_user_actualizado->set('is_active', 1);
+        $sf_guard_user_actualizado->save();
+
         if($sf_guard_user_actualizado)
         {
             $datos_medico = $request->getParameter($this->medico_form->getName());

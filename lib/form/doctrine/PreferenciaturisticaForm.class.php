@@ -10,7 +10,7 @@
  */
 class PreferenciaturisticaForm extends BasePreferenciaturisticaForm
 {
-  public function configure()
-  {
-  }
+    public function configure()
+    {
+    }
 }

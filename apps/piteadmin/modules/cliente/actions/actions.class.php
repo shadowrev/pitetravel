@@ -325,4 +325,29 @@ class clienteActions extends sfActions
   {
       // TODO Eliminar la reserva del vuelo
   }
+
+  public function executePreferenciasTuristicas(sfWebRequest $request)
+  {
+      $this->form = new PreferenciaturisticaPacienteForm();
+      if($this->getUser()->getAttribute('pac_codigo'))
+      {
+          $this->paciente = Doctrine_Core::getTable('Paciente')->find($this->getUser()->getAttribute('pac_codigo'));
+          $this->form = new PreferenciaturisticaPacienteForm($this->paciente);
+      }
+  }
+
+  public function executeGuardarPreferenciasTuristicas(sfWebRequest $request)
+  {
+      $datos_paciente = $request->getParameter('paciente');
+      if(!empty($datos_paciente['pac_codigo']))
+      {
+          $this->paciente = Doctrine_Core::getTable('Paciente')->find($this->getUser()->getAttribute('pac_codigo'));
+          $this->form = new PreferenciaturisticaPacienteForm($this->paciente);
+          $this->form->bind($datos_paciente);
+          $paciente_actualizado = $this->form->save();
+          // Mensaje de exito
+      }
+      //$this->redirect('cliente/preferenciasTuristicas');
+      $this->setTemplate('preferenciasTuristicas');
+  }
 }
