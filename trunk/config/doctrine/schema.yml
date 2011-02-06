@@ -785,10 +785,14 @@ Paciente:
       local: pac_codigo
       foreign: tra_pac_codigo
       type: many
-    Preferenciaturistica:
+#    Preferenciaturistica:
+#      local: pac_codigo
+#      foreign: prt_pac_codigo
+#      type: many
+    Destinoturistico:
       local: pac_codigo
-      foreign: prt_pac_codigo
-      type: many
+      foreign: dst_codigo
+      refClass: Preferenciaturistica
 Postoperatorio:
   connection: doctrine
   tableName: postoperatorio
@@ -1600,13 +1604,13 @@ Preferenciaturistica:
   connection: doctrine
   tableName: preferenciaturistica
   columns:
-    prt_pac_codigo:
+    pac_codigo:
       type: integer(8)
       fixed: false
       unsigned: false
       primary: true
       autoincrement: false
-    prt_dst_codigo:
+    dst_codigo:
       type: integer(8)
       fixed: false
       unsigned: false
@@ -1614,11 +1618,11 @@ Preferenciaturistica:
       autoincrement: false
   relations:
     Paciente:
-      local: prt_pac_codigo
+      local: pac_codigo
       foreign: pac_codigo
       type: one
     Destinoturistico:
-      local: prt_dst_codigo
+      local: dst_codigo
       foreign: dst_codigo
       type: one
 Destinoturistico:
@@ -1638,8 +1642,12 @@ Destinoturistico:
       primary: false
       autoincrement: false
   relations:
-    Preferenciaturistica:
+#    Preferenciaturistica:
+#      local: dst_codigo
+#      foreign: prt_dst_codigo
+#      type: many
+    Paciente:
       local: dst_codigo
-      foreign: prt_dst_codigo
-      type: many
+      foreign: pac_codigo
+      refClass: Preferenciaturistica
 

@@ -23,6 +23,13 @@ class PacienteForm extends BasePacienteForm
             'culture' => 'es',
             'date_widget' => $widget_date
         ));
+
+        $this->widgetSchema['destinoturistico_list'] = new sfWidgetFormDoctrineChoice(array(
+            'multiple' => true,
+            'expanded' => true,
+            'model' => 'Destinoturistico'
+        ));
+
         $this->widgetSchema->setLabels(array(
             'pac_nombre' => 'Nombres y Apellidos:',
             'pac_identificacion' => 'Documento de Identidad:',

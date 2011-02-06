@@ -12,4 +12,7 @@
  */
 class Destinoturistico extends BaseDestinoturistico
 {
+    public function  __toString() {
+        return $this->dst_destino;
+    }
 }
