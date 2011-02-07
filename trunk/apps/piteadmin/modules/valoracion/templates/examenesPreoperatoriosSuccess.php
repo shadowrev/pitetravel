@@ -7,6 +7,7 @@
         $variables_incluir = array(
             'form' => $form,
             'procedimiento_form' => $procedimiento_form,
+            'preoperatorio' => $preoperatorio,
             'forms_fotos' => $forms_fotos,
             'links_forms_fotos' => $links_forms_fotos
         );

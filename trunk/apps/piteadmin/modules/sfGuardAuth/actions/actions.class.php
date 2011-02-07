@@ -36,6 +36,10 @@ class sfGuardAuthActions extends sfGuardAuthAct
             {
                 $values = $this->form->getValues();
                 $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
+                $this->getUser()->setAttribute('user_id', $values['user']->getId());
+
+                $medico = Doctrine_Core::getTable('Medico')->obtenerMedicoPorIdUsuario($values['user']->getId());
+                $this->getUser()->setAttribute('med_codigo', ($medico != false) ? $medico->med_codigo : null);
 
                 // always redirect to a URL set in app.yml
                 // or to the referer
@@ -67,5 +71,16 @@ class sfGuardAuthActions extends sfGuardAuthAct
 
             $this->getResponse()->setStatusCode(401);
         }
+    }
+
+    public function executeSignout($request)
+    {
+        $this->getUser()->getAttributeHolder()->remove('pac_codigo');
+        $this->getUser()->getAttributeHolder()->remove('pac_nombre');
+        $this->getUser()->getAttributeHolder()->remove('tra_codigo');
+        $this->getUser()->getAttributeHolder()->remove('user_id');
+        $this->getUser()->getAttributeHolder()->remove('med_codigo');
+
+        parent::executeSignout($request);
     }
 }
