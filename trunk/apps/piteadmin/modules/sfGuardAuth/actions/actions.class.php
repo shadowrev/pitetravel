@@ -37,6 +37,7 @@ class sfGuardAuthActions extends sfGuardAuthAct
                 $values = $this->form->getValues();
                 $this->getUser()->signin($values['user'], array_key_exists('remember', $values) ? $values['remember'] : false);
                 $this->getUser()->setAttribute('user_id', $values['user']->getId());
+                $this->getUser()->setAttribute('user_name', $values['user']->username);
 
                 $medico = Doctrine_Core::getTable('Medico')->obtenerMedicoPorIdUsuario($values['user']->getId());
                 $this->getUser()->setAttribute('med_codigo', ($medico != false) ? $medico->med_codigo : null);
@@ -79,6 +80,7 @@ class sfGuardAuthActions extends sfGuardAuthAct
         $this->getUser()->getAttributeHolder()->remove('pac_nombre');
         $this->getUser()->getAttributeHolder()->remove('tra_codigo');
         $this->getUser()->getAttributeHolder()->remove('user_id');
+        $this->getUser()->getAttributeHolder()->remove('user_name');
         $this->getUser()->getAttributeHolder()->remove('med_codigo');
 
         parent::executeSignout($request);

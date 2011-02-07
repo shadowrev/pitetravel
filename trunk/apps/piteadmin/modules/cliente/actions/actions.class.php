@@ -149,6 +149,14 @@ class clienteActions extends sfActions
           }
          
           $this->paciente = $this->form->save();
+
+          if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
+          {
+              $tratamiento = new Tratamiento();
+              $tratamiento->tra_pac_codigo = $this->paciente->pac_codigo;
+              $tratamiento->save();
+          }
+
           foreach($formas_contactos_nuevos as $nombre_forma)
           {
               $contacto_form = new ContactoForm();

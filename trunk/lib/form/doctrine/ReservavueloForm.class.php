@@ -31,16 +31,16 @@ class ReservavueloForm extends BaseReservavueloForm
       ));
 
       $this->widgetSchema->setLabels(array(
-          'vue_origen' => 'Origen:',
-          'vue_destino' => 'Destino:',
-          'vue_fecha_ida' => 'Fecha de Partida:',
-          'vue_fecha_regreso' => 'Fecha de Llegada al Origen:',
-          'vue_nro_vuelo_ida' => 'Localizador/C&oacute;digo de Vuelo:',
-          'vue_nro_vuelo_regreso' => 'Localizador/C&oacute;digo de Vuelo:',
-          'vue_hora_salida_ida' => 'Hora de Salida (Vuelo de Partida):',
-          'vue_hora_llegada_ida' => 'Hora de Llegada (Vuelo de Partida):',
-          'vue_hora_salida_vuelta' => 'Hora de Salida (Vuelo de Regreso):',
-          'vue_hora_llegada_vuelta' => 'Hora de Llegada (Vuelo de Regreso):'
+          'vue_origen' => '*Origen:',
+          'vue_destino' => '*Destino:',
+          'vue_fecha_ida' => '*Fecha de Partida:',
+          'vue_fecha_regreso' => '*Fecha de Regreso:',
+          'vue_nro_vuelo_ida' => '*Localizador/C&oacute;digo de Vuelo:',
+          'vue_nro_vuelo_regreso' => '*Localizador/C&oacute;digo de Vuelo:',
+          'vue_hora_salida_ida' => '*Hora de Salida (Vuelo de Partida):',
+          'vue_hora_llegada_ida' => '*Hora de Llegada (Vuelo de Partida):',
+          'vue_hora_salida_vuelta' => '*Hora de Salida (Vuelo de Regreso):',
+          'vue_hora_llegada_vuelta' => '*Hora de Llegada (Vuelo de Regreso):'
       ));
   }
 }

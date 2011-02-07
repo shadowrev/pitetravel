@@ -31,17 +31,18 @@ class PacienteForm extends BasePacienteForm
         ));
 
         $this->widgetSchema->setLabels(array(
-            'pac_nombre' => 'Nombres y Apellidos:',
-            'pac_identificacion' => 'Documento de Identidad:',
+            'pac_nombre' => '*Nombres y Apellidos:',
+            'pac_identificacion' => '*Documento de Identidad:',
             'pac_fecha_nacimiento' => 'Fecha de Nacimiento:',
             'pac_telefono1' => 'Tel&eacute;fono Fijo:',
             'pac_telefono2' => 'Tel&eacute;fono M&oacute;vil:',
-            'pac_email' => 'Correo Electr&oacute;nico:',
+            'pac_email' => '*Correo Electr&oacute;nico:',
             'pac_direccion' => 'Direcci&oacute;n:',
             'pac_ciudad' => 'Localidad/Ciudad:',
             'pac_estado' => 'Provincia/Estado:',
-            'pac_pais' => 'Pa&iacute;s:',
-            'pac_cod_postal' => 'C&oacute;digo Postal:'
+            'pac_pais' => '*Pa&iacute;s:',
+            'pac_cod_postal' => 'C&oacute;digo Postal:',
+            'pac_intervencion_deseada' => 'Observaciones adicionales:'
         ));
 
         //$this->setValidators();

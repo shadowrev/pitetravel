@@ -22,9 +22,10 @@
                 <?php if(sizeof($ids_procedimientos) > 0): ?>
                     <?php $par = false ?>
                     <?php foreach($tratamiento->Procedimiento as $procedimiento): ?>
+                    <?php $descripcion = in_array($procedimiento->pro_dtr_codigo, array(11, 21, 30, 40)) ? $procedimiento->pro_otro : $procedimiento->Descripciontratamiento->dtr_descripcion ?>
                     <tr class="<?php echo (true == $par) ? 'par' : 'impar' ?>">
                         <td><?php echo $procedimiento->Tipotratamiento->tit_nombre ?></td>
-                        <td><?php echo $procedimiento->Descripciontratamiento->dtr_descripcion ?></td>
+                        <td><?php echo $descripcion ?></td>
                         <td><?php echo '[modificar]' ?></td>
                         <td><?php echo '[eliminar]' ?></td><?php $par = !$par ?>
                     </tr>
@@ -105,7 +106,7 @@
             </script>
         </div>
     </div>
-    <?php if($sf_context->getUser()->hasCredential(array('medicos_locales', 'medicos_internacionales', 'admin'))): ?>
+    <?php if($sf_context->getUser()->hasCredential(array('medicos_locales', 'medicos_internacionales', 'admin'), false)): ?>
     <div class="formulario">
         <h2>Ex&aacute;menes Pre-Operatorios</h2>
         <div class="form">
