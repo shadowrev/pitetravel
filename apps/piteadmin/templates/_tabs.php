@@ -27,6 +27,9 @@
         <a href="<?php echo url_for('logistica/logistica') ?>"><span>Log&iacute;stica</span></a>
     </li>
     <?php //endif; ?>
+    <li<?php echo (strcmp($current, 'informes') == 0) ? ' class="current"' : '' ?>>
+        <a href="#"><span>Reportes</span></a>
+    </li>
     <?php //if(in_array('usuarios', $show)) : ?>
     <li<?php echo (strcmp($current, 'sfGuardUser') == 0) ? ' class="current"' : '' ?>>
         <a href="<?php echo url_for('@sf_guard_user') ?>"><span>Administraci&oacute;n de Usuarios</span></a>

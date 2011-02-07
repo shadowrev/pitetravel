@@ -53,6 +53,11 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
+                    <td colspan="3"><?php echo $form['pac_intervencion_deseada']->renderError() ?>
+                        <?php echo $form['pac_intervencion_deseada']->renderLabel() ?><br />
+                        <?php echo $form['pac_intervencion_deseada']->render() ?></td>
+                </tr>
+                <tr>
                     <td colspan="3">
                         <div style="text-align: right">
                             <script type="text/javascript">

@@ -717,7 +717,7 @@ Paciente:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     pac_telefono1:
       type: string(15)
@@ -738,28 +738,28 @@ Paciente:
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     pac_direccion:
       type: string(150)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     pac_ciudad:
       type: string(50)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     pac_estado:
       type: string(50)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     pac_pais:
       type: string(50)
@@ -775,6 +775,13 @@ Paciente:
       primary: false
       default: '0'
       notnull: true
+      autoincrement: false
+    pac_intervencion_deseada:
+      type: string()
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
       autoincrement: false
   relations:
     Contacto:
@@ -1320,14 +1327,14 @@ Reservavuelo:
       notnull: true
       autoincrement: false
     vue_nro_vuelo_ida:
-      type: integer(4)
+      type: string(16)
       fixed: false
       unsigned: false
       primary: false
       notnull: true
       autoincrement: false
     vue_nro_vuelo_regreso:
-      type: integer(4)
+      type: string(16)
       fixed: false
       unsigned: false
       primary: false

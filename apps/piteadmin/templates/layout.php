@@ -12,6 +12,11 @@
         <div id="encabezado">
             <img src="<?php echo public_path('') ?>images/pite_logo_2.jpg" alt="PITE Logo" />
         </div>
+        <?php if(0 != strcmp($sf_context->getUser()->getAttribute('user_id'), '')): ?>
+        <div>
+            Usuario Actual: <?php echo $sf_context->getUser()->getAttribute('user_name') ?>
+        </div>
+        <?php endif ?>
         <?php $clase_contenido = '' ?>
         <?php if(strcasecmp($sf_context->getModuleName(), 'sfGuardAuth') != 0): ?>
         <?php $clase_contenido = ' class="borde"' ?>
