@@ -9,13 +9,40 @@ sfGuardUser:
     Groups:         [Group_admin]
 
   raulerne:
-    first_name:     Raul Ernesto Villamarin
-    last_name:      ---
+    first_name:     Raul Ernesto 
+    last_name:      Villamarin
     email_address:  raul.villamarin@correounivalle.edu.co
     username:       raulerne
     password:       raulerne
     is_super_admin: false
     Groups:         [Group_admin, grupo_tour_operador]
+
+  horacio:
+    first_name:     Horacio
+    last_name:      Venegas
+    email_address:  horacio@nuevaeps.gov.co
+    username:       horacio
+    password:       horacio
+    is_super_admin: false
+    Groups:         [grupo_medicos_locales]
+
+  camilo:
+    first_name:     Camilo Albeiro
+    last_name:      Banagher
+    email_address:  camialbeiro@sunrise.com
+    username:       camilo
+    password:       camilo
+    is_super_admin: false
+    Groups:         [grupo_medicos_internacionales]
+
+  celes:
+    first_name:     Celes Amada
+    last_name:      Velazques
+    email_address:  celes@gmail.com
+    username:       celes
+    password:       celes
+    is_super_admin: false
+    Groups:         [grupo_logistica]
 
 
 sfGuardGroup:
@@ -32,26 +59,35 @@ sfGuardGroup:
   grupo_logistica:
     name:           Logistica
     description:    Grupo de Logistica
-    Permissions:    []
+    Permissions:    [logistica]
 
   grupo_medicos_locales:
     name:           Médicos Evaluadores
     description:    Grupo de Médicos que reciben los exámenes preoperatorios y remiten al exterior.
-    Permissions:    []
+    Permissions:    [medicos_locales]
 
   grupo_medicos_internacionales:
-    name:           Médicos Intervencionista
+    name:           Médicos Intervencionistas
     description:    Grupo de Médicos que evaluan los exámenes preoperatorios y determinan la realización de la intervención.
-    Permissions:    []
+    Permissions:    [medicos_internacionales]
 
 sfGuardPermission:
   Permission_admin:
     name:           admin
     description:    Administrator permission
+
   tour_operador:
     name:           touroperador
     description:    Permiso para el Tour Operador
 
-  medicos:
-    name:           medicos
+  medicos_locales:
+    name:           medicos_locales
     description:    Permiso para los medicos
+
+  medicos_internacionales:
+    name:           medicos_internacionales
+    description:    Permiso para los medicos
+
+  logistica:
+    name:           logistica
+    description:    Permiso para el equipo de logistica

@@ -28,10 +28,13 @@ class valoracionActions extends sfActions
     public function executeExamenesPreoperatorios(sfWebRequest $request)
     {
         $this->form = new PreoperatorioForm();
+        $this->preoperatorio = $this->form->getObject();
         $this->procedimiento_form = new ProcedimientoForm();
         $this->links_forms_fotos = array();
         $this->forms_fotos = array(new FotoForm());
         $this->forms_fotos[0]->cambiarGrupo('foto_0');
+
+        $this->medico_actual = Doctrine_Core::getTable('Medico')->find($this->getUser()->getAttribute('med_codigo'));
         
         if(0 != strcmp($this->getUser()->getAttribute('pac_codigo'), ''))
         {
@@ -59,6 +62,7 @@ class valoracionActions extends sfActions
             // TODO cargar los procedimientos que se van a realizar en el tratamiento
             $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find(array($this->getUser()->getAttribute('tra_codigo')));
             $this->ids_procedimientos = array();
+
             foreach($this->tratamiento->Procedimiento as $procedimiento)
             {
                 $this->ids_procedimientos[] = $procedimiento->pro_codigo;
@@ -95,84 +99,91 @@ class valoracionActions extends sfActions
 
     public function executeGuardarPreoperatorio(sfWebRequest $request)
     {
-        if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
+        if(0 != strcmp($this->getUser()->getAttribute('pac_codigo'), ''))
         {
-            $this->tratamiento = new Tratamiento();
-            $this->tratamiento->tra_pac_codigo = $this->getUser()->getAttribute('pac_codigo');
-            $this->tratamiento->save();
-            $this->getUser()->setAttribute('tra_codigo', $this->tratamiento->tra_codigo);
-        }
-
-        for($i = 0; $i < $request->getParameter('cuenta_procedimientos'); $i ++)
-        {
-            //$forms_procedimientos[] = 'procedimiento_' . $i;
-            $datos_nuevo_procedimiento = $request->getParameter('procedimiento_' . $i);
-            
-            if(empty($datos_nuevo_procedimiento['pro_codigo']))
+            if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
             {
-                $nuevo_procedimiento = new Procedimiento();
-                $nuevo_procedimiento->set('pro_tra_codigo', $this->getUser()->getAttribute('tra_codigo'));
-                $nuevo_procedimiento->set('pro_tit_codigo', $datos_nuevo_procedimiento['pro_tit_codigo']);
-                $nuevo_procedimiento->set('pro_dtr_codigo', $datos_nuevo_procedimiento['pro_dtr_codigo']);
-                $nuevo_procedimiento->set('pro_otro', $datos_nuevo_procedimiento['pro_otro']);
-                $nuevo_procedimiento->save();
+                $this->tratamiento = new Tratamiento();
+                $this->tratamiento->tra_pac_codigo = $this->getUser()->getAttribute('pac_codigo');
+                $this->tratamiento->save();
+                $this->getUser()->setAttribute('tra_codigo', $this->tratamiento->tra_codigo);
             }
-        }
 
-        $contenido_preoperatorio = $request->getParameter('preoperatorio');
-        $contenido_preoperatorio['preo_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
+            for($i = 0; $i < $request->getParameter('cuenta_procedimientos'); $i ++)
+            {
+                //$forms_procedimientos[] = 'procedimiento_' . $i;
+                $datos_nuevo_procedimiento = $request->getParameter('procedimiento_' . $i);
 
-        if(!empty($contenido_preoperatorio['preo_codigo']))
-        {
-            $preoperatorio = Doctrine_Core::getTable('Preoperatorio')->find(array($contenido_preoperatorio['preo_codigo']));
-            $this->form_preoperatorio = new PreoperatorioForm($preoperatorio);
-            $this->form_preoperatorio->bind($contenido_preoperatorio);
-            if($this->form_preoperatorio->isValid())
-            {
-                $this->preoperatorio_actual = $this->form_preoperatorio->save();
-            }
-        }
-        else
-        {
-            $this->form_preoperatorio = new PreoperatorioForm();
-            $this->form_preoperatorio->bind($contenido_preoperatorio);
-            if($this->form_preoperatorio->isValid())
-            {
-                $this->preoperatorio_actual = $this->form_preoperatorio->save();
-            }
-        }
-
-        $forms_fotos = array();
-        for($i = 0; $i <= $request->getParameter('cuenta_fotos'); $i ++)
-        {
-            $datos_foto = $request->getParameter('foto_' . $i);
-            $datos_foto['fot_preoperatoria'] = 1;
-            $datos_foto['fot_preo_codigo'] = $this->preoperatorio_actual->preo_codigo;
-            $forma_foto = new FotoForm();
-            if(!empty($datos_foto['fot_codigo']))
-            {
-                $foto = Doctrine_Core::getTable('Foto')->find(array($datos_foto['fot_codigo']));
-                $forma_foto = new FotoForm($foto);
-                if(empty($datos_foto['fot_uri_imagen']))
+                if(empty($datos_nuevo_procedimiento['pro_codigo']))
                 {
-                    $foto->setFotNombre($datos_foto['fot_nombre']);
-                    $foto->save();
+                    $nuevo_procedimiento = new Procedimiento();
+                    $nuevo_procedimiento->set('pro_tra_codigo', $this->getUser()->getAttribute('tra_codigo'));
+                    $nuevo_procedimiento->set('pro_tit_codigo', $datos_nuevo_procedimiento['pro_tit_codigo']);
+                    $nuevo_procedimiento->set('pro_dtr_codigo', $datos_nuevo_procedimiento['pro_dtr_codigo']);
+                    $nuevo_procedimiento->set('pro_otro', $datos_nuevo_procedimiento['pro_otro']);
+                    $nuevo_procedimiento->save();
                 }
-                else
+            }
+
+            $contenido_preoperatorio = $request->getParameter('preoperatorio');
+            $contenido_preoperatorio['preo_med_codigo'] = $this->getUser()->getAttribute('med_codigo');
+            $contenido_preoperatorio['preo_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
+
+            if(!empty($contenido_preoperatorio['preo_codigo']))
+            {
+                $preoperatorio = Doctrine_Core::getTable('Preoperatorio')->find(array($contenido_preoperatorio['preo_codigo']));
+                $this->form_preoperatorio = new PreoperatorioForm($preoperatorio);
+                $this->form_preoperatorio->bind($contenido_preoperatorio);
+                if($this->form_preoperatorio->isValid())
                 {
-                    $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
-                    $foto_nueva = $forma_foto->save();
+                    $this->preoperatorio_actual = $this->form_preoperatorio->save();
                 }
             }
             else
             {
-                $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
-                if($forma_foto->isValid())
-                    $foto_nueva = $forma_foto->save();
+                $this->form_preoperatorio = new PreoperatorioForm();
+                $this->form_preoperatorio->bind($contenido_preoperatorio);
+                if($this->form_preoperatorio->isValid())
+                {
+                    $this->preoperatorio_actual = $this->form_preoperatorio->save();
+                }
             }
+
+            $forms_fotos = array();
+            for($i = 0; $i <= $request->getParameter('cuenta_fotos'); $i ++)
+            {
+                $datos_foto = $request->getParameter('foto_' . $i);
+                $datos_foto['fot_preoperatoria'] = 1;
+                $datos_foto['fot_preo_codigo'] = $this->preoperatorio_actual->preo_codigo;
+                $forma_foto = new FotoForm();
+                if(!empty($datos_foto['fot_codigo']))
+                {
+                    $foto = Doctrine_Core::getTable('Foto')->find(array($datos_foto['fot_codigo']));
+                    $forma_foto = new FotoForm($foto);
+                    if(empty($datos_foto['fot_uri_imagen']))
+                    {
+                        $foto->setFotNombre($datos_foto['fot_nombre']);
+                        $foto->save();
+                    }
+                    else
+                    {
+                        $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
+                        $foto_nueva = $forma_foto->save();
+                    }
+                }
+                else
+                {
+                    $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
+                    if($forma_foto->isValid())
+                        $foto_nueva = $forma_foto->save();
+                }
+            }
+            $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
         }
-        //return sfView::NONE;
-        $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
+        else
+        {
+            $this->redirect('valoracion/examenesPreoperatorios');
+        }
     }
 
     /**
