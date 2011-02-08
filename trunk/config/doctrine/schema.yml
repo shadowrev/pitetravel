@@ -1210,14 +1210,14 @@ Reservahotel:
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     reh_tra_codigo:
       type: integer(8)
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     reh_fecha_entrada:
       type: date(25)
@@ -1245,28 +1245,28 @@ Reservahotel:
       fixed: false
       unsigned: false
       primary: false
-      notnull: false
+      notnull: true
       autoincrement: false
     reh_localizador:
       type: string(80)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     reh_dias_estadia:
       type: integer(4)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     reh_noches_estadia:
       type: integer(4)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
   relations:
     Tratamiento:

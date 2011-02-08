@@ -6,6 +6,5 @@
         <li<?php echo (strcmp($current, 'transporte') == 0) ? ' class="current"' : '' ?>>
             <a href="<?php echo url_for('logistica/transporte') ?>"><span>Transporte</span></a>
         </li>
-        <li><a href="#"><span>Generar Imprimible</span></a></li>
     </ul>
 </div>
