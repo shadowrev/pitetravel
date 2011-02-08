@@ -47,15 +47,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><?php echo $form['reh_dias_estadia']->renderError() ?>
-                    <?php echo $form['reh_dias_estadia']->renderLabel() ?><br />
-                    <?php echo $form['reh_dias_estadia']->render() ?></td>
-                    <td><?php echo $form['reh_noches_estadia']->renderError() ?>
-                    <?php echo $form['reh_noches_estadia']->renderLabel() ?><br />
-                    <?php echo $form['reh_noches_estadia']->render() ?></td>
                     <td><?php echo $form['reh_localizador']->renderError() ?>
                     <?php echo $form['reh_localizador']->renderLabel() ?><br />
                     <?php echo $form['reh_localizador']->render() ?></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td colspan="3">

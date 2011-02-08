@@ -6,6 +6,5 @@
         <li<?php echo (strcmp($current, 'destino') == 0) ? ' class="current"' : '' ?>>
             <a href="<?php echo url_for('valoracion/valoracionExamenes') ?>"><span>Valoraci&oacute;n en Destino</span></a>
         </li>
-        <li><a href="#"><span>Generar Imprimible</span></a></li>
     </ul>
 </div>
