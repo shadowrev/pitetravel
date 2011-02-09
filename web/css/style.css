@@ -193,3 +193,11 @@ body {
     color: #DF0C73;
     text-align: center;
 }
+
+fieldset {
+    margin-bottom: 10px;
+}
+
+legend {
+    font-weight: bold;
+}
