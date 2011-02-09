@@ -21,9 +21,6 @@
                     <?php echo $preoperatorio_form['preo_informe_especialista']->render() ?></td>
                 </tr>
             </table>
-            <div>
-                <em>&Uacute;ltima valoraci&oacute;n realizada por: <strong>Nombre del m&eacute;dico</strong></em>
-            </div>
         </div>
     </div>
 
@@ -284,6 +281,5 @@
     </div>
     <div class="submit">
         <button type="submit">Guardar</button>
-        <button type="button">Cancelar</button>
     </div>
 </form>
