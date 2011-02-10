@@ -1,4 +1,4 @@
-<?php include_partial('submenu', array('current' => 'datos')) ?>
+<?php include_partial('submenu', array('current' => 'logistica')) ?>
 <div id="contenido-formulario">
     <div class="formulario">
         <h2>Informe de Logistica</h2>
