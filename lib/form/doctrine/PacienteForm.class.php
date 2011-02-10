@@ -42,7 +42,7 @@ class PacienteForm extends BasePacienteForm
             'pac_estado' => 'Provincia/Estado:',
             'pac_pais' => '*Pa&iacute;s:',
             'pac_cod_postal' => 'C&oacute;digo Postal:',
-            'pac_intervencion_deseada' => 'Observaciones adicionales:'
+            'pac_intervencion_deseada' => 'Procedimiento deseado:'
         ));
 
         //$this->setValidators();

@@ -22,7 +22,9 @@ class reportesActions extends sfActions
             // Datos del Paciente
             // Datos del Contacto
             // Datos de la reserva de vuelo
+            $this->reserva_vuelo = $this->tratamiento->Reservavuelo;
             // Datos de la reserva hotelera
+            $this->reserva_hotel = $this->tratamiento->Reservahotel;
             // Datos de los contactos de logistica
         }
     }
@@ -57,6 +59,6 @@ class reportesActions extends sfActions
         $this->paciente = Doctrine_Core::getTable('Paciente')->find($this->getUser()->getAttribute('pac_codigo'));
         $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
 
-        return empty($this->paciente) || empty($this->tratamiento);
+        return !(empty($this->paciente) || empty($this->tratamiento));
     }
 }
