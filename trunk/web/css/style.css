@@ -182,6 +182,21 @@ body {
     color: #666;
 }
 
+#menu .desactivada a {
+    float:left;
+    background:url("../images/tableft.gif") no-repeat left top;
+    margin:0;
+    padding:0 0 0 4px;
+    text-decoration:none;
+}
+#menu .desactivada a span {
+    float:left;
+    display:block;
+    background:url("../images/tabright.gif") no-repeat right top;
+    padding:5px 15px 4px 6px;
+    color:#FFF;
+}
+
 /* Botonera de control de formularios */
 .submit {
     text-align: center;
