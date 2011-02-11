@@ -5,7 +5,9 @@
         <div class="form">
             <?php include_partial('reporte_logistica', array(
                 'paciente' => $paciente,
-                'tratamiento' => $tratamiento
+                'tratamiento' => $tratamiento,
+                'reserva_vuelo' => $reserva_vuelo,
+                'reserva_hotel' => $reserva_hotel
             )) ?>
             <?php if($paciente): ?>
             <div class="submit">
