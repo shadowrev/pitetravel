@@ -93,5 +93,13 @@ class Util
         $lista_tabla .= '</table>';
         return $lista_tabla;
     }
+
+    public static function calcularDias($fecha_inicial, $fecha_final)
+    {
+        $fecha1 = new DateTime($fecha_inicial);
+        $fecha2 = new DateTime($fecha_final);
+        $diferencia = $fecha1->diff($fecha2);
+        return $diferencia->format('%a');
+    }
 }
 ?>
