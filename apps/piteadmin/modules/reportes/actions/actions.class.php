@@ -25,6 +25,8 @@ class reportesActions extends sfActions
             $this->reserva_vuelo = $this->tratamiento->Reservavuelo->getFirst();
             // Datos de la reserva hotelera
             $this->reserva_hotel = $this->tratamiento->Reservahotel->getFirst();
+            $dias_estadia = $this->reserva_hotel->reh_fecha_salida - $this->reserva_hotel->reh_fecha_salida;
+            $this->dias = array('dias' => $dias_estadia);
             // Datos de los contactos de logistica
         }
     }

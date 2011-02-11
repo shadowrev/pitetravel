@@ -135,6 +135,22 @@
                 <strong>Correo Electr&oacute;nico: </strong><?php echo $reserva_hotel->Hotel->hot_email ?>
             </td>
         </tr>
+        <tr>
+            <td>
+                <strong>Fecha de Entrada: </strong><?php echo $reserva_hotel->reh_fecha_entrada ?>
+            </td>
+            <td>
+                <strong>Hora de Entrada: </strong><?php echo $reserva_hotel->reh_hora_llegada ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Fecha de Salida: </strong><?php echo $reserva_hotel->reh_fecha_salida ?>
+            </td>
+            <td>
+                <strong>Hora de Salida: </strong><?php echo $reserva_hotel->reh_hora_salida ?>
+            </td>
+        </tr>
     </table>
 </fieldset>
 <?php endif ?>
