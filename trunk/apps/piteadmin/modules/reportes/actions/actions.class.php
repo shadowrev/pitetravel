@@ -22,9 +22,9 @@ class reportesActions extends sfActions
             // Datos del Paciente
             // Datos del Contacto
             // Datos de la reserva de vuelo
-            $this->reserva_vuelo = $this->tratamiento->Reservavuelo;
+            $this->reserva_vuelo = $this->tratamiento->Reservavuelo->getFirst();
             // Datos de la reserva hotelera
-            $this->reserva_hotel = $this->tratamiento->Reservahotel;
+            $this->reserva_hotel = $this->tratamiento->Reservahotel->getFirst();
             // Datos de los contactos de logistica
         }
     }

@@ -46,16 +46,10 @@
                     <?php echo $form['vue_hora_llegada_vuelta']->render() ?></td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr>
-                    <td colspan="2">
-                        <div style="text-align: right"><button type="button">Buscar Reserva</button></div>
-                    </td>
-                </tr>
             </table>
         </div>
     </div>
     <div class="submit">
         <button type="submit">Guardar</button>
-        <button type="button">Generar Imprimible</button>
     </div> 
 </form>
