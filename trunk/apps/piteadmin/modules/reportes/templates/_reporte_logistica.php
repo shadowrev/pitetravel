@@ -151,15 +151,98 @@
                 <strong>Hora de Salida: </strong><?php echo $reserva_hotel->reh_hora_salida ?>
             </td>
         </tr>
+        <tr>
+            <td>
+                <strong>D&iacute;as de Estad&iacute;a: </strong><?php echo $reserva_hotel->reh_dias_estadia ?>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
     </table>
 </fieldset>
 <?php endif ?>
+<?php if($logistica): ?>
 <fieldset>
     <legend>Contactos de log&iacute;stica</legend>
-    <div>
-        Aqu&iacute; vienen los datos de los contactos de logistica
-    </div>
+    <table>
+        <tr>
+            <td>
+                <strong>Nombre del Responsable: </strong><?php echo $logistica->Contactologistica->clo_nombre ?>
+            </td>
+            <td>
+                <strong>Identificaci&oacute;n: </strong><?php echo $logistica->Contactologistica->clo_identificacion ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Correo Electr&oacute;nico: </strong><?php echo $logistica->Contactologistica->clo_email ?>
+            </td>
+            <td>
+                <strong>Tel&eacute;fono: </strong><?php echo $logistica->Contactologistica->clo_telefono ?>
+            </td>
+        </tr>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td>
+                <strong>Nombre del Gu&iacute;a: </strong><?php echo $logistica->Contactologistica_3->clo_nombre ?>
+            </td>
+            <td>
+                <strong>Identificaci&oacute;n: </strong><?php echo $logistica->Contactologistica_3->clo_identificacion ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Correo Electr&oacute;nico: </strong><?php echo $logistica->Contactologistica_3->clo_email ?>
+            </td>
+            <td>
+                <strong>Tel&eacute;fono: </strong><?php echo $logistica->Contactologistica_3->clo_telefono ?>
+            </td>
+        </tr>
+        <?php if($logistica->Transporte->trans_codigo): ?>
+        <tr><td colspan="2">&nbsp;</td></tr>
+        <tr>
+            <td>
+                <strong>Nombre del Transportista: </strong><?php echo $logistica->Transporte->trans_nombre ?>
+            </td>
+            <td>
+                <strong>Identificaci&oacute;n: </strong><?php echo $logistica->Transporte->trans_identificacion ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Tel&eacute;fono Fijo: </strong><?php echo $logistica->Transporte->trans_telefono1 ?>
+            </td>
+            <td>
+                <strong>Tel&eacute;fono M&oacute;vil: </strong><?php echo $logistica->Transporte->trans_telefono2 ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Direcci&oacute;n: </strong><?php echo $logistica->Transporte->trans_direccion ?>
+            </td>
+            <td>
+                <strong>Tipo de Veh&iacute;culo: </strong><?php echo $logistica->Transporte->trans_tipo_vehiculo ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Placas del Veh&iacute;culo: </strong><?php echo $logistica->Transporte->trans_placa_vehiculo ?>
+            </td>
+            <td>
+                <strong>Compa&ntilde;&iacute;a: </strong><?php echo $logistica->Transporte->trans_nombre_companhia ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>NIT: </strong><?php echo $logistica->Transporte->trans_numero_companhia ?>
+            </td>
+            <td>
+                <strong>Tel&eacute;fono: </strong><?php echo $logistica->Transporte->trans_telefono_companhia ?>
+            </td>
+        </tr>
+        <?php endif; ?>
+    </table>
 </fieldset>
+<?php endif ?>
 <?php else: ?>
 <div>Primero seleccione un Cliente</div>
 <?php endif ?>

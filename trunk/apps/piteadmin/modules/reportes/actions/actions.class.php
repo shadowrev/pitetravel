@@ -17,38 +17,24 @@ class reportesActions extends sfActions
     */
     public function executeGenerarReporteLogistica(sfWebRequest $request)
     {
-        if($this->cargarInformacionPaciente())
-        {
-            // Datos del Paciente
-            // Datos del Contacto
-            // Datos de la reserva de vuelo
-            $this->reserva_vuelo = $this->tratamiento->Reservavuelo->getFirst();
-            // Datos de la reserva hotelera
-            $this->reserva_hotel = $this->tratamiento->Reservahotel->getFirst();
-            $dias_estadia = $this->reserva_hotel->reh_fecha_salida - $this->reserva_hotel->reh_fecha_salida;
-            $this->dias = array('dias' => $dias_estadia);
-            // Datos de los contactos de logistica
-        }
+        $this->reporteLogistica();
     }
 
     public function executeGenerarReporteLogisticaPDF(sfWebRequest $request)
     {
-
+        $this->reporteLogistica();
+        $this->setLayout('output_pdf');
     }
 
     public function executeGenerarReporteMedico(sfWebRequest $request)
     {
-        if($this->cargarInformacionPaciente())
-        {
-            // Datos del Paciente
-            // Informe de Examenes Preoperatorios
-            // Informe Postoperatorio
-        }
+        $this->reporteMedico();
     }
 
     public function executeGenerarReporteMedicoPDF(sfWebRequest $request)
     {
-
+        $this->reporteMedico();
+        $this->setLayout('output_pdf');
     }
 
     public function executeGenerarDieta(sfWebRequest $request)
@@ -56,11 +42,35 @@ class reportesActions extends sfActions
         // TODO genera la dieta del paciente
     }
     
-    public function cargarInformacionPaciente()
+    protected function cargarInformacionPaciente()
     {
         $this->paciente = Doctrine_Core::getTable('Paciente')->find($this->getUser()->getAttribute('pac_codigo'));
         $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
 
         return !(empty($this->paciente) || empty($this->tratamiento));
+    }
+
+    protected function reporteLogistica()
+    {
+        if($this->cargarInformacionPaciente())
+        {
+            // Datos de la reserva de vuelo
+            $this->reserva_vuelo = $this->tratamiento->Reservavuelo->getLast();
+            // Datos de la reserva hotelera
+            $this->reserva_hotel = $this->tratamiento->Reservahotel->getLast();
+            // Datos de los contactos de logistica
+            $this->logistica = $this->tratamiento->Logistica->getLast();
+        }
+    }
+
+    protected function reporteMedico()
+    {
+        if($this->cargarInformacionPaciente())
+        {
+            // Informe de Examenes Preoperatorios
+            $this->preoperatorio = $this->tratamiento->Preoperatorio->getLast();
+            // Informe Postoperatorio
+            $this->postoperatorio = $this->tratamiento->Postoperatorio->getLast();
+        }
     }
 }

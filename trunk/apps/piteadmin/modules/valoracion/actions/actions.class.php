@@ -335,7 +335,7 @@ class valoracionActions extends sfActions
                 }
                 $datos_dieta['dtp_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
                 $form_dieta->bind($datos_dieta);
-                //if($form_dieta->isValid())
+                if($form_dieta->isValid())
                     $this->dietapaciente_actualizada = $form_dieta->save();
 
                 $this->menu_dieta = array();
@@ -350,7 +350,7 @@ class valoracionActions extends sfActions
                     }
                     $datos_menu['men_dtp_codigo'] = $this->dietapaciente_actualizada->dtp_codigo;
                     $form_menu->bind($datos_menu);
-                    //if($form_menu->isValid())
+                    if($form_menu->isValid())
                         $this->menu_dieta[] = $form_menu->save();
                 }
             }

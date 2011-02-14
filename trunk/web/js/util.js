@@ -43,6 +43,15 @@ function abrirPopUp (url, nombre, ancho, alto, x, y)
 // return ventana;
 }
 
+function nuevoPopUp(url, nombre) {
+    var width = screen.width * 0.6;
+    var height = screen.height * 0.6;
+
+    var x_pos = (screen.width / 2) - (width / 2);
+    var y_pos = (screen.height / 2) - (height / 2);
+    abrirPopUp(url, nombre, width, height, x_pos, y_pos)
+}
+
 /**
  * Despliega una lista emergente
  *

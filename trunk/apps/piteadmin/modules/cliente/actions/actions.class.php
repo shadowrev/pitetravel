@@ -254,6 +254,7 @@ class clienteActions extends sfActions
   {
       $datos_reserva = $request->getParameter('reservahotel');
       $datos_reserva['reh_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
+      $datos_reserva['reh_dias_estadia'] = Util::calcularDias($datos_reserva['reh_fecha_entrada'], $datos_reserva['reh_fecha_salida']);
       if(!empty($datos_reserva['reh_tra_codigo']))
       {
           if(0 != strcmp($datos_reserva['reh_codigo'], ''))
@@ -272,6 +273,7 @@ class clienteActions extends sfActions
                       $nueva_reserva = $form_reserva->save();
           }
           // TODO redireccionar a la reserva de hotel almacenada
+          //$this->setTemplate('reserva');
           $this->redirect('cliente/reserva');
       }
   }
