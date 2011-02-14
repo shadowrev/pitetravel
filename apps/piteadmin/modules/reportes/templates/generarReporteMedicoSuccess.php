@@ -14,7 +14,7 @@
             <?php if($paciente): ?>
             <div class="submit">
                 <button type="button" onclick="nuevoPopUp('<?php echo url_for('reportes/generarReporteMedicoPDF') ?>', 'reporte_medico')">Guardar PDF</button>
-                <button type="button">Enviar por E-Mail</button>
+                <button type="button" onclick="nuevoPopUp('<?php echo url_for('reportes/generarReporteMedicoMail') ?>', 'reporte_medico')">Enviar por E-Mail</button>
             </div>
             <?php endif ?>
         </div>

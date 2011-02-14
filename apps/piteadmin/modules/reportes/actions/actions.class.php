@@ -23,7 +23,34 @@ class reportesActions extends sfActions
     public function executeGenerarReporteLogisticaPDF(sfWebRequest $request)
     {
         $this->reporteLogistica();
-        $this->setLayout('output_pdf');
+        $contenido = $this->getPartial('generarReporteLogisticaPDF');
+
+        $config = sfTCPDFPluginConfigHandler::loadConfig();
+        sfTCPDFPluginConfigHandler::includeLangFile($this->getUser()->getCulture());
+        
+        $pdf_gen = new sfTCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
+
+        $pdf_gen->writeHTML($contenido, true, 0);
+
+        $pdf_gen->Output('reporte_logistica.pdf');
+        return sfView::NONE;
+    }
+
+    public function executeGenerarReporteLogisticaMail(sfWebRequest $request)
+    {
+        $this->reporteLogistica();
+        $contenido = $this->getPartial('generarReporteLogisticaPDF');
+        $usuario = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
+
+        $mensaje_correo = Swift_Message::newInstance()
+            ->setFrom(sfConfig::get('app_correo_pite'))
+            ->setTo($usuario->email_address)
+            ->setSubject('Reporte de Logistica para ' . $this->paciente->pac_nombre)
+            ->setBody($contenido);
+
+        $this->getMailer()->send($mensaje_correo);
+
+        return sfView::NONE;
     }
 
     public function executeGenerarReporteMedico(sfWebRequest $request)
@@ -35,6 +62,21 @@ class reportesActions extends sfActions
     {
         $this->reporteMedico();
         $this->setLayout('output_pdf');
+    }
+
+    public function executeGenerarReporteMedicoMail(sfWebRequest $request)
+    {
+        $this->reporteMedico();
+        $this->setLayout('output_pdf');
+        $usuario = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
+
+        $mensaje_correo = Swift_Message::newInstance()
+            ->setFrom(sfConfig::get('app_correo_pite'))
+            ->setTo($usuario->email_address)
+            ->setSubject('Reporte de Logistica para ' . $this->paciente->pac_nombre)
+            ->setBody($contenido);
+
+        $this->getMailer()->send($mensaje_correo);
     }
 
     public function executeGenerarDieta(sfWebRequest $request)
