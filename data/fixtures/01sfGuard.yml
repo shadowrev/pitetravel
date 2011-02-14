@@ -2,7 +2,8 @@ sfGuardUser:
   User_admin:
     first_name:     Administrator
     last_name:      D
-    email_address:  dummy-email@localhost.com
+#    email_address:  grupocgb@gmail.com
+    email_address:  shadowrev@gmail.com
     username:       admin
     password:       admin
     is_super_admin: true

@@ -96,10 +96,12 @@ class Util
 
     public static function calcularDias($fecha_inicial, $fecha_final)
     {
-        $fecha1 = new DateTime($fecha_inicial);
-        $fecha2 = new DateTime($fecha_final);
-        $diferencia = $fecha1->diff($fecha2);
-        return $diferencia->format('%a');
+        $timestamp_ini = mktime(0, 0, 0, $fecha_inicial['month'], $fecha_inicial['day'], $fecha_inicial['year']);
+        $timestamp_fin = mktime(0, 0, 0, $fecha_final['month'], $fecha_final['day'], $fecha_final['year']);
+
+        $diferencia = floor(abs($timestamp_fin - $timestamp_ini) / 86400);
+
+        return $diferencia;
     }
 }
 ?>
