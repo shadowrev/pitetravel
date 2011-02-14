@@ -14,8 +14,8 @@
             <?php include_partial('reporte_logistica', $variables) ?>
             <?php if($paciente): ?>
             <div class="submit">
-                <button type="button" onclick="nuevoPopUp('<?php echo url_for('reportes/generarPDF?reporte=logistica') ?>', 'reporte_logistica')">Guardar PDF</button>
-                <button type="button">Enviar por E-Mail</button>
+                <button type="button" onclick="nuevoPopUp('<?php echo url_for('reportes/generarReporteLogisticaPDF') ?>', 'reporte_logistica')">Guardar PDF</button>
+                <button type="button" onclick="nuevoPopUp('<?php echo url_for('reportes/generarReporteLogisticaMail') ?>', 'reporte_logistica')">Enviar por E-Mail</button>
             </div>
             <?php endif ?>
         </div>
