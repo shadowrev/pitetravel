@@ -5,15 +5,15 @@ default:
 
   # Disable default TCPDF default config
   K_TCPDF_EXTERNAL_CONFIG: true
-  
+
   # Auto-detected parameters (leave empty for auto-detection) ##################
-  # Installation path (/var/www/tcpdf/) 
-  K_PATH_MAIN: 
-  K_PATH_URL: 
-  K_PATH_FONTS: 
-  K_PATH_CACHE: 
-  K_PATH_URL_CACHE: 
-  K_PATH_IMAGES: 
+  # Installation path (/var/www/tcpdf/)
+  K_PATH_MAIN:
+  K_PATH_URL:
+  K_PATH_FONTS:
+  K_PATH_CACHE:
+  K_PATH_URL_CACHE:
+  K_PATH_IMAGES:
   K_BLANK_IMAGE:
 
   # Other parameters  ##########################################################
@@ -67,16 +67,16 @@ default:
   K_TITLE_MAGNIFICATION: "1.3"
   # reduction factor for small font
   K_SMALL_RATIO: "2/3"
-
+  
 # Specific configs (copy this file in your application config directory to ovveride it)
-my_config:
-  K_TCPDF_EXTERNAL_CONFIG: false
-  K_PATH_MAIN: /var/www/apps/pitetravel/plugins/sfTCPDFPlugin/tcpdf/
-  K_PATH_URL: http://dev.my-symfony-project/ 
-  K_PATH_FONTS: /var/www/apps/pitetravel/plugins/sfTCPDFPlugin/tcpdf/fonts
-  K_PATH_CACHE: /var/www/apps/pitetravel/plugins/sfTCPDFPlugin/tcpdf/cache
+pdf_pitetravel:
+  K_TCPDF_EXTERNAL_CONFIG: true
+  K_PATH_MAIN: /home/uvmedia/public_html/pitetravel/plugins/sfTCPDFPlugin/lib/tcpdf/
+  K_PATH_URL: http://dev.my-symfony-project/
+  K_PATH_FONTS: /home/uvmedia/public_html/pitetravel/plugins/sfTCPDFPlugin/lib/tcpdf/fonts
+  K_PATH_CACHE: /home/uvmedia/public_html/pitetravel/plugins/sfTCPDFPlugin/lib/tcpdf/cache
   K_PATH_URL_CACHE: http://dev.my-symfony-project/cache
-  K_PATH_IMAGES: /var/www/apps/pitetravel/plugins/sfTCPDFPlugin/tcpdf/images
-  K_BLANK_IMAGE: /var/www/apps/pitetravel/plugins/sfTCPDFPlugin/tcpdf/images/_blank.png
+  K_PATH_IMAGES: /home/uvmedia/public_html/pitetravel/plugins/sfTCPDFPlugin/lib/tcpdf/images
+  K_BLANK_IMAGE: /home/uvmedia/public_html/pitetravel/plugins/sfTCPDFPlugin/lib/tcpdf/images/_blank.png
 
   # ... copy paste from defaulf config.

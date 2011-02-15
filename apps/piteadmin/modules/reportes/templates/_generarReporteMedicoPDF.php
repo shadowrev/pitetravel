@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
     <head>
         <style type="text/css">
 /* Aplica a todo */
@@ -21,15 +20,9 @@ body {
 	padding-left: 10px;
 }
 
-#contenido.borde {
-    border: 1px solid #DF0D74;
-    -moz-border-radius: 0 0 15px 15px;
-    -webkit-border-radius: 0 0 15px 15px;
-}
-
 /* Aplica al area de formularios */
 #contenido-formulario {
-	float: left;
+    border: 1px solid #DF0D74;
 }
 
 .form table {
@@ -41,40 +34,13 @@ body {
 	height: 6em;
 }
 
-/* Aplica al resto de formularios */
 .formulario {
-    width: 600px;
-    margin: 20px auto;
-    min-height: 150px;
-    border: 1px solid #DF0C73;
+    font-size: 11px;
 }
 
 .formulario h2 { /* También aplica a h2 de .formulario*/
     margin-top: 0;
-    background-color: #DF0C73;
     text-align: center;
-    color: #FFF;
-}
-
-/* Aplica a las listas */
-.lista table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.lista thead {
-    font-weight: bold;
-    background-color: #E7F1F8;
-}
-
-.lista tbody .par {
-    background-color: #E7F1F8;
-}
-.lista tbody .impar {
-}
-
-.lista tbody tr:hover {
-    background-color: #DF6BA3;
 }
 
 /* Aplica al pie de pagina */
@@ -84,40 +50,38 @@ body {
     text-align: center;
 }
 
-fieldset {
+.fieldset {
+    width: 100%;
     margin-bottom: 10px;
+    display: block;
 }
 
-legend {
+.legend {
+    width: 100%;
     font-weight: bold;
+    display: block;
 }
         </style>
     </head>
     <body>
         <div id="encabezado">
-            <img src="<?php echo public_path('') ?>images/pite_logo_2.jpg" alt="PITE Logo" />
+            <img src="images/pite_logo_2.jpg" alt="PITE Logo" />
         </div>
         <div id="contenido">
-            <div id="contenido-formulario">
-                <div class="formulario">
-                    <h2>Informe de Logistica</h2>
-                    <div class="form">
-                        <?php $variables = array(
-                            'paciente' => $paciente,
-                            'tratamiento' => $tratamiento
-                        );
+            <h2>Informe M&eacute;dico</h2>
+            <div class="form">
+                <?php $variables = array(
+                    'paciente' => $paciente,
+                    'tratamiento' => $tratamiento
+                );
 
-                        if(isset($preoperatorio)) $variables['preoperatorio'] = $preoperatorio;
-                        if(isset($postoperatorio)) $variables['postoperatorio'] = $postoperatorio; ?>
-                        <?php include_partial('reporte_medico', $variables) ?>
-                    </div>
-                </div>
+                if(isset($preoperatorio)) $variables['preoperatorio'] = $preoperatorio;
+                if(isset($postoperatorio)) $variables['postoperatorio'] = $postoperatorio; ?>
+                <?php include_partial('reporte_medico', $variables) ?>
             </div>
         </div>
-        <div id="pie">
-            <p>PITE Travel<br />
-            &copy;2010 - Todos los derechos reservados</p>
-        </div>
+        <p>PITE Travel<br />
+        &copy;2010 - Todos los derechos reservados</p>
     </body>
 </html>
 
