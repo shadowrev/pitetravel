@@ -24,15 +24,21 @@ class reportesActions extends sfActions
     {
         $this->reporteLogistica();
         $contenido = $this->getPartial('generarReporteLogisticaPDF');
+        $contenido = str_replace('/fieldset', '/div', $contenido);
+        $contenido = str_replace('fieldset', 'div class="fieldset"', $contenido);
+        $contenido = str_replace('/legend', '/strong></div', $contenido);
+        $contenido = str_replace('legend', 'div class="legend"><strong', $contenido);
 
         $config = sfTCPDFPluginConfigHandler::loadConfig();
-        sfTCPDFPluginConfigHandler::includeLangFile($this->getUser()->getCulture());
+        //sfTCPDFPluginConfigHandler::includeLangFile($this->getUser()->getCulture());
         
-        $pdf_gen = new sfTCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
+        $pdf_gen = new sfTCPDF();
+        $pdf_gen->AddPage();
 
-        $pdf_gen->writeHTML($contenido, true, 0);
+        $pdf_gen->writeHTML($contenido, false);
 
         $pdf_gen->Output('reporte_logistica.pdf');
+//        echo $contenido;
         return sfView::NONE;
     }
 
@@ -61,22 +67,39 @@ class reportesActions extends sfActions
     public function executeGenerarReporteMedicoPDF(sfWebRequest $request)
     {
         $this->reporteMedico();
-        $this->setLayout('output_pdf');
+        $contenido = $this->getPartial('generarReporteMedicoPDF');
+        $contenido = str_replace('/fieldset', '/div', $contenido);
+        $contenido = str_replace('fieldset', 'div class="fieldset"', $contenido);
+        $contenido = str_replace('/legend', '/strong></div', $contenido);
+        $contenido = str_replace('legend', 'div class="legend"><strong', $contenido);
+
+        $config = sfTCPDFPluginConfigHandler::loadConfig();
+        //sfTCPDFPluginConfigHandler::includeLangFile($this->getUser()->getCulture());
+
+        $pdf_gen = new sfTCPDF();
+        $pdf_gen->AddPage();
+
+        $pdf_gen->writeHTML($contenido, false);
+
+        $pdf_gen->Output('reporte_medico.pdf');
+//        echo $contenido;
+        return sfView::NONE;
     }
 
     public function executeGenerarReporteMedicoMail(sfWebRequest $request)
     {
         $this->reporteMedico();
-        $this->setLayout('output_pdf');
+        $contenido = $this->getPartial('generarReporteMedicoPDF');
         $usuario = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
 
         $mensaje_correo = Swift_Message::newInstance()
             ->setFrom(sfConfig::get('app_correo_pite'))
             ->setTo($usuario->email_address)
-            ->setSubject('Reporte de Logistica para ' . $this->paciente->pac_nombre)
+            ->setSubject('Reporte Medico para ' . $this->paciente->pac_nombre)
             ->setBody($contenido);
 
         $this->getMailer()->send($mensaje_correo);
+        return sfView::NONE;
     }
 
     public function executeGenerarDieta(sfWebRequest $request)
