@@ -100,13 +100,14 @@
             <div style="text-align: right">
                 <button type="button" onclick="agregarFoto()">Agregar Foto</button>
             </div>
+            <?php if(!empty($postoperatorio)): ?>
             <div>
-                <em>&Uacute;ltima valoraci&oacute;n realizada por: <strong>Nombre del m&eacute;dico</strong></em>
+                <em>&Uacute;ltima valoraci&oacute;n realizada por: <strong><?php echo $postoperatorio->Medico->med_nombre ?> (<a href="<?php echo 'mailto:' . $postoperatorio->Medico->med_email ?>"><?php echo $postoperatorio->Medico->med_email ?></a>)</strong></em>
             </div>
+            <?php endif ?>
         </div>
     </div>
     <div class="submit">
         <button type="submit">Guardar</button>
-        <button type="button">Cancelar</button>
     </div>
 </form>

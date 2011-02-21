@@ -59,48 +59,64 @@ class postoperatorioActions extends sfActions
 
     public function executeGuardarInfoPostOperatorio(sfWebRequest $request)
     {
-        $datos_postoperatorio = $request->getParameter('postoperatorio');
-        $this->form = new PostoperatorioForm();
-        if(!empty($datos_postoperatorio['pos_codigo']))
+        if((0 != strcmp($this->getUser()->getAttribute('tra_codigo'), '')))
         {
-            $this->postoperatorio_actual = Doctrine_Core::getTable('Postoperatorio')->find(array($datos_postoperatorio['pos_codigo']));
-            $this->form = new PostoperatorioForm($this->postoperatorio_actual);
-        }
-        $datos_postoperatorio['pos_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
-        $this->form->bind($datos_postoperatorio);
-
-        if($this->form->isValid())
-            $this->postoperatorio_nuevo = $this->form->save();
-
-        $forms_fotos = array();
-        for($i = 0; $i <= $request->getParameter('cuenta_fotos'); $i ++)
-        {
-            $datos_foto = $request->getParameter('foto_' . $i);
-            $datos_foto['fot_preoperatoria'] = 0;
-            $datos_foto['fot_pos_codigo'] = $this->postoperatorio_nuevo->pos_codigo;
-            $forma_foto = new FotoForm();
-            if(!empty($datos_foto['fot_codigo']))
+            $datos_postoperatorio = $request->getParameter('postoperatorio');
+            $this->form = new PostoperatorioForm();
+            if(!empty($datos_postoperatorio['pos_codigo']))
             {
-                $foto = Doctrine_Core::getTable('Foto')->find(array($datos_foto['fot_codigo']));
-                $forma_foto = new FotoForm($foto);
-                if(empty($datos_foto['fot_uri_imagen']))
+                $this->postoperatorio_actual = Doctrine_Core::getTable('Postoperatorio')->find(array($datos_postoperatorio['pos_codigo']));
+                $this->form = new PostoperatorioForm($this->postoperatorio_actual);
+            }
+            $datos_postoperatorio['pos_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
+            $datos_postoperatorio['pos_med_codigo_responsable'] = $this->getUser()->getAttribute('med_codigo');
+            $this->form->bind($datos_postoperatorio);
+
+            if($this->form->isValid())
+            {
+                $this->getUser()->setFlash ('notificacion', 'La valoracion Post-Operatoria ' . sfConfig::get('app_guardado_exitoso_f'));
+                $this->postoperatorio_nuevo = $this->form->save();
+            }
+            else
+                $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
+
+            $forms_fotos = array();
+            for($i = 0; $i <= $request->getParameter('cuenta_fotos'); $i ++)
+            {
+                $datos_foto = $request->getParameter('foto_' . $i);
+                $datos_foto['fot_preoperatoria'] = 0;
+                $datos_foto['fot_pos_codigo'] = $this->postoperatorio_nuevo->pos_codigo;
+                $forma_foto = new FotoForm();
+                if(!empty($datos_foto['fot_codigo']))
                 {
-                    $foto->setFotNombre($datos_foto['fot_nombre']);
-                    $foto->save();
+                    $foto = Doctrine_Core::getTable('Foto')->find(array($datos_foto['fot_codigo']));
+                    $forma_foto = new FotoForm($foto);
+                    if(empty($datos_foto['fot_uri_imagen']))
+                    {
+                        $foto->setFotNombre($datos_foto['fot_nombre']);
+                        $foto->save();
+                    }
+                    else
+                    {
+                        $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
+                        if($forma_foto->isValid())
+                            $foto_nueva = $forma_foto->save();
+//                        else
+//                            $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
+                    }
                 }
                 else
                 {
                     $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
-                    $foto_nueva = $forma_foto->save();
+                    if($forma_foto->isValid())
+                        $foto_nueva = $forma_foto->save();
+//                    else
+//                        $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
                 }
             }
-            else
-            {
-                $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
-//                if($forma_foto->isValid())
-                    $foto_nueva = $forma_foto->save();
-            }
         }
+        else
+            $this->getUser()->setFlash ('error', sfConfig::get('app_error_paciente_seleccionado'));
         $this->redirect('postoperatorio/infoPostOperatorio');
     }
 
@@ -128,16 +144,20 @@ class postoperatorioActions extends sfActions
             $this->form = new AltapostoperatoriaForm($this->postoperatorio_actual);
         }
         $datos_postoperatorio['apo_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
+        $datos_postoperatorio['apo_med_codigo'] = $this->getUser()->getAttribute('med_codigo');
         $this->form->bind($datos_postoperatorio);
         if($this->form->isValid())
         {
             $this->postoperatorio_nuevo = $this->form->save();
+            $this->getUser()->setFlash ('notificacion', 'El Informe ' . sfConfig::get('app_guardado_exitoso_m'));
             $this->redirect('postoperatorio/altaPostOperatoria');
         }
         else
         {
-            $this->setTemplate('altaPostOperatoria');
+            $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
+//            $this->setTemplate('altaPostOperatoria');
         }
+        $this->redirect('postoperatorio/altaPostOperatoria');
     }
 
     public function executeAgregarFoto(sfWebRequest $request)

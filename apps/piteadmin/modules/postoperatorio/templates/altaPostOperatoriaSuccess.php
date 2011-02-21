@@ -3,7 +3,7 @@
 <?php endif; ?>
 <?php include_partial('submenu', array('current' => 'info')) ?>
 <div id="contenido-formulario">
-<?php include_partial('alta', array(
-    'form' => $form
-)) ?>
+<?php $array_elementos = array('form' => $form);
+if(isset($altapostoperatoria)) $array_elementos['altapostoperatoria'] = $altapostoperatoria;
+include_partial('alta', $array_elementos) ?>
 </div>

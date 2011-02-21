@@ -6,6 +6,7 @@
 <?php include_partial('postoperatorio', array(
     'form' => $form,
     'forms_fotos' => $forms_fotos,
-    'links_forms_fotos' => $links_forms_fotos
+    'links_forms_fotos' => $links_forms_fotos,
+    'postoperatorio' => $postoperatorio
 )) ?>
 </div>

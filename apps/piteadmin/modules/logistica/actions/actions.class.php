@@ -43,37 +43,50 @@ class logisticaActions extends sfActions
         }
         else
         {
-            $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede programar la logistica.');
+            //$this->getUser()->setFlash('error', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede programar la logistica.');
         }
     }
 
     public function executeGuardarLogistica(sfWebRequest $request)
     {
-        $datos_responsable = $request->getParameter('contactologistica_responsable');
-        $datos_guia = $request->getParameter('contactologistica_contacto');
-        $datos_logistica = $request->getParameter('logistica');
-
-        $this->form_contacto = $this->guardarContacto($datos_guia);
-        $this->form_responsable = $this->guardarContacto($datos_responsable);
-        $this->form_logistica = new ResponsableLogisticaForm();
-
-        if(!empty($datos_logistica['log_codigo']))
+        if(0 != strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
         {
-            $this->logistica = Doctrine_Core::getTable('Logistica')->find(array($datos_logistica['log_codigo']));
-            $this->form_logistica = new ResponsableLogisticaForm($this->logistica);
-        }
-        
-        $datos_logistica['log_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
-        $datos_logistica['log_clo_codigo_responsable'] = $this->form_responsable->getObject()->get('clo_codigo');
-        $datos_logistica['log_clo_codigo_guia'] = $this->form_contacto->getObject()->get('clo_codigo');
+            $datos_responsable = $request->getParameter('contactologistica_responsable');
+            $datos_guia = $request->getParameter('contactologistica_contacto');
+            $datos_logistica = $request->getParameter('logistica');
 
-        $this->form_logistica->bind($datos_logistica);
-        if($this->form_logistica->isValid())
-        {
-            $this->logistica_nuevo = $this->form_logistica->save();
-            $this->redirect('logistica/logistica');
+            $this->form_contacto = $this->guardarContacto($datos_guia);
+            $this->form_responsable = $this->guardarContacto($datos_responsable);
+            $this->form_logistica = new ResponsableLogisticaForm();
+
+            if(!empty($datos_logistica['log_codigo']))
+            {
+                $this->logistica = Doctrine_Core::getTable('Logistica')->find(array($datos_logistica['log_codigo']));
+                $this->form_logistica = new ResponsableLogisticaForm($this->logistica);
+            }
+
+            $datos_logistica['log_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
+            $datos_logistica['log_clo_codigo_responsable'] = $this->form_responsable->getObject()->get('clo_codigo');
+            $datos_logistica['log_clo_codigo_guia'] = $this->form_contacto->getObject()->get('clo_codigo');
+
+            $this->form_logistica->bind($datos_logistica);
+            if($this->form_logistica->isValid())
+            {
+                $this->logistica_nuevo = $this->form_logistica->save();
+                $this->getUser()->setFlash ('notificacion', 'La informacion de Logistica ' . sfConfig::get('app_guardado_exitoso_f'));
+                $this->redirect('logistica/logistica');
+            }
+            else
+            {
+                $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
+//                $this->setTemplate('logistica');
+            }
         }
-        $this->setTemplate('logistica');
+        else
+        {
+            $this->getUser()->setFlash ('error', sfConfig::get('app_error_paciente_seleccionado'));
+        }
+        $this->redirect('logistica/logistica');
     }
 
     public function executeListarContactos(sfWebRequest $request)
@@ -121,6 +134,10 @@ class logisticaActions extends sfActions
         {
             $contacto_actualizado = $contacto_form->save();
         }
+        else
+        {
+            $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
+        }
         return $contacto_form;
     }
 
@@ -142,7 +159,7 @@ class logisticaActions extends sfActions
         }
         else
         {
-            $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede programar la logistica.');
+            //$this->getUser()->setFlash('error', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede programar la logistica.');
         }
     }
     
@@ -163,12 +180,15 @@ class logisticaActions extends sfActions
         $datos_logistica['log_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
         $this->form_logistica->bind($datos_logistica);
 
-//        if($this->form_logistica->isValid())
-//        {
+        if($this->form_logistica->isValid())
+        {
             $this->logistica_nuevo = $this->form_logistica->save();
-            $this->redirect('logistica/transporte');
-//        }
-        $this->setTemplate('transporte');
+            $this->getUser()->setFlash ('notificacion', 'La informacion de Transporte ' . sfConfig::get('app_guardado_exitoso_f'));
+        }
+        else
+            $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
+        //$this->setTemplate('transporte');
+        $this->redirect('logistica/transporte');
     }
 
     public function executeListarTransporte(sfWebRequest $request)
@@ -207,10 +227,10 @@ class logisticaActions extends sfActions
             $transporte_form = new TransporteForm($transporte);
         }
         $transporte_form->bind($datos_transporte);
-//        if($transporte_form->isValid())
-//        {
+        if($transporte_form->isValid())
+        {
             $contacto_actualizado = $transporte_form->save();
-//        }
+        }
         return $transporte_form;
     }
 }

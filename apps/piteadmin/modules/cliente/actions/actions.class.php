@@ -82,7 +82,7 @@ class clienteActions extends sfActions
           {
               if($primero)
               {
-                  $this->contact_form = new ContactoForm($contacto);
+                  $this->contact_form = new ContactoForm();
                   $primero = false;
               }
               $this->ids_contactos[] = $contacto->con_codigo;
@@ -103,6 +103,10 @@ class clienteActions extends sfActions
       if($request->isXmlHttpRequest())
       {
           $contacto = new Contacto();
+          if(0 != strcmp($request->getParameter('con_codigo'), ''))
+          {
+              $contacto = Doctrine_Core::getTable('Contacto')->find($request->getParameter('con_codigo'));
+          }
           $contacto->set('con_nombre', $request->getParameter('con_nombre'));
           $contacto->set('con_telefono1', $request->getParameter('con_telefono1'));
           $contacto->set('con_telefono2', $request->getParameter('con_telefono2'));
@@ -147,8 +151,13 @@ class clienteActions extends sfActions
                   $this->contactos_form[] = new ContactoForm($obj_contacto);
               }
           }
-         
-          $this->paciente = $this->form->save();
+          if($this->form->isValid())
+          {
+              $this->paciente = $this->form->save();
+              $this->getUser()->setFlash ('notificacion', 'El cliente ha sido guardado');
+          }
+          else
+              $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
 
           if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
           {
@@ -161,9 +170,17 @@ class clienteActions extends sfActions
           {
               $contacto_form = new ContactoForm();
               $contenido_contacto = $request->getParameter($nombre_forma);
+              if(0 != strcmp($contenido_contacto['con_codigo'], ''))
+              {
+                  $contacto_actual = Doctrine_Core::getTable('Contacto')->find($contenido_contacto['con_codigo']);
+                  $contacto_form = new ContactoForm($contacto_actual);
+              }
               $contenido_contacto['con_pac_codigo'] = $this->paciente->pac_codigo;
               $contacto_form->bind($contenido_contacto);
-              $this->contactos[] = $contacto_form->save();
+              if($contacto_form->isValid())
+                  $this->contactos[] = $contacto_form->save();
+              else
+                  $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
           }
 
           $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
@@ -173,7 +190,13 @@ class clienteActions extends sfActions
       {
           $this->form->bind($datos_paciente);
           // TODO Guardar contactos
-          $this->paciente = $this->form->save();
+          if($this->form->isValid())
+          {
+              $this->paciente = $this->form->save();
+              $this->getUser()->setFlash ('notificacion', 'El cliente ha sido guardado');
+          }
+          else
+              $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
 
           $tratamiento = new Tratamiento();
           $tratamiento->tra_pac_codigo = $this->paciente->pac_codigo;
@@ -184,7 +207,10 @@ class clienteActions extends sfActions
               $contenido_contacto = $request->getParameter($nombre_forma);
               $contenido_contacto['con_pac_codigo'] = $this->paciente->pac_codigo;
               $contacto_form->bind($contenido_contacto);
-              $this->contactos[] = $contacto_form->save();
+              if($contacto_form->isValid())
+                  $this->contactos[] = $contacto_form->save();
+              else
+                  $this->getUser()->setFlash ('error', 'Uno o mas contactos no se han guardado. Por favor, intentelo nuevamente');
           }
           
           $this->getUser()->setAttribute('pac_codigo', $this->paciente->pac_codigo);
@@ -204,6 +230,25 @@ class clienteActions extends sfActions
       }
       
       $this->setLayout('popUp');
+  }
+  
+  public function executeCargarContactoPaciente(sfWebRequest $request)
+  {
+      if(0 != strcmp($request->getParameter('con_codigo'), ''))
+      {
+          $this->contacto_paciente = Doctrine_Core::getTable('Contacto')->find($request->getParameter('con_codigo'));
+          $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
+          $json_info_contacto = array(
+              'con_codigo' => $this->contacto_paciente->con_codigo,
+              'con_nombre' => $this->contacto_paciente->con_nombre,
+              'con_telefono1' => $this->contacto_paciente->con_telefono1,
+              'con_telefono2' => $this->contacto_paciente->con_telefono2,
+              'con_email' => $this->contacto_paciente->con_email,
+              'con_direccion' => $this->contacto_paciente->con_direccion
+          );
+          $this->getResponse()->setContent(json_encode($json_info_contacto));
+      }
+      return sfView::NONE;
   }
 
   public function executeCargarHotel(sfWebRequest $request)
@@ -227,7 +272,7 @@ class clienteActions extends sfActions
   {
       if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
       {
-          $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');
+          //$this->getUser()->setFlash('error', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');
           $this->form = new ReservahotelForm();
       }
       else
@@ -263,17 +308,33 @@ class clienteActions extends sfActions
               $form_reserva = new ReservahotelForm($reserva_hotel);
               $form_reserva->bind($datos_reserva);
               if($form_reserva->isValid())
-                      $nueva_reserva = $form_reserva->save();
+              {
+                  $this->getUser()->setFlash ('notificacion', 'La reserva ' . sfConfig::get('app_guardado_exitoso_f'));
+                  $nueva_reserva = $form_reserva->save();
+              }
+              else
+                  $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
           }
           else
           {
               $form_reserva = new ReservahotelForm();
               $form_reserva->bind($datos_reserva);
               if($form_reserva->isValid())
-                      $nueva_reserva = $form_reserva->save();
+              {
+                  $nueva_reserva = $form_reserva->save();
+                  $this->getUser()->setFlash ('notificacion', 'La reserva ' . sfConfig::get('app_guardado_exitoso_f'));
+              }
+              else
+                  $this->getUser()->setFlash ('error', 'Compruebe los datos obligatorios e intentelo nuevamente');
           }
           // TODO redireccionar a la reserva de hotel almacenada
           //$this->setTemplate('reserva');
+
+          $this->redirect('cliente/reserva');
+      }
+      else
+      {
+          $this->getUser()->setFlash ('error', sfConfig::get('app_error_paciente_seleccionado'));
           $this->redirect('cliente/reserva');
       }
   }
@@ -287,7 +348,7 @@ class clienteActions extends sfActions
   {
       if(0 == strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
       {
-          $this->getUser()->setFlash('mensaje_advertencia', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');
+          //$this->getUser()->setFlash('error', 'El Paciente actual no ha sido valorado aún. Todavía no se le puede crear una reserva.');
           $this->form = new ReservavueloForm();
       }
       else
@@ -316,19 +377,33 @@ class clienteActions extends sfActions
               $reserva_vuelo = Doctrine_Core::getTable('Reservavuelo')->find(array($datos_vuelo['vue_codigo']));
               $form_reserva = new ReservavueloForm($reserva_vuelo);
               $form_reserva->bind($datos_vuelo);
-              //if($form_reserva->isValid())
-                      $nueva_reserva = $form_reserva->save();
+              if($form_reserva->isValid())
+              {
+                  $this->getUser()->setFlash ('notificacion', 'La reserva ' . sfConfig::get('app_guardado_exitoso_f'));
+                  $nueva_reserva = $form_reserva->save();
+              }
+              else
+                  $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
           }
           else
           {
               $form_reserva = new ReservavueloForm();
               $form_reserva->bind($datos_vuelo);
-              //if($form_reserva->isValid())
-                      $nueva_reserva = $form_reserva->save();
+              if($form_reserva->isValid())
+              {
+                  $this->getUser()->setFlash ('notificacion', 'La reserva ' . sfConfig::get('app_guardado_exitoso_f'));
+                  $nueva_reserva = $form_reserva->save();
+              }
+              else
+                  $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
           }
-          // TODO Redireccionar a la reserva de vuelo guardada
+          $this->redirect('cliente/vuelo');
       }
-      $this->redirect('cliente/vuelo');
+      else
+      {
+          $this->getUser()->setFlash ('error', sfConfig::get('app_error_paciente_seleccionado'));
+          $this->redirect('cliente/vuelo');
+      }
   }
 
   public function executeEliminarVuelo(sfWebRequest $request)

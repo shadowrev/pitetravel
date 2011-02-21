@@ -114,7 +114,12 @@
         <div class="form">
             <script type="text/javascript">
                 var actualizarFormaContacto = function() {
+                    if("none" != document.getElementById('form1').elemento_edicion.value) {
+                        $("#contacto_" + document.getElementById('form1').elemento_edicion.value).remove();
+                        document.getElementById('form1').elemento_edicion.value = "none";
+                    }
                     var contador_contactos = document.getElementById('form1').cuenta_contactos.value;
+
                     agregarHiddensDinamicos('hidden_contacto_forms', '<?php echo url_for('cliente/almacenarContacto') ?>', 'contacto', contador_contactos);
                     var ultima_fila = $("#lst_contactos_paciente table#lista_contactos tbody tr:last-child");
 
@@ -149,10 +154,41 @@
                         ultima_fila.after(fila_nueva);
 
                     document.getElementById('form1').cuenta_contactos.value ++;
-                }
+                };
+                
+                var cargarContacto = function(id_contacto) {
+                    document.getElementById('form1').elemento_edicion.value = id_contacto;
+                    $.ajax({
+                        url: "<?php echo url_for('cliente/cargarContactoPaciente') ?>",
+                        data: "con_codigo=" + id_contacto,
+                        dataType: "json",
+                        success: function(respuesta) {
+                            document.getElementById("contacto_con_codigo").value = respuesta.con_codigo;
+                            document.getElementById("contacto_con_nombre").value = respuesta.con_nombre;
+                            document.getElementById("contacto_con_telefono1").value = respuesta.con_telefono1;
+                            document.getElementById("contacto_con_telefono2").value = respuesta.con_telefono2;
+                            document.getElementById("contacto_con_email").value = respuesta.con_email;
+                            document.getElementById("contacto_con_direccion").value = respuesta.con_direccion;
+                        }
+                    });
+                };
+                
+                var eliminarContacto = function(id_contacto) {
+                    $.ajax({
+                        url: "<?php //echo url_for('cliente/cargarContactoPaciente') ?>",
+                        data: "con_codigo=" + id_contacto,
+                        dataType: "json",
+                        success: function(respuesta) {
+                            if(0 != respuesta) {
+                                alert("Parece que hubo un error al intentar eliminar el contacto. Intentelo mas tarde");
+                            }
+                        }
+                    });
+                };
             </script>
             <?php echo $contact_form->renderHiddenFields() ?>
             <input type="hidden" name="cuenta_contactos" value="0" />
+            <input type="hidden" name="elemento_edicion" value="none" />
             <table>
                 <tr>
                     <td><?php echo $contact_form['con_nombre']->renderError() ?>

@@ -4,7 +4,7 @@
     <td><?php echo $contacto_paciente->con_nombre ?></td>
     <td><?php echo $contacto_paciente->con_telefono1 ?></td>
     <td><?php echo $contacto_paciente->con_email ?></td>
-    <td><?php echo '[modificar]' ?></td>
-    <td><?php echo '[eliminar]' ?></td><?php $par = !$par ?>
+    <td><a href="javascript:cargarContacto('<?php echo $contacto_paciente->con_codigo ?>')">[modificar]</a></td>
+    <td><a href="javascript:eliminarContacto('<?php echo $contacto_paciente->con_codigo ?>')">[eliminar]</a></td><?php $par = !$par ?>
 </tr>
 <?php endforeach; ?>

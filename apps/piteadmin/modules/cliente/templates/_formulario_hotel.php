@@ -53,15 +53,6 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
-                <tr>
-                    <td colspan="3">
-                        
-                        <div style="text-align: right">
-                            <!--<button type="button">Buscar Reserva</button>-->
-                            <button type="button" onclick="desplegarListaWincombo('<?php echo url_for('cliente/listarPacientes') ?>', elementos)">Buscar Reserva</button>
-                        </div>
-                    </td>
-                </tr>
             </table>
             <script type="text/javascript">
                 actualizarInfoHotel("<?php echo url_for('cliente/cargarHotel') ?>", document.getElementById("reservahotel_reh_hot_codigo").value);
@@ -70,6 +61,5 @@
     </div>
     <div class="submit">
         <button type="submit">Guardar</button>
-        <button type="button">Generar Imprimible</button>
     </div> 
 </form>

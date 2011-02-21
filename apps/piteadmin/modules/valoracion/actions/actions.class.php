@@ -136,8 +136,11 @@ class valoracionActions extends sfActions
                 $this->form_preoperatorio->bind($contenido_preoperatorio);
                 if($this->form_preoperatorio->isValid())
                 {
+                    $this->getUser()->setFlash ('notificacion', 'La valoracion ' . sfConfig::get('app_guardado_exitoso_f'));
                     $this->preoperatorio_actual = $this->form_preoperatorio->save();
                 }
+                else
+                    $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
             }
             else
             {
@@ -145,8 +148,11 @@ class valoracionActions extends sfActions
                 $this->form_preoperatorio->bind($contenido_preoperatorio);
                 if($this->form_preoperatorio->isValid())
                 {
+                    $this->getUser()->setFlash ('notificacion', 'La valoracion ' . sfConfig::get('app_guardado_exitoso_f'));
                     $this->preoperatorio_actual = $this->form_preoperatorio->save();
                 }
+                else
+                    $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
             }
 
             $forms_fotos = array();
@@ -168,7 +174,12 @@ class valoracionActions extends sfActions
                     else
                     {
                         $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
-                        $foto_nueva = $forma_foto->save();
+                        if($forma_foto->isValid())
+                        {
+                            $foto_nueva = $forma_foto->save();
+                        }
+                        else
+                            $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
                     }
                 }
                 else
@@ -176,12 +187,15 @@ class valoracionActions extends sfActions
                     $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
                     if($forma_foto->isValid())
                         $foto_nueva = $forma_foto->save();
+                    else
+                        $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
                 }
             }
             $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
         }
         else
         {
+            $this->getUser()->setFlash ('error', sfConfig::get('app_error_paciente_seleccionado'));
             $this->redirect('valoracion/examenesPreoperatorios');
         }
     }
@@ -303,6 +317,7 @@ class valoracionActions extends sfActions
             if($this->preoperatorio_form->isValid())
             {
                 $this->preoperatorio_actualizado = $this->preoperatorio_form->save();
+                $this->getUser()->setFlash ('notificacion', 'La valoracion ' . sfConfig::get('app_guardado_exitoso_f'));
 
                 // Guarda el material quirurgico
                 $this->exi_guardados = array();
@@ -323,6 +338,10 @@ class valoracionActions extends sfActions
                     {
                         $this->exi_guardados[] = $exi_form->save();
                     }
+                    else
+                    {
+                        $this->getUser()->setFlash ('error', 'Uno o mas elementos no se han guardado. Por favor, intentelo nuevamente');
+                    }
                 }
 
                 // Guarda el menu
@@ -337,6 +356,8 @@ class valoracionActions extends sfActions
                 $form_dieta->bind($datos_dieta);
                 if($form_dieta->isValid())
                     $this->dietapaciente_actualizada = $form_dieta->save();
+                else
+                    $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
 
                 $this->menu_dieta = array();
                 for($i = 0; $i < $request->getParameter('cuenta_menu'); $i ++)
@@ -352,12 +373,14 @@ class valoracionActions extends sfActions
                     $form_menu->bind($datos_menu);
                     if($form_menu->isValid())
                         $this->menu_dieta[] = $form_menu->save();
+                    else
+                        $this->getUser()->setFlash ('error', 'Uno o mas menues no se han guardado. Por favor, intentelo nuevamente');
                 }
             }
         }
         else
         {
-            // TODO Enviar mensaje "Aun no se guarda un examen preoperatorio"
+            $this->getUser()->setFlash ('error', sfConfig::get('app_error_paciente_seleccionado'));
         }
         $this->redirect('valoracion/valoracionExamenes');
     }
