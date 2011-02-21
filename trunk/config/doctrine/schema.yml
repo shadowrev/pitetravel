@@ -62,6 +62,10 @@ Altapostoperatoria:
       local: apo_cli_codigo
       foreign: cli_codigo
       type: one
+    Medico:
+      local: apo_med_codigo
+      foreign: med_codigo
+      type: one
 Clinica:
   connection: doctrine
   tableName: clinica
@@ -644,6 +648,10 @@ Medico:
     Preoperatorio:
       local: med_codigo
       foreign: preo_med_codigo
+      type: many
+    Altapostoperatoria:
+      local: med_codigo
+      foreign: apo_med_codigo
       type: many
 Menu:
   connection: doctrine

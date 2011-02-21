@@ -9,6 +9,12 @@
         <?php include_javascripts() ?>
     </head>
     <body>
+        <?php if($sf_user->hasFlash('notificacion')) : ?>
+        <div class="mensaje notificacion"><?php echo $sf_user->getFlash('notificacion'); ?></div>
+        <?php endif ?>
+        <?php if($sf_user->hasFlash('error')) : ?>
+        <div class="mensaje error"><?php echo $sf_user->getFlash('error'); ?></div>
+        <?php endif ?>
         <div id="encabezado">
             <img src="<?php echo public_path('') ?>images/pite_logo_2.jpg" alt="PITE Logo" />
         </div>

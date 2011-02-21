@@ -17,10 +17,10 @@
     <li class="<?php echo ((strcmp($current, 'valoracion') == 0) ? 'current' : '') . $pestanha_val ?>">
         <a href="<?php echo $enlace_val ?>"><span>Valoraci&oacute;n</span></a>
     </li>
-    <?php //$enlace_pos = $sf_context->getUser()->hasCredential(array('medicos_locales', 'medicos_internacionales'), false) ? url_for('valoracion/examenesPreoperatorios') : '#' ?>
-    <?php //$pestanha_pos = ($enlace_pos == "#") ? 'desactivada' : '' ?>
-    <li class="<?php echo ((strcmp($current, 'postoperatorio') == 0) ? 'current' : '') ?>">
-        <a href="<?php echo url_for('postoperatorio/infoPostOperatorio') ?>"><span>Post-Operatorio</span></a>
+    <?php $enlace_pos = $sf_context->getUser()->hasCredential(array('medicos_locales', 'medicos_internacionales'), false) ? url_for('postoperatorio/infoPostOperatorio') : '#' ?>
+    <?php $pestanha_pos = ($enlace_pos == "#") ? 'desactivada' : '' ?>
+    <li class="<?php echo ((strcmp($current, 'postoperatorio') == 0) ? 'current' : '') . $pestanha_pos ?>">
+        <a href="<?php echo $enlace_pos ?>"><span>Post-Operatorio</span></a>
     </li>
     <?php //$enlace_log = $sf_context->getUser()->hasCredential(array('medicos_locales', 'medicos_internacionales'), false) ? url_for('valoracion/examenesPreoperatorios') : '#' ?>
     <?php //$pestanha_log = ($enlace_log == "#") ? 'desactivada' : '' ?>

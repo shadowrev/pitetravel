@@ -45,7 +45,5 @@
     </div>
     <div class="submit">
         <button type="submit">Guardar</button>
-        <button type="button">Cancelar</button>
-        <button type="button">Generar Imprimible</button>
     </div>
 </form>

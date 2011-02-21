@@ -10,3 +10,11 @@ all:
     correo_william: willamurillo@gmail.com
     correo_gonzalo: gonzalofuentes@eurobelleza.es
     locale: [en-US, es-ES]
+
+  .mensajes:
+    error_validacion: Compruebe los datos obligatorios e intentelo nuevamente
+    error_paciente_seleccionado: Primero debe seleccionar un paciente
+    guardado_exitoso_m: ha sido guardado exitosamente
+    guardado_exitoso_f: ha sido guardada exitosamente
+    guardado_exitoso_ms: han sido guardados exitosamente
+    guardado_exitoso_fs: han sido guardadas exitosamente
