@@ -23,11 +23,11 @@
                     <?php $par = false ?>
                     <?php foreach($tratamiento->Procedimiento as $procedimiento): ?>
                     <?php $descripcion = in_array($procedimiento->pro_dtr_codigo, array(11, 21, 30, 40)) ? $procedimiento->pro_otro : $procedimiento->Descripciontratamiento->dtr_descripcion ?>
-                    <tr class="<?php echo (true == $par) ? 'par' : 'impar' ?>">
+                    <tr class="<?php echo (true == $par) ? 'par' : 'impar' ?>" id="procedimiento_<?php echo $procedimiento->pro_codigo ?>">
                         <td><?php echo $procedimiento->Tipotratamiento->tit_nombre ?></td>
                         <td><?php echo $descripcion ?></td>
-                        <td><?php echo '[modificar]' ?></td>
-                        <td><?php echo '[eliminar]' ?></td><?php $par = !$par ?>
+                        <td><a href="javascript:cargarProcedimiento(<?php echo $procedimiento->pro_codigo ?>)">[modificar]</a></td>
+                        <td><a href="<?php echo '#' ?>">[eliminar]</a></td><?php $par = !$par ?>
                     </tr>
                     <?php endforeach; ?>
                     <?php endif; ?>
@@ -37,6 +37,10 @@
         </div>
         <script type="text/javascript">
             var actualizarFormaTratamientos = function() {
+                if("none" != document.getElementById('form1').elemento_edicion.value) {
+                    $("#procedimiento_" + document.getElementById('form1').elemento_edicion.value).remove();
+                    document.getElementById('form1').elemento_edicion.value = "none";
+                }
                 var contador_contactos = document.getElementById('form1').cuenta_procedimientos.value;
                 agregarHiddensDinamicos('procedimientos_hidden', '<?php echo url_for('valoracion/almacenarProcedimiento') ?>', 'procedimiento', contador_contactos);
                 var ultima_fila = $("#lst_procedimientos table tbody tr:last-child");
@@ -69,10 +73,34 @@
                     ultima_fila.after(fila_nueva);
 
                 document.getElementById('form1').cuenta_procedimientos.value ++;
+            };
+
+            var cargarProcedimiento = function(id_procedimiento) {
+                document.getElementById('form1').elemento_edicion.value = id_procedimiento;
+                $.ajax({
+                    url: "<?php echo url_for('valoracion/cargarProcedimiento') ?>",
+                    data: "pro_codigo=" + id_procedimiento,
+                    dataType: "json",
+                    success: function(respuesta) {
+                        // Ver la forma de cargar nuevamente el formulario con el tipo de tratamiento; como esta ahora solo
+                        // selecciona los items que corresponden a procedimiento_pro_tit_codigo = corporal
+                        document.getElementById("procedimiento_pro_codigo").value = respuesta.pro_codigo;
+                        document.getElementById("procedimiento_pro_tit_codigo").value = respuesta.pro_tit_codigo;
+                        document.getElementById("procedimiento_pro_dtr_codigo").value = respuesta.pro_dtr_codigo;
+                        document.getElementById("procedimiento_pro_otro").value = respuesta.pro_otro;
+                    }
+                });
+            };
+
+            var limpiarFormaProcedimiento = function() {
+                document.getElementById("procedimiento_pro_codigo").value = null;
+                document.getElementById("procedimiento_pro_otro").value = null;
             }
         </script>
         <div class="form">
             <input type="hidden" name="cuenta_procedimientos" value="0" />
+            <input type="hidden" name="elemento_edicion" value="none" />
+            <?php echo $procedimiento_form->renderHiddenFields() ?>
             <table>
                 <tr>
                     <td><?php echo $procedimiento_form['pro_tit_codigo']->renderError() ?>
@@ -94,7 +122,7 @@
                 <tr>
                     <td colspan="3">
                         <div style="text-align: right">
-                            <button type="button" onclick="">Limpiar Campos</button>
+                            <button type="button" onclick="limpiarFormaProcedimiento()">Limpiar Campos</button>
                             <button type="button" onclick="actualizarFormaTratamientos()">Agregar Tratamiento</button>
                         </div>
                     </td>

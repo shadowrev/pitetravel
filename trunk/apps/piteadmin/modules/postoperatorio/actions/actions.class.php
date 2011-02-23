@@ -101,17 +101,17 @@ class postoperatorioActions extends sfActions
                         $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
                         if($forma_foto->isValid())
                             $foto_nueva = $forma_foto->save();
-//                        else
-//                            $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
+                        else
+                            $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
                     }
                 }
-                else
+                elseif(!empty($datos_foto['fot_uri_imagen']) && !empty($datos_foto['fot_nombre']))
                 {
                     $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
                     if($forma_foto->isValid())
                         $foto_nueva = $forma_foto->save();
-//                    else
-//                        $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
+                    else
+                        $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
                 }
             }
         }
