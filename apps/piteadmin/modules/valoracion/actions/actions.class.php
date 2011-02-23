@@ -97,6 +97,23 @@ class valoracionActions extends sfActions
         }
     }
 
+    public function executeCargarProcedimiento(sfWebRequest $request)
+    {
+        if(0 != strcmp($request->getParameter('pro_codigo'), ''))
+        {
+          $this->procedimiento = Doctrine_Core::getTable('Procedimiento')->find($request->getParameter('pro_codigo'));
+          $this->getResponse()->setHttpHeader('Content-Type', 'application/json; charset=utf-8');
+          $json_info_procedimiento = array(
+              'pro_codigo' => $this->procedimiento->pro_codigo,
+              'pro_dtr_codigo' => $this->procedimiento->pro_dtr_codigo,
+              'pro_tit_codigo' => $this->procedimiento->pro_tit_codigo,
+              'pro_otro' => $this->procedimiento->pro_otro,
+          );
+          $this->getResponse()->setContent(json_encode($json_info_procedimiento));
+        }
+        return sfView::NONE;
+    }
+
     public function executeGuardarPreoperatorio(sfWebRequest $request)
     {
         if(0 != strcmp($this->getUser()->getAttribute('pac_codigo'), ''))
@@ -118,6 +135,14 @@ class valoracionActions extends sfActions
                 {
                     $nuevo_procedimiento = new Procedimiento();
                     $nuevo_procedimiento->set('pro_tra_codigo', $this->getUser()->getAttribute('tra_codigo'));
+                    $nuevo_procedimiento->set('pro_tit_codigo', $datos_nuevo_procedimiento['pro_tit_codigo']);
+                    $nuevo_procedimiento->set('pro_dtr_codigo', $datos_nuevo_procedimiento['pro_dtr_codigo']);
+                    $nuevo_procedimiento->set('pro_otro', $datos_nuevo_procedimiento['pro_otro']);
+                    $nuevo_procedimiento->save();
+                }
+                else
+                {
+                    $nuevo_procedimiento = Doctrine_Core::getTable('Procedimiento')->find($datos_nuevo_procedimiento['pro_codigo']);
                     $nuevo_procedimiento->set('pro_tit_codigo', $datos_nuevo_procedimiento['pro_tit_codigo']);
                     $nuevo_procedimiento->set('pro_dtr_codigo', $datos_nuevo_procedimiento['pro_dtr_codigo']);
                     $nuevo_procedimiento->set('pro_otro', $datos_nuevo_procedimiento['pro_otro']);
@@ -182,7 +207,7 @@ class valoracionActions extends sfActions
                             $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
                     }
                 }
-                else
+                elseif(!empty($datos_foto['fot_uri_imagen']) && !empty($datos_foto['fot_nombre']))
                 {
                     $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
                     if($forma_foto->isValid())
@@ -244,6 +269,10 @@ class valoracionActions extends sfActions
         if($request->isXmlHttpRequest())
         {
             $procedimiento = new Procedimiento();
+            if(0 != strcmp($request->getParameter('pro_codigo'), ''))
+            {
+                $procedimiento = Doctrine_Core::getTable('Procedimiento')->find($request->getParameter('pro_codigo'));
+            }
             $procedimiento->set('pro_tra_codigo', $request->getParameter('pro_tra_codigo'));
             $procedimiento->set('pro_tit_codigo', $request->getParameter('pro_tit_codigo'));
             $procedimiento->set('pro_dtr_codigo', $request->getParameter('pro_dtr_codigo'));
