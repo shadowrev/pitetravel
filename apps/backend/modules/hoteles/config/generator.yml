@@ -13,9 +13,18 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
-      filter:  ~
+      fields: ~
+      list:
+        title: Hoteles en el sistema
+        display: [=hot_nombre, hot_telefono, hot_email]
+        fields:
+          hot_nombre: {label: Nombre del Hotel}
+          hot_telefono: {label: Tel&eacute;fono}
+          hot_email: {label: Correo Electr&oacute;nico}
+      filter:
+        class: false
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        title: Actualizando la informaci&oacute;n para %%hot_nombre%%
+      new:
+        title: Ingresando un nuevo Hotel

@@ -10,7 +10,15 @@
  */
 class HotelForm extends BaseHotelForm
 {
-  public function configure()
-  {
-  }
+    public function configure()
+    {
+        $this->widgetSchema->setLabels(array(
+            'hot_nombre' => 'Nombre del Hotel:',
+            'hot_direccion' => 'Direcci&oacute;n:',
+            'hot_telefono' => 'Tel&eacute;fono:',
+            'hot_web' => 'P&aacute;gina Web:',
+            'hot_email' => 'Correo Electr&oacute;nico:',
+            'hot_valor_noche' => 'Costo x Noche:'
+        ));
+    }
 }

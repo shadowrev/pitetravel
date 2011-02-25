@@ -14,8 +14,16 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
-      filter:  ~
+      list:
+        title: Enfermeras registradas en el sistema
+        display: [enf_nombre, enf_valor_servicio]
+        fields:
+          enf_nombre: {label: Nombre}
+          enf_valor_servicio: {label: Costo del Servicio}
+      filter:
+        class: false
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        title: Actualizando la informaci&oacute;n de %%enf_nombre%%
+      new:
+        title: Ingresando un(a) nuevo(a) Enfermero(a)
