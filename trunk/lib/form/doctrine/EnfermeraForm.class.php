@@ -12,5 +12,9 @@ class EnfermeraForm extends BaseEnfermeraForm
 {
   public function configure()
   {
+      $this->widgetSchema->setLabels(array(
+          'enf_nombre' => 'Nombre:',
+          'enf_valor_servicio' => 'Costo del Servicio:'
+      ));
   }
 }
