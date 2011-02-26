@@ -127,6 +127,10 @@ class clienteActions extends sfActions
       // TODO Guardar el paciente en la base de datos
       $this->form = new PacienteForm();
       $datos_paciente = $request->getParameter($this->form->getName());
+
+      if(!$this->getUser()->hasCredential(array('medicos_locales', 'medicos_internacionales'), false))
+          $datos_paciente['pac_agn_codigo'] = $this->getUser()->getAttribute('agn_codigo');
+
       $formas_contactos_nuevos = array();
       $this->contactos = array();
 
@@ -221,8 +225,18 @@ class clienteActions extends sfActions
 
   public function executeListarPacientes(sfWebRequest $request)
   {
-      // TODO evaluar la forma para pasar parametros de busqueda a traves de $request
-      $this->pacientes = Doctrine_Core::getTable('Paciente')->obtenerPacientesActivos();
+      if(!$this->getUser()->hasCredential(array('medicos_locales', 'medicos_internacionales'), false))
+      {
+          $datos_busqueda = array(
+              'pac_agn_codigo' => $this->getUser()->getAttribute('agn_codigo')
+          );
+      }
+      else
+      {
+          $datos_busqueda = null;
+      }
+
+      $this->pacientes = Doctrine_Core::getTable('Paciente')->obtenerPacientesActivos($datos_busqueda);
       $this->array_pacientes = array();
       foreach($this->pacientes as $paciente)
       {

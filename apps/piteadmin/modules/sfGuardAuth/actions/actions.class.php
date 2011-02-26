@@ -42,6 +42,10 @@ class sfGuardAuthActions extends sfGuardAuthAct
                 $medico = Doctrine_Core::getTable('Medico')->obtenerMedicoPorIdUsuario($values['user']->getId());
                 $this->getUser()->setAttribute('med_codigo', ($medico != false) ? $medico->med_codigo : null);
 
+                $agencia = Doctrine_Core::getTable('Usuariosagencia')->obtenerAgenciaUsuario($values['user']->getId());
+                $this->getUser()->setAttribute('agn_codigo', ($agencia != false) ? $agencia->agn_codigo : null);
+                //$this->getUser()->setAttribute('agn_codigo', 'ivo');
+
                 // always redirect to a URL set in app.yml
                 // or to the referer
                 // or to the homepage

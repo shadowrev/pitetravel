@@ -49,7 +49,15 @@
                     <td><?php echo $form['pac_cod_postal']->renderError() ?>
                         <?php echo $form['pac_cod_postal']->renderLabel() ?><br />
                         <?php echo $form['pac_cod_postal']->render() ?></td>
-                    <td>&nbsp;</td>
+                    <td>
+                        <?php if($sf_user->hasCredential(array('medicos_locales', 'medicos_internacionales'), false)) : ?>
+                        <?php echo $form['pac_agn_codigo']->renderError() ?>
+                        <?php echo $form['pac_agn_codigo']->renderLabel() ?>
+                        <?php echo $form['pac_agn_codigo']->render() ?>
+                        <?php else : ?>
+                        &nbsp;
+                        <?php endif ?>
+                    </td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
