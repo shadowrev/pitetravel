@@ -791,6 +791,13 @@ Paciente:
       primary: false
       notnull: false
       autoincrement: false
+    pac_agn_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
   relations:
     Contacto:
       local: pac_codigo
@@ -808,6 +815,10 @@ Paciente:
       local: pac_codigo
       foreign: dst_codigo
       refClass: Preferenciaturistica
+    Agencia:
+      local: pac_agn_codigo
+      foreign: agn_codigo
+      type: one
 Postoperatorio:
   connection: doctrine
   tableName: postoperatorio
@@ -1666,3 +1677,66 @@ Destinoturistico:
       foreign: pac_codigo
       refClass: Preferenciaturistica
 
+# Agencias
+Agencia:
+  connection: doctrine
+  tableName: agencia
+  columns:
+    agn_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: true
+    agn_nombre:
+      type: string(255)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: true
+      autoincrement: false
+    agn_descripcion:
+      type: string
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+    agn_telefono:
+      type: string(15)
+      fixed: false
+      unsigned: false
+      primary: false
+      notnull: false
+      autoincrement: false
+  relations:
+    Paciente:
+      local: agn_codigo
+      foreign: pac_agn_codigo
+      type: many
+    Usuariosagencia:
+      local: agn_codigo
+      foreign: uag_agn_codigo
+      type: many
+
+Usuariosagencia:
+  connection: doctrine
+  tableName: usuariosagencia
+  columns:
+    uag_agn_codigo:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+    uag_sfu_id:
+      type: integer(8)
+      fixed: false
+      unsigned: false
+      primary: true
+      autoincrement: false
+  relations:
+    Agencia:
+      local: uag_agn_codigo
+      foreign: agn_codigo
+      type: one
