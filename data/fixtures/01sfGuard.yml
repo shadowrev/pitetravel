@@ -45,6 +45,166 @@ sfGuardUser:
     is_super_admin: false
     Groups:         [grupo_logistica]
 
+  usuario_1:
+    first_name:     Usuario 1
+    last_name:      ---
+    email_address:  dummy1@gmail.com
+    username:       dummy1
+    password:       dummy1
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_2:
+    first_name:     Usuario 2
+    last_name:      ---
+    email_address:  dummy2@gmail.com
+    username:       dummy2
+    password:       dummy2
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_3:
+    first_name:     Usuario 3
+    last_name:      ---
+    email_address:  dummy3@gmail.com
+    username:       dummy3
+    password:       dummy3
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_4:
+    first_name:     Usuario 4
+    last_name:      ---
+    email_address:  dummy4@gmail.com
+    username:       dummy4
+    password:       dummy4
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_5:
+    first_name:     Usuario 5
+    last_name:      ---
+    email_address:  dummy5@gmail.com
+    username:       dummy5
+    password:       dummy5
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_6:
+    first_name:     Usuario 6
+    last_name:      ---
+    email_address:  dummy6@gmail.com
+    username:       dummy6
+    password:       dummy6
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_7:
+    first_name:     Usuario 7
+    last_name:      ---
+    email_address:  dummy7@gmail.com
+    username:       dummy7
+    password:       dummy7
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_8:
+    first_name:     Usuario 8
+    last_name:      ---
+    email_address:  dummy8@gmail.com
+    username:       dummy8
+    password:       dummy8
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_9:
+    first_name:     Usuario 9
+    last_name:      ---
+    email_address:  dummy9@gmail.com
+    username:       dummy9
+    password:       dummy9
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_10:
+    first_name:     Usuario 10
+    last_name:      ---
+    email_address:  dummy10@gmail.com
+    username:       dummy10
+    password:       dummy10
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_11:
+    first_name:     Usuario 11
+    last_name:      ---
+    email_address:  dummy11@gmail.com
+    username:       dummy11
+    password:       dummy11
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_12:
+    first_name:     Usuario 12
+    last_name:      ---
+    email_address:  dummy12@gmail.com
+    username:       dummy12
+    password:       dummy12
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_13:
+    first_name:     Usuario 13
+    last_name:      ---
+    email_address:  dummy13@gmail.com
+    username:       dummy13
+    password:       dummy13
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_14:
+    first_name:     Usuario 14
+    last_name:      ---
+    email_address:  dummy14@gmail.com
+    username:       dummy14
+    password:       dummy14
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_15:
+    first_name:     Usuario 15
+    last_name:      ---
+    email_address:  dummy15@gmail.com
+    username:       dummy15
+    password:       dummy15
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_16:
+    first_name:     Usuario 16
+    last_name:      ---
+    email_address:  dummy16@gmail.com
+    username:       dummy16
+    password:       dummy16
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_17:
+    first_name:     Usuario 17
+    last_name:      ---
+    email_address:  dummy17@gmail.com
+    username:       dummy17
+    password:       dummy17
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_18:
+    first_name:     Usuario 18
+    last_name:      ---
+    email_address:  dummy18@gmail.com
+    username:       dummy18
+    password:       dummy18
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_19:
+    first_name:     Usuario 19
+    last_name:      ---
+    email_address:  dummy19@gmail.com
+    username:       dummy19
+    password:       dummy19
+    is_super_admin: false
+    Groups:         [grupo_logistica]
+  usuario_20:
+    first_name:     Usuario 20
+    last_name:      ---
+    email_address:  dummy20@gmail.com
+    username:       dummy20
+    password:       dummy20
+    is_super_admin: false
+    Groups:         [grupo_logistica]
 
 sfGuardGroup:
   Group_admin:

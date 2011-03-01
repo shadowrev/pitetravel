@@ -30,7 +30,7 @@
     <li class="<?php echo ((strcmp($current, 'reportes') == 0) ? 'current' : '') ?>">
         <a href="<?php echo url_for('reportes/generarReporteLogistica') ?>"><span>Reportes</span></a>
     </li>
-    <?php $enlace_adm = $sf_context->getUser()->hasCredential('admin') ? url_for('@sf_guard_user') : '#' ?>
+    <?php $enlace_adm = $sf_context->getUser()->hasCredential('admin') ? url_for('@sf_guard_user') . '?page=1' : '#' ?>
     <?php $pestanha_adm = ($enlace_adm == "#") ? 'desactivada' : '' ?>
     <li class="<?php echo ((strcmp($current, 'sfGuardUser') == 0) ? 'current' : '') . $pestanha_adm ?>">
         <a href="<?php echo $enlace_adm ?>"><span>Administraci&oacute;n de Usuarios</span></a>

@@ -235,3 +235,11 @@ legend {
     background-color: #E75C58;
     border: 1px solid #E75C58;
 }
+
+.paginacion {
+    text-align: right;
+}
+
+.paginacion a {
+    margin: 0 0.5em;
+}

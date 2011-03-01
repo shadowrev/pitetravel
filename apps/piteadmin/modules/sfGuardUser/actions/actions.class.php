@@ -73,6 +73,18 @@ class sfGuardUserActions extends autoSfGuardUserActions
 
         $this->setTemplate('new');
     }
+
+    public function executeDelete(sfWebRequest $request)
+    {
+        $sf_user = Doctrine_Core::getTable('sfGuardUser')->find($request->getParameter('id'));
+        $medico = Doctrine_Core::getTable('Medico')->obtenerMedicoPorIdUsuario($sf_user->id);
+        if($sf_user->delete() && $medico)
+        {
+            $medico->delete();
+        }
+        return sfView::NONE;
+        //$this->redirect('sfGuardUser/users');
+    }
     
     protected function guardarForma($form, $datos)
     {
