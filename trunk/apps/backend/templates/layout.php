@@ -12,19 +12,15 @@
         <div id="encabezado">
             <img src="<?php echo public_path('') ?>images/pite_logo_2.jpg" alt="PITE Logo" />
         </div>
-        <?php if(0 != strcmp($sf_context->getUser()->getAttribute('user_id'), '')): ?>
-        <div>
-            Usuario Actual: <?php echo $sf_context->getUser()->getAttribute('user_name') ?>
-        </div>
-        <?php endif ?>
         <?php $clase_contenido = '' ?>
+        <?php if(strcasecmp($sf_context->getModuleName(), 'sfGuardAuth') != 0): ?>
         <?php $clase_contenido = ' class="borde"' ?>
         <div id="menu">
             <?php include_partial('global/tabs', array('current' => $sf_context->getModuleName())) ?>
         </div>
-        <div id="contenido" class="borde">
-            <div style="padding: 20px 0"><?php echo $sf_content ?></div>
-            
+        <?php endif; ?>
+        <div id="contenido"<?php echo $clase_contenido ?>>
+            <div style="padding: 20px 0"><?php echo $sf_content ?></div>            
         </div>
         <div id="pie">
             <p>PITE Travel<br />

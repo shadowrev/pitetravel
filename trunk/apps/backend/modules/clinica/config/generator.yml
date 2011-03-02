@@ -14,8 +14,17 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
-      filter:  ~
+      list:
+        title: Cl&iacute;nicas en el Sistema
+        display: [=cli_nombre, cli_direccion, cli_telefono]
+        fields:
+          cli_nombre: {label: Nombre}
+          cli_direccion: {label: Direcci&oacute;n}
+          cli_telefono: {label: Tel&eacute;fono}
+      filter:
+        class: false
       form:    ~
-      edit:    ~
-      new:     ~
+      edit:
+        title: Actualizando la informaci&oacute;n para %%cli_nombre%%
+      new:
+        title: Ingresando nueva Cl&iacute;nica

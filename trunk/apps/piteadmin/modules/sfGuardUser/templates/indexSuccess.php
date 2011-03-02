@@ -41,7 +41,7 @@
                         <td><?php echo $sf_guard_user->first_name . ' ' . $sf_guard_user->last_name ?></td>
                         <td><?php echo link_to('[modificar]',  'sfGuardUser/edit?id=' . $sf_guard_user->id) ?></td>
                         <!--<td><?php echo link_to('[eliminar]', 'sfGuardUser/delete?id=' . $sf_guard_user->id, array('confirm' => 'Desea eliminar a ' . $sf_guard_user->username)) ?></td>-->
-                        <td>[eliminar]</td>
+                        <td><a href="#">[eliminar]</a></td>
                     </tr>
                 <?php $par = !$par ?>
                 <?php endforeach; ?>

@@ -7,6 +7,11 @@ prod:
     param:
       level:   err
       loggers: ~
+      
+  storage:
+    class: sfSessionStorage
+    param:
+      session_name: pitetravel
 
 test:
   storage:
