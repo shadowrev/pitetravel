@@ -1,0 +1,30 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Agencia
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          agencia
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Agencias en el sistema
+        display: [=agn_nombre, agn_descripcion_resumen, agn_telefono]
+        fields:
+          agn_nombre: {label: Nombre de la Agencia}
+          agn_descripcion_resumen: {label: Descripci&oacute;n}
+          agn_telefono: {label: Tel&eacute;fono}
+      filter:
+        class: false
+      form:    ~
+      edit:
+        title: Actualizando la informaci&oacute;n para %%agn_nombre%%
+      new:
+        title: Ingresando nueva agencia

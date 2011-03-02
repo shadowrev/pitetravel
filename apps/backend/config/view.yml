@@ -9,7 +9,7 @@ default:
     title:        Administrador de Maestros
     #description:  symfony project
     #keywords:     symfony, project
-    #language:     en
+    language:     es
     #robots:       index, follow
 
   stylesheets:    [main.css, style.css]

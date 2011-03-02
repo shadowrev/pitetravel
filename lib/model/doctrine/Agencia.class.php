@@ -15,4 +15,12 @@ class Agencia extends BaseAgencia
     public function  __toString() {
         return $this->agn_nombre;
     }
+
+    public function  getAgnDescripcionResumen()
+    {
+        if(strlen($this->agn_descripcion) > 15)
+            return substr($this->agn_descripcion, 0, 15) . '...';
+        else
+            return $this->agn_descripcion;
+    }
 }
