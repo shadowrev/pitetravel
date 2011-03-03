@@ -68,6 +68,7 @@
     </table>
 </fieldset>
 <?php endif ?>
+<?php $reserva_vuelo = empty($reserva_vuelo) ? false : $reserva_vuelo ?>
 <?php if($reserva_vuelo): ?>
 <fieldset>
     <legend>Reservas de Vuelo</legend>
@@ -115,6 +116,7 @@
     </table>
 </fieldset>
 <?php endif ?>
+<?php $reserva_hotel = empty($reserva_hotel) ? false : $reserva_hotel ?>
 <?php if($reserva_hotel): ?>
 <fieldset>
     <legend>Reservas de Hospedaje</legend>
@@ -160,6 +162,7 @@
     </table>
 </fieldset>
 <?php endif ?>
+<?php $logistica = empty($logistica) ? false : $logistica ?>
 <?php if($logistica): ?>
 <fieldset>
     <legend>Contactos de log&iacute;stica</legend>

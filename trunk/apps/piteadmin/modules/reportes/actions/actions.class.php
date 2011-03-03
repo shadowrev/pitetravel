@@ -54,7 +54,12 @@ class reportesActions extends sfActions
             ->setSubject('Reporte de Logistica para ' . $this->paciente->pac_nombre)
             ->setBody($contenido);
 
-        $this->getMailer()->send($mensaje_correo);
+        $enviado = $this->getMailer()->send($mensaje_correo);
+
+        if($enviado)
+            $this->renderText('<p>Correo Enviado </p><a href="javascript:window.close()">Cerrar</a>');
+        else
+            $this->renderText('<p>No es posible enviar el correo </p><a href="javascript:window.close()">Cerrar</a>');
 
         return sfView::NONE;
     }
