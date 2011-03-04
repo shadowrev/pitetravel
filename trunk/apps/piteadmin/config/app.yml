@@ -6,9 +6,10 @@ all:
   .settings:
     enabled_modules: [default, sfGuardAuth]    
     especialidades: [Cirujano, Odontólogo, Traumatólogo]
-    correo_pite: shadow_rev@yahoo.com
-    correo_william: willamurillo@gmail.com
-    correo_gonzalo: gonzalofuentes@eurobelleza.es
+    correo_pite: grupocgb@gmail.com
+    #correo_admin: raul.villamarin@correounivalle.edu.co
+    correo_medico_adm_1: willamurillo@gmail.com
+    correo_medico_adm_2: gonzalofuentes@eurobelleza.es
     locale: [es-ES, en_US]
 
   .mensajes:

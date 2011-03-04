@@ -314,6 +314,7 @@ class clienteActions extends sfActions
       $datos_reserva = $request->getParameter('reservahotel');
       $datos_reserva['reh_tra_codigo'] = $this->getUser()->getAttribute('tra_codigo');
       $datos_reserva['reh_dias_estadia'] = Util::calcularDias($datos_reserva['reh_fecha_entrada'], $datos_reserva['reh_fecha_salida']);
+      $nueva_reserva = null;
       if(!empty($datos_reserva['reh_tra_codigo']))
       {
           if(0 != strcmp($datos_reserva['reh_codigo'], ''))
@@ -343,7 +344,7 @@ class clienteActions extends sfActions
           }
           // TODO redireccionar a la reserva de hotel almacenada
           //$this->setTemplate('reserva');
-
+          $this->enviarMail($nueva_reserva);
           $this->redirect('cliente/reserva');
       }
       else
@@ -448,5 +449,23 @@ class clienteActions extends sfActions
       }
       //$this->redirect('cliente/preferenciasTuristicas');
       $this->setTemplate('preferenciasTuristicas');
+  }
+
+  protected function enviarMail($reserva_hotel)
+  {
+      $this->paciente = Doctrine_Core::getTable('Paciente')->find($this->getUser()->getAttribute('pac_codigo'));
+      $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
+      $this->reserva_vuelo = $this->tratamiento->Reservavuelo->getLast();
+      $this->reserva_hotel = $reserva_hotel;
+      $this->logistica = null;
+      $contenido = $this->getPartial('reportes/generarReporteLogisticaMail');
+      $admin = Doctrine_Core::getTable('sfGuardUser')->find(1);
+
+      $mensaje_correo = new Swift_Message('Reporte de Logistica para ' . $this->paciente->pac_nombre, $contenido, 'text/html', 'utf-8');
+      $mensaje_correo->setFrom(sfConfig::get('app_correo_pite'))
+          //->setCc(array(sfConfig::get('app_correo_medico_adm_1'), sfConfig::get('app_correo_medico_adm_2')))
+          ->setTo($admin->email_address);
+
+      $this->getMailer()->send($mensaje_correo);
   }
 }
