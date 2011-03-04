@@ -36,9 +36,9 @@ dev:
 #      transport:
 #        class: Swift_SmtpTransport
 #        param:
-#          host: ~
-#          port: 22
-#          encryption: ~
+#          host: smtp.gmail.com
+#          port: 465
+#          encryption: ssl
 #          username: ~
 #          password: ~
 

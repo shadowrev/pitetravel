@@ -45,14 +45,18 @@ class reportesActions extends sfActions
     public function executeGenerarReporteLogisticaMail(sfWebRequest $request)
     {
         $this->reporteLogistica();
-        $contenido = $this->getPartial('generarReporteLogisticaPDF');
+        $contenido = $this->getPartial('generarReporteLogisticaMail');
         $usuario = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
-
-        $mensaje_correo = Swift_Message::newInstance()
-            ->setFrom(sfConfig::get('app_correo_pite'))
-            ->setTo($usuario->email_address)
-            ->setSubject('Reporte de Logistica para ' . $this->paciente->pac_nombre)
-            ->setBody($contenido);
+        
+        $mensaje_correo = new Swift_Message('Reporte de Logistica para ' . $this->paciente->pac_nombre, $contenido, 'text/html', 'utf-8');
+        $mensaje_correo->setFrom(sfConfig::get('app_correo_pite'))
+                ->setTo($usuario->email_address);
+        
+//        $mensaje_correo = Swift_Message::newInstance()
+//            ->setFrom(sfConfig::get('app_correo_pite'))
+//            ->setTo($usuario->email_address)
+//            ->setSubject('Reporte de Logistica para ' . $this->paciente->pac_nombre)
+//            ->setBody($contenido);
 
         $enviado = $this->getMailer()->send($mensaje_correo);
 
@@ -94,7 +98,7 @@ class reportesActions extends sfActions
     public function executeGenerarReporteMedicoMail(sfWebRequest $request)
     {
         $this->reporteMedico();
-        $contenido = $this->getPartial('generarReporteMedicoPDF');
+        $contenido = $this->getPartial('generarReporteMedicoMail');
         $usuario = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
 
         $mensaje_correo = Swift_Message::newInstance()
