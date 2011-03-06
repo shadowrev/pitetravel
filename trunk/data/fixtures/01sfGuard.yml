@@ -232,6 +232,11 @@ sfGuardGroup:
     description:    Grupo de Médicos que evaluan los exámenes preoperatorios y determinan la realización de la intervención.
     Permissions:    [medicos_internacionales]
 
+  grupo_medicos_administradores:
+    name:           Médicos Administradores
+    description:    Médicos socios de PITETravel. A ellos les llega la valoración que se le realice a cualquier paciente.
+    Permissions:    [medicos_locales, medicos_internacionales]
+
 sfGuardPermission:
   Permission_admin:
     name:           admin

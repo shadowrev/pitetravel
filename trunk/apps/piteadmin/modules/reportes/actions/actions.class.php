@@ -63,7 +63,7 @@ class reportesActions extends sfActions
         if($enviado)
             $this->renderText('<p>Correo Enviado </p><a href="javascript:window.close()">Cerrar</a>');
         else
-            $this->renderText('<p>No es posible enviar el correo </p><a href="javascript:window.close()">Cerrar</a>');
+            $this->renderText('<p>No es posible enviar el correo. Intentelo mas tarde </p><a href="javascript:window.close()">Cerrar</a>');
 
         return sfView::NONE;
     }
@@ -101,13 +101,23 @@ class reportesActions extends sfActions
         $contenido = $this->getPartial('generarReporteMedicoMail');
         $usuario = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
 
-        $mensaje_correo = Swift_Message::newInstance()
-            ->setFrom(sfConfig::get('app_correo_pite'))
-            ->setTo($usuario->email_address)
-            ->setSubject('Reporte Medico para ' . $this->paciente->pac_nombre)
-            ->setBody($contenido);
+//        $mensaje_correo = Swift_Message::newInstance()
+//            ->setFrom(sfConfig::get('app_correo_pite'))
+//            ->setTo($usuario->email_address)
+//            ->setSubject('Reporte Medico para ' . $this->paciente->pac_nombre)
+//            ->setBody($contenido);
 
-        $this->getMailer()->send($mensaje_correo);
+        $mensaje_correo = new Swift_Message('Reporte Medico para ' . $this->paciente->pac_nombre, $contenido, 'text/html', 'utf-8');
+        $mensaje_correo->setFrom(sfConfig::get('app_correo_pite'))
+                ->setTo($usuario->email_address);
+
+        $enviado = $this->getMailer()->send($mensaje_correo);
+
+        if($enviado)
+            $this->renderText('<p>Correo Enviado </p><a href="javascript:window.close()">Cerrar</a>');
+        else
+            $this->renderText('<p>No es posible enviar el correo en este momento. Intentelo mas tarde </p><a href="javascript:window.close()">Cerrar</a>');
+
         return sfView::NONE;
     }
 

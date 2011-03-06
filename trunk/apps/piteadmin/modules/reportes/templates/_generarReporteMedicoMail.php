@@ -77,7 +77,7 @@ body {
 
                 if(isset($preoperatorio)) $variables['preoperatorio'] = $preoperatorio;
                 if(isset($postoperatorio)) $variables['postoperatorio'] = $postoperatorio; ?>
-                <?php include_partial('reporte_medico', $variables) ?>
+                <?php include_partial('reportes/reporte_medico', $variables) ?>
             </div>
         </div>
         <p>PITE Travel<br />
