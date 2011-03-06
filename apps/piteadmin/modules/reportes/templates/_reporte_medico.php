@@ -157,7 +157,7 @@
         <?php endif ?>
     </table>
 </fieldset>
-<?php if(!empty($preoperatorio->preo_fecha_cirugia)) ?>
+<?php if(!empty($preoperatorio->preo_fecha_cirugia)): ?>
 <fieldset>
     <legend>Cita de la Cirug&iacute;a</legend>
     <table>
@@ -177,12 +177,14 @@
                 <strong>Hora de la Cirug&iacute;a: </strong><?php echo $preoperatorio->preo_hora_cirugia ?>
             </td>
         </tr>
+        <?php if(!empty($preoperatorio->Enfermera)) : ?>
         <tr>
             <td>
                 <strong>Enfermera: </strong><?php echo $preoperatorio->Enfermera ?>
             </td>
             <td>&nbsp;</td>
         </tr>
+        <?php endif ?>
         <tr>
             <td colspan="2">
                 <strong>Observaciones:</strong><br />
@@ -191,6 +193,7 @@
         </tr>
     </table>
 </fieldset>
+<?php endif ?>
 <?php if(0 < sizeof($preoperatorio->Elementosxintervencion)): ?>
 <fieldset>
     <legend>Material Quirurgico Adicional</legend>

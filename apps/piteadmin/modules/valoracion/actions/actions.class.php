@@ -125,6 +125,10 @@ class valoracionActions extends sfActions
                 $this->tratamiento->save();
                 $this->getUser()->setAttribute('tra_codigo', $this->tratamiento->tra_codigo);
             }
+            else
+            {
+                $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
+            }
 
             for($i = 0; $i < $request->getParameter('cuenta_procedimientos'); $i ++)
             {
@@ -216,6 +220,7 @@ class valoracionActions extends sfActions
                         $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
                 }
             }
+            $this->enviarMail('Se ha efectuado un cambio en la Valoración Médica de ' . $this->tratamiento->Paciente->pac_nombre);
             $this->redirect('valoracion/cargarExamenPreoperatorio?preo_codigo=' . $preoperatorio->preo_codigo);
         }
         else
@@ -345,7 +350,7 @@ class valoracionActions extends sfActions
             $this->preoperatorio_form->bind($datos_preoperatorio);
             if($this->preoperatorio_form->isValid())
             {
-                $this->preoperatorio_actualizado = $this->preoperatorio_form->save();
+                $this->preoperatorio_actual = $this->preoperatorio_form->save();
                 $this->getUser()->setFlash ('notificacion', 'La valoracion ' . sfConfig::get('app_guardado_exitoso_f'));
 
                 // Guarda el material quirurgico
@@ -360,7 +365,7 @@ class valoracionActions extends sfActions
                         $exi_form = new ElementosxintervencionForm($elementosxintervencion_obj);
                     }
 
-                    $datos_exi['exi_preo_codigo'] = $this->preoperatorio_actualizado->preo_codigo;
+                    $datos_exi['exi_preo_codigo'] = $this->preoperatorio_actual->preo_codigo;
 
                     $exi_form->bind($datos_exi);
                     if($exi_form->isValid())
@@ -412,5 +417,29 @@ class valoracionActions extends sfActions
             $this->getUser()->setFlash ('error', sfConfig::get('app_error_paciente_seleccionado'));
         }
         $this->redirect('valoracion/valoracionExamenes');
+    }
+
+    public function enviarMail($asunto)
+    {
+        $this->paciente = $this->tratamiento->Paciente;
+        $this->preoperatorio = $this->preoperatorio_actual;
+        
+        $contenido = $this->getPartial('reportes/generarReporteMedicoMail');
+
+        $grupo_medico_admin = new sfGuardGroup();
+        $grupo_medico_admin->Users;
+        $grupo_medico_admin = Doctrine_Core::getTable('sfGuardGroup')->find(6); // Grupo de Medicos administradores
+
+        $email_medicos = array();
+        foreach($grupo_medico_admin->Users as $users)
+        {
+            $email_medicos[] = $users->email_address;
+        }
+
+        $mensaje_correo = new Swift_Message($asunto, $contenido, 'text/html', 'utf-8');
+        $mensaje_correo->setFrom(sfConfig::get('app_correo_pite'))
+          ->setTo($email_medicos);
+
+        $this->getMailer()->send($mensaje_correo);
     }
 }
