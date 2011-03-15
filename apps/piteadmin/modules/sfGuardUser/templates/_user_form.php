@@ -1,6 +1,6 @@
 <?php echo $form->renderHiddenFields() ?>
+<?php echo $usuariosagencia_form->renderHiddenFields() ?>
 <div class="form">
-    <!--<?php echo $form ?>-->
     <table>
         <tr>
             <td><?php echo $form['first_name']->renderError() ?>
@@ -23,6 +23,13 @@
             <td><?php echo $form['password_again']->renderError() ?>
                 <?php echo $form['password_again']->renderLabel('Confirmar Contrase&ntilde;a:') ?><br />
                 <?php echo $form['password_again']->render() ?></td>
+        </tr>
+        <tr>
+            <td><?php echo $usuariosagencia_form['uag_agn_codigo']->renderError() ?>
+                <?php echo $usuariosagencia_form['uag_agn_codigo']->renderLabel() ?><br />
+                <?php echo $usuariosagencia_form['uag_agn_codigo']->render() ?></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
         </tr>
     </table>
 </div>
