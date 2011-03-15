@@ -12,5 +12,12 @@ class UsuariosagenciaForm extends BaseUsuariosagenciaForm
 {
   public function configure()
   {
+      $this->widgetSchema['uag_agn_codigo'] = new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('Agencia'), 'add_empty' => true));
+      $this->widgetSchema->setLabels(array(
+          'uag_agn_codigo' => 'Agencia (solo Tour Operador o Logistica):'
+      ));
+
+      $this->validatorSchema['uag_agn_codigo'] = new sfValidatorNumber(array('required' => true));
+      $this->validatorSchema['uag_sfu_id'] = new sfValidatorNumber(array('required' => true));
   }
 }

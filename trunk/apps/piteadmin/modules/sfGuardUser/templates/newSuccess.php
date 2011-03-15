@@ -4,7 +4,8 @@
     <div class="formulario">
         <h2><?php echo ($form->getObject()->isNew()) ? 'Nuevo ' : 'Actualizar ' ?>Usuario</h2>
         <?php include_partial('user_form', array(
-            'form' => $form
+            'form' => $form,
+            'usuariosagencia_form' => $usuariosagencia_form
         )) ?>
     </div>
     <div class="formulario">

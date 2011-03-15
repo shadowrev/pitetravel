@@ -14,6 +14,7 @@ class sfGuardUserActions extends autoSfGuardUserActions
     {
         $this->form = new userForm();
         $this->medico_form = new MedicoForm();
+        $this->usuariosagencia_form = new UsuariosagenciaForm();
         $this->sf_guard_user = $this->form->getObject();
         $this->medico = $this->medico_form->getObject();
     }
@@ -35,6 +36,12 @@ class sfGuardUserActions extends autoSfGuardUserActions
             $datos_medico['med_email'] = $this->sf_guard_user->email_address;
 
             $this->medico = $this->guardarForma($this->medico_form, $datos_medico);
+            
+            $this->usuariosagencia_form = new UsuariosagenciaForm();
+            $datos_agencia = $request->getParameter($this->usuariosagencia_form->getName());
+            $datos_agencia['uag_sfu_id'] = $this->sf_guard_user->id;
+            
+            $this->usuariosagencia = $this->guardarForma($this->usuariosagencia_form, $datos_agencia);
         }
         $this->redirect('@sf_guard_user');
         //$this->setTemplate('new');
@@ -46,6 +53,8 @@ class sfGuardUserActions extends autoSfGuardUserActions
         $this->form = new userForm($this->sf_guard_user);
         $this->medico = Doctrine_Core::getTable('Medico')->obtenerMedicoPorIdUsuario($this->sf_guard_user->id);
         $this->medico_form = new MedicoForm($this->medico);
+        $this->usuariosagencia = Doctrine_Core::getTable('Usuariosagencia')->obtenerPorUsuario($this->sf_guard_user->id);
+        $this->usuariosagencia_form = new UsuariosagenciaForm($this->usuariosagencia);
         $this->setTemplate('new');
     }
     
@@ -55,6 +64,9 @@ class sfGuardUserActions extends autoSfGuardUserActions
         $this->form = new userForm($this->sf_guard_user);
         $this->medico = Doctrine_Core::getTable('Medico')->obtenerMedicoPorIdUsuario($this->sf_guard_user->id);
         $this->medico_form = new MedicoForm($this->medico);
+        
+        $this->usuariosagencia = Doctrine_Core::getTable('Usuariosagencia')->obtenerPorUsuario($this->sf_guard_user->id);
+        $this->usuariosagencia_form = new UsuariosagenciaForm($this->usuariosagencia);
 
         $sf_guard_user_actualizado = $this->guardarForma($this->form, $request->getParameter($this->form->getName()));
         $sf_guard_user_actualizado->set('is_active', 1);
@@ -68,6 +80,11 @@ class sfGuardUserActions extends autoSfGuardUserActions
             $datos_medico['med_email'] = $sf_guard_user_actualizado->email_address;
 
             $medico_actualizado = $this->guardarForma($this->medico_form, $datos_medico);
+            
+            $datos_usuariosagencia = $request->getParameter($this->usuariosagencia_form->getName());
+            $datos_usuariosagencia['uag_sfu_id'] = $sf_guard_user_actualizado->id;
+            
+            $usuariosagencia_actualizado = $this->guardarForma($this->usuariosagencia_form, $datos_usuariosagencia);
             $this->redirect('@sf_guard_user');
         }
 

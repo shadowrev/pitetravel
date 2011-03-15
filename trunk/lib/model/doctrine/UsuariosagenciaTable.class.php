@@ -17,10 +17,15 @@ class UsuariosagenciaTable extends Doctrine_Table
         return Doctrine_Core::getTable('Usuariosagencia');
     }
 
-    public function obtenerAgenciaUsuario($id_usuario)
+    public function obtenerPorUsuario($id_usuario)
     {
         $query = $this->createQuery()->where('uag_sfu_id = ' . $id_usuario);
-        $result = $query->execute()->getFirst();
+        return $query->execute()->getFirst();
+    }
+
+    public function obtenerAgenciaUsuario($id_usuario)
+    {
+        $result = $this->obtenerPorUsuario($id_usuario);
         return $result ? $result->Agencia : $result;
     }
 }
