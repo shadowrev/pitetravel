@@ -47,47 +47,61 @@ class Util
         $lista_tabla .= '<tbody>';
         $impar = true;
         $contador = 1;
-        foreach($items as $item)
+        if(0 < sizeof($items))
         {
-            $class = '';
-            if($impar)
+            foreach($items as $item)
             {
-                $class = 'class="impar"';
-            }
-            else
-            {
-                $class = 'class="par"';
-            }
-
-            $lista_tabla .= '<tr ' . $class . '><td>' . $contador . '</td>';
-            //foreach($item as $param)
-            for($i = 1; $i < sizeof($item); $i ++)
-            {
-                $lista_tabla .= '<td>' . $item[$i] . '</td>';
-            }
-            if(!empty($opciones['options']))
-            {
-                if($lista_ajax)
+                $class = '';
+                if($impar)
                 {
-                    foreach($opciones['options'] as $tags => $operation)
-                    {
-                        $enlace = 'javascript:cargarUrlAjax(window.opener.' . $opciones['parametros']['funcion_ajax'] . ', ' . $item[0] . ')';
-                        $lista_tabla .= '<td><a href="' . $enlace . '">[' . $tags . ']</a></td>';
-                    }
+                    $class = 'class="impar"';
                 }
                 else
                 {
-                    foreach($opciones['options'] as $tags => $operation)
-                    {
-                        // TODO ver como poner los enlaces aqui
-                        $enlace = 'javascript:cargarUrlExterno(&quot;' . url_for($operation . '?pac_codigo=' . $item[0]) . '&quot;, window.opener)';
-                        $lista_tabla .= '<td><a href="' . $enlace . '">[' . $tags . ']</a></td>';
-                    }                    
+                    $class = 'class="par"';
                 }
+
+                $lista_tabla .= '<tr ' . $class . '><td>' . $contador . '</td>';
+                //foreach($item as $param)
+                for($i = 1; $i < sizeof($item); $i ++)
+                {
+                    $lista_tabla .= '<td>' . $item[$i] . '</td>';
+                }
+                if(!empty($opciones['options']))
+                {
+                    if($lista_ajax)
+                    {
+                        foreach($opciones['options'] as $tags => $operation)
+                        {
+                            $enlace = 'javascript:cargarUrlAjax(window.opener.' . $opciones['parametros']['funcion_ajax'] . ', ' . $item[0] . ')';
+                            $lista_tabla .= '<td><a href="' . $enlace . '">[' . $tags . ']</a></td>';
+                        }
+                    }
+                    else
+                    {
+                        foreach($opciones['options'] as $tags => $operation)
+                        {
+                            $enlace = 'javascript:cargarUrlExterno(&quot;' . url_for($operation . '?pac_codigo=' . $item[0]) . '&quot;, window.opener)';
+                            if(in_array($tags, array('delete', 'eliminar', 'borrar')))
+                            {
+                                $lista_tabla .= '<td><a onclick="return confirm(\'Esta seguro?\')" href="' . $enlace . '">[' . $tags . ']</a></td>';
+                            }
+                            else
+                            {
+                                $lista_tabla .= '<td><a href="' . $enlace . '">[' . $tags . ']</a></td>';
+                            }
+
+                        }
+                    }
+                }
+                $lista_tabla .= '</tr>';
+                $impar = !$impar;
+                $contador ++;
             }
-            $lista_tabla .= '</tr>';
-            $impar = !$impar;
-            $contador ++;
+        }
+        else
+        {
+            $lista_tabla .= '<tr><td colspan="' . sizeof($items) + sizeof($opciones['options']) . '">No se encuentran registros</td></tr>';
         }
         $lista_tabla .= '</tbody>';
         $lista_tabla .= '</table>';

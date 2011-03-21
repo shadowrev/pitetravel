@@ -47,7 +47,6 @@ class clienteActions extends sfActions
 
   public function executeMostrarInformacionPaciente(sfWebRequest $request)
   {
-      // TODO cargar la informacion del paciente para su edicion
       //$this->forward404($paciente = Doctrine_Core::getTable('Paciente')->find(array($request->getParameter('pac_codigo'))), 'El Paciente no existe');
       $this->paciente = Doctrine_Core::getTable('Paciente')->find(array($request->getParameter('pac_codigo')));
 
@@ -118,8 +117,14 @@ class clienteActions extends sfActions
   }
 
   public function executeEliminarPaciente(sfWebRequest $request) {
-      // TODO cargar la informacion del paciente para su edicion
-      $this->setLayout(false);
+      $paciente = Doctrine_Core::getTable('Paciente')->find($request->getParameter('pac_codigo'));
+      if(0 < sizeof($paciente->Contacto))
+      {
+          $paciente->Contacto->delete();
+      }
+      $paciente->delete();
+      //$this->forward('cliente', 'informacionPaciente');
+      $this->redirect('cliente/informacionPaciente?nuevo_paciente=si');
   }
 
   public function executeGuardarPaciente(sfWebRequest $request)
@@ -151,7 +156,6 @@ class clienteActions extends sfActions
           {
               foreach($paciente->Contactos as $obj_contacto)
               {
-                  // TODO Procedimiento para editar contactos
                   $this->contactos_form[] = new ContactoForm($obj_contacto);
               }
           }
@@ -449,6 +453,13 @@ class clienteActions extends sfActions
       }
       //$this->redirect('cliente/preferenciasTuristicas');
       $this->setTemplate('preferenciasTuristicas');
+  }
+
+  public function executeEliminarContacto(sfWebRequest $request)
+  {
+      $contacto = Doctrine_Core::getTable('Contacto')->find($request->getParameter('con_codigo'));
+      $contacto->delete();
+      $this->forward('cliente', 'informacionPaciente');
   }
 
   protected function enviarMail($reserva_hotel)

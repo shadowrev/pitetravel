@@ -18,4 +18,17 @@ class Paciente extends BasePaciente
         $query = $tabla_tratamientos->createQuery('t')->where('tra_pac_codigo=' . $this->pac_codigo)->addOrderBy('tra_codigo');
         return $query->execute();
     }
+
+    public function delete(Doctrine_Connection $conn = null) {
+        if(0 < sizeof($this->Contacto))
+            $this->Contacto->delete();
+
+        if(0 < sizeof($this->Preferenciaturistica))
+            $this->Preferenciaturistica->delete();
+
+        if(0 < sizeof($this->Tratamiento))
+            $this->Tratamiento->delete();
+
+        parent::delete($conn);
+    }
 }

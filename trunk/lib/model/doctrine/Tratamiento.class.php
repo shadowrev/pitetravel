@@ -12,4 +12,29 @@
  */
 class Tratamiento extends BaseTratamiento
 {
+    public function delete(Doctrine_Connection $conn = null) {
+        if(0 < sizeof($this->Dietapaciente))
+            $this->Dietapaciente->delete();
+
+        if(0 < sizeof($this->Logistica))
+            $this->Logistica->delete();
+
+        if(0 < sizeof($this->Postoperatorio))
+            $this->Postoperatorio->delete();
+
+        if(0 < sizeof($this->Preoperatorio))
+            $this->Preoperatorio->delete();
+
+        if(0 < sizeof($this->Procedimiento))
+            $this->Procedimiento->delete();
+
+        if(0 < sizeof($this->Reservahotel))
+            $this->Reservahotel->delete();
+
+        if(0 < sizeof($this->Reservavuelo))
+            $this->Reservavuelo->delete();
+
+
+        parent::delete($conn);
+    }
 }
