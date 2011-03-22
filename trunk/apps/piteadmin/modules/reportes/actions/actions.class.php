@@ -50,7 +50,7 @@ class reportesActions extends sfActions
         
         $mensaje_correo = new Swift_Message('Reporte de Logistica para ' . $this->paciente->pac_nombre, $contenido, 'text/html', 'utf-8');
         $mensaje_correo->setFrom(sfConfig::get('app_correo_pite'))
-                ->setTo($usuario->email_address);
+                ->setTo(array($usuario->email_address, $this->paciente->pac_email));
         
 //        $mensaje_correo = Swift_Message::newInstance()
 //            ->setFrom(sfConfig::get('app_correo_pite'))
@@ -109,7 +109,7 @@ class reportesActions extends sfActions
 
         $mensaje_correo = new Swift_Message('Reporte Medico para ' . $this->paciente->pac_nombre, $contenido, 'text/html', 'utf-8');
         $mensaje_correo->setFrom(sfConfig::get('app_correo_pite'))
-                ->setTo($usuario->email_address);
+                ->setTo(array($usuario->email_address, $this->paciente->pac_email));
 
         $enviado = $this->getMailer()->send($mensaje_correo);
 
