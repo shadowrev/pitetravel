@@ -84,6 +84,7 @@
                     success: function(respuesta) {
                         // Ver la forma de cargar nuevamente el formulario con el tipo de tratamiento; como esta ahora solo
                         // selecciona los items que corresponden a procedimiento_pro_tit_codigo = corporal
+                        //filtrarTratamientos("<?php url_for('valoracion/cargarTipoTratamiento') ?>", respuesta.pro_tit_codigo);
                         document.getElementById("procedimiento_pro_codigo").value = respuesta.pro_codigo;
                         document.getElementById("procedimiento_pro_tit_codigo").value = respuesta.pro_tit_codigo;
                         document.getElementById("procedimiento_pro_dtr_codigo").value = respuesta.pro_dtr_codigo;

@@ -410,6 +410,7 @@ class valoracionActions extends sfActions
                     else
                         $this->getUser()->setFlash ('error', 'Uno o mas menues no se han guardado. Por favor, intentelo nuevamente');
                 }
+                $this->enviarMail('Se ha efectuado un cambio en la Valoración Médica de ' . $this->tratamiento->Paciente->pac_nombre);
             }
         }
         else
@@ -431,6 +432,7 @@ class valoracionActions extends sfActions
         $grupo_medico_admin = Doctrine_Core::getTable('sfGuardGroup')->find(6); // Grupo de Medicos administradores
 
         $email_medicos = array();
+        $email_medicos[] = $this->getUser()->getAttribute('user_email');
         foreach($grupo_medico_admin->Users as $users)
         {
             $email_medicos[] = $users->email_address;
