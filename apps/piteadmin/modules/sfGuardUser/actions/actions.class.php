@@ -61,6 +61,8 @@ class sfGuardUserActions extends autoSfGuardUserActions
     public function executeUpdate(sfWebRequest $request)
     {
         $this->sf_guard_user = $this->getRoute()->getObject();
+        $es_super_admin = $this->sf_guard_user->is_super_admin;
+        
         $this->form = new userForm($this->sf_guard_user);
         $this->medico = Doctrine_Core::getTable('Medico')->obtenerMedicoPorIdUsuario($this->sf_guard_user->id);
         $this->medico_form = new MedicoForm($this->medico);
@@ -70,6 +72,7 @@ class sfGuardUserActions extends autoSfGuardUserActions
 
         $sf_guard_user_actualizado = $this->guardarForma($this->form, $request->getParameter($this->form->getName()));
         $sf_guard_user_actualizado->set('is_active', 1);
+        $sf_guard_user_actualizado->set('is_super_admin', $es_super_admin);
         $sf_guard_user_actualizado->save();
 
         if($sf_guard_user_actualizado)
