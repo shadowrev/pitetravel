@@ -473,11 +473,13 @@ class clienteActions extends sfActions
       //$this->reserva_hotel = $reserva_hotel;
       $this->reserva_hotel = $this->tratamiento->Reservahotel->getLast();
       $this->logistica = null;
+      
+      $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
+      $this->usuario_ultima_modificacion = $usuario_actual->first_name . ' ' . $usuario_actual->last_name;
+
       $contenido = $this->getPartial('reportes/generarReporteLogisticaMail');
       $admin = Doctrine_Core::getTable('sfGuardUser')->find(1);
       
-      $grupo_medico_admin = new sfGuardGroup();
-      $grupo_medico_admin->Users;
       $grupo_medico_admin = Doctrine_Core::getTable('sfGuardGroup')->find(6); // Grupo de Medicos administradores
 
       $email_destinatarios = array();
@@ -488,7 +490,7 @@ class clienteActions extends sfActions
           $email_destinatarios[] = $users->email_address;
       }
 
-      $mensaje_correo = new Swift_Message('Reporte de Logistica para ' . $this->paciente->pac_nombre, $contenido, 'text/html', 'utf-8');
+      $mensaje_correo = new Swift_Message('Novedades en el Paciente ' . $this->paciente->pac_nombre, $contenido, 'text/html', 'utf-8');
       $mensaje_correo->setFrom(sfConfig::get('app_correo_pite'))
           //->setCc(array(sfConfig::get('app_correo_medico_adm_1'), sfConfig::get('app_correo_medico_adm_2')))
           ->setTo($email_destinatarios);

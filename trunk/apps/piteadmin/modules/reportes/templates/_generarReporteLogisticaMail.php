@@ -66,7 +66,7 @@ body {
     <body>
         <img src="<?php echo public_path('', true) ?>images/pite_logo_2.jpg" alt="PITE Logo" />
         <div id="contenido">
-            <h2 align="center">Informe de Logistica</h2>
+            <h2 align="center">Novedades en el Paciente <?php echo $paciente->pac_nombre ?></h2>
             <div class="form">
                 <?php $variables = array(
                     'paciente' => $paciente,
@@ -76,6 +76,9 @@ body {
                 if(isset($reserva_hotel)) $variables['reserva_hotel'] = $reserva_hotel;
                 if(isset($logistica)) $variables['logistica'] = $logistica; ?>
                 <?php include_partial('reportes/reporte_logistica', $variables) ?>
+                <?php if(isset($usuario_ultima_modificacion)) : ?>
+                <div>&Uacute;ltimo cambio realizado por: <?php echo $usuario_ultima_modificacion ?></div>
+                <?php endif ?>
             </div>
         </div>
         <p>PITE Travel<br />

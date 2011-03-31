@@ -68,7 +68,7 @@ body {
             <img src="<?php echo public_path('', true) ?>images/pite_logo_2.jpg" alt="PITE Logo" />
         </div>
         <div id="contenido">
-            <h2>Informe M&eacute;dico</h2>
+            <h2>Novedades en el Paciente <?php echo $paciente->pac_nombre ?></h2>
             <div class="form">
                 <?php $variables = array(
                     'paciente' => $paciente,
@@ -78,6 +78,9 @@ body {
                 if(isset($preoperatorio)) $variables['preoperatorio'] = $preoperatorio;
                 if(isset($postoperatorio)) $variables['postoperatorio'] = $postoperatorio; ?>
                 <?php include_partial('reportes/reporte_medico', $variables) ?>
+                <?php if(isset($usuario_ultima_modificacion)) : ?>
+                <div>&Uacute;ltimo cambio realizado por: <?php echo $usuario_ultima_modificacion ?></div>
+                <?php endif ?>
             </div>
         </div>
         <p>PITE Travel<br />

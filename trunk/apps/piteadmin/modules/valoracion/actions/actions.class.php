@@ -424,11 +424,12 @@ class valoracionActions extends sfActions
     {
         $this->paciente = $this->tratamiento->Paciente;
         $this->preoperatorio = $this->preoperatorio_actual;
+
+        $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_name'));
+        $this->usuario_ultima_modificacion = $usuario_actual->first_name . ' ' . $usuario_actual->last_name;
         
         $contenido = $this->getPartial('reportes/generarReporteMedicoMail');
 
-        $grupo_medico_admin = new sfGuardGroup();
-        $grupo_medico_admin->Users;
         $grupo_medico_admin = Doctrine_Core::getTable('sfGuardGroup')->find(6); // Grupo de Medicos administradores
 
         $email_medicos = array();
