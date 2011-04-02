@@ -451,11 +451,18 @@ class clienteActions extends sfActions
           $this->paciente = Doctrine_Core::getTable('Paciente')->find($this->getUser()->getAttribute('pac_codigo'));
           $this->form = new PreferenciaturisticaPacienteForm($this->paciente);
           $this->form->bind($datos_paciente);
-          $paciente_actualizado = $this->form->save();
-          // Mensaje de exito
+          if($this->form->isValid())
+          {
+              $paciente_actualizado = $this->form->save();
+              $this->getUser()->setFlash ('notificacion', 'Las Preferencias Turisticas ' . sfConfig::get('app_guardado_exitoso_fs'));
+          }
+          else
+          {
+              $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
+          }
       }
-      //$this->redirect('cliente/preferenciasTuristicas');
-      $this->setTemplate('preferenciasTuristicas');
+      $this->redirect('cliente/preferenciasTuristicas');
+      //$this->setTemplate('preferenciasTuristicas');
   }
 
   public function executeEliminarContacto(sfWebRequest $request)

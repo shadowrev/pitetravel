@@ -26,6 +26,7 @@ class PreferenciaturisticaPacienteForm extends PacienteForm
         unset($this->widgetSchema['pac_estado']);
         unset($this->widgetSchema['pac_pais']);
         unset($this->widgetSchema['pac_cod_postal']);
+        unset($this->widgetSchema['pac_agn_codigo']);
 
         unset($this->validatorSchema['pac_nombre']);
         unset($this->validatorSchema['pac_identificacion']);
@@ -38,6 +39,7 @@ class PreferenciaturisticaPacienteForm extends PacienteForm
         unset($this->validatorSchema['pac_estado']);
         unset($this->validatorSchema['pac_pais']);
         unset($this->validatorSchema['pac_cod_postal']);
+        unset($this->validatorSchema['pac_agn_codigo']);
     }
 }
 ?>

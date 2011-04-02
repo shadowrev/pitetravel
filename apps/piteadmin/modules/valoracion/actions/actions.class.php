@@ -191,6 +191,7 @@ class valoracionActions extends sfActions
                 $datos_foto['fot_preoperatoria'] = 1;
                 $datos_foto['fot_preo_codigo'] = $this->preoperatorio_actual->preo_codigo;
                 $forma_foto = new FotoForm();
+                //var_dump($datos_foto, $_FILES);
                 if(!empty($datos_foto['fot_codigo']))
                 {
                     $foto = Doctrine_Core::getTable('Foto')->find(array($datos_foto['fot_codigo']));
@@ -211,7 +212,8 @@ class valoracionActions extends sfActions
                             $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
                     }
                 }
-                elseif(!empty($datos_foto['fot_uri_imagen']) && !empty($datos_foto['fot_nombre']))
+//                elseif(!empty($datos_foto['fot_uri_imagen']) && !empty($datos_foto['fot_nombre']))
+                else
                 {
                     $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
                     if($forma_foto->isValid())
@@ -420,10 +422,11 @@ class valoracionActions extends sfActions
         $this->redirect('valoracion/valoracionExamenes');
     }
 
-    public function enviarMail($asunto)
+    protected function enviarMail($asunto)
     {
         $this->paciente = $this->tratamiento->Paciente;
-        $this->preoperatorio = $this->preoperatorio_actual;
+        $this->postoperatorio = $this->tratamiento->Postoperatorio->getLast();
+        $this->preoperatorio = $this->tratamiento->Preoperatorio->getLast();
 
         $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_name'));
         $this->usuario_ultima_modificacion = $usuario_actual->first_name . ' ' . $usuario_actual->last_name;

@@ -1,3 +1,4 @@
+<?php $solo_lectura = !$sf_context->getUser()->hasCredential(array('touroperador', 'logistica'), false) ?>
 <form id="form1" name="form1" method="post" action="<?php echo url_for('logistica/guardarLogistica') ?>">
     <script type="text/javascript">
         var actualizarResponsable = function(id_contacto) {
@@ -22,12 +23,14 @@
     </script>
     <div class="formulario" id="frm_responsable_logistica">
         <?php include_partial('form_responsable', array(
-            'form_responsable' => $form_responsable
+            'form_responsable' => $form_responsable,
+            'solo_lectura' => $solo_lectura
         )) ?>
     </div>
     <div class="formulario" id="frm_guia">
         <?php include_partial('form_guia', array(
-            'form_contacto' => $form_contacto
+            'form_contacto' => $form_contacto,
+            'solo_lectura' => $solo_lectura
         )) ?>
     </div>
     <div class="formulario">
@@ -38,12 +41,12 @@
                 <tr>
                     <td><?php echo $form_logistica['log_observaciones']->renderError() ?>
                     <?php echo $form_logistica['log_observaciones']->renderLabel() ?><br />
-                    <?php echo $form_logistica['log_observaciones']->render() ?></td>
+                    <?php echo $form_logistica['log_observaciones']->render(array('disabled' => $solo_lectura)) ?></td>
                 </tr>
             </table>
         </div>
     </div>
     <div class="submit">
-        <button type="submit">Guardar</button>
+        <button type="submit"<?php echo $solo_lectura ? ' disabled' : '' ?>>Guardar</button>
     </div>
 </form>

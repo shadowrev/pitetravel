@@ -61,6 +61,7 @@ class postoperatorioActions extends sfActions
     {
         if((0 != strcmp($this->getUser()->getAttribute('tra_codigo'), '')))
         {
+            $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
             $datos_postoperatorio = $request->getParameter('postoperatorio');
             $this->form = new PostoperatorioForm();
             if(!empty($datos_postoperatorio['pos_codigo']))
@@ -76,6 +77,7 @@ class postoperatorioActions extends sfActions
             {
                 $this->getUser()->setFlash ('notificacion', 'La valoracion Post-Operatoria ' . sfConfig::get('app_guardado_exitoso_f'));
                 $this->postoperatorio_nuevo = $this->form->save();
+                //$this->enviarMail('Se ha efectuado un cambio en el Post-Operatorio de ' . $this->tratamiento->Paciente->pac_nombre);
             }
             else
                 $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
@@ -105,7 +107,8 @@ class postoperatorioActions extends sfActions
                             $this->getUser()->setFlash ('error', 'Una o mas fotos no se han guardado. Por favor, intentelo nuevamente');
                     }
                 }
-                elseif(!empty($datos_foto['fot_uri_imagen']) && !empty($datos_foto['fot_nombre']))
+                //elseif(!empty($datos_foto['fot_uri_imagen']) && !empty($datos_foto['fot_nombre']))
+                else
                 {
                     $forma_foto->bind($datos_foto, $request->getFiles('foto_' . $i));
                     if($forma_foto->isValid())
@@ -118,6 +121,7 @@ class postoperatorioActions extends sfActions
         else
             $this->getUser()->setFlash ('error', sfConfig::get('app_error_paciente_seleccionado'));
         $this->redirect('postoperatorio/infoPostOperatorio');
+        //$this->setTemplate('postoperatorio/infoPostOperatorio');
     }
 
     public function executeAltaPostOperatoria(sfWebRequest $request)
@@ -126,6 +130,9 @@ class postoperatorioActions extends sfActions
         $this->form = new AltapostoperatoriaForm();
         if(0 != strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
         {
+            $this->tratamiento = DoctrineCore::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
+            // Ver que pasa si en vez de buscar el alta por el codigo del tratamiento, se obtiene con el tratamiento que tenemos
+            //   aquí encima.
             $this->altapostoperatoria = Doctrine_Core::getTable('Altapostoperatoria')->buscarPorTratamiento($this->getUser()->getAttribute('tra_codigo'));
             if($this->altapostoperatoria)
             {
@@ -136,6 +143,7 @@ class postoperatorioActions extends sfActions
 
     public function executeGuardarAltaPostoperatoria(sfWebRequest $request)
     {
+        $this->tratamiento = DoctrineCore::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
         $datos_postoperatorio = $request->getParameter('altapostoperatoria');
         $this->form = new AltapostoperatoriaForm();
         if(!empty($datos_postoperatorio['apo_codigo']))
@@ -150,6 +158,7 @@ class postoperatorioActions extends sfActions
         {
             $this->postoperatorio_nuevo = $this->form->save();
             $this->getUser()->setFlash ('notificacion', 'El Informe ' . sfConfig::get('app_guardado_exitoso_m'));
+            //$this->enviarMail('Se ha efectuado un cambio en el Post-Operatorio de ' . $this->tratamiento->Paciente->pac_nombre);
             $this->redirect('postoperatorio/altaPostOperatoria');
         }
         else
@@ -167,5 +176,32 @@ class postoperatorioActions extends sfActions
             $this->form_foto = new FotoForm();
             $this->form_foto->cambiarGrupo('foto_' . $request->getParameter('cuenta_fotos'));
         }
+    }
+
+    protected function enviarMail($asunto)
+    {
+        $this->paciente = $this->tratamiento->Paciente;
+        $this->preoperatorio = $this->tratamiento->Preoperatorio->getLast();
+        $this->postoperatorio = $this->tratamiento->Postoperatorio->getLast();
+
+        $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_name'));
+        $this->usuario_ultima_modificacion = $usuario_actual->first_name . ' ' . $usuario_actual->last_name;
+
+        $contenido = $this->getPartial('reportes/generarReporteMedicoMail');
+
+        $grupo_medico_admin = Doctrine_Core::getTable('sfGuardGroup')->find(6); // Grupo de Medicos administradores
+
+        $email_medicos = array();
+        $email_medicos[] = $this->getUser()->getAttribute('user_email');
+        foreach($grupo_medico_admin->Users as $users)
+        {
+            $email_medicos[] = $users->email_address;
+        }
+
+        $mensaje_correo = new Swift_Message($asunto, $contenido, 'text/html', 'utf-8');
+        $mensaje_correo->setFrom(sfConfig::get('app_correo_pite'))
+          ->setTo($email_medicos);
+
+        $this->getMailer()->send($mensaje_correo);
     }
 }

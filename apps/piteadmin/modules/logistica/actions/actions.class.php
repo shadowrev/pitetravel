@@ -74,7 +74,9 @@ class logisticaActions extends sfActions
             {
                 $this->logistica_nuevo = $this->form_logistica->save();
                 $this->getUser()->setFlash ('notificacion', 'La informacion de Logistica ' . sfConfig::get('app_guardado_exitoso_f'));
-                $this->redirect('logistica/logistica');
+                $this->enviarMail();
+                //$this->redirect('logistica/logistica');
+                //$this->setTemplate('logistica');
             }
             else
             {
@@ -183,6 +185,7 @@ class logisticaActions extends sfActions
         if($this->form_logistica->isValid())
         {
             $this->logistica_nuevo = $this->form_logistica->save();
+            $this->enviarMail();
             $this->getUser()->setFlash ('notificacion', 'La informacion de Transporte ' . sfConfig::get('app_guardado_exitoso_f'));
         }
         else
@@ -232,5 +235,39 @@ class logisticaActions extends sfActions
             $contacto_actualizado = $transporte_form->save();
         }
         return $transporte_form;
+    }
+    
+    protected function enviarMail()
+    {
+        $this->paciente = Doctrine_Core::getTable('Paciente')->find($this->getUser()->getAttribute('pac_codigo'));
+        $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
+        $this->reserva_vuelo = $this->tratamiento->Reservavuelo->getLast();
+        //$this->reserva_hotel = $reserva_hotel;
+        $this->reserva_hotel = $this->tratamiento->Reservahotel->getLast();
+
+        $this->logistica = $this->tratamiento->Logistica->getLast();
+
+        $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
+        $this->usuario_ultima_modificacion = $usuario_actual->first_name . ' ' . $usuario_actual->last_name;
+
+        $contenido = $this->getPartial('reportes/generarReporteLogisticaMail');
+        $admin = Doctrine_Core::getTable('sfGuardUser')->find(1);
+
+        //$grupo_medico_admin = Doctrine_Core::getTable('sfGuardGroup')->find(6); // Grupo de Medicos administradores
+
+        $email_destinatarios = array();
+        $email_destinatarios[] = $admin->email_address;
+        $email_destinatarios[] = $this->getUser()->getAttribute('user_email');
+        /*foreach($grupo_medico_admin->Users as $users)
+        {
+          $email_destinatarios[] = $users->email_address;
+        }*/
+
+        $mensaje_correo = new Swift_Message('Novedades en el Paciente ' . $this->paciente->pac_nombre, $contenido, 'text/html', 'utf-8');
+        $mensaje_correo->setFrom(sfConfig::get('app_correo_pite'))
+          //->setCc(array(sfConfig::get('app_correo_medico_adm_1'), sfConfig::get('app_correo_medico_adm_2')))
+          ->setTo($email_destinatarios);
+
+        $this->getMailer()->send($mensaje_correo);
     }
 }
