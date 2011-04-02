@@ -101,7 +101,7 @@ class Util
         }
         else
         {
-            $lista_tabla .= '<tr><td colspan="' . sizeof($items) + sizeof($opciones['options']) . '">No se encuentran registros</td></tr>';
+            $lista_tabla .= '<tr><td colspan="' . (sizeof($items) + sizeof($opciones['options'])) . '">No se encuentran registros</td></tr>';
         }
         $lista_tabla .= '</tbody>';
         $lista_tabla .= '</table>';

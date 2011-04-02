@@ -1,3 +1,4 @@
+<?php $editable = array('disabled' => !$sf_context->getUser()->hasCredential(array('touroperador', 'logistica'), false)) ?>
 <form id="form1" name="form1" method="post" action="<?php echo url_for('cliente/guardarReserva') ?>">
     <div class="formulario">
         <h2>Reserva del Hospedaje</h2>
@@ -29,18 +30,18 @@
                                 <tr>
                                     <td><?php echo $form['reh_fecha_entrada']->renderError() ?>
                                     <?php echo $form['reh_fecha_entrada']->renderLabel() ?><br />
-                                    <?php echo $form['reh_fecha_entrada']->render() ?></td>
+                                    <?php echo $form['reh_fecha_entrada']->render($editable) ?></td>
                                     <td><?php echo $form['reh_fecha_salida']->renderError() ?>
                                     <?php echo $form['reh_fecha_salida']->renderLabel() ?><br />
-                                    <?php echo $form['reh_fecha_salida']->render() ?></td>
+                                    <?php echo $form['reh_fecha_salida']->render($editable) ?></td>
                                 </tr>
                                 <tr>
                                     <td><?php echo $form['reh_hora_llegada']->renderError() ?>
                                     <?php echo $form['reh_hora_llegada']->renderLabel() ?><br />
-                                    <?php echo $form['reh_hora_llegada']->render() ?></td>
+                                    <?php echo $form['reh_hora_llegada']->render($editable) ?></td>
                                     <td><?php echo $form['reh_hora_salida']->renderError() ?>
                                     <?php echo $form['reh_hora_salida']->renderLabel() ?><br />
-                                    <?php echo $form['reh_hora_salida']->render() ?></td>
+                                    <?php echo $form['reh_hora_salida']->render($editable) ?></td>
                                 </tr>
                             </table>
                         </div>
@@ -49,7 +50,7 @@
                 <tr>
                     <td><?php echo $form['reh_localizador']->renderError() ?>
                     <?php echo $form['reh_localizador']->renderLabel() ?><br />
-                    <?php echo $form['reh_localizador']->render() ?></td>
+                    <?php echo $form['reh_localizador']->render($editable) ?></td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
@@ -60,6 +61,6 @@
         </div>
     </div>
     <div class="submit">
-        <button type="submit">Guardar</button>
+        <button type="submit"<?php echo $editable['disabled'] ? ' disabled' : '' ?>>Guardar</button>
     </div> 
 </form>

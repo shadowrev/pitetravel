@@ -1,4 +1,5 @@
-<?php $campo_desactivado = $sf_context->getUser()->hasCredential('medicos_locales') ? array() : array('disabled' => true) ?>
+<?php //$campo_desactivado = $sf_context->getUser()->hasCredential('medicos_locales') ? array() : array('disabled' => true) ?>
+<?php $campo_desactivado = array() ?>
 <form id="form1" name="form1" method="post" action="<?php echo url_for('valoracion/guardarPreoperatorio') ?>" enctype="multipart/form-data">
     <div class="formulario">
         <h2>Tratamiento</h2>

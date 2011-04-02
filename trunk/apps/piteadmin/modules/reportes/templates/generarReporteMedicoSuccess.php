@@ -1,7 +1,7 @@
 <?php include_partial('submenu', array('current' => 'medico')) ?>
 <div id="contenido-formulario">
     <div class="formulario">
-        <h2>Informe de Logistica</h2>
+        <h2>Informe M&eacute;dico del Paciente</h2>
         <div class="form">
             <?php $variables = array(
                 'paciente' => $paciente,
