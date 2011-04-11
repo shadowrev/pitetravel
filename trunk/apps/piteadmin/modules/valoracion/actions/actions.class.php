@@ -316,6 +316,7 @@ class valoracionActions extends sfActions
         $this->dieta_paciente = $this->dieta_form->getObject();
 //        $this->dieta_paciente = new Dietapaciente();
         
+        $this->preoperatorio = new Preoperatorio();
         if(!empty($tratamiento_id))
         {
             $this->tratamiento_actual = Doctrine_Core::getTable('Tratamiento')->find(array($tratamiento_id));

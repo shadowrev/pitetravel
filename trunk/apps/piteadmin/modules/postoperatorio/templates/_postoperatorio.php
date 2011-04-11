@@ -5,17 +5,6 @@
             <?php echo $form->renderHiddenFields() ?>
             <table>
                 <tr>
-                    <td><?php echo $form['pos_hora_cita_col']->renderError() ?>
-                    <?php echo $form['pos_hora_cita_col']->renderLabel() ?><br />
-                    <?php echo $form['pos_hora_cita_col']->render() ?></td>
-                    <td><?php echo $form['pos_hora_cirugia']->renderError() ?>
-                    <?php echo $form['pos_hora_cirugia']->renderLabel() ?><br />
-                    <?php echo $form['pos_hora_cirugia']->render() ?></td>
-                    <td><?php echo $form['pos_enf_codigo']->renderError() ?>
-                    <?php echo $form['pos_enf_codigo']->renderLabel() ?><br />
-                    <?php echo $form['pos_enf_codigo']->render() ?></td>
-                </tr>
-                <tr>
                     <td><?php echo $form['pos_tipo_anestesia']->renderError() ?>
                     <?php echo $form['pos_tipo_anestesia']->renderLabel() ?><br />
                     <?php echo $form['pos_tipo_anestesia']->render() ?></td>
@@ -28,24 +17,19 @@
                     <?php echo $form['pos_valoracion']->render() ?></td>
                 </tr>
                 <tr>
-                    <td colspan="3"><?php echo $form['pos_recomendaciones']->renderError() ?>
-                    <?php echo $form['pos_recomendaciones']->renderLabel() ?><br />
-                    <?php echo $form['pos_recomendaciones']->render() ?></td>
-                </tr>
-                <tr>
                     <td colspan="3"><?php echo $form['pos_info_especialista']->renderError() ?>
                     <?php echo $form['pos_info_especialista']->renderLabel() ?><br />
                     <?php echo $form['pos_info_especialista']->render() ?></td>
                 </tr>
                 <tr>
+                    <td colspan="3"><?php echo $form['pos_recomendaciones']->renderError() ?>
+                    <?php echo $form['pos_recomendaciones']->renderLabel() ?><br />
+                    <?php echo $form['pos_recomendaciones']->render() ?></td>
+                </tr>
+                <tr>
                     <td colspan="3"><?php echo $form['pos_observaciones']->renderError() ?>
                     <?php echo $form['pos_observaciones']->renderLabel() ?><br />
                     <?php echo $form['pos_observaciones']->render() ?></td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <div style="text-align: right"><button type="button">Buscar Informe</button></div>
-                    </td>
                 </tr>
             </table>
         </div>
