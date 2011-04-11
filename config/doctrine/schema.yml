@@ -848,7 +848,7 @@ Postoperatorio:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     pos_valoracion:
       type: string()
@@ -876,14 +876,14 @@ Postoperatorio:
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     pos_enf_codigo:
       type: integer(8)
       fixed: false
       unsigned: false
       primary: false
-      notnull: true
+      notnull: false
       autoincrement: false
     pos_info_especialista:
       type: string()

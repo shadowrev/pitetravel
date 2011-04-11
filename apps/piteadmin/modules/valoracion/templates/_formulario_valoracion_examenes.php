@@ -11,9 +11,7 @@
                     <td><?php echo $preoperatorio_form['preo_hora_cita_ext']->renderError() ?>
                     <?php echo $preoperatorio_form['preo_hora_cita_ext']->renderLabel() ?><br />
                     <?php echo $preoperatorio_form['preo_hora_cita_ext']->render() ?></td>
-                    <td><?php echo $preoperatorio_form['preo_cli_codigo']->renderError() ?>
-                    <?php echo $preoperatorio_form['preo_cli_codigo']->renderLabel() ?><br />
-                    <?php echo $preoperatorio_form['preo_cli_codigo']->render() ?></td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td colspan="3"><?php echo $preoperatorio_form['preo_informe_especialista']->renderError() ?>
@@ -37,15 +35,12 @@
                     <td><?php echo $preoperatorio_form['preo_hora_cirugia']->renderError() ?>
                     <?php echo $preoperatorio_form['preo_hora_cirugia']->renderLabel() ?><br />
                     <?php echo $preoperatorio_form['preo_hora_cirugia']->render() ?></td>
+                    <td><?php echo $preoperatorio_form['preo_cli_codigo']->renderError() ?>
+                    <?php echo $preoperatorio_form['preo_cli_codigo']->renderLabel() ?><br />
+                    <?php echo $preoperatorio_form['preo_cli_codigo']->render() ?></td>
                 </tr>
                 <tr>
-                    <td id="td_preoperatorio_preo_enf_codigo"><?php echo $preoperatorio_form['preo_enf_codigo']->renderError() ?>
-                    <?php echo $preoperatorio_form['preo_enf_codigo']->renderLabel() ?><br />
-                    <?php echo $preoperatorio_form['preo_enf_codigo']->render() ?></td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td colspan="2"><?php echo $preoperatorio_form['preo_observaciones']->renderError() ?>
+                    <td colspan="3"><?php echo $preoperatorio_form['preo_observaciones']->renderError() ?>
                     <?php echo $preoperatorio_form['preo_observaciones']->renderLabel() ?><br />
                     <?php echo $preoperatorio_form['preo_observaciones']->render() ?></td>
                 </tr>
@@ -274,9 +269,11 @@
                     </td>
                 </tr>
             </table>
+            <?php if(!empty($preoperatorio->Medico)): ?>
             <div>
-                <em>&Uacute;ltima valoraci&oacute;n realizada por: <strong>Nombre del m&eacute;dico</strong></em>
+                <em>&Uacute;ltima valoraci&oacute;n realizada por: <strong><?php echo $preoperatorio->Medico->med_nombre ?> (<a href="<?php echo 'mailto:' . $preoperatorio->Medico->med_email ?>"><?php echo $preoperatorio->Medico->med_email ?></a>)</strong></em>
             </div>
+            <?php endif ?>
         </div>
     </div>
     <div class="submit">

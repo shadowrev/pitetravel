@@ -9,6 +9,7 @@
     'dieta_form' => $dieta_form,
     'menu_form' => $menu_form,
     'material_quirurgico' => $material_quirurgico,
-    'dieta_paciente' => $dieta_paciente
+    'dieta_paciente' => $dieta_paciente,
+    'preoperatorio' => $preoperatorio
 )) ?>
 </div>
