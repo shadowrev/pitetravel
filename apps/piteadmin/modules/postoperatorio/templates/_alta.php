@@ -29,11 +29,11 @@
                     <?php echo $form['apo_observaciones']->renderLabel() ?><br />
                     <?php echo $form['apo_observaciones']->render() ?></td>
                 </tr>
-                <tr>
+                <!--<tr>
                     <td>
                         <div style="text-align: right"><button type="button">Buscar Informe</button></div>
                     </td>
-                </tr>
+                </tr>-->
             </table>
             <?php if(!empty($altapostoperatoria)): ?>
             <div>
