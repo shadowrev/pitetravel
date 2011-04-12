@@ -130,7 +130,7 @@ class postoperatorioActions extends sfActions
         $this->form = new AltapostoperatoriaForm();
         if(0 != strcmp($this->getUser()->getAttribute('tra_codigo'), ''))
         {
-            $this->tratamiento = DoctrineCore::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
+            $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
             // Ver que pasa si en vez de buscar el alta por el codigo del tratamiento, se obtiene con el tratamiento que tenemos
             //   aquí encima.
             $this->altapostoperatoria = Doctrine_Core::getTable('Altapostoperatoria')->buscarPorTratamiento($this->getUser()->getAttribute('tra_codigo'));
@@ -143,7 +143,7 @@ class postoperatorioActions extends sfActions
 
     public function executeGuardarAltaPostoperatoria(sfWebRequest $request)
     {
-        $this->tratamiento = DoctrineCore::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
+        $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
         $datos_postoperatorio = $request->getParameter('altapostoperatoria');
         $this->form = new AltapostoperatoriaForm();
         if(!empty($datos_postoperatorio['apo_codigo']))
