@@ -67,22 +67,26 @@
                             <?php echo $forms_fotos[$i]['fot_nombre']->render() ?>
                         </td>
                         <td>
-                            <?php echo $forms_fotos[$i]['fot_uri_imagen']->renderError() ?>
-                            <?php echo $forms_fotos[$i]['fot_uri_imagen']->renderLabel() ?><br />
-                            <?php echo $forms_fotos[$i]['fot_uri_imagen']->render() ?><br />
                             <?php if(sizeof($links_forms_fotos) > 0): ?>
-                            <a href="<?php echo public_path('') . 'uploads/fotos_pacientes/' . $links_forms_fotos[$i] ?>" target="_blank">Imagen Actual</a>
+                            <a href="<?php echo public_path('') . 'uploads/fotos_pacientes/' . $links_forms_fotos[$i] ?>" target="_blank">
+                                <img src="<?php echo public_path('') ?>images/icono_jpg.jpg" alt="Ver imagen actual" title="Ver imagen actual" />
+                            </a>
                             <?php endif; ?>
                         </td>
                         <td>
-                            <button type="button" onclick="">X</button>
+                            <?php echo $forms_fotos[$i]['fot_uri_imagen']->renderError() ?>
+                            <?php echo $forms_fotos[$i]['fot_uri_imagen']->renderLabel() ?><br />
+                            <?php echo $forms_fotos[$i]['fot_uri_imagen']->render() ?><br />
                         </td>
+                        <!--<td>
+                            <button type="button" onclick="">X</button>
+                        </td>-->
                     </tr>
                 </table>
             </div>
             <?php endfor; ?>
             <div style="text-align: right">
-                <button type="button" onclick="agregarFoto()">Agregar Foto</button>
+                <button type="button" onclick="agregarFoto()">Adicionar Nueva Foto</button>
             </div>
             <?php if(!empty($postoperatorio->Medico)): ?>
             <div>
