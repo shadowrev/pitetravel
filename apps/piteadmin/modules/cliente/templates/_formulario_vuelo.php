@@ -6,7 +6,9 @@
             <?php echo $form->renderHiddenFields() ?>
             <table>
                 <tr>
-                    
+                    <td colspan="2"><div class="informacion">Los campos marcados con * son obligatorios</div></td>
+                </tr>
+                <tr>
                     <td><?php echo $form['vue_origen']->renderError() ?>
                     <?php echo $form['vue_origen']->renderLabel() ?><br />
                     <?php echo $form['vue_origen']->render($editable) ?></td>

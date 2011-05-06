@@ -243,3 +243,9 @@ legend {
 .paginacion a {
     margin: 0 0.5em;
 }
+
+.informacion {
+    font-style: italic;
+    color: #333;
+    margin: 0 0 5px;
+}

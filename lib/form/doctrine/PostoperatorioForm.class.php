@@ -14,13 +14,13 @@ class PostoperatorioForm extends BasePostoperatorioForm
     {
         $this->widgetSchema->setLabels(array(
             'pos_hora_cita_col' => 'Hora Cita M&eacute;dica en el Exterior:',
-            'pos_valoracion' => 'Descripci&oacute;n del Procedimiento:',
-            'pos_recomendaciones' => 'Recomendaciones:',
-            'pos_tipo_anestesia' => 'Tipo de Anestesia:',
+            'pos_valoracion' => '*Descripci&oacute;n del Procedimiento:',
+            'pos_recomendaciones' => '*Recomendaciones:',
+            'pos_tipo_anestesia' => '*Tipo de Anestesia:',
             'pos_hora_cirugia' => 'Hora de la Cirug&iacute;a:',
             'pos_enf_codigo' => 'Enfermera:',
-            'pos_info_especialista' => 'Informe del Especialista:',
-            'pos_observaciones' => 'Observaciones:'
+            'pos_info_especialista' => '*Informe del Especialista:',
+            'pos_observaciones' => '*Observaciones:'
         ));
     }
 }

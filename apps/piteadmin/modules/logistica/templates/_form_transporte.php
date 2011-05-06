@@ -4,6 +4,9 @@
     <?php echo $form_transporte->renderHiddenFields() ?>
     <table>
         <tr>
+            <td colspan="3"><div class="informacion">Los campos marcados con * son obligatorios</div></td>
+        </tr>
+        <tr>
             <td><?php echo $form_transporte['trans_nombre']->renderError() ?>
             <?php echo $form_transporte['trans_nombre']->renderLabel() ?><br />
             <?php echo $form_transporte['trans_nombre']->render($arr_solo_lectura) ?></td>

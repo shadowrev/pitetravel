@@ -105,6 +105,9 @@
             <?php echo $procedimiento_form->renderHiddenFields() ?>
             <table>
                 <tr>
+                    <td colspan="3"><div class="informacion">Los campos marcados con * son obligatorios</div></td>
+                </tr>
+                <tr>
                     <td><?php echo $procedimiento_form['pro_tit_codigo']->renderError() ?>
                     <?php echo $procedimiento_form['pro_tit_codigo']->renderLabel() ?><br />
                     <?php echo $procedimiento_form['pro_tit_codigo']->render(array(
