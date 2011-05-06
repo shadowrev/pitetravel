@@ -5,6 +5,9 @@
         <div class="form">
             <table>
                 <tr>
+                    <td colspan="3"><div class="informacion">Los campos marcados con * son obligatorios</div></td>
+                </tr>
+                <tr>
                     <td><?php echo $form['pac_nombre']->renderError() ?>
                         <?php echo $form['pac_nombre']->renderLabel() ?><br />
                         <?php echo $form['pac_nombre']->render() ?></td>

@@ -5,6 +5,9 @@
             <?php echo $preoperatorio_form->renderHiddenFields() ?>
             <table>
                 <tr>
+                    <td colspan="3"><div class="informacion">Los campos marcados con * son obligatorios</div></td>
+                </tr>
+                <tr>
                     <td><?php echo $preoperatorio_form['preo_fecha_cita_ext']->renderError() ?>
                     <?php echo $preoperatorio_form['preo_fecha_cita_ext']->renderLabel() ?><br />
                     <?php echo $preoperatorio_form['preo_fecha_cita_ext']->render() ?></td>

@@ -6,6 +6,9 @@
             <?php echo $form->renderHiddenFields() ?>
             <table>
                 <tr>
+                    <td colspan="3"><div class="informacion">Los campos marcados con * son obligatorios</div></td>
+                </tr>
+                <tr>
                     <td><?php echo $form['reh_hot_codigo']->renderError() ?>
                     <?php echo $form['reh_hot_codigo']->renderLabel() ?><br />
                     <?php echo $form['reh_hot_codigo']->render(array(
