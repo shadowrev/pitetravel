@@ -226,14 +226,24 @@ legend {
     padding: 2px 4px;
 }
 
-.notificacion {
+div.notificacion {
     background-color: #ffe45c;
     border: 1px solid #ffe45c;
 }
 
-.error {
+div.error {
     background-color: #E75C58;
     border: 1px solid #E75C58;
+}
+
+label.error {
+    color: #F00;
+    display: block;
+    width: 153px;
+}
+
+input.error {
+    background-color: #ffe45c;
 }
 
 .paginacion {
