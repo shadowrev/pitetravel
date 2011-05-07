@@ -10,10 +10,14 @@
                 <tr>
                     <td><?php echo $form['pac_nombre']->renderError() ?>
                         <?php echo $form['pac_nombre']->renderLabel() ?><br />
-                        <?php echo $form['pac_nombre']->render() ?></td>
+                        <?php echo $form['pac_nombre']->render(array(
+                            'class' => 'required'
+                        )) ?></td>
                     <td><?php echo $form['pac_identificacion']->renderError() ?>
                         <?php echo $form['pac_identificacion']->renderLabel() ?><br />
-                        <?php echo $form['pac_identificacion']->render() ?></td>
+                        <?php echo $form['pac_identificacion']->render(array(
+                            'class' => 'required'
+                        )) ?></td>
                     <td><?php echo $form['pac_fecha_nacimiento']->renderError() ?>
                         <?php echo $form['pac_fecha_nacimiento']->renderLabel() ?><br />
                         <?php echo $form['pac_fecha_nacimiento']->render() ?></td>
@@ -31,7 +35,9 @@
                 <tr>
                     <td><?php echo $form['pac_email']->renderError() ?>
                         <?php echo $form['pac_email']->renderLabel() ?><br />
-                        <?php echo $form['pac_email']->render() ?></td>
+                        <?php echo $form['pac_email']->render(array(
+                            'class' => 'required'
+                        )) ?></td>
                     <td><?php echo $form['pac_direccion']->renderError() ?>
                         <?php echo $form['pac_direccion']->renderLabel() ?><br />
                         <?php echo $form['pac_direccion']->render() ?></td>
@@ -40,7 +46,9 @@
                 <tr>
                     <td><?php echo $form['pac_pais']->renderError() ?>
                         <?php echo $form['pac_pais']->renderLabel() ?><br />
-                        <?php echo $form['pac_pais']->render() ?></td>
+                        <?php echo $form['pac_pais']->render(array(
+                            'class' => 'required'
+                        )) ?></td>
                     <td><?php echo $form['pac_estado']->renderError() ?>
                         <?php echo $form['pac_estado']->renderLabel() ?><br />
                         <?php echo $form['pac_estado']->render() ?></td>
@@ -56,7 +64,9 @@
                         <?php if($sf_user->hasCredential(array('medicos_locales', 'medicos_internacionales'), false)) : ?>
                         <?php echo $form['pac_agn_codigo']->renderError() ?>
                         <?php echo $form['pac_agn_codigo']->renderLabel() ?>
-                        <?php echo $form['pac_agn_codigo']->render() ?>
+                        <?php echo $form['pac_agn_codigo']->render(array(
+                            'class' => 'required'
+                        )) ?>
                         <?php else : ?>
                         &nbsp;
                         <?php endif ?>

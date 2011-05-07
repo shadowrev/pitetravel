@@ -14,7 +14,7 @@ default:
 
   stylesheets:    [main.css, style.css, ui-lightness/jquery-ui-1.8.7.custom.css]
 
-  javascripts:    [jquery-1.4.4.min.js, jquery-ui-1.8.7.custom.min.js, util.js, load.js]
+  javascripts:    [jquery-1.4.4.min.js, jquery-ui-1.8.7.custom.min.js, jquery.validate.min.js, util.js, load.js]
 
   has_layout:     true
   layout:         layout

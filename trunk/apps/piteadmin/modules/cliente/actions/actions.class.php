@@ -205,7 +205,10 @@ class clienteActions extends sfActions
               $this->getUser()->setFlash ('notificacion', 'El cliente ha sido guardado');
           }
           else
+          {
               $this->getUser()->setFlash ('error', sfConfig::get('app_error_validacion'));
+              $this->redirect('cliente/mostrarInformacionPaciente?pac_codigo=' . $this->getUser()->getAttribute('pac_codigo'));
+          }
 
           $tratamiento = new Tratamiento();
           $tratamiento->tra_pac_codigo = $this->paciente->pac_codigo;
@@ -476,9 +479,11 @@ class clienteActions extends sfActions
   {
       $this->paciente = Doctrine_Core::getTable('Paciente')->find($this->getUser()->getAttribute('pac_codigo'));
       $this->tratamiento = Doctrine_Core::getTable('Tratamiento')->find($this->getUser()->getAttribute('tra_codigo'));
-      $this->reserva_vuelo = $this->tratamiento->Reservavuelo->getLast();
+      if(0 < sizeof($this->tratamiento->Reservavuelo))
+        $this->reserva_vuelo = $this->tratamiento->Reservavuelo->getLast();
       //$this->reserva_hotel = $reserva_hotel;
-      $this->reserva_hotel = $this->tratamiento->Reservahotel->getLast();
+      if(0 < sizeof($this->tratamiento->Reservahotel))
+        $this->reserva_hotel = $this->tratamiento->Reservahotel->getLast();
       $this->logistica = null;
       
       $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
