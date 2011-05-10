@@ -28,8 +28,7 @@ class FotoForm extends BaseFotoForm
 
       $this->validatorSchema['fot_uri_imagen'] = new sfValidatorFile(array(
           'required' => true,
-          'path' => sfConfig::get('sf_upload_dir') . '/fotos_pacientes',
-          'mime_types' => 'web_images'
+          'path' => sfConfig::get('sf_upload_dir') . '/fotos_pacientes'
       ));
     }
 
