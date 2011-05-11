@@ -1,4 +1,6 @@
-<?php $editable = array('disabled' => !$sf_context->getUser()->hasCredential(array('touroperador', 'logistica'), false)) ?>
+<?php $editable = array('disabled' => !$sf_context->getUser()->hasCredential(array('touroperador', 'logistica'), false),
+        'class' => 'required') ?>
+<?php $editable_no_obligatorio = array('disabled' => !$sf_context->getUser()->hasCredential(array('touroperador', 'logistica'), false)) ?>
 <form id="form1" name="form1" method="post" action="<?php echo url_for('cliente/guardarReserva') ?>">
     <div class="formulario">
         <h2>Reserva del Hospedaje</h2>
@@ -12,7 +14,8 @@
                     <td><?php echo $form['reh_hot_codigo']->renderError() ?>
                     <?php echo $form['reh_hot_codigo']->renderLabel() ?><br />
                     <?php echo $form['reh_hot_codigo']->render(array(
-                        'onchange' => 'actualizarInfoHotel(&quot;' . url_for('cliente/cargarHotel') . '&quot;, this.value)'
+                        'onchange' => 'actualizarInfoHotel(&quot;' . url_for('cliente/cargarHotel') . '&quot;, this.value)',
+                        'class' => 'required'
                     )) ?></td>
                     <td><label for="reserva_direccion">Direcci&oacute;n:</label><br />
                     <input type="text" name="direccion_hotel" id="reserva_direccion" readonly /></td>
@@ -53,7 +56,7 @@
                 <tr>
                     <td><?php echo $form['reh_localizador']->renderError() ?>
                     <?php echo $form['reh_localizador']->renderLabel() ?><br />
-                    <?php echo $form['reh_localizador']->render($editable) ?></td>
+                    <?php echo $form['reh_localizador']->render($editable_no_obligatorio) ?></td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>

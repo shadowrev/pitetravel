@@ -1,4 +1,5 @@
-<?php $editable = array('disabled' => !$sf_context->getUser()->hasCredential(array('touroperador', 'logistica'), false)) ?>
+<?php $editable = array('disabled' => !$sf_context->getUser()->hasCredential(array('touroperador', 'logistica'), false),
+        'class' => 'required') ?>
 <form id="form1" name="form1" method="post" action="<?php echo url_for('cliente/guardarVuelo') ?>">
     <div class="formulario">
         <h2>Reserva del Vuelo</h2>
