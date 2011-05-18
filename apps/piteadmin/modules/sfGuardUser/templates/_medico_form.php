@@ -2,6 +2,9 @@
 <div class="form">
     <table>
         <tr>
+            <td colspan="3"><div class="informacion">Diligencie s&oacute;lo si va a ingresar un M&eacute;dico.</div></td>
+        </tr>
+        <tr>
             <td><?php echo $medico_form['med_direccion']->renderError() ?>
                 <?php echo $medico_form['med_direccion']->renderLabel() ?><br />
                 <?php echo $medico_form['med_direccion']->render() ?></td>

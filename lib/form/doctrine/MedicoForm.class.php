@@ -21,10 +21,10 @@ class MedicoForm extends BaseMedicoForm
         ));
 
         $this->widgetSchema->setLabels(array(
-            'med_direccion' => 'Direcci&oacute;n de Residencia:',
-            'med_telefono1' => 'Tel&eacute;fono Fijo:',
-            'med_telefono2' => 'Tel&eacute;fono M&oacute;vil:',
-            'med_especialidad' => 'Especialidad:'
+            'med_direccion' => '*Direcci&oacute;n de Residencia:',
+            'med_telefono1' => '*Tel&eacute;fono Fijo:',
+            'med_telefono2' => '*Tel&eacute;fono M&oacute;vil:',
+            'med_especialidad' => '*Especialidad:'
         ));
     }
 }

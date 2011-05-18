@@ -1,6 +1,12 @@
+<?php use_helper('JavascriptBase') ?>
 <?php include_partial('submenu', array('current' => 'usuarios')) ?>
+<?php echo javascript_tag('$().ready(function() {
+        $("#form1").validate();
+    });') ?>
 <div id="contenido-formulario">
-    <?php echo form_tag_for($form, '@sf_guard_user') ?>
+    <?php echo form_tag_for($form, '@sf_guard_user', array(
+        'id' => 'form1'
+    )) ?>
     <div class="formulario">
         <h2><?php echo ($form->getObject()->isNew()) ? 'Nuevo ' : 'Actualizar ' ?>Usuario</h2>
         <?php include_partial('user_form', array(
