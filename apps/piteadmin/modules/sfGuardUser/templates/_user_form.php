@@ -30,14 +30,10 @@
                 )) ?></td>
             <td><?php echo $form['password']->renderError() ?>
                 <?php echo $form['password']->renderLabel('*Contrase&ntilde;a:') ?><br />
-                <?php echo $form['password']->render(array(
-                    'class' => 'required'
-                )) ?></td>
+                <?php echo $form['password']->render() ?></td>
             <td><?php echo $form['password_again']->renderError() ?>
                 <?php echo $form['password_again']->renderLabel('*Confirmar Contrase&ntilde;a:') ?><br />
-                <?php echo $form['password_again']->render(array(
-                    'class' => 'required'
-                )) ?></td>
+                <?php echo $form['password_again']->render() ?></td>
         </tr>
         <tr>
             <td><?php echo $usuariosagencia_form['uag_agn_codigo']->renderError() ?>
