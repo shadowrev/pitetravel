@@ -1,3 +1,12 @@
+destinoturistico:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                Destinoturistico
+    module:               destinoturistico
+    prefix_path:          /destinoturistico
+    column:               dst_codigo
+    with_wildcard_routes: true
+
 agencia:
   class: sfDoctrineRouteCollection
   options:

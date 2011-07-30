@@ -1,0 +1,31 @@
+generator:
+  class: sfDoctrineGenerator
+  param:
+    model_class:           Destinoturistico
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ~
+    plural:                ~
+    route_prefix:          destinoturistico
+    with_doctrine_route:   true
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title: Destinos Tur&iacute;sticos
+        display: [=dst_destino]
+        fields:
+          dst_destino: 
+            label: Destino
+      filter:
+        class: false
+      form:    ~
+      edit:
+        title: Actualizando la informaci&oacute;n para %%dst_destino%%
+        display: [dst_destino]
+      new:
+        title: Ingresando nuevo Destino Tur&iacute;stico
+        display: [dst_destino]

@@ -12,5 +12,8 @@ class DestinoturisticoForm extends BaseDestinoturisticoForm
 {
   public function configure()
   {
+      $this->widgetSchema->setLabels(array(
+          'dst_destino' => 'Destino Tur&iacute;stico'
+      ));
   }
 }
