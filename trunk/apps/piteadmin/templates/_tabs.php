@@ -22,10 +22,13 @@
     <li class="<?php echo ((strcmp($current, 'postoperatorio') == 0) ? 'current' : '') . $pestanha_pos ?>">
         <a href="<?php echo $enlace_pos ?>"><span>Post-Operatorio</span></a>
     </li>
-    <?php //$enlace_log = $sf_context->getUser()->hasCredential(array('medicos_locales', 'medicos_internacionales'), false) ? url_for('valoracion/examenesPreoperatorios') : '#' ?>
-    <?php //$pestanha_log = ($enlace_log == "#") ? 'desactivada' : '' ?>
-    <li class="<?php echo ((strcmp($current, 'logistica') == 0) ? 'current' : '') ?>">
+    <?php $enlace_log = $sf_context->getUser()->hasCredential(array('admin', 'medicos_locales', 'medicos_internacionales'), false) ? url_for('logistica/logistica') : '#' ?>
+    <?php $pestanha_log = ($enlace_log == "#") ? 'desactivada' : '' ?>
+    <!--<li class="<?php echo ((strcmp($current, 'logistica') == 0) ? 'current' : '') ?>">
         <a href="<?php echo url_for('logistica/logistica') ?>"><span>Log&iacute;stica</span></a>
+    </li>-->
+    <li class="<?php echo ((strcmp($current, 'logistica') == 0) ? 'current' : '') . $pestanha_log ?>">
+        <a href="<?php echo $enlace_log ?>"><span>Log&iacute;stica</span></a>
     </li>
     <li class="<?php echo ((strcmp($current, 'reportes') == 0) ? 'current' : '') ?>">
         <a href="<?php echo url_for('reportes/generarReporteLogistica') ?>"><span>Reportes</span></a>

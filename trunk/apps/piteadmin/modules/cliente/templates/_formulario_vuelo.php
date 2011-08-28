@@ -7,7 +7,15 @@
             <?php echo $form->renderHiddenFields() ?>
             <table>
                 <tr>
-                    <td colspan="2"><div class="informacion">Los campos marcados con * son obligatorios</div></td>
+                    <td colspan="2">
+                        <div><strong>Importante:</strong> Para realizar una reserva de vuelo a trav&eacute;s del Sistema de B&uacute;squeda 
+                            y Reservas de Vuelo, ingrese a trav&eacute;s de <a href="https://www.webinplantb2b.com/karibu/index.jsp" target="_blank">este enlace</a> y 
+                            utilice los siguientes datos para iniciar sesi&oacute;n:<br />
+                            C&oacute;digo de usuario: pitetrvl<br />
+                            Contrase&ntilde;a: travel
+                        </div>
+                        <div class="informacion">Los campos marcados con * son obligatorios</div>
+                    </td>
                 </tr>
                 <tr>
                     <td><?php echo $form['vue_origen']->renderError() ?>
