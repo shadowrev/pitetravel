@@ -96,6 +96,10 @@ body {
 	height: 6em;
 }
 
+.form select#paciente_pac_agn_codigo, .form select#usuariosagencia_uag_agn_codigo {
+    width: 12em;
+}
+
 /* Aplica al resto de formularios */ 
 .formulario {
     width: 600px;
