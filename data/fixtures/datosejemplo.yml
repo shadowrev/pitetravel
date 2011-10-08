@@ -20,7 +20,7 @@ Paciente:
   raulerne:
     pac_nombre:           Raul Ernesto Villamarin
     pac_identificacion:   14621099
-    pac_fecha_nacimiento: 1983-11-06
+    pac_fecha_nacimiento: 
     pac_telefono1:        4463197
     pac_telefono2:        3006600740
     pac_email:            raulernevl@hotmail.com
@@ -34,7 +34,7 @@ Paciente:
   victorh:
     pac_nombre:           Victor Hugo Villamarin
     pac_identificacion:   6104222
-    pac_fecha_nacimiento: 1979-22-03
+    pac_fecha_nacimiento: 
     pac_telefono1:        4463197
     pac_telefono2:        3015242563
     pac_email:            victor.villamarin@gmail.com
@@ -48,7 +48,7 @@ Paciente:
   anavictoria:
     pac_nombre:           Ana Victoria Agudelo
     pac_identificacion:   45253625
-    pac_fecha_nacimiento: 1989-30-04
+    pac_fecha_nacimiento: 
     pac_telefono1:        5253213
     pac_telefono2:        3156698542
     pac_email:            anagudelo@gmail.com
