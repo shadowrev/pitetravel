@@ -33,6 +33,15 @@ class loginremotoActions extends sfGuardAuthAct
         
         // Inicia la sesion y redirige al home del sistema
         $this->getUser()->signin($user);
+        $this->getUser()->setAttribute('user_id', $user->getId());
+        $this->getUser()->setAttribute('user_name', $user->username);
+        $this->getUser()->setAttribute('user_email', $user->email_address);
+
+        $medico = Doctrine_Core::getTable('Medico')->obtenerMedicoPorIdUsuario($user->getId());
+        $this->getUser()->setAttribute('med_codigo', ($medico != false) ? $medico->med_codigo : null);
+
+        $agencia = Doctrine_Core::getTable('Usuariosagencia')->obtenerAgenciaUsuario($user->getId());
+        $this->getUser()->setAttribute('agn_codigo', ($agencia != false) ? $agencia->agn_codigo : null);
         $this->redirect('@homepage');
     }
 }

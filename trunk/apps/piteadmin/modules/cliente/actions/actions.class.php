@@ -426,7 +426,9 @@ class clienteActions extends sfActions
       }
       else
       {
-          $this->getUser()->setFlash ('error', sfConfig::get('app_error_paciente_seleccionado'));
+          $paciente_seleccionado = $this->getUser()->getAttribute('pac_codigo');
+          $mensaje_error = (empty($paciente_seleccionado) ? sfConfig::get('app_error_paciente_seleccionado') : sfConfig::get('app_error_paciente_no_valorado'));
+          $this->getUser()->setFlash('error', $mensaje_error);
           $this->redirect('cliente/vuelo');
       }
   }

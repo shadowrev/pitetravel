@@ -184,7 +184,7 @@ class postoperatorioActions extends sfActions
         $this->preoperatorio = $this->tratamiento->Preoperatorio->getLast();
         $this->postoperatorio = $this->tratamiento->Postoperatorio->getLast();
 
-        $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_name'));
+        $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
         $this->usuario_ultima_modificacion = $usuario_actual->first_name . ' ' . $usuario_actual->last_name;
 
         $contenido = $this->getPartial('reportes/generarReporteMedicoMail');
