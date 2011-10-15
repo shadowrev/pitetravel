@@ -429,7 +429,7 @@ class valoracionActions extends sfActions
         $this->postoperatorio = $this->tratamiento->Postoperatorio->getLast();
         $this->preoperatorio = $this->tratamiento->Preoperatorio->getLast();
 
-        $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_name'));
+        $usuario_actual = Doctrine_Core::getTable('sfGuardUser')->find($this->getUser()->getAttribute('user_id'));
         $this->usuario_ultima_modificacion = $usuario_actual->first_name . ' ' . $usuario_actual->last_name;
         
         $contenido = $this->getPartial('reportes/generarReporteMedicoMail');
