@@ -12,7 +12,7 @@ class ReservahotelForm extends BaseReservahotelForm
 {
   public function configure()
   {
-      $anhos = range(2000, date('Y'));
+      $anhos = range(2000, date('Y') + 1);
       $widget_date = new sfWidgetFormDate(array(
             'years' => array_combine($anhos, $anhos),
             'can_be_empty' => false
