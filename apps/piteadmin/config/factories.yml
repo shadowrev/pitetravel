@@ -13,6 +13,13 @@ prod:
     param:
       session_name: pitetravel
 
+  mailer:
+    param:
+      delivery_strategy: realtime
+      transport:
+        class: Swift_SendmailTransport
+          
+
 test:
   storage:
     class: sfSessionTestStorage
@@ -32,15 +39,6 @@ dev:
   mailer:
     param:
       delivery_strategy: none
-#      delivery_strategy: realtime
-#      transport:
-#        class: Swift_SmtpTransport
-#        param:
-#          host: smtp.gmail.com
-#          port: 465
-#          encryption: ssl
-#          username: ~
-#          password: ~
 
 all:
   routing:
@@ -54,9 +52,3 @@ all:
     param:
       cache_key_use_vary_headers: true
       cache_key_use_host_name:    true
-
-#  mailer:
-#    class: sfMailer
-#    param:
-#      deliver_strategy: realtime
-#

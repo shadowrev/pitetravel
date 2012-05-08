@@ -27,7 +27,8 @@
                     <tr class="<?php echo (true == $par) ? 'par' : 'impar' ?>" id="procedimiento_<?php echo $procedimiento->pro_codigo ?>">
                         <td><?php echo $procedimiento->Tipotratamiento->tit_nombre ?></td>
                         <td><?php echo $descripcion ?></td>
-                        <td><a href="javascript:cargarProcedimiento(<?php echo $procedimiento->pro_codigo ?>)">[modificar]</a></td>
+                        <!--<td><a href="javascript:cargarProcedimiento(<?php echo $procedimiento->pro_codigo ?>)">[modificar]</a></td>-->
+                        <td><a href="#">[modificar]</a></td>
                         <td><a href="<?php echo '#' ?>">[eliminar]</a></td><?php $par = !$par ?>
                     </tr>
                     <?php endforeach; ?>
