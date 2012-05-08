@@ -33,14 +33,6 @@ Hotel:
     hot_email:       dummy@mail.com
     hot_valor_noche: 0
 
-  dummy_hotel:
-    hot_nombre:      Dummy Hotel
-    hot_direccion:   Empty
-    hot_telefono:    0000000
-    hot_web:         http://dummy-hotel/
-    hot_email:       dummy@mail.com
-    hot_valor_noche: 0
-
 Descripciontratamiento:
   lipo:
     Tipotratamiento: corporal
@@ -208,20 +200,6 @@ Materialquirurgico:
   otros:
     maq_nombre: Otros
     maq_valor: <?php echo rand(10000, 900000); ?>
-
-Enfermera:
-  marta:
-    enf_nombre: Martha Suarez
-    enf_valor_servicio: 300000
-  alicia:
-    enf_nombre: Alicia Rodriguez
-    enf_valor_servicio: 320000
-  rebeca:
-    enf_nombre: Rebeca Imada
-    enf_valor_servicio: 220000
-  alberto:
-    enf_nombre: Alberto Suarez
-    enf_valor_servicio: 380000
 
 Destinoturistico:
   tour_cali:
